@@ -1,0 +1,31 @@
+Week 1 
+
+This Week:
+- Formed group with Louis, Trina, Maria and Jenna called Internship404. 
+- We decided to use Messenger as general chat and Teams for sharing files and stand-up meeting.
+- During the Lab, we decided to choose project 5  E-Commerce Recommendation System as our capstone project.
+- Discussed with the team what are we going to sell at our e-commerce.
+- I came up with ideas of glasses store that able to recommend glasses based on user's face shape with AI, Supermarket with recipe page, and cake shop with customisable cake
+- After sharing each other ideas, we decided to choose Supermarket with recipe page.
+- I and Louis decided to be the front end developer and choose React JS for the frontend.
+
+Next Week:
+- Contructing the 8 functionality with 2 novel functionality
+- Writing user stories and acceptance criteria of each of them
+- Deciding the sprints duration and backlog
+- Deciding the system architecture
+
+Week 2
+
+This Week:
+- Broke down objectives into user stories
+- Did competitor analysis of 4 big supermarket in Australia: Woolworths, Coles, Aldi and IGA.
+- Wrote Acceptance Criteria
+Next Week:
+- Designing wireframe for the UI/UX
+- Writing the proposal
+- Draw System architecture
+- Do sprint planning meeting
+
+Obstacles:
+- We realise that IGA and Woolworth have the recipe page already. Hence we could not use that as novel functionality. We brainstorm of ideas to make it different and decided we add more social aspect on the recipe page with follow, like, and comment on a recipe page and rewarding system.
