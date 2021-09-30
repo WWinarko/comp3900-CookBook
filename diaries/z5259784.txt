@@ -63,3 +63,19 @@ Sunday 27/09/21 (team meeting)
         - Trina and I to work on user stories
         - Maria, Wincent and Louis to work on techinical and drawings
         - Regroup to decide on sprints
+
+
+--- WEEK THREE ---
+
+Tuesday 28/09/21
+    - User story acceptance criteria with Trina
+    - Assigned priority (high, medium, low)
+    - Linked them to objectives
+
+Thursday 30/09/21 (lab class)
+    - Showed progress to Matthew (Jira, interface)
+    - Need to link Jira code to user stories
+    - Need to add arrows between interface diagrams
+    - Walked through interface design with team, made modifications/ suggestions to designs
+    - Went through stories and assigned story points, and planned out the sprints
+    - Discussed colour themes
