@@ -1,0 +1,17 @@
+Week 1
+- Formed group. Decided project
+- Write down features and objectives from the problem statement
+- Decided to narrow down the scope to a category. Task was to 
+brainstorm about a category with possible novelty features.
+
+Week 2
+- Decided our platform theme: website where people shar their 
+recipes and buy groceries from our catalogue. Initial idea 
+proposed by Wincent and then further developed in the meeting. 
+- Define objectives and write down user stories and epics. Also develop
+into acceptance criteria.
+- Worked out the software architecture and delegated tasks for the
+Proposal. Jenna and Trina are working on the report; Wincent, Louis and 
+myself are working in the graphs for the frontend.
+
+Week 3
