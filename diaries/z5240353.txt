@@ -29,3 +29,17 @@ Next Week:
 
 Obstacles:
 - We realise that IGA and Woolworth have the recipe page already. Hence we could not use that as novel functionality. We brainstorm of ideas to make it different and decided we add more social aspect on the recipe page with follow, like, and comment on a recipe page and rewarding system.
+
+Week 3
+
+This Week:
+- Did sprint planning meeting
+- Finished the proposal
+- Designed wireframe and high-fidelity prototype on figma
+- Drew System architecture
+
+Next week:
+- Doing sprint 1
+
+Obstacles:
+- Took long time for choosing color for our website.
