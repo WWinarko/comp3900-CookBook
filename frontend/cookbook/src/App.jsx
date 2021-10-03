@@ -7,7 +7,7 @@ import Home from './pages/Home.jsx';
 function App() {
   return (
     <Router>
-    <div className="App-header">
+    <div>
       <Switch>
         <Route path="/login">
           <h2>aaaaaaaaaaa</h2>
