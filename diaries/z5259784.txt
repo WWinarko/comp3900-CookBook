@@ -1,0 +1,81 @@
+--- WEEK ONE ---
+
+Thursday 16/09/21 (lab class)
+    - Met with the group during the lab time. Introductions and shared skills. 
+    - We talked through all the project options, and decided on Topic 5 (E-commerce recommender).
+    - We also discussed preferred programming languages. Python was a popular one amongst all members. 
+    - The team also discussed roles within the team: 
+        2 front end devs (Wincent + Louis),
+        2 back end devs (Maria + Trina),
+        Myself as the scrum master.
+    - I created a Jira board and added group members and Matthew (mentor)
+    - Maria also set up a Google document to start working on the first milestone
+
+Saturday 18/09/21
+    - I started writing up some background information for the topic based on need for e-commerce.
+    - Possible idea of site to sell food from distributers (restaurants)
+        Users would be consumers, admin would be restaurants
+        Recommendations made based on taste, cruisine, price, time
+
+Sunday 19/09/21 (team meeting)
+    - We discussed in more depth our chosen topic
+    - Wincent suggested choosing books, so that we can focus on one type of item to sell. 
+    - Similarly, Maria suggested looking into selling candles/ aromatiser.
+    - We generally struggled with finding something which we could add novel features to, while also being reasonable to implement.
+    - Next meeting: brainstorm more ideas which can have novel functions. Discuss before checking with Matthew.
+
+
+--- WEEK TWO ---
+
+Tuesday 21/09/21 (team meeting)
+    - We still discussed different topics that we thought of
+    - Idea I came up with - site for recommending computer devices based on user needs
+    - More ideas:
+        - Grocery and recipe site
+        - Computer parts site
+    - We ended up deciding on focusing on the recipe idea
+        - Looked at exisiting examples in the market eg. Coles, Woolworths
+        - Novel feature to introduce commenting/ rating system for each user
+        - Users can also upload their own recipes and link the correct ingredients
+        - Reward system for user who upload recipes which users buy 
+    - Still need to confirm idea with Matthew
+
+Thursday 29/09/21 (lab class)
+    - Checked idea with Matthew, and he suggested a further few ideas we could discuss
+        - Recommend similar ingredients as replacement
+        - Recommend recipes based on order history
+        - Recommend recipes based on same key ingredients
+    - Tools to research
+        - PayPal sandbox
+        - MongoDB cloud -> use connection string to link with Python
+        - Balsamiq cloud -> drawing up wireframes
+    - Worked on the user stories from the epics - everything on the google doc
+    - Before next meeting, work on acceptance criteria
+
+Friday 24/09/21
+    - Uploaded stories and epics to Jira board
+
+Sunday 27/09/21 (team meeting)
+    - Further refining of user stories
+    - Finalised 8+ objectives
+    - Discussed databases, APIs
+    - Division of work
+        - Trina and I to work on user stories
+        - Maria, Wincent and Louis to work on techinical and drawings
+        - Regroup to decide on sprints
+
+
+--- WEEK THREE ---
+
+Tuesday 28/09/21
+    - User story acceptance criteria with Trina
+    - Assigned priority (high, medium, low)
+    - Linked them to objectives
+
+Thursday 30/09/21 (lab class)
+    - Showed progress to Matthew (Jira, interface)
+    - Need to link Jira code to user stories
+    - Need to add arrows between interface diagrams
+    - Walked through interface design with team, made modifications/ suggestions to designs
+    - Went through stories and assigned story points, and planned out the sprints
+    - Discussed colour themes
