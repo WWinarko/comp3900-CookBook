@@ -1,0 +1,38 @@
+week1:
+- Formed the group called internship404
+- Looked at the projects and decided on topic 5(E-commerce)
+- Discussion on the programming language we are going to use(python)
+- Started worked on the proposal together on Google doc
+- I will be the backend dev with Maria
+- Brainstormed the novel functions for the platform
+    - Initially, we wanted to develop a platform similar to Ebay and Amzaon with novel features
+    - Then, Wincent suggested we could sell books and Maria suggested we could sell candles with customized shape
+- Worked on the objectives of the platform
+- We need to brainstorm more ideas as we don't have enough novel functions yet
+
+week2:
+- Our first discussion of the week focuses on choosing site recommending laptops or groceries
+- We decided to develop a groceries website that recommends recipes
+- We look into existing examples and decide to introduce social features for the website
+    - following system
+    - comment function
+    - rating function
+    - users can upload their recipes and get rewards if someone buys it
+- Matthew suggested a few ideas on recommendation
+- Discuss what server/database/APIs to use 
+- Refined the objectves and user stories
+- Finish the user stories with Jennna
+
+week3:
+- Finish the acceptance criteria with Jenna
+- Assign priority and story point to each user story with the team
+- Discuss with the team on what we should achieve in each sprint
+- Discuss about the current interface design with the team
+- Research on different servers and databases, we decided to use AWS EC2 and mongoDB
+- Discuss about what main colour we want to use for the website
+- Modify the layer description that Wincent wrote
+- Add description to the pages
+- Set up some bases for the backend
+    - List our own APIs for the website(HTTP Route, HTTP method, parameter, return)
+    - Roughly list the objects we are goingn to have and their associated attributes
+    - Look into setting up mongoDB
