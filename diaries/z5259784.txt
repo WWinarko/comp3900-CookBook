@@ -79,3 +79,13 @@ Thursday 30/09/21 (lab class)
     - Walked through interface design with team, made modifications/ suggestions to designs
     - Went through stories and assigned story points, and planned out the sprints
     - Discussed colour themes
+
+Saturday 02/09/21
+    - Linked all user stories to objectives
+    - Edited first half of the report
+
+Sunday 03/09/21
+    - Added arrows to interface diagrams
+    - Linked user stories to interface diagrams
+    - Edited second half of the report
+    - Submitted the report
