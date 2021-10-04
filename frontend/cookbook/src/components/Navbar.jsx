@@ -7,6 +7,7 @@ import SearchBar from './SearchBar';
 import RoundButton from './RoundButton';
 import {ReactComponent as ReactLogo} from '../assets/CookBook.svg';
 import {ReactComponent as CartIcon} from '../assets/shopping-cart.svg';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(({
   root: {
@@ -29,6 +30,13 @@ const useStyles = makeStyles(({
 
 function Navbar() {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleLogin = () => {
+    history.push('/login');
+    // console.log("hi");
+  }
+
   return (
     <div className={classes.root} >
       <ReactLogo className={classes.logo} />
@@ -40,7 +48,7 @@ function Navbar() {
         className={classes.iconBar}
       >
         <CartIcon />
-        <RoundButton />
+        <RoundButton name="Login" onClick={handleLogin} />
       </Stack>
     </div>
   );

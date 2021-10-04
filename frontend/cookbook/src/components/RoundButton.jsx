@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -16,10 +17,10 @@ const SignInButton = styled(Button)(() => ({
   fontWeight: 'bold',
 }));
 
-function RoundButton() {
+function RoundButton({name, onClick}) {
   return (
-    <SignInButton variant= "outlined">
-      Sign In
+    <SignInButton variant= "outlined" onClick={onClick}>
+      {name}
     </SignInButton>
   );
 }
