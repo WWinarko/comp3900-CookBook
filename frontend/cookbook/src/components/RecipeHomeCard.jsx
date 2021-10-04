@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(({
@@ -19,8 +20,8 @@ const useStyles = makeStyles(({
 
   },
   thumbnail: {
-    width: '106px',
-    height: '106px',
+    maxWidth: '106px',
+    maxHeight: '106px',
 
     border: '1px solid black',
     borderRadius: '5px',
@@ -51,22 +52,24 @@ const useStyles = makeStyles(({
   }
 }));
 
-function RecipeCardHome() {
+function RecipeHomeCard({ data }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div className={classes.thumbnail}>
-        <img src='a' alt='thumbnail' />
-      </div>
-      <div className={classes.title}>Honey Chicken</div>
+      <img src={data.picture} alt='thumbnail' className={classes.thumbnail} />
+      <div className={classes.title}>{data.title}</div>
       <div className={classes.desc}>
-        <div style={{ marginRight: '5px' }}>Prep 10 min</div>
-        <div style={{ marginLeft: '5px' }}>Cook 10 min</div>
+        <div style={{ marginRight: '5px' }}>Prep {data.prep} min</div>
+        <div style={{ marginLeft: '5px' }}>Cook {data.cook} min</div>
       </div>
-      <div></div>
-      <div className={classes.author}>Wincent</div>
+      <div>{data.rating}</div>
+      <div className={classes.author}>{data.author}</div>
     </div>
   )
 }
 
-export default RecipeCardHome;
+RecipeHomeCard.propTypes = {
+  data: PropTypes.object
+}
+
+export default RecipeHomeCard;

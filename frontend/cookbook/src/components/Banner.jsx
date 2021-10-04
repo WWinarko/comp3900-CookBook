@@ -43,7 +43,7 @@ const useStyles = makeStyles(({
   },
 }));
 
-function Banner ( {bannerdata} ) {
+function Banner ({ bannerdata }) {
   const classes = useStyles();
   const [curr, setCurr] = useState(0);
   const len = bannerdata.length;

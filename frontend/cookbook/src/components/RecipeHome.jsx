@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 
 import RecipeHomeContainer from './RecipeHomeContainer';
 import RoundButton from './RoundButton';
+import { RecipeData } from './RecipeData';
 
 const useStyles = makeStyles(({
   root: {
@@ -34,6 +35,7 @@ const useStyles = makeStyles(({
     backgroundColor: '#F9FAF9',
 
     paddingTop: '20px',
+    paddingBottom: '20px',
 
     display: 'flex',
     alignItems: 'center',
@@ -45,13 +47,19 @@ const useStyles = makeStyles(({
 
 function HomeRecipe() {
   const classes = useStyles();
-  const [recipes, setRecipes] = useState(['1']);
   const [count, setCount] = useState(1);
+  const [recipes, setRecipes] = useState([RecipeData.properties.slice(0, 4)]);
+  const [done, setDone] = useState(false);
 
   const showMore = () => {
+    const newRecipes = [...recipes, RecipeData.properties.slice(count * 4, (count + 1) * 4)];
+
     setCount(count + 1);
-    const newRecipes = [...recipes, count + 1];
     setRecipes(newRecipes);
+    
+    if (RecipeData.properties.length < (count + 1) * 4) {
+      setDone(!done);
+    }
   }
 
   return (
@@ -60,13 +68,15 @@ function HomeRecipe() {
         <div className={classes.text}>Popular This Week</div>
       </div>
       <div className={classes.container}>
-        {recipes.map((recipe, index) => {
+        {recipes.map((recipes, index) => {
           return (
-            <RecipeHomeContainer tes={recipe} key={index}/>
+            <RecipeHomeContainer recipesData={recipes} key={index}/>
           )
-
         })}
-        <RoundButton name='Show More' onClick={showMore} />
+        {done
+          ? <></>
+          : <RoundButton name='Show More' onClick={showMore} />
+        }
       </div>
     </div>
   )

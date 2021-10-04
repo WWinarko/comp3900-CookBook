@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 
 import RecipeHomeCard from './RecipeHomeCard';
@@ -11,16 +12,21 @@ const useStyles = makeStyles(({
   },
 }));
 
-function Category() {
+function RecipeHomeContainer({ recipesData }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <RecipeHomeCard/>
-      <RecipeHomeCard/>
-      <RecipeHomeCard/>
-      <RecipeHomeCard/>
+      {recipesData.map((recipe, index) => {
+        return (
+          <RecipeHomeCard data={recipe} key={index} />
+        )
+      })}
     </div>
   )
 }
 
-export default Category;
+RecipeHomeContainer.propTypes = {
+  recipesData: PropTypes.Array
+}
+
+export default RecipeHomeContainer;
