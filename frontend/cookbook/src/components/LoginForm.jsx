@@ -5,6 +5,7 @@ import { styled } from '@mui/system';
 
 import CustomTextField from "./CustomTextField";
 import SquareButton from "./SquareButton";
+import RegisterDialog from "./RegisterDialog";
 import {ReactComponent as GoogleAccount} from '../assets/google-account.svg';
 
 const SignIn = styled(Typography)({
@@ -31,10 +32,15 @@ const theme = createTheme({
   },
 });
 
-
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [open, setOpen] = useState(false);
+
+  const showRegister = () => {
+    setOpen(true);
+  }
   return (
     <Stack
       direction="column"
@@ -55,12 +61,13 @@ function LoginForm() {
         sx={{width: '78%'}}
       >
         <SquareButton name="Login" />
-        <SquareButton name="Register" />
+        <SquareButton name="Register" onClick={showRegister}/>
       </Stack>
       <ThemeProvider theme={theme}>
         <Divider variant="middle" sx={{color: '#9D9D9D', width: '78%'}}>or</Divider>
       </ThemeProvider>
       <GoogleAccount />
+      <RegisterDialog open={open} setOpen={setOpen} />
     </Stack>
   )
 }
