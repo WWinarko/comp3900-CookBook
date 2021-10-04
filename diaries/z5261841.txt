@@ -1,0 +1,18 @@
+Week 1
+- Discuss which project should we make
+- Brainstorm features and objectives
+- Brainstorm novel features
+
+Week 2
+- Finalize our project idea as well as the novel features
+- Determine the software architecture
+- Create user stories for all the functions 
+- Define objectives
+
+Week 3
+- Design UI
+- Discuss and finalize the user stories and acceptance criteria
+- Create sprints
+- Choose website theme and colors
+- Finish the flow diagram
+- Start coding
