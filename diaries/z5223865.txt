@@ -15,3 +15,7 @@ Proposal. Jenna and Trina are working on the report; Wincent, Louis and
 myself are working in the graphs for the frontend.
 
 Week 3
+- I finished up helping with the frontend wireframes.
+- I started the design of the UI Web: Home page, Login page and Recipe page.
+- We finish up the report, started to list out the APIs, frontend started
+to code.
