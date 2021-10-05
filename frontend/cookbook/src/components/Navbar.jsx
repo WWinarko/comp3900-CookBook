@@ -7,6 +7,7 @@ import SearchBar from './SearchBar';
 import RoundButton from './RoundButton';
 import {ReactComponent as ReactLogo} from '../assets/CookBook.svg';
 import {ReactComponent as CartIcon} from '../assets/shopping-cart.svg';
+import {ReactComponent as AddRecipeIcon} from '../assets/add-recipe.svg';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(({
@@ -27,9 +28,11 @@ const useStyles = makeStyles(({
   iconBar: {
     paddingRight: '65px',
   },
-  cartIcon: {
+  icon: {
     cursor: 'pointer',
-  }
+
+  },
+  
 }));
 
 
@@ -50,6 +53,10 @@ function Navbar() {
     history.push('/cart');
   }
 
+  const handleAdd = () => {
+    history.push('/recipe/add');
+  }
+
   return (
     <div className={classes.root} >
       <ReactLogo className={classes.logo} onClick={handleHome}/>
@@ -60,7 +67,13 @@ function Navbar() {
         spacing={5}
         className={classes.iconBar}
       >
-        <CartIcon onClick={handleCart} className={classes.cartIcon} />
+        <Stack
+          direction="row"
+          spacing={3}
+          alignItems="center">
+          <AddRecipeIcon onClick={handleAdd} className={classes.icon}/>
+          <CartIcon onClick={handleCart} className={classes.icon} />
+        </Stack>
         <RoundButton name="Login" onClick={handleLogin} />
       </Stack>
     </div>

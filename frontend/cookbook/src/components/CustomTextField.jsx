@@ -30,9 +30,12 @@ import { FormControl , FormLabel, OutlinedInput } from "@mui/material";
 
 
 function CustomTextField(props) {
-  const {id, name, value, setValue, width} = props;
+  const {id, name, value, setValue, field, width} = props;
 
   const handleChange = (event) => {
+    if (field === "object") {
+      setValue(id, event.target.value);
+    }
     setValue(event.target.value);
   };
 

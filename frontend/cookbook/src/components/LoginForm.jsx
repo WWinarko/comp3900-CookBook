@@ -7,6 +7,7 @@ import CustomTextField from "./CustomTextField";
 import SquareButton from "./SquareButton";
 import RegisterDialog from "./RegisterDialog";
 import {ReactComponent as GoogleAccount} from '../assets/google-account.svg';
+import { useHistory } from "react-router-dom";
 
 const SignIn = styled(Typography)({
   fontWeight: '500',
@@ -37,10 +38,16 @@ function LoginForm() {
   const [password, setPassword] = useState('');
 
   const [open, setOpen] = useState(false);
+  const history = useHistory();
 
   const showRegister = () => {
     setOpen(true);
-  }
+  };
+
+  const handleLogin = () => {
+    history.push('/');
+  };
+
   return (
     <Stack
       direction="column"
@@ -60,7 +67,7 @@ function LoginForm() {
         alignItems="center"
         sx={{width: '78%'}}
       >
-        <SquareButton name="Login" />
+        <SquareButton name="Login" onClick={handleLogin}/>
         <SquareButton name="Register" onClick={showRegister}/>
       </Stack>
       <ThemeProvider theme={theme}>

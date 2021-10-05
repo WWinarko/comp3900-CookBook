@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Dialog,DialogActions, DialogContent, DialogTitle, Stack} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useHistory } from 'react-router-dom';
 
 import CustomTextField from './CustomTextField';
 import SquareButton from './SquareButton';
@@ -42,10 +43,33 @@ function RegisterDialog({open, setOpen}) {
     confirmPassword: '',
   });
   const [next, setNext] = useState(false);
+  const history = useHistory();
 
   const handleClose = () => {
     setOpen(false);
   }
+
+  const handleRegister = () => {
+    history.push('/');
+  }
+
+  const handlePersonalInfo = (field, newValue) => {
+    setPersonalInfo(prevState => {
+      return {
+      ...prevState,
+      [field] : newValue,
+      }
+    })
+  };
+  
+  const handleAccountInfo = (field, newValue) => {
+    setAccountInfo(prevState => {
+      return {
+      ...prevState,
+      [field] : newValue,
+      }
+    })
+  };
 
   return(
     <ThemeProvider theme={dialogTheme}>
@@ -64,11 +88,11 @@ function RegisterDialog({open, setOpen}) {
               },
               }}
             >
-              <CustomTextField id="firstName" name="First Name" value={personalInfo['firstName']} setValue={setPersonalInfo}  width="205px"/>
-              <CustomTextField id="lastName" name="Last Name" value={personalInfo['lastName']} setValue={setPersonalInfo}  width="205px"/>
+              <CustomTextField id="firstName" name="First Name" value={personalInfo['firstName']} setValue={handlePersonalInfo}  field="object" width="205px"/>
+              <CustomTextField id="lastName" name="Last Name" value={personalInfo['lastName']} setValue={handlePersonalInfo}  field="object" width="205px"/>
             </Stack>
-            <CustomTextField id="email" name="Email" value={personalInfo['email']} setValue={setPersonalInfo}  width="466px"/>
-            <CustomTextField id="adress" name="Address" value={personalInfo['adress']} setValue={setPersonalInfo}  width="466px"/>
+            <CustomTextField id="email" name="Email" value={personalInfo['email']} setValue={handlePersonalInfo}  field="object" width="466px"/>
+            <CustomTextField id="adress" name="Address" value={personalInfo['adress']} setValue={handlePersonalInfo}  field="object" width="466px"/>
             <Stack
               direction="row"
               sx={{"div:first-child": {
@@ -76,8 +100,8 @@ function RegisterDialog({open, setOpen}) {
               },
               }}
             >
-              <CustomTextField id="state" name="State" value={personalInfo['state']} setValue={setPersonalInfo}  width="205px"/>
-              <CustomTextField id="postcode" name="Postcode" value={personalInfo['postcode']} setValue={setPersonalInfo}  width="205px"/>
+              <CustomTextField id="state" name="State" value={personalInfo['state']} setValue={handlePersonalInfo}  field="object" width="205px"/>
+              <CustomTextField id="postcode" name="Postcode" value={personalInfo['postcode']} setValue={handlePersonalInfo}  field="object" width="205px"/>
             </Stack>
             <Stack
               direction="row"
@@ -86,15 +110,15 @@ function RegisterDialog({open, setOpen}) {
               },
               }}
             >
-              <CustomTextField id="phone" name="Phone" value={personalInfo['phone']} setValue={setPersonalInfo}  width="205px"/>
-              <CustomTextField id="dob" name="Date of Birth" value={personalInfo['dob']} setValue={setPersonalInfo}  width="205px"/>
+              <CustomTextField id="phone" name="Phone" value={personalInfo['phone']} setValue={handlePersonalInfo}  field="object" width="205px"/>
+              <CustomTextField id="dob" name="Date of Birth" value={personalInfo['dob']} setValue={handlePersonalInfo}  field="object" width="205px"/>
             </Stack>
           </> 
         :
           <>
-            <CustomTextField id="username" name="Username" value={accountInfo['username']} setValue={setAccountInfo}  width="466px"/>
-            <CustomTextField id="password" name="Password" value={accountInfo['password']} setValue={setAccountInfo}  width="466px"/>
-            <CustomTextField id="confirmPassword" name="Confirm Password" value={accountInfo['confirmPassword']} setValue={setAccountInfo}  width="466px"/>
+            <CustomTextField id="username" name="Username" value={accountInfo['username']} setValue={handleAccountInfo}  field="object" width="466px"/>
+            <CustomTextField id="password" name="Password" value={accountInfo['password']} setValue={handleAccountInfo}  field="object" width="466px"/>
+            <CustomTextField id="confirmPassword" name="Confirm Password" value={accountInfo['confirmPassword']} setValue={handleAccountInfo}  field="object" width="466px"/>
           </>
         }
           
@@ -106,7 +130,7 @@ function RegisterDialog({open, setOpen}) {
             :
               <>
                 <SquareButton name="Back" onClick={() => setNext(false)} />
-                <SquareButton name="Register" />
+                <SquareButton name="Register" onClick={handleRegister}/>
               </>
             }
         </DialogActions>
