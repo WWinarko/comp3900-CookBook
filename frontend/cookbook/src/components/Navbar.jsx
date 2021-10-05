@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 
 import SearchBar from './SearchBar';
 import RoundButton from './RoundButton';
-import {ReactComponent as ReactLogo} from '../assets/Cookbook.svg';
+import {ReactComponent as ReactLogo} from '../assets/CookBook.svg';
 import {ReactComponent as CartIcon} from '../assets/shopping-cart.svg';
 import { useHistory } from 'react-router-dom';
 
@@ -18,13 +18,18 @@ const useStyles = makeStyles(({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    boxShadow: '0px 3px 3px rgba(0, 0, 0, 0.25)',
   },
   logo: {
     paddingLeft: '65px',
+    cursor: 'pointer',
   },
   iconBar: {
     paddingRight: '65px',
   },
+  cartIcon: {
+    cursor: 'pointer',
+  }
 }));
 
 
@@ -37,9 +42,17 @@ function Navbar() {
     // console.log("hi");
   }
 
+  const handleHome = () => {
+    history.push('/');
+  }
+
+  const handleCart = () => {
+    history.push('/cart');
+  }
+
   return (
     <div className={classes.root} >
-      <ReactLogo className={classes.logo} />
+      <ReactLogo className={classes.logo} onClick={handleHome}/>
       <SearchBar />
       <Stack
         direction="row"
@@ -47,7 +60,7 @@ function Navbar() {
         spacing={5}
         className={classes.iconBar}
       >
-        <CartIcon />
+        <CartIcon onClick={handleCart} className={classes.cartIcon} />
         <RoundButton name="Login" onClick={handleLogin} />
       </Stack>
     </div>
