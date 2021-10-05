@@ -11,7 +11,7 @@ const useStyles = makeStyles(({
     alignItems: 'center',
   },
   textHolder: {
-    width: '583px',
+    width: '31%',
     height: '41px',
     left: '0px',
     top: '507px',
@@ -30,16 +30,15 @@ const useStyles = makeStyles(({
     color: "#FFFFFF",
   },
   arrowLeft: {
-    position: "absolute",
-    left: '350px',
+    paddingRight: '5%',
+
     width: '24px',
     height: '24px',
     cursor: 'pointer',
-
   },
   arrowRight: {
-    position: "absolute",
-    right: '350px',
+    paddingLeft: '5%',
+
     width: '24px',
     height: '24px',
     cursor: 'pointer',
@@ -61,8 +60,8 @@ function Category() {
       </div>
       <div className={classes.container}>
         <ArrowBackIosIcon className={classes.arrowLeft} />
-        <ArrowForwardIosIcon className={classes.arrowRight} />
         <CategoryContainer />
+        <ArrowForwardIosIcon className={classes.arrowRight} />
       </div>
     </div>
   )

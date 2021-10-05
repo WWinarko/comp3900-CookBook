@@ -18,16 +18,15 @@ const useStyles = makeStyles(({
     maxHeight: '304px',
   },
   arrowLeft: {
-    position: "absolute",
-    left: '300px',
+    paddingRight: '5%',
+
     width: '24px',
     height: '24px',
     cursor: 'pointer',
-
   },
   arrowRight: {
-    position: "absolute",
-    right: '300px',
+    paddingLeft: '5%',
+
     width: '24px',
     height: '24px',
     cursor: 'pointer',
@@ -64,7 +63,7 @@ function Banner ({ bannerdata }) {
   return (
     <div className={classes.root}>
       <ArrowBackIosIcon className={classes.arrowLeft} onClick={prevSlide} />
-      <ArrowForwardIosIcon className={classes.arrowRight} onClick={nextSlide} />
+      <div style={{ width:'1040px' }}>
       {BannerData.map((slide, index) => {
         return (
           <div
@@ -77,6 +76,8 @@ function Banner ({ bannerdata }) {
           </div>
         )
       })}
+      </div>
+      <ArrowForwardIosIcon className={classes.arrowRight} onClick={nextSlide} />
     </div>
   )
 }

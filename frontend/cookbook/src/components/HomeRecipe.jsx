@@ -11,7 +11,7 @@ const useStyles = makeStyles(({
     alignItems: 'center',
   },
   textHolder: {
-    width: '583px',
+    width: '31%',
     height: '41px',
     left: '0px',
     top: '507px',
