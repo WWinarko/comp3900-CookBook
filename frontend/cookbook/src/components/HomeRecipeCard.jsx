@@ -52,7 +52,7 @@ const useStyles = makeStyles(({
   }
 }));
 
-function RecipeHomeCard({ data }) {
+function HomeRecipeCard({ data }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -68,8 +68,8 @@ function RecipeHomeCard({ data }) {
   )
 }
 
-RecipeHomeCard.propTypes = {
+HomeRecipeCard.propTypes = {
   data: PropTypes.object
 }
 
-export default RecipeHomeCard;
+export default HomeRecipeCard;

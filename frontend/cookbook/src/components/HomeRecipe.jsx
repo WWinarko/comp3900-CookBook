@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 
-import RecipeHomeContainer from './RecipeHomeContainer';
+import HomeRecipeContainer from './HomeRecipeContainer';
 import RoundButton from './RoundButton';
 import { RecipeData } from './RecipeData';
 
 const useStyles = makeStyles(({
   root: {
     width: '100%',
-    height: '50px',
     alignItems: 'center',
   },
   textHolder: {
@@ -70,7 +69,7 @@ function HomeRecipe() {
       <div className={classes.container}>
         {recipes.map((recipes, index) => {
           return (
-            <RecipeHomeContainer recipesData={recipes} key={index}/>
+            <HomeRecipeContainer recipesData={recipes} key={index}/>
           )
         })}
         {done

@@ -18,7 +18,6 @@ const useStyles = makeStyles(({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    zIndex:'10',
   },
   logo: {
     paddingLeft: '65px',

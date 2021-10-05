@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import Banner from '../components/Banner';
 import { BannerData } from '../components/BannerData';
 import Category from '../components/Category';
-import RecipeHome from '../components/RecipeHome';
+import HomeRecipe from '../components/HomeRecipe';
 
 
 function Home () {
@@ -18,7 +18,7 @@ function Home () {
       >
         <Banner bannerdata={BannerData} style={{ backgroundColor:'red' }}/>
         <Category />
-        <RecipeHome />
+        <HomeRecipe />
       </Stack>
     </div>
   )
