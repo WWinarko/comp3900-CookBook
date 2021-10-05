@@ -1,7 +1,7 @@
 import React from 'react';
 import { Stack } from '@mui/material';
 
-import {ReactComponent as ReactLogo} from '../assets/CookBook.svg';
+import {ReactComponent as ReactLogo} from '../assets/Cookbook.svg';
 import LoginForm from '../components/LoginForm';
 
 function Login() {

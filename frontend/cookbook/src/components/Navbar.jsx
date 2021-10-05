@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 
 import SearchBar from './SearchBar';
 import RoundButton from './RoundButton';
-import {ReactComponent as ReactLogo} from '../assets/CookBook.svg';
+import {ReactComponent as ReactLogo} from '../assets/Cookbook.svg';
 import {ReactComponent as CartIcon} from '../assets/shopping-cart.svg';
 import {ReactComponent as AddRecipeIcon} from '../assets/add-recipe.svg';
 import { useHistory } from 'react-router-dom';
@@ -20,6 +20,7 @@ const useStyles = makeStyles(({
     alignItems: 'center',
     justifyContent: 'space-between',
     boxShadow: '0px 3px 3px rgba(0, 0, 0, 0.25)',
+    zIndex: '10',
   },
   logo: {
     paddingLeft: '65px',
