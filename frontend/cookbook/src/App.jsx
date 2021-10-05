@@ -4,9 +4,9 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-// import Home from './pages/Home.jsx';
-import Navbar from './components/Navbar';
+import Home from './pages/Home';
 import Login from './pages/Login';
+import Recipe from './pages/Recipe';
 
 function App() {
   return (
@@ -16,7 +16,10 @@ function App() {
           <Login />
         </Route>
         <Route exact path="/">
-          <Navbar />
+          <Home />
+        </Route>
+        <Route path="/recipe/:recipeId">
+          <Recipe />
         </Route>
       </Switch>
     </Router>
