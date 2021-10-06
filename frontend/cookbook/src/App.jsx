@@ -7,7 +7,7 @@ import {
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Recipe from './pages/Recipe';
-import Navbar from './components/Navbar';
+import AddRecipe from './pages/AddRecipe';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Login />
         </Route>
         <Route exact path="/recipe/add">
-          <Navbar />
+          <AddRecipe />
         </Route>
         <Route path="/recipe/:recipeId">
           <Recipe />
