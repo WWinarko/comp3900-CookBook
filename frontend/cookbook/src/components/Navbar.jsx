@@ -1,14 +1,15 @@
 import React from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
+import Tooltip from '@mui/material/Tooltip';
 
 import SearchBar from './SearchBar';
 import RoundButton from './RoundButton';
-import {ReactComponent as ReactLogo} from '../assets/Cookbook.svg';
+import {ReactComponent as ReactLogo} from '../assets/CookBook.svg';
 import {ReactComponent as CartIcon} from '../assets/shopping-cart.svg';
 import {ReactComponent as AddRecipeIcon} from '../assets/add-recipe.svg';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(({
   root: {
@@ -40,14 +41,18 @@ const useStyles = makeStyles(({
 function Navbar() {
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
 
+  console.log(location);
   const handleLogin = () => {
     history.push('/login');
     // console.log("hi");
   }
 
   const handleHome = () => {
-    history.push('/');
+    if (location['pathname'] !== '/') {
+      history.push('/');
+    }
   }
 
   const handleCart = () => {
@@ -72,7 +77,9 @@ function Navbar() {
           direction="row"
           spacing={3}
           alignItems="center">
-          <AddRecipeIcon onClick={handleAdd} className={classes.icon}/>
+          <Tooltip title="Add New Recipe" placement="bottom-end">
+            <AddRecipeIcon onClick={handleAdd} className={classes.icon}/>
+          </Tooltip>
           <CartIcon onClick={handleCart} className={classes.icon} />
         </Stack>
         <RoundButton name="Login" onClick={handleLogin} />

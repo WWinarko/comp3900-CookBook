@@ -3,7 +3,7 @@ import { FormControl, Stack, Typography, Divider } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/system';
 
-import CustomTextField from "./CustomTextField";
+import CustomTextField from "./TextField/CustomTextField";
 import SquareButton from "./SquareButton";
 import RegisterDialog from "./RegisterDialog";
 import {ReactComponent as GoogleAccount} from '../assets/google-account.svg';
@@ -59,7 +59,7 @@ function LoginForm() {
       <SignIn component="h1" variant="h2" align="center">Sign In</SignIn>
       <FormControl>
         <CustomTextField id="username" name="Username" value={username} setValue={setUsername}  width="362px"/>
-        <CustomTextField id="password" name="Password" value={password} setValue={setPassword}  width="362px"/>
+        <CustomTextField id="password" name="Password" value={password} setValue={setPassword}  width="362px" type="password"/>
       </FormControl>
       <Stack
         direction="row"

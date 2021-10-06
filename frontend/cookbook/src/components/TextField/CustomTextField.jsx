@@ -26,23 +26,26 @@ import { FormControl , FormLabel, OutlinedInput } from "@mui/material";
 
 // color: #89623D;
 
-
-
-
 function CustomTextField(props) {
-  const {id, name, value, setValue, field, width} = props;
+  const {id, name, value, setValue, field, width, type, multiline, endAdornment} = props;
 
   const handleChange = (event) => {
     if (field === "object") {
-      setValue(id, event.target.value);
+      setValue(prevState => {
+        return {
+        ...prevState,
+        [id] : event.target.value,
+        }
+      });
+    } else {
+      setValue(event.target.value);
     }
-    setValue(event.target.value);
   };
 
   return (
     <FormControl sx={{marginTop: '15px'}}>
         <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500' }}>{name}</FormLabel>
-        <OutlinedInput id={id} value={value} onChange={handleChange} sx={{borderRadius: '3px', width: width, margin: '10px 0', backgroundColor:'#ffffff', color: '#000000'}}/>
+        <OutlinedInput id={id} value={value} onChange={handleChange} sx={{borderRadius: '3px', width: width, margin: '10px 0', backgroundColor:'#ffffff', color: '#000000'}} type={type ? type : 'string'} multiline={multiline} minRows={5} endAdornment={endAdornment}/>
     </FormControl>
   )  
 }
