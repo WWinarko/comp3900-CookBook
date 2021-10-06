@@ -8,7 +8,24 @@ export const RecipeData = {
       "author": "Singer",
       "prep": 2,
       "cook": 2,
-      "rating": 2
+      "rating": 2,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ],
   },
   {
       "_id": "593e9297ec4cca9c56bf61af",
@@ -18,7 +35,24 @@ export const RecipeData = {
       "author": "Machias",
       "prep": 2,
       "cook": 1,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e929773c71925e5d7c11c",
@@ -28,7 +62,24 @@ export const RecipeData = {
       "author": "Bend",
       "prep": 3,
       "cook": 2,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92973d4d15eedb129aee",
@@ -38,7 +89,24 @@ export const RecipeData = {
       "author": "Ivanhoe",
       "prep": 3,
       "cook": 2,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e929728b7f8543b7907e1",
@@ -48,7 +116,24 @@ export const RecipeData = {
       "author": "Lydia",
       "prep": 2,
       "cook": 1,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92975996a6263d146444",
@@ -58,7 +143,24 @@ export const RecipeData = {
       "author": "Rosedale",
       "prep": 2,
       "cook": 1,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297a13e246da5ba0884",
@@ -68,7 +170,24 @@ export const RecipeData = {
       "author": "Allison",
       "prep": 2,
       "cook": 2,
-      "rating": 2
+      "rating": 2,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297afa51a013fcd07d5",
@@ -78,7 +197,24 @@ export const RecipeData = {
       "author": "Nicut",
       "prep": 4,
       "cook": 1,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92972bd8fd05f2ab1a89",
@@ -88,7 +224,24 @@ export const RecipeData = {
       "author": "Canterwood",
       "prep": 3,
       "cook": 1,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297fe2e6d32c859ecf4",
@@ -98,7 +251,24 @@ export const RecipeData = {
       "author": "Cobbtown",
       "prep": 2,
       "cook": 1,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92970481ccf52f948e6d",
@@ -108,7 +278,24 @@ export const RecipeData = {
       "author": "Blue",
       "prep": 4,
       "cook": 1,
-      "rating": 2
+      "rating": 2,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297e09417746b79e1c5",
@@ -118,7 +305,24 @@ export const RecipeData = {
       "author": "Craig",
       "prep": 2,
       "cook": 1,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92978e7160fa2b9992d9",
@@ -128,7 +332,24 @@ export const RecipeData = {
       "author": "Orovada",
       "prep": 1,
       "cook": 2,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92973459fbdfa1f1c041",
@@ -138,7 +359,24 @@ export const RecipeData = {
       "author": "Clay",
       "prep": 1,
       "cook": 1,
-      "rating": 2
+      "rating": 2,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92970306538830483e14",
@@ -148,7 +386,24 @@ export const RecipeData = {
       "author": "Windsor",
       "prep": 2,
       "cook": 2,
-      "rating": 2
+      "rating": 2,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92976042982766c97ca1",
@@ -158,7 +413,24 @@ export const RecipeData = {
       "author": "Bluetown",
       "prep": 2,
       "cook": 1,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92971901e888a036a258",
@@ -168,7 +440,24 @@ export const RecipeData = {
       "author": "Wakulla",
       "prep": 1,
       "cook": 1,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e929780e6af9c11a10b90",
@@ -178,7 +467,24 @@ export const RecipeData = {
       "author": "Greer",
       "prep": 1,
       "cook": 2,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297441033e3f818ff6b",
@@ -188,7 +494,24 @@ export const RecipeData = {
       "author": "Wright",
       "prep": 3,
       "cook": 2,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297964d25b59d94e8aa",
@@ -198,7 +521,24 @@ export const RecipeData = {
       "author": "Manchester",
       "prep": 3,
       "cook": 2,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e929737636c879539416d",
@@ -208,7 +548,24 @@ export const RecipeData = {
       "author": "Ballico",
       "prep": 1,
       "cook": 1,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297b2516c3e5af4601f",
@@ -218,7 +575,24 @@ export const RecipeData = {
       "author": "Tuskahoma",
       "prep": 2,
       "cook": 1,
-      "rating": 2
+      "rating": 2,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92972f6034590df04c45",
@@ -228,7 +602,24 @@ export const RecipeData = {
       "author": "Temperanceville",
       "prep": 3,
       "cook": 1,
-      "rating": 2
+      "rating": 2,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297aa0e233a421f1a58",
@@ -238,7 +629,24 @@ export const RecipeData = {
       "author": "Cliffside",
       "prep": 2,
       "cook": 2,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92977526a30b580dcfb2",
@@ -248,7 +656,24 @@ export const RecipeData = {
       "author": "Sunbury",
       "prep": 2,
       "cook": 2,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e92975141c74b24375bd9",
@@ -258,7 +683,24 @@ export const RecipeData = {
       "author": "Gracey",
       "prep": 3,
       "cook": 1,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297b3ffeb95bb008453",
@@ -268,7 +710,24 @@ export const RecipeData = {
       "author": "Farmers",
       "prep": 3,
       "cook": 1,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297e262c91acd91ab81",
@@ -278,7 +737,24 @@ export const RecipeData = {
       "author": "Mapletown",
       "prep": 1,
       "cook": 2,
-      "rating": 0
+      "rating": 0,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e9297df21e62e0465f91f",
@@ -288,7 +764,24 @@ export const RecipeData = {
       "author": "Snyderville",
       "prep": 2,
       "cook": 1,
-      "rating": 2
+      "rating": 2,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
       "_id": "593e929787f567dccda86910",
@@ -298,7 +791,24 @@ export const RecipeData = {
       "author": "Inkerman",
       "prep": 1,
       "cook": 1,
-      "rating": 1
+      "rating": 1,
+      "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
   },
   {
     "_id": "593e9297df21e62e0465f91f",
@@ -308,7 +818,24 @@ export const RecipeData = {
     "author": "Snyderville",
     "prep": 2,
     "cook": 1,
-    "rating": 2
+    "rating": 2,
+    "ingredients": [
+          "3 cups store bought roast chicken",
+          "1 cup corn kernels",
+          "1/2 red onion",
+          "300g cherry tomatoes",
+          "2 cucumbers",
+          "2 avocados",
+          "150g bacon",
+          "2 1/2 tbsp cider vinegar",
+          "6 tbsp extra virgin olive oil",
+          "1 garlic clove , minced using garlic press",
+          "1 tsp Dijon Mustard",
+          "2 tsp dried mixed herbs",
+          "1 tsp sugar , optional",
+          "3/4 tsp salt",
+          "1/2 tsp black pepper"
+      ]
 },
   ]
 }

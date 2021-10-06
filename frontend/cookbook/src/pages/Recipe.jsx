@@ -3,6 +3,7 @@ import { Stack } from '@mui/material';
 
 import Navbar from '../components/Navbar';
 import RecipeIngredients from '../components/RecipeIngredients';
+import RecipeDescription from './RecipeDescription';
 
 function Recipe() {
   return (
@@ -24,11 +25,10 @@ function Recipe() {
             <RecipeIngredients />
           </Stack>
           <Stack
-            sx={{ width: '50%', height: '100%', backgroundColor: 'yellow' }}
+            sx={{ width: '50%', height: '100%' }}
           >
-
+            <RecipeDescription />
           </Stack>
-
         </Stack>
 
       </Stack>

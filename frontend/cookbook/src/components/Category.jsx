@@ -30,14 +30,14 @@ const useStyles = makeStyles(({
     color: "#FFFFFF",
   },
   arrowLeft: {
-    paddingRight: '5%',
+    paddingRight: '1.5%',
 
     width: '24px',
     height: '24px',
     cursor: 'pointer',
   },
   arrowRight: {
-    paddingLeft: '5%',
+    paddingLeft: '1.5%',
 
     width: '24px',
     height: '24px',
