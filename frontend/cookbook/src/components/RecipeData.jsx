@@ -26,6 +26,11 @@ export const RecipeData = {
           "3/4 tsp salt",
           "1/2 tsp black pepper"
       ],
+      "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],
   },
   {
       "_id": "593e9297ec4cca9c56bf61af",
@@ -52,8 +57,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e929773c71925e5d7c11c",
       "index": 2,
@@ -79,8 +88,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92973d4d15eedb129aee",
       "index": 3,
@@ -106,8 +119,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e929728b7f8543b7907e1",
       "index": 4,
@@ -133,8 +150,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92975996a6263d146444",
       "index": 5,
@@ -160,8 +181,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297a13e246da5ba0884",
       "index": 6,
@@ -187,8 +212,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297afa51a013fcd07d5",
       "index": 7,
@@ -214,8 +243,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92972bd8fd05f2ab1a89",
       "index": 8,
@@ -241,8 +274,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297fe2e6d32c859ecf4",
       "index": 9,
@@ -268,8 +305,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92970481ccf52f948e6d",
       "index": 10,
@@ -295,8 +336,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297e09417746b79e1c5",
       "index": 11,
@@ -322,8 +367,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92978e7160fa2b9992d9",
       "index": 12,
@@ -349,8 +398,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92973459fbdfa1f1c041",
       "index": 13,
@@ -376,8 +429,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92970306538830483e14",
       "index": 14,
@@ -403,8 +460,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92976042982766c97ca1",
       "index": 15,
@@ -430,8 +491,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92971901e888a036a258",
       "index": 16,
@@ -457,8 +522,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e929780e6af9c11a10b90",
       "index": 17,
@@ -484,8 +553,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297441033e3f818ff6b",
       "index": 18,
@@ -511,8 +584,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297964d25b59d94e8aa",
       "index": 19,
@@ -538,8 +615,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e929737636c879539416d",
       "index": 20,
@@ -565,8 +646,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297b2516c3e5af4601f",
       "index": 21,
@@ -592,8 +677,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92972f6034590df04c45",
       "index": 22,
@@ -619,8 +708,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297aa0e233a421f1a58",
       "index": 23,
@@ -646,8 +739,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92977526a30b580dcfb2",
       "index": 24,
@@ -673,8 +770,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e92975141c74b24375bd9",
       "index": 25,
@@ -700,8 +801,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297b3ffeb95bb008453",
       "index": 26,
@@ -727,8 +832,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297e262c91acd91ab81",
       "index": 27,
@@ -754,8 +863,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e9297df21e62e0465f91f",
       "index": 28,
@@ -781,8 +894,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
       "_id": "593e929787f567dccda86910",
       "index": 29,
@@ -808,8 +925,12 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-  },
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   {
     "_id": "593e9297df21e62e0465f91f",
     "index": 28,
@@ -835,7 +956,11 @@ export const RecipeData = {
           "1 tsp sugar , optional",
           "3/4 tsp salt",
           "1/2 tsp black pepper"
-      ]
-},
+      ],
+    "steps": [
+        "Dressing: Place ingredients in a jar, shake, set aside for at least 10 minutes to let flavours meld",
+        "Salad: Place all ingredients except bacon in a big bowl. Drizzle over most of the Dressing, then toss well.",
+        "Transfer to serving bowl, drizzle with remaining Dressing. Sprinkle with bacon. Serve immediately!",
+      ],    },
   ]
 }
