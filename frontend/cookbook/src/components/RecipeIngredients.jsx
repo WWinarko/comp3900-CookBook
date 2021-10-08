@@ -32,6 +32,8 @@ const useStyles = makeStyles({
     marginTop: '10px',
     marginBottom: '15px',
 
+    padding: '2%',
+
     fontFamily: 'Roboto',
     fontSize: '14px',
     color: '#89623D',

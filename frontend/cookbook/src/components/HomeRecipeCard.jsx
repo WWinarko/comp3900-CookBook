@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(({
   root: {
@@ -18,6 +19,12 @@ const useStyles = makeStyles(({
     textAlign: 'center',
     gap: '5px',
 
+    cursor: 'pointer',
+    backgroundColor: '#FFFFFF',
+    '&:hover': {
+      backgroundColor: '#FFFFFF',
+      border: '1px solid orange'
+    },
   },
   thumbnail: {
     maxWidth: '106px',
@@ -54,8 +61,14 @@ const useStyles = makeStyles(({
 
 function HomeRecipeCard({ data }) {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleRecipe = () => {
+    history.push('/recipe/' + data.index);
+  }
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={handleRecipe}>
       <img src={data.picture} alt='thumbnail' className={classes.thumbnail} />
       <div className={classes.title}>{data.title}</div>
       <div className={classes.desc}>

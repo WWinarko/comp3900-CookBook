@@ -1,33 +1,32 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-import CategoryContainer from './CategoryContainer';
+import RecommendationContainer from './RecommendationContainer';
 
-const useStyles = makeStyles(({
+const useStyles = makeStyles({
   root: {
     width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
   },
-  textHolder: {
-    width: '31%',
-    height: '41px',
-    left: '0px',
-    top: '507px',
-    textAlign: 'right',
-    background: '#C4C4C4',
-  },
-  text: {
-    paddingTop: '6px',
-    paddingRight: '100px',
-
+  header: {
     fontFamily: 'Roboto',
-    fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: '25px',
+    fontSize: '30px',
 
-    color: "#FFFFFF",
+    color: '#FE793D',
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    marginBottom: '75px',
   },
   arrowLeft: {
     paddingRight: '1.5%',
@@ -43,28 +42,26 @@ const useStyles = makeStyles(({
     height: '24px',
     cursor: 'pointer',
   },
-  container: {
-    width: '100%',
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: 'center',
-  }
-}));
+})
 
-function Category() {
+function RecipeRecommendation() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div className={classes.textHolder}>
-        <div className={classes.text}>Category</div>
-      </div>
+      <p className={classes.header}>Similar Recipes</p>
       <div className={classes.container}>
         <ArrowBackIosIcon className={classes.arrowLeft} />
-        <CategoryContainer />
+        <RecommendationContainer />
+        <ArrowForwardIosIcon className={classes.arrowRight} />
+      </div>
+      <p className={classes.header}>Recommendations</p>
+      <div className={classes.container}>
+        <ArrowBackIosIcon className={classes.arrowLeft} />
+        <RecommendationContainer />
         <ArrowForwardIosIcon className={classes.arrowRight} />
       </div>
     </div>
   )
 }
 
-export default Category;
+export default RecipeRecommendation;
