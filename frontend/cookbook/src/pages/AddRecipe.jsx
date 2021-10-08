@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Stack, Typography, InputAdornment} from "@mui/material"; 
+import { Stack, Typography, InputAdornment, FormLabel, Button} from "@mui/material"; 
 
 import CustomTextField from "../components/TextField/CustomTextField";
 import NumberTextField from "../components/TextField/NumberTextField";
 import Navbar from '../components/Navbar';
 import FileTextField from "../components/TextField/FileTextField";
+// import RoundButton from '../components/RoundButton'
+import IngredientCard from "../components/IngredientCard";
 
 function AddRecipe() {
   const [recipeInfo, setRecipeInfo] = useState(
@@ -19,6 +21,9 @@ function AddRecipe() {
     });
   // const [ingredients, setIngredients] = ([]);
   // const [steps, setSteps] = ([]);
+  const handleIngredients = () => {
+    console.log("added");
+  }
 
   return (
     <>
@@ -46,6 +51,9 @@ function AddRecipe() {
             <NumberTextField id="difficulty" name="Difficulty" value={recipeInfo['difficulty']} setValue={setRecipeInfo} field="object" width="70px" min="1" max="5"/>
             <NumberTextField id="serves" name="Serves" value={recipeInfo['serves']} setValue={setRecipeInfo} field="object" width="70px" min="1" />
           </Stack>
+          <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Ingredients</FormLabel>
+          <IngredientCard />
+          <Button onClick={handleIngredients}>Add ingredient</Button>
         </Stack>
       </Stack>
     </>
