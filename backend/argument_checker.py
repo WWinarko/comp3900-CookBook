@@ -4,7 +4,6 @@ def is_empty_string(string):
     '''
       Returns True if string is any combination of empty
       E.g. Contains only spaces, tabs, new lines or no character
-
     '''
 
     string = string.strip()
@@ -25,22 +24,10 @@ def all_not_empty(args):
 
 def no_white_space(args):
     '''
-        Checks list of arguments is not all white space
-        Also checks that argument doesn't contain any whitespace chars
-        Will raise InputError if invalid
+        checks that argument doesn't contain any whitespace chars and not empty
     '''
     all_not_empty(args)
 
     for arg in args:
-        if ' ' in arg:
-            raise InputError(description='Input contains space')
-        if "\t" in arg:
-            raise InputError(description='Input contains space')
-        if "\n" in arg:
-            raise InputError(description='Input contains space')
-        if "\v" in arg:
-            raise InputError(description='Input contains space')
-        if "\f" in arg:
-            raise InputError(description='Input contains space')
-        if "\r" in arg:
+        if (' ' or "\t" or "\n" or "\v" or "\f" or "\r") in arg:
             raise InputError(description='Input contains space')
