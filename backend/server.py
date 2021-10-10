@@ -4,6 +4,7 @@ from json import dumps
 
 from auth_register import auth_register
 from auth_login import auth_login
+from auth_logout import auth_logout
 
 def default_handler(err):
     ''' Default Handle '''
@@ -38,6 +39,13 @@ def auth_login_root():
     ''' Login a user '''
     payload = request.get_json()
     return dumps(auth_login(payload['username'], payload['password']))
+
+
+@APP.route("/auth/logout", methods=['POST'])
+def auth_logout_root():
+    ''' Logs out a user '''
+    payload = request.get_json()
+    return dumps(auth_logout(payload['token']))
 
 if __name__ == "__main__":
     pass

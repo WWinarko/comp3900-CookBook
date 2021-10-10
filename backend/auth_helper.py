@@ -51,6 +51,3 @@ def validate_email(email, users):
 
     if is_email_in_use(email, users):
         raise InputError(description="Email Already In Use")
-
-
-    

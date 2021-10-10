@@ -61,8 +61,3 @@ def auth_register(first_name, last_name, email, address, state, postcode, phone,
 
 # auth_register("Trina", "Chang", "kabcde@gmail.com", "", "", "", "09123", "TrinaChang", "abcdefgh", "abcdefgh")
 # auth_register("Jenna", "Chan", "jennaclown@gmail.com", "", "", "", "09123456", "JennaChan", "iamsougly", "iamsougly")
-
-
-
-
-
