@@ -17,13 +17,12 @@ def default_handler(err):
     })
     response.content_type = 'application/json'
     return response
-    
+
 APP = Flask(__name__)
 CORS(APP)
 
 APP.config['TRAP_HTTP_EXCEPTIONS'] = True
 APP.register_error_handler(Exception, default_handler)
-
 
 @APP.route("/auth/register", methods=['POST'])
 def auth_register_root():

@@ -2,7 +2,7 @@ from error import InputError
 import re
 
 def check_user_name(username, users):
-    ''' Returns True or False if email is already in use '''
+    ''' Returns True or False if username is already in use '''
     result = users.find_one({"username":username})
     if (result is None):
         return False
@@ -11,6 +11,13 @@ def check_user_name(username, users):
 def check_phone_in_use(phone, users):
     ''' Returns True or False if phone is already in use '''
     result = users.find_one({"phone":phone})
+    if (result is None):
+        return False
+    return True
+
+def check_user_id(userId, users):
+    ''' Returns True or False if userid exists '''
+    result = users.find_one({"_id":userId})
     if (result is None):
         return False
     return True

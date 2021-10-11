@@ -30,5 +30,5 @@ def auth_login(username, password):
         'token': token
     }
 
-auth_login("TrinaChang", "abcdefgh")
-auth_login("JennaChan", "iamsougly")
+# auth_login("TrinaChang", "abcdefgh")
+# auth_login("JennaChan", "iamsougly")
