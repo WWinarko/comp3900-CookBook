@@ -8,7 +8,16 @@ from auth_logout import auth_logout
 
 def default_handler(err):
     ''' Default Handle '''
-
+    response = err.get_response()
+    print('response', err, err.get_response())
+    response.data = dumps({
+        "code": err.code,
+        "name": "System Error",
+        "message": err.get_description(),
+    })
+    response.content_type = 'application/json'
+    return response
+    
 APP = Flask(__name__)
 CORS(APP)
 
@@ -48,4 +57,4 @@ def auth_logout_root():
     return dumps(auth_logout(payload['token']))
 
 if __name__ == "__main__":
-    pass
+    APP.run()
