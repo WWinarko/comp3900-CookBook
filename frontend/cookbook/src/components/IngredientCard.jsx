@@ -1,20 +1,36 @@
 import React from 'react';
-import { Card, CardContent, Stack, Typography } from '@mui/material';
+import { Card, CardActions, CardContent, CardMedia, Stack, Typography, Button, Box } from '@mui/material';
+import image from '../assets/cheese.png';
 
 
 function IngredientCard() {
   return (
-    <Card sx={{width: '100%', marginTop: '10px'}}>
-      <CardContent>
-        <Stack
-          direction="column"
-        >
-          <Typography variant="subtitle1">Name</Typography>
-          <Typography variant="subtitle1">Quantity</Typography>
-          <Typography variant="subtitle1">Price</Typography>
-        </Stack>
-      </CardContent>
-    </Card>
+    <Box mt={2} sx={{width: '781px'}}>
+      <Typography component="p" sx={{color: '#9D9D9D', fontWeight: '600'}}>1 cup parmesan cheese</Typography>  
+      <Card sx={{width: '100%', marginTop: '10px', display: 'flex', flexDirection:'row'}}>
+        <CardMedia
+              component="img"
+              sx={{ width: 151 }}
+              image={image}
+              alt="Ingredient Image"
+        />
+        <CardContent>
+          <Stack
+            direction="column"
+            spacing={3}
+            sx={{width: '400px'}}
+          >
+            <Typography variant="subtitle1" sx={{color: '#977554'}}>Best Parmesan Cheese</Typography>
+            <Typography variant="subtitle1" sx={{color: '#977554'}}>Quantity: 1</Typography>
+            <Typography variant="subtitle1" sx={{color: '#977554'}}>$10</Typography>
+          </Stack>
+        </CardContent>
+        <CardActions sx={{display: 'flex', flexDirection:'row', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
+          <Button sx={{color: '#FE793D', textTransform: 'none', fontSize: '18px'}}>Edit</Button>
+          <Button sx={{color: '#FE793D', textTransform: 'none', fontSize: '18px'}}>Remove</Button>
+        </CardActions>
+      </Card>
+    </Box>
   )
 }
 

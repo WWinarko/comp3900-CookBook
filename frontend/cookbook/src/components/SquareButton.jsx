@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-const SignInButton = styled(Button)(() => ({
+const BrownButton = styled(Button)(() => ({
   backgroundColor: '#89623D',
   color: "#ffffff",
   borderRadius: '3px',
@@ -18,12 +18,12 @@ const SignInButton = styled(Button)(() => ({
   fontWeight: '500',
 }));
 
-function RoundButton({ name, onClick }) {
+function SquareButton({ name, onClick }) {
   return (
-    <SignInButton variant= "outlined" onClick={onClick}>
+    <BrownButton variant= "outlined" onClick={onClick}>
       {name}
-    </SignInButton>
+    </BrownButton>
   );
 }
 
-export default RoundButton;
+export default SquareButton;
