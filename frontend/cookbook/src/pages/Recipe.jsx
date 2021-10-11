@@ -34,14 +34,14 @@ function Recipe() {
         </Stack>
         
         <Stack
-          sx={{ width:'100%'}}
+          sx={{ width:'100%' }}
           pt={10}
         >
           <RecipeReview />
         </Stack>
 
         <Stack
-          sx={{ width:'100%', height: '1000px' }}
+          sx={{ width:'100%' }}
           pt={10}
         >
             <RecipeRecommendation/>

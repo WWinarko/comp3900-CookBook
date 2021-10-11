@@ -5,7 +5,8 @@ import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
-    margin: '20px 30px 20px 30px',
+    
+    margin: '20px 50px 20px 50px',
 
     borderRadius: '5px',
 
@@ -13,21 +14,22 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-    gap: '5px',
 
     cursor: 'pointer',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F9FAF9',
     '&:hover': {
-      backgroundColor: '#FFFFFF',
-      border: '1px solid orange'
-    },
-    thumbnail: {
-      maxWidth: '200px',
-      maxHeight: '200px',
-
-      margin: '5px',
+      backgroundColor: '#F9FAF9',
     }
   },
+  thumbnail: {
+    maxWidth: '250px',
+    maxHeight: '250px',
+
+  },
+  text: {
+    color: '#89623D',
+    
+  }
 })
 
 function RecommendationCard({ data }) {
@@ -35,12 +37,13 @@ function RecommendationCard({ data }) {
   const history = useHistory();
 
   const handleRecipe = () => {
-    history.push('/');
+    history.push('/recipe/' + data.index);
   }
 
   return (
     <div className={classes.root} onClick={handleRecipe}>
       <img src={data.picture} alt='thumbnail' className={classes.thumbnail} />
+      <p className={classes.text}>{data.title}</p>
     </div>
   )
 }
