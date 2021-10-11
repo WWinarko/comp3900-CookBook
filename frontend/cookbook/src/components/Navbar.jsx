@@ -42,8 +42,7 @@ function Navbar() {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
-
-  console.log(location);
+  
   const handleLogin = () => {
     history.push('/login');
     // console.log("hi");
