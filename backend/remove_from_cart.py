@@ -4,6 +4,7 @@ import database
 import cart_helper
 
 def remove_from_cart(token, item):
+    ''' Remove item (only one) from shopping cart '''
     # Validates token
     users = database.get_users()
     token_helper.is_token_valid(token, users)

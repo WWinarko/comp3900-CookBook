@@ -4,6 +4,7 @@ import token_helper
 import cart_helper
 
 def add_to_cart(token, items):
+    ''' Add items to shopping cart'''
     # Validates token
     users = database.get_users()
     token_helper.is_token_valid(token, users)
