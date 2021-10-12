@@ -2,6 +2,7 @@ import argument_checker
 import database
 import auth_helper
 import encryption_helper
+import re
 from error import InputError
 
 def auth_register(first_name, last_name, email, address, state, postcode, phone, username, password, confirmpassword):
@@ -43,10 +44,18 @@ def auth_register(first_name, last_name, email, address, state, postcode, phone,
     # create token
     token = encryption_helper.generate_token()
 
+    regex = '^\w+([\.-]?\w+)*@cookbook.com$'
+
+    if re.search(regex, email):
+        admin = True
+    else:
+        admin = False
+
+
     # create user data
     user = {"username":username, "password":password_hash, "first_name":first_name, 
     "last_name":last_name, "email":email, "address":address, "state":state, "postcode":postcode, 
-    "phone":phone, "follower":0, "admin":False, "token":token, "photo":""}
+    "phone":phone, "follower":0, "admin":admin, "token":token, "photo":""}
 
     users.insert_one(user)
 
@@ -59,5 +68,7 @@ def auth_register(first_name, last_name, email, address, state, postcode, phone,
         'token': token
     }
 
-# auth_register("Trina", "Chang", "kabcde@gmail.com", "", "", "", "09123", "TrinaChang", "abcdefgh", "abcdefgh")
+
+
+# auth_register("Trina", "Chang", "kabcde@cookbook.com", "", "", "", "09123", "TrinaChang", "abcdefgh", "abcdefgh")
 # auth_register("Jenna", "Chan", "jennaclown@gmail.com", "", "", "", "09123456", "JennaChan", "iamsougly", "iamsougly")

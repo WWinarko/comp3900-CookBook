@@ -4,6 +4,7 @@ import database
 from error import InputError
 
 def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps):
+    ''' upload a recipe '''
     users = database.get_users()
 
     # check if the token is valid
@@ -49,7 +50,7 @@ def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, se
     }
 
 # users = database.get_users()
-# user = users.find_one({"username":"wincent"})
+# user = users.find_one({"username":"TrinaChang"})
 
 # recipe_upload(
 #     user['token'], 'testing', 'dfsfsd', 'sfssd', 5, 30, 20, 4, 

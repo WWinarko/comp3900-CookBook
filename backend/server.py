@@ -9,6 +9,8 @@ from auth_logout import auth_logout
 from recipe_view import recipe_view
 from recipe_upload import recipe_upload
 
+from product_add import product_add
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -86,5 +88,20 @@ def auth_register_root():
         recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps)
     )
 
+##### PRODUCT ROUTE #####
+
+@APP.route("/product/add", methods=['POST'])
+def auth_register_root():
+    ''' Register User '''
+    payload = request.get_json()
+    token = payload['token']
+    title = payload['title']
+    photo = payload['photo']
+    description = payload['description']
+    labels = payload['labels']
+    return dumps(
+        product_add(token, title, photo, description, labels)
+    )
+    
 if __name__ == "__main__":
     APP.run()

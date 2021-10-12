@@ -66,9 +66,9 @@ def recipe_view(recipe_id):
         'steps': steps
     }
 
-# recipes = database.get_recipes()
-# recipe = recipes.find_one({"title":"testing"})
-# print(recipe_view(recipe['_id']))
+recipes = database.get_recipes()
+recipe = recipes.find_one({"title":"testing"})
+print(recipe_view(recipe['_id']))
 
 '''
 recipe format:
