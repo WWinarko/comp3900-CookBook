@@ -7,6 +7,7 @@ from auth_login import auth_login
 from auth_logout import auth_logout
 
 from recipe_view import recipe_view
+from recipe_upload import recipe_upload
 
 def default_handler(err):
     ''' Default Handle '''
@@ -66,6 +67,24 @@ def recipe_view_root():
     ''' Return recipe information '''
     recipe_id = request.args.get('recipe_id')
     return dumps(recipe_view(recipe_id))
+
+@APP.route("/recipe/upload", methods=['POST'])
+def auth_register_root():
+    ''' Register User '''
+    payload = request.get_json()
+    token = payload['token']
+    title = payload['title']
+    intro = payload['intro']
+    photo = payload['photo']
+    difficulty = payload['difficulty']
+    cooktime= payload['cooktime']
+    preptime = payload['preptime']
+    serves = payload['serves']
+    steps = payload['steps']
+    ingredients = payload['ingredients']
+    return dumps(
+        recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps)
+    )
 
 if __name__ == "__main__":
     APP.run()
