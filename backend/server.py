@@ -6,6 +6,8 @@ from auth_register import auth_register
 from auth_login import auth_login
 from auth_logout import auth_logout
 
+from recipe_view import recipe_view
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -23,6 +25,8 @@ CORS(APP)
 
 APP.config['TRAP_HTTP_EXCEPTIONS'] = True
 APP.register_error_handler(Exception, default_handler)
+
+##### AUTH ROUTE #####
 
 @APP.route("/auth/register", methods=['POST'])
 def auth_register_root():
@@ -54,6 +58,14 @@ def auth_logout_root():
     ''' Logs out a user '''
     payload = request.get_json()
     return dumps(auth_logout(payload['token']))
+
+##### RECIPE ROUTE #####
+
+@APP.route("/recipe/view", methods=['GET'])
+def recipe_view_root():
+    ''' Return recipe information '''
+    recipe_id = request.args.get('recipe_id')
+    return dumps(recipe_view(recipe_id))
 
 if __name__ == "__main__":
     APP.run()

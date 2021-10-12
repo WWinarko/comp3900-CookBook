@@ -15,9 +15,9 @@ def check_phone_in_use(phone, users):
         return False
     return True
 
-def check_user_id(userId, users):
+def check_user_id(user_id, users):
     ''' Returns True or False if userid exists '''
-    result = users.find_one({"_id":userId})
+    result = users.find_one({"_id":user_id})
     if (result is None):
         return False
     return True

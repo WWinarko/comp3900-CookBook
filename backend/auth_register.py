@@ -46,7 +46,7 @@ def auth_register(first_name, last_name, email, address, state, postcode, phone,
     # create user data
     user = {"username":username, "password":password_hash, "first_name":first_name, 
     "last_name":last_name, "email":email, "address":address, "state":state, "postcode":postcode, 
-    "phone":phone, "follower":0, "token":token}
+    "phone":phone, "follower":0, "admin":False, "token":token, "photo":""}
 
     users.insert_one(user)
 
