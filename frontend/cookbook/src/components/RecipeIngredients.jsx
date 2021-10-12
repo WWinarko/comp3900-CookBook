@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 
 import RoundButton from './RoundButton';
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
   },
   ingredientsText: {
     backgroundColor: '#FFFFFF',
-    width: '60%',
+    width: '56%',
 
     marginTop: '10px',
     marginBottom: '15px',
@@ -42,11 +43,11 @@ const useStyles = makeStyles({
   },
 });
 
-function RecipeIngredients() {
+function RecipeIngredients({ setState }) {
   const classes = useStyles();
 
   const buyRecipe = () => {
-    console.log('aa');
+    setState(true);
   }
 
   return (
@@ -82,6 +83,10 @@ function RecipeIngredients() {
       <RoundButton name='Buy Recipe' onClick={buyRecipe} />
     </div>
   )
+}
+
+RecipeIngredients.propTypes = {
+  setState: PropTypes.func
 }
 
 export default RecipeIngredients;

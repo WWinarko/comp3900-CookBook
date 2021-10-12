@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Stack } from '@mui/material';
 
 import Navbar from '../components/Navbar';
@@ -6,8 +6,10 @@ import RecipeIngredients from '../components/RecipeIngredients';
 import RecipeDescription from '../components/RecipeDescription';
 import RecipeReview from '../components/RecipeReview';
 import RecipeRecommendation from '../components/RecipeRecommendation';
+import BuyRecipeModal from '../components/BuyRecipeModal';
 
 function Recipe() {
+  const [state, setState] = useState(false);
   return (
     <div style={{ backgroundColor: '#F9FAF9' }}>
       <Navbar />
@@ -24,7 +26,8 @@ function Recipe() {
           <Stack
             sx={{ width: '50%' }}
           >
-            <RecipeIngredients />
+            <RecipeIngredients setState={setState} />
+            {state}
           </Stack>
           <Stack
             sx={{ width: '50%' }}
@@ -44,9 +47,10 @@ function Recipe() {
           sx={{ width:'100%' }}
           pt={10}
         >
-            <RecipeRecommendation/>
+            <RecipeRecommendation />
         </Stack>
       </Stack>
+      <BuyRecipeModal state={state} setState={setState} />
     </div>
     
   )
