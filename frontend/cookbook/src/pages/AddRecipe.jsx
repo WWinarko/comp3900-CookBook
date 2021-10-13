@@ -78,7 +78,7 @@ function AddRecipe() {
           <IngredientCard />
           <AddButton onClick={handleIngredients}> Add ingredient </AddButton>
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Steps</FormLabel>
-          <RecipeStepsContainer recipesData={RecipeData.properties[0]} />
+          <RecipeStepsContainer recipesData={[RecipeData.properties[0]]} />
           {newStep ? <AddStep steps={steps} setSteps={setSteps} newStep={newStep} setNewStep={() => setNewStep(false)}/> : <AddButton onClick={handleNewStep}> Add step </AddButton>}
         </Stack>
       </Stack>
