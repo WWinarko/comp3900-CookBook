@@ -8,6 +8,7 @@ from auth_logout import auth_logout
 
 from recipe_view import recipe_view
 from recipe_upload import recipe_upload
+from recipe_listall import recipe_listall
 
 from product_add import product_add
 
@@ -87,6 +88,11 @@ def recipe_upload_root():
     return dumps(
         recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps)
     )
+
+@APP.route("/recipe/listall", methods=['GET'])
+def recipe_list_all_root():
+    ''' Return recipe information '''
+    return dumps(recipe_listall())
 
 ##### PRODUCT ROUTE #####
 
