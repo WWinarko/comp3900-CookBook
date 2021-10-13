@@ -4,9 +4,11 @@ import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
+import Avatar from '@mui/material/Avatar';
 
 import SearchBar from './SearchBar';
 import RoundButton from './RoundButton';
+import AccountMenu from './AccountMenu';
 import {ReactComponent as ReactLogo} from '../assets/CookBook.svg';
 import {ReactComponent as CartIcon} from '../assets/shopping-cart.svg';
 import {ReactComponent as AddRecipeIcon} from '../assets/add-recipe.svg';
@@ -42,10 +44,20 @@ function Navbar() {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  }
   
+  const token = localStorage.getItem('cookbook-token');
   const handleLogin = () => {
     history.push('/login');
-    // console.log("hi");
   }
 
   const handleHome = () => {
@@ -55,11 +67,19 @@ function Navbar() {
   }
 
   const handleCart = () => {
-    history.push('/cart');
+    if (token !== null) {
+      history.push('/cart');
+    } else {
+      history.push('/login');
+    }
   }
 
   const handleAdd = () => {
-    history.push('/recipe/add');
+    if (token !== null) {
+      history.push('/recipe/add');
+    } else {
+      history.push('/login');
+    }
   }
 
   return (
@@ -81,7 +101,18 @@ function Navbar() {
           </Tooltip>
           <CartIcon onClick={handleCart} className={classes.icon} />
         </Stack>
-        <RoundButton name="Login" onClick={handleLogin} />
+        {token === null ? <RoundButton name="Login" onClick={handleLogin} /> 
+        : 
+        <>
+          <Avatar sx={{cursor: 'pointer'}} onClick={handleMenu}>C</Avatar>
+          <AccountMenu 
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            onClick={handleClose}
+          />
+        </>
+        }
       </Stack>
     </div>
   );
