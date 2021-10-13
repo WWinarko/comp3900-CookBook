@@ -50,7 +50,6 @@ function LoginForm({setNotify}) {
 
   const validateInput = () => {
     if (username.trim() === '') {
-      console.log(username, password);
       setNotify({
         isOpen: true,
         message: 'Username field should not be empty',
@@ -75,13 +74,9 @@ function LoginForm({setNotify}) {
         password: password.trim()
       })
       .then((res) => {
-        if(res.status === 200) {
-          const {token} = res.data;
-          localStorage.setItem('cookbook-token', token);
-          history.push('/');
-        } else {
-          console.log(res);
-        }
+        const {token} = res.data;
+        localStorage.setItem('cookbook-token', token);
+        history.push('/');
       })
       .catch((err) => {
         setNotify({
