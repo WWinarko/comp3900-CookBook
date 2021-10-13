@@ -85,7 +85,7 @@ function Navbar() {
   return (
     <div className={classes.root} >
       <ReactLogo className={classes.logo} onClick={handleHome}/>
-      <SearchBar />
+      <SearchBar width="667px" placeholder="Search recipes" />
       <Stack
         direction="row"
         divider={<Divider orientation="vertical" flexItem sx={{border: "1.5px solid #FFFFFF", borderRadius: '5px'}}/>}

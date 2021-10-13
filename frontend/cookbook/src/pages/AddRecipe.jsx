@@ -8,8 +8,9 @@ import Navbar from '../components/Navbar';
 import FileTextField from "../components/TextField/FileTextField";
 import IngredientCard from "../components/IngredientCard";
 import RecipeStepsContainer from '../components/RecipeStepsContainer';
-import { RecipeData } from '../components/RecipeData';
 import AddStep from "../components/AddStep";
+import RoundButton from "../components/RoundButton";
+import AddIngredientModal from "../components/AddIngredientModal";
 
 export const AddButton = styled(Button)(() => ({
   backgroundColor: '#89623D',
@@ -40,10 +41,10 @@ function AddRecipe() {
   // const [ingredients, setIngredients] = ([]);
   const [steps, setSteps] = useState([]);
   const [newStep, setNewStep] = useState(false);
+  const [newIngredient, setNewIngredient] = useState(false);
 
-  const handleIngredients = () => {
-    console.log("added");
-  }
+  const handleNewIngredient = () => setNewIngredient(!newIngredient);
+
   const handleNewStep = () => {
     setNewStep(!newStep);
   }
@@ -75,12 +76,20 @@ function AddRecipe() {
             <NumberTextField id="serves" name="Serves" value={recipeInfo['serves']} setValue={setRecipeInfo} field="object" width="70px" min="1" />
           </Stack>
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Ingredients</FormLabel>
+
+
           <IngredientCard />
-          <AddButton onClick={handleIngredients}> Add ingredient </AddButton>
+          <AddButton onClick={handleNewIngredient}> Add ingredient </AddButton>
+          <AddIngredientModal open={newIngredient} onClose={handleNewIngredient}/>
+
+
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Steps</FormLabel>
-          <RecipeStepsContainer recipesData={[RecipeData.properties[0]]} />
-          {newStep ? <AddStep steps={steps} setSteps={setSteps} newStep={newStep} setNewStep={() => setNewStep(false)}/> : <AddButton onClick={handleNewStep}> Add step </AddButton>}
+          <div style={{ width: '100%' }}>
+            <RecipeStepsContainer recipesData={steps} />
+            {newStep ? <AddStep steps={steps} setSteps={setSteps} newStep={newStep} setNewStep={() => setNewStep(false)}/> : <AddButton onClick={handleNewStep}> Add step </AddButton>}
+          </div>
         </Stack>
+        <RoundButton name="Add Recipe"/>
       </Stack>
     </>
   )
