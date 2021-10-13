@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'space-between',
 
-    backgroundColor: 'red',
+    backgroundColor: 'white',
   },
   thumbnail: {
     width: '115px',
@@ -36,7 +36,7 @@ function BuyRecipeModalCard() {
       <img src={image} alt='thumbnail' className={classes.thumbnail}/>
       <div style={{ backgroundColor: 'blue', width:'200px', height: '150px'}}></div>
       <Divider orientation="vertical" variant="middle" flexItem />
-      <div style={{ backgroundColor: 'yellow', width:'200px', height: '150px'}}></div>
+      <div style={{ backgroundColor: 'white', width:'200px', height: '150px'}}></div>
     </div>
   )
 }

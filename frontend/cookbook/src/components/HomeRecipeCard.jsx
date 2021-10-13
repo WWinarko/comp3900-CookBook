@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import { useHistory } from 'react-router-dom';
+import { CircularProgress, Rating } from '@mui/material';
 
 const useStyles = makeStyles(({
   root: {
@@ -27,6 +28,8 @@ const useStyles = makeStyles(({
     },
   },
   thumbnail: {
+    minWidth: '106px',
+    minHeight: '106px',
     maxWidth: '106px',
     maxHeight: '106px',
 
@@ -62,27 +65,55 @@ const useStyles = makeStyles(({
 function HomeRecipeCard({ data }) {
   const classes = useStyles();
   const history = useHistory();
+  const [recipeData, setRecipeData] = useState({});
+  const [loadingState, setLoadingState] = useState(true);
+
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + data, {
+      method: 'GET',
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setRecipeData(res);
+          console.log(res);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setLoadingState(false);
+    })
+  }, [])
 
   const handleRecipe = () => {
-    history.push('/recipe/' + data.index);
+    history.push('/recipe/' + data);
   }
 
   return (
-    <div className={classes.root} onClick={handleRecipe}>
-      <img src={data.picture} alt='thumbnail' className={classes.thumbnail} />
-      <div className={classes.title}>{data.title}</div>
-      <div className={classes.desc}>
-        <div style={{ marginRight: '5px' }}>Prep {data.prep} min</div>
-        <div style={{ marginLeft: '5px' }}>Cook {data.cook} min</div>
-      </div>
-      <div>{data.rating}</div>
-      <div className={classes.author}>{data.author}</div>
+    <div className={classes.root}>
+      {loadingState
+        ? <div style={{ height: '207px', display: 'flex', alignItems: 'center' }}>
+            <CircularProgress />
+          </div>
+        : <div onClick={handleRecipe}>
+            <img src={recipeData.photo} alt='thumbnail' className={classes.thumbnail} />
+            <div className={classes.title}>{recipeData.title}</div>
+            <div className={classes.desc}>
+              <div style={{ marginRight: '5px' }}>Prep {recipeData.preptime} min</div>
+              <div style={{ marginLeft: '5px' }}>Cook {recipeData.cooktime} min</div>
+            </div>
+            <div>
+              <Rating name="read-only" value={recipeData.rating} readOnly />
+            </div>
+            <div className={classes.author}>{recipeData.owner_username}</div>
+          </div>
+      }
     </div>
   )
 }
 
 HomeRecipeCard.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.string
 }
 
 export default HomeRecipeCard;
