@@ -9,15 +9,18 @@ function AddStep({ steps, setSteps, setNewStep }) {
   
   const handleSave = () => {
     if (step !== '') {
-      setSteps([steps, step]);
+      const tempSteps = [...steps, step];
+      setSteps(tempSteps);
     }
     setNewStep();
 
   }
   return (
     <>
+    <div>
       <CustomTextField id="newStep" name="New Step" multiline value={step} setValue={setStep} width="781px"/>
-      <AddButton onClick={handleSave}>Save</AddButton>
+    </div>
+    <AddButton onClick={handleSave}>Save</AddButton>
     </>
   )
 }
