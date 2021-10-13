@@ -53,7 +53,7 @@ def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, se
 # user = users.find_one({"username":"TrinaChang"})
 
 # recipe_upload(
-#     user['token'], 'testing', 'dfsfsd', 'sfssd', 5, 30, 20, 4, 
+#     user['token'], 'popular recipe', 'dfsfsd', 'sfssd', 5, 30, 20, 4, 
 #     [{'ingredient':'dfsfsdfsdf', 'product_id':'fsdfsfd'}, {'ingredient':'abcsdf', 'product_id':'adslsfd'}], 
 #     ['sdfdsfsdfs', 'sfdfsdfsdfsfds', 'fsdfsdfsdsfdsfs'])
 
