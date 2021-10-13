@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 
@@ -43,50 +43,55 @@ const useStyles = makeStyles({
   },
 });
 
-function RecipeIngredients({ setState }) {
+function RecipeIngredients({ setState, recipe }) {
   const classes = useStyles();
+  const [loadingState, setLoadingState] = useState(true);
+
+  React.useEffect(() => {
+    if (recipe === undefined) {
+      setLoadingState(true);
+    } else {
+      setLoadingState(false);
+    }
+  }, [recipe])
 
   const buyRecipe = () => {
     setState(true);
   }
 
   return (
-    <div className={classes.root}>
-      <img src='a' alt='thumbnail' style={{ width:'415px', height:'415px', border:'1px solid', borderRadius:'7px', marginBottom:'20px' }} />
-
-      <div className={classes.text}>Ingredients</div>
-      <div className={classes.textHolder}>
-        <div style={{ backgroundColor:'#C4C4C4', width: '80%', height:'100%' }} />
-        <div style={{ width:'20%' }} />
-      </div>
+    <div>
+      {loadingState
+        ? <>
+          </>
+        : <div className={classes.root}>
+            <img src={recipe.photo} alt='thumbnail' style={{ width:'415px', height:'415px', border:'1px solid', borderRadius:'7px', marginBottom:'20px' }} />
       
-      <div className={classes.ingredientsText}>
-        <p>3 cups store bought roast chicken</p>
-        <p>1 cup corn kernels</p>
-        <p>1/2 red onion</p>
-        <p>300g cherry tomatoes</p>
-        <p>2 cucumbers</p>
-        <p>2 avocados</p>
-        <p>150g bacon</p>
-        <br/>
-        <p style={{ fontWeight: 'bold' }}>Dressing</p>
-        <p>2 1/2 tbsp cider vinegar</p>
-        <p>6 tbsp extra virgin olive oil</p>
-        <p>1 garlic clove , minced using garlic press </p>
-        <p>1 tsp Dijon Mustard</p>
-        <p>2 tsp dried mixed herbs</p>
-        <p>1 tsp sugar , optional</p>
-        <p>3/4 tsp salt</p>
-        <p>1/2 tsp black pepper</p>
-      </div>
+            <div className={classes.text}>Ingredients</div>
+            <div className={classes.textHolder}>
+              <div style={{ backgroundColor:'#C4C4C4', width: '80%', height:'100%' }} />
+              <div style={{ width:'20%' }} />
+            </div>
+            
+            <div className={classes.ingredientsText}>
+              {recipe.ingredient_string.map((ingredient, index) => {
+                return (
+                  <p key={index}>{ingredient}</p>
+                )
+              })}
+            </div>
+      
+            <RoundButton name='Buy Recipe' onClick={buyRecipe} />
+          </div>
 
-      <RoundButton name='Buy Recipe' onClick={buyRecipe} />
+      }
     </div>
   )
 }
 
 RecipeIngredients.propTypes = {
-  setState: PropTypes.func
+  setState: PropTypes.func,
+  recipe: PropTypes.object
 }
 
 export default RecipeIngredients;

@@ -18,7 +18,7 @@ function IngredientCard() {
           <Stack
             direction="column"
             spacing={3}
-            sx={{width: '400px'}}
+            sx={{width: '250px', backgroundColor: 'red' }}
           >
             <Typography variant="subtitle1" sx={{color: '#977554'}}>Best Parmesan Cheese</Typography>
             <Typography variant="subtitle1" sx={{color: '#977554'}}>Quantity: 1</Typography>

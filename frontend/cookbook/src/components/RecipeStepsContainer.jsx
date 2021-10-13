@@ -24,7 +24,7 @@ function RecipeStepsContainer({ recipesData }) {
 
   return (
     <div className={classes.root}>
-      {recipesData.steps.map((step, index) => {
+      {recipesData.map((step, index) => {
         return (
           <div key={index}>
             <p className={classes.title}>Step {index + 1}</p>
@@ -37,7 +37,7 @@ function RecipeStepsContainer({ recipesData }) {
 }
 
 RecipeStepsContainer.propTypes = {
-  recipesData: PropTypes.Array
+  recipesData: PropTypes.array
 }
 
 export default RecipeStepsContainer;
