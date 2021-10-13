@@ -71,7 +71,7 @@ def recipe_view_root():
     return dumps(recipe_view(recipe_id))
 
 @APP.route("/recipe/upload", methods=['POST'])
-def auth_register_root():
+def recipe_upload_root():
     ''' Register User '''
     payload = request.get_json()
     token = payload['token']
@@ -91,7 +91,7 @@ def auth_register_root():
 ##### PRODUCT ROUTE #####
 
 @APP.route("/product/add", methods=['POST'])
-def auth_register_root():
+def product_add_root():
     ''' Register User '''
     payload = request.get_json()
     token = payload['token']

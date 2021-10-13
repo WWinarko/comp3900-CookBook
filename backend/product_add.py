@@ -31,9 +31,9 @@ def product_add(token, title, photo, description, labels):
         'product_id': str(result.inserted_id)
     }
 
-users = database.get_users()
-user = users.find_one({"username":"JennaChan"})
-product_add(user['token'], 'fdsdfsf', 'sfsdfsd', 'sdfsdf', ['sdfsdf', 'sdfsdf'])
+# users = database.get_users()
+# user = users.find_one({"username":"JennaChan"})
+# product_add(user['token'], 'fdsdfsf', 'sfsdfsd', 'sdfsdf', ['sdfsdf', 'sdfsdf'])
 
 
 
