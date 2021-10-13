@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 
@@ -45,6 +46,8 @@ const useStyles = makeStyles({
 
 function RecipeIngredients({ setState, recipe }) {
   const classes = useStyles();
+  const history = useHistory();
+  const token = localStorage.getItem('cookbook-token');
   const [loadingState, setLoadingState] = useState(true);
 
   React.useEffect(() => {
@@ -56,7 +59,11 @@ function RecipeIngredients({ setState, recipe }) {
   }, [recipe])
 
   const buyRecipe = () => {
-    setState(true);
+    if (token !== null) {
+      setState(true);
+    } else {
+      history.push('/login');
+    }
   }
 
   return (
