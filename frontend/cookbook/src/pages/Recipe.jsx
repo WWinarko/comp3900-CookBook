@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Stack } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
 import RecipeIngredients from '../components/RecipeIngredients';
@@ -9,6 +10,19 @@ import RecipeRecommendation from '../components/RecipeRecommendation';
 import BuyRecipeModal from '../components/BuyRecipeModal';
 
 function Recipe() {
+  const location = useLocation();
+  const recipeId = (location.pathname.split('/')).pop();
+
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + {recipeId}, {
+      method: 'GET',
+    }).then((data) => {
+      data.json().then((res) => {
+        console.log(res);
+      })
+    })
+  })
+
   const [state, setState] = useState(false);
   return (
     <div style={{ backgroundColor: '#F9FAF9' }}>

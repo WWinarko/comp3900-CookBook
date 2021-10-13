@@ -14,6 +14,17 @@ const useStyles = makeStyles(({
 
 function HomeRecipeContainer({ recipesData }) {
   const classes = useStyles();
+
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/recipe/view?recipe_id=61656c4cc6b71dc62b6aa9ca', {
+      method: 'GET',
+    }).then((data) => {
+      data.json().then((res) => {
+        console.log(res);
+      })
+    })
+  })
+
   return (
     <div className={classes.root}>
       {recipesData.map((recipe, index) => {
