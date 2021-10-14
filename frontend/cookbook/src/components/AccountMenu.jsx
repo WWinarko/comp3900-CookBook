@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
+import Divider from '@mui/material/Divider';
 import { useHistory } from 'react-router-dom';
 
 import Notification from './Notification';
@@ -43,6 +44,9 @@ function AccountMenu({anchorEl, open, onClose, onClick}) {
         });
       })
   }
+  const handleAddProduct = () => {
+    history.push('/product/add');
+  }
   return (
     <>
       <Notification notify={notify} setNotify={setNotify} /> 
@@ -80,6 +84,10 @@ function AccountMenu({anchorEl, open, onClose, onClick}) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
+        <MenuItem onClick={handleAddProduct}>
+          Add product
+        </MenuItem>
+        <Divider />
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
