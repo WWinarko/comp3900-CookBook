@@ -12,6 +12,10 @@ from recipe_listall import recipe_listall
 
 from product_add import product_add
 
+from cart_add import cart_add
+from cart_remove import cart_remove
+
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -109,5 +113,27 @@ def product_add_root():
         product_add(token, title, photo, description, labels)
     )
     
+##### CART ROUTE #####
+
+@APP.route("/cart/add", methods=['POST'])
+def add_to_cart_root():
+    ''' Add product to shopping cart '''
+    payload = request.get_json()
+    token = payload['token']
+    list_items = payload['ingredients']
+    return dumps(
+        cart_add(token, list_items)
+    )
+
+@APP.route("/remove/cart", methods=['POST'])
+def remove_from_cart_root():
+    ''' Remove product from shopping cart '''
+    payload = request.get_json()
+    token = payload['token']
+    item = payload['ingredients']
+    return dumps(
+        cart_remove(token, item)
+    )
+
 if __name__ == "__main__":
     APP.run()
