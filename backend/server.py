@@ -125,7 +125,7 @@ def add_to_cart_root():
         cart_add(token, list_items)
     )
 
-@APP.route("/remove/cart", methods=['POST'])
+@APP.route("/cart/remove", methods=['POST'])
 def remove_from_cart_root():
     ''' Remove product from shopping cart '''
     payload = request.get_json()
