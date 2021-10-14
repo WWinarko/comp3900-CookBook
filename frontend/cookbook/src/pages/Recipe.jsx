@@ -79,7 +79,7 @@ function Recipe() {
                 <RecipeRecommendation />
             </Stack>
           </Stack>
-          <BuyRecipeModal state={state} setState={setState} />
+          <BuyRecipeModal state={state} setState={setState} recipe={recipe}/>
         </div>
       }
     </div>

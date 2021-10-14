@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 
 import Divider from '@mui/material/Divider';
@@ -7,8 +8,8 @@ import image from '../assets/cheese.png';
 
 const useStyles = makeStyles({
   root: {
-    width: '600px',
-    height: '150px',
+    width: '400px',
+    height: '100px',
     borderRadius: '5px',
 
     margin: '10px 10px 10px 10px',
@@ -21,24 +22,27 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
   },
   thumbnail: {
-    width: '115px',
-    height: '115px',
+    width: '85px',
+    height: '85px',
 
     margin: '5px',
   }
 })
 
-function BuyRecipeModalCard() {
+function BuyRecipeModalCard({ name }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <img src={image} alt='thumbnail' className={classes.thumbnail}/>
-      <div style={{ backgroundColor: 'blue', width:'200px', height: '150px'}}></div>
+      <div>{name}</div>
       <Divider orientation="vertical" variant="middle" flexItem />
-      <div style={{ backgroundColor: 'white', width:'200px', height: '150px'}}></div>
     </div>
   )
+}
+
+BuyRecipeModalCard.propTypes = {
+  name: PropTypes.string,
 }
 
 export default BuyRecipeModalCard;
