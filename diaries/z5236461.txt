@@ -36,3 +36,10 @@ week3:
     - List our own APIs for the website(HTTP Route, HTTP method, parameter, return)
     - Roughly list the objects we are goingn to have and their associated attributes
     - Look into setting up mongoDB
+Week4:
+- Finish setting up mongodb
+- Finish the recipe view/upload/listall backend
+- Finish the auth login/logout/register backend
+- Finish the product add backend
+- Set up flask server and the routes
+
