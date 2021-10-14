@@ -1,12 +1,13 @@
 import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Stack, Typography, Button, Box } from '@mui/material';
+import PropTypes from 'prop-types';
 import image from '../assets/cheese.png';
 
 
-function IngredientCard() {
+function IngredientCard({ name }) {
   return (
     <Box mt={2} sx={{width: '781px'}}>
-      <Typography component="p" sx={{color: '#9D9D9D', fontWeight: '600'}}>1 cup parmesan cheese</Typography>  
+      <Typography component="p" sx={{color: '#9D9D9D', fontWeight: '600'}}>{name}</Typography>  
       <Card sx={{width: '100%', marginTop: '10px', display: 'flex', flexDirection:'row'}}>
         <CardMedia
               component="img"
@@ -18,10 +19,9 @@ function IngredientCard() {
           <Stack
             direction="column"
             spacing={3}
-            sx={{width: '250px', backgroundColor: 'red' }}
+            sx={{width: '250px'}}
           >
             <Typography variant="subtitle1" sx={{color: '#977554'}}>Best Parmesan Cheese</Typography>
-            <Typography variant="subtitle1" sx={{color: '#977554'}}>Quantity: 1</Typography>
             <Typography variant="subtitle1" sx={{color: '#977554'}}>$10</Typography>
           </Stack>
         </CardContent>
@@ -32,6 +32,10 @@ function IngredientCard() {
       </Card>
     </Box>
   )
+}
+
+IngredientCard.propTypes = {
+  name: PropTypes.string
 }
 
 export default IngredientCard;

@@ -4,6 +4,8 @@ import { makeStyles } from '@mui/styles';
 
 
 import RecipeStepsCard from './RecipeStepsCard';
+import { Stack } from '@mui/material';
+// import SquareButton from './SquareButton';
 
 
 const useStyles = makeStyles(({
@@ -17,6 +19,9 @@ const useStyles = makeStyles(({
     color: '#9D9D9D',
     fontSize: '18px',
   },
+  buttons: {
+
+  }
 }));
 
 function RecipeStepsContainer({ recipesData }) {
@@ -29,6 +34,10 @@ function RecipeStepsContainer({ recipesData }) {
           <div key={index}>
             <p className={classes.title}>Step {index + 1}</p>
             <RecipeStepsCard data={step}/>
+            <Stack direction="row" spacing={2} mt={2}>
+              {/* <SquareButton name="Edit" />
+              <SquareButton name="Remove" /> */}
+            </Stack>
           </div>
         )
       })}
@@ -37,7 +46,8 @@ function RecipeStepsContainer({ recipesData }) {
 }
 
 RecipeStepsContainer.propTypes = {
-  recipesData: PropTypes.array
+  recipesData: PropTypes.array,
+  // setRemove: PropTypes.func
 }
 
 export default RecipeStepsContainer;

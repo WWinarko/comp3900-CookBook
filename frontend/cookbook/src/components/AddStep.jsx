@@ -26,7 +26,7 @@ function AddStep({ steps, setSteps, setNewStep }) {
 }
 
 AddStep.propTypes = {
-  steps: PropTypes.object,
+  steps: PropTypes.array,
   setSteps: PropTypes.func,
   setNewStep: PropTypes.func
 }

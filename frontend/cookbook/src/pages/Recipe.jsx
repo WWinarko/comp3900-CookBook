@@ -23,7 +23,6 @@ function Recipe() {
       if (data.status === 200) {
         data.json().then((res) => {
           setRecipe(res);
-          console.log(data);
         })
       }
     }).catch((err) => {

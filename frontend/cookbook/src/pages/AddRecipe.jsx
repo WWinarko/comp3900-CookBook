@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import { Stack, Typography, InputAdornment, FormLabel, Button, } from "@mui/material";
 import { styled } from '@mui/material/styles';
 
@@ -28,6 +29,7 @@ export const AddButton = styled(Button)(() => ({
 
 
 function AddRecipe() {
+  const history = useHistory();
   const [recipeInfo, setRecipeInfo] = useState(
     {
       recipeName: '',
@@ -38,7 +40,7 @@ function AddRecipe() {
       difficulty: 1,
       serves: 1,
     });
-  // const [ingredients, setIngredients] = ([]);
+  const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState([]);
   const [newStep, setNewStep] = useState(false);
   const [newIngredient, setNewIngredient] = useState(false);
@@ -48,6 +50,45 @@ function AddRecipe() {
   const handleNewStep = () => {
     setNewStep(!newStep);
   }
+
+  const sendToBack = () => {
+    const recipeBody = {
+      token: localStorage.getItem('cookbook-token'),
+      title: recipeInfo.recipeName,
+      photo: recipeInfo.photo,
+      intro: recipeInfo.description,
+      difficulty: recipeInfo.difficulty,
+      cooktime: recipeInfo.cookTime,
+      preptime: recipeInfo.prepTime,
+      serves: recipeInfo.serves,
+      ingredients: ingredients,
+      steps: steps,
+    }
+    fetch('http://127.0.0.1:5000/recipe/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(recipeBody)
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          history.push('/recipe/' + res.recipe_id);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+
+  }
+
+  // const [remove, setRemove] = useState("");
+
+  // const handleRemove = () => setRemove(1);
+
+  // React.useEffect(() => {
+  //   console.log('aa');
+  // }, [remove])
 
   return (
     <>
@@ -78,9 +119,15 @@ function AddRecipe() {
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Ingredients</FormLabel>
 
 
-          <IngredientCard />
+          {ingredients.map((ingredient, index) => {
+            return (
+              <IngredientCard name={ingredient.ingredient} key={index} />
+            )
+          })}
+
+
           <AddButton onClick={handleNewIngredient}> Add ingredient </AddButton>
-          <AddIngredientModal open={newIngredient} onClose={handleNewIngredient}/>
+          <AddIngredientModal open={newIngredient} onClose={handleNewIngredient} ingredients={ingredients} setIngredients={setIngredients}/>
 
 
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Steps</FormLabel>
@@ -89,7 +136,9 @@ function AddRecipe() {
             {newStep ? <AddStep steps={steps} setSteps={setSteps} newStep={newStep} setNewStep={() => setNewStep(false)}/> : <AddButton onClick={handleNewStep}> Add step </AddButton>}
           </div>
         </Stack>
-        <RoundButton name="Add Recipe"/>
+        <div style={{ marginBottom: '20px'}}>
+          <RoundButton name="Add Recipe" onClick={sendToBack}/>
+        </div>
       </Stack>
     </>
   )

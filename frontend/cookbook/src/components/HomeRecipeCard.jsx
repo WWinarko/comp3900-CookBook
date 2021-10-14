@@ -75,7 +75,6 @@ function HomeRecipeCard({ data }) {
       if (data.status === 200) {
         data.json().then((res) => {
           setRecipeData(res);
-          console.log(res);
         })
       }
     }).catch((err) => {
