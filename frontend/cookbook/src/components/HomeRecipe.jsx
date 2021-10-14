@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 
-import HomeRecipeContainer from './HomeRecipeContainer';
 import RoundButton from './RoundButton';
-import { RecipeData } from './RecipeData';
+import HomeRecipeContainer from './HomeRecipeContainer';
+import { CircularProgress } from '@mui/material';
 
 const useStyles = makeStyles(({
   root: {
@@ -11,7 +11,7 @@ const useStyles = makeStyles(({
     alignItems: 'center',
   },
   textHolder: {
-    width: '583px',
+    width: '31%',
     height: '41px',
     left: '0px',
     top: '507px',
@@ -47,16 +47,38 @@ const useStyles = makeStyles(({
 function HomeRecipe() {
   const classes = useStyles();
   const [count, setCount] = useState(1);
-  const [recipes, setRecipes] = useState([RecipeData.properties.slice(0, 4)]);
+  const [allRecipes, setAllRecipes] = useState([])
+  const [recipes, setRecipes] = useState([]);
   const [done, setDone] = useState(false);
+  const [loadingState, setLoadingState] = useState(true);
+
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/recipe/listall', {
+      method: 'GET',
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setAllRecipes(res.recipe_list);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setLoadingState(false);
+    })
+  }, [])
+
+  React.useEffect(() => {
+    setRecipes([allRecipes.slice(0, 4)]);
+  }, [allRecipes]);
 
   const showMore = () => {
-    const newRecipes = [...recipes, RecipeData.properties.slice(count * 4, (count + 1) * 4)];
+    const newRecipes = [...recipes, allRecipes.slice(count * 4, (count + 1) * 4)];
 
     setCount(count + 1);
     setRecipes(newRecipes);
     
-    if (RecipeData.properties.length < (count + 1) * 4) {
+    if (allRecipes.length < (count + 1) * 4) {
       setDone(!done);
     }
   }
@@ -66,17 +88,22 @@ function HomeRecipe() {
       <div className={classes.textHolder}>
         <div className={classes.text}>Popular This Week</div>
       </div>
-      <div className={classes.container}>
-        {recipes.map((recipes, index) => {
-          return (
-            <HomeRecipeContainer recipesData={recipes} key={index}/>
-          )
-        })}
-        {done
-          ? <></>
-          : <RoundButton name='Show More' onClick={showMore} />
-        }
-      </div>
+      {loadingState
+        ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress />
+          </div>
+        : <div className={classes.container}>
+          {recipes.map((recipe, index) => {
+            return (
+              <HomeRecipeContainer recipesData={recipe} key={index} />
+            )
+          })}
+          {done
+            ? <></>
+            : <RoundButton name='Show More' onClick={showMore} />
+          }
+        </div>
+      }
     </div>
   )
 }

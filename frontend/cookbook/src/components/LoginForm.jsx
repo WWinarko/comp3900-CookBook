@@ -1,11 +1,16 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, {useState} from "react";
-import { FormControl, Stack, Typography, Divider } from "@mui/material";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import { FormControl, Stack, Typography } from "@mui/material";
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/system';
+import { useHistory } from "react-router-dom"; 
 
-import CustomTextField from "./CustomTextField";
+import CustomTextField from "./TextField/CustomTextField";
 import SquareButton from "./SquareButton";
-import {ReactComponent as GoogleAccount} from '../assets/google-account.svg';
+import RegisterDialog from "./RegisterDialog";
+// import {ReactComponent as GoogleAccount} from '../assets/google-account.svg';
 
 const SignIn = styled(Typography)({
   fontWeight: '500',
@@ -15,38 +20,86 @@ const SignIn = styled(Typography)({
   paddingTop: '10%',
 });
 
-const theme = createTheme({
-  components: {
-    // Name of the component
-    MuiDivider: {
-      styleOverrides: {
-        // Name of the slot
-        root: {
-          ":before, :after": {
-            top: '0',
-          },
-        },
-      },
-    },
-  },
-});
+// const theme = createTheme({
+//   components: {
+//     // Name of the component
+//     MuiDivider: {
+//       styleOverrides: {
+//         // Name of the slot
+//         root: {
+//           ":before, :after": {
+//             top: '0',
+//           },
+//         },
+//       },
+//     },
+//   },
+// });
 
-
-function LoginForm() {
+function LoginForm({setNotify}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [open, setOpen] = useState(false);
+  const history = useHistory();
+
+ 
+  const showRegister = () => {
+    setOpen(true);
+  };
+
+  const validateInput = () => {
+    if (username.trim() === '') {
+      setNotify({
+        isOpen: true,
+        message: 'Username field should not be empty',
+        type: 'error',
+      });
+      return false;
+    } else if (password.trim() === '') {
+      setNotify({
+        isOpen: true,
+        message: 'Password field should not be empty',
+        type: 'error',
+      });
+      return false;
+    } else {
+      return true;
+    }
+  }
+  const handleLogin = () => {
+    if (validateInput()) {
+      axios.post('http://127.0.0.1:5000/auth/login', {
+        username: username.trim(),
+        password: password.trim()
+      })
+      .then((res) => {
+        const {token} = res.data;
+        localStorage.setItem('cookbook-token', token);
+        history.push('/');
+      })
+      .catch((err) => {
+        setNotify({
+          isOpen: true,
+          message: err.response.data.message,
+          type: 'error',
+        });
+      })
+    }
+  };
+
   return (
     <Stack
       direction="column"
       justifyContent="flex-start"
       alignItems="center"
-      sx={{ background: '#F9FAF9', borderRadius: '10px', width: '458px', height: '601px' }}
+      sx={{ background: '#F9FAF9', borderRadius: '10px', width: '458px', height: '476px' }}
       spacing={3}
     >
       <SignIn component="h1" variant="h2" align="center">Sign In</SignIn>
       <FormControl>
-        <CustomTextField id="username" name="Username" value={username} setValue={setUsername}  width="362px"/>
-        <CustomTextField id="password" name="Password" value={password} setValue={setPassword}  width="362px"/>
+        <CustomTextField id="username" name="Username" required value={username} setValue={setUsername}   width="362px"/>
+        <CustomTextField id="password" name="Password" required value={password} setValue={setPassword}   width="362px" type="password"/>
       </FormControl>
       <Stack
         direction="row"
@@ -54,13 +107,14 @@ function LoginForm() {
         alignItems="center"
         sx={{width: '78%'}}
       >
-        <SquareButton name="Login" />
-        <SquareButton name="Register" />
+        <SquareButton name="Login" onClick={handleLogin}/>
+        <SquareButton name="Register" onClick={showRegister}/>
       </Stack>
-      <ThemeProvider theme={theme}>
+      {/* <ThemeProvider theme={theme}>
         <Divider variant="middle" sx={{color: '#9D9D9D', width: '78%'}}>or</Divider>
-      </ThemeProvider>
-      <GoogleAccount />
+      </ThemeProvider> */}
+      {/* <GoogleAccount /> */}
+      <RegisterDialog open={open} setOpen={setOpen} />
     </Stack>
   )
 }
