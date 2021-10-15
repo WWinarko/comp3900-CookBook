@@ -16,3 +16,12 @@ Week 3
 - Choose website theme and colors
 - Finish the flow diagram
 - Start coding
+
+Week 4
+- Discuss how to implement the frontend with Wincent
+- Implement homepage and recipe page components in accordance to sprint 1 user stories
+
+
+Week 5
+- Integrate frontend and backend
+- Finalize all the components in homepage and recipe page to complete acceptance criteria in sprint 1 user stories
