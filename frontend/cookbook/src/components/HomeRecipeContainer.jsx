@@ -14,6 +14,7 @@ const useStyles = makeStyles(({
 
 function HomeRecipeContainer({ recipesData }) {
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       {recipesData.map((recipe, index) => {
@@ -26,7 +27,7 @@ function HomeRecipeContainer({ recipesData }) {
 }
 
 HomeRecipeContainer.propTypes = {
-  recipesData: PropTypes.Array
+  recipesData: PropTypes.array,
 }
 
 export default HomeRecipeContainer;

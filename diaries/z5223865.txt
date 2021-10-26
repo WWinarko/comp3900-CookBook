@@ -19,3 +19,16 @@ Week 3
 - I started the design of the UI Web: Home page, Login page and Recipe page.
 - We finish up the report, started to list out the APIs, frontend started
 to code.
+
+Week 4
+- I worked a bit more on the UI Web design: added some sort of modal 
+to the recipes page and Admin/User page.
+- Wincent and Louis kept working on the frontend. By the end of this 
+week they accomplished about 70% of the total work.
+- Trina started to setup database and do some code for the backend.
+- Jenna started to draft some categories and labels that can be used in the 
+recommended system.
+
+Week 5
+- Worked on the backend 
+  TODO: COMPLETE ME

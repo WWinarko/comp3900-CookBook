@@ -7,19 +7,27 @@ import {
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Recipe from './pages/Recipe';
+import AddRecipe from './pages/AddRecipe';
+import AddProduct from './pages/AddProduct';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
         <Route exact path="/">
           <Home />
         </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/recipe/add">
+          <AddRecipe />
+        </Route>
         <Route path="/recipe/:recipeId">
           <Recipe />
+        </Route>
+        <Route path="/product/add">
+          <AddProduct />
         </Route>
       </Switch>
     </Router>

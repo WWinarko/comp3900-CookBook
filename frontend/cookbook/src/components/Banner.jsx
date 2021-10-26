@@ -18,16 +18,15 @@ const useStyles = makeStyles(({
     maxHeight: '304px',
   },
   arrowLeft: {
-    position: "absolute",
-    left: '300px',
+    paddingRight: '1.5%',
+
     width: '24px',
     height: '24px',
     cursor: 'pointer',
-
   },
   arrowRight: {
-    position: "absolute",
-    right: '300px',
+    paddingLeft: '1.5%',
+
     width: '24px',
     height: '24px',
     cursor: 'pointer',
@@ -35,11 +34,11 @@ const useStyles = makeStyles(({
   activeSlide: {
     opacity: '1',
     transitionDuration: '1s',
-    transform: 'scale(1.08)',
   },
   notActiveSlide: {
     opacity: '0',
     transitionDuration: '1s ease',
+    transform: 'scale(0.92)'
   },
 }));
 
@@ -64,19 +63,21 @@ function Banner ({ bannerdata }) {
   return (
     <div className={classes.root}>
       <ArrowBackIosIcon className={classes.arrowLeft} onClick={prevSlide} />
+      <div style={{ width:'1040px', height: '304px' }}>
+        {BannerData.map((slide, index) => {
+          return (
+            <div
+              className={index === curr ? classes.activeSlide : classes.notActiveSlide}
+              key={index}
+            >
+              {index === curr && (
+                <img src={slide.image} alt='promo' className={classes.banner} />
+              )}
+            </div>
+          )
+        })}
+      </div>
       <ArrowForwardIosIcon className={classes.arrowRight} onClick={nextSlide} />
-      {BannerData.map((slide, index) => {
-        return (
-          <div
-            className={index === curr ? classes.activeSlide : classes.notActiveSlide}
-            key={index}
-          >
-            {index === curr && (
-              <img src={slide.image} alt='promo' className={classes.banner} />
-            )}
-          </div>
-        )
-      })}
     </div>
   )
 }
