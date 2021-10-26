@@ -33,6 +33,7 @@ function User() {
         >
           <UserInfo />
           <p className={classes.header}>Most Popular</p>
+          
         </Stack>
       </Stack>
     </div>
