@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import Recipe from './pages/Recipe';
 import AddRecipe from './pages/AddRecipe';
 import AddProduct from './pages/AddProduct';
+import User from './pages/User';
+import MyProfile from './pages/MyProfile';
 
 function App() {
   return (
@@ -28,6 +30,12 @@ function App() {
         </Route>
         <Route path="/product/add">
           <AddProduct />
+        </Route>
+        <Route path="/user/:userId">
+          <User />
+        </Route>
+        <Route path="/profile">
+          <MyProfile />
         </Route>
       </Switch>
     </Router>
