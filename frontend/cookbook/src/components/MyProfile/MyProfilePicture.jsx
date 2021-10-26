@@ -23,7 +23,7 @@ function MyProfilePicture() {
       <Avatar
         alt="Profile Picture"
         src="a"
-        sx={{ width:'115px', height: '115px', marginBottom:'30px' }}
+        sx={{ width:'120px', height: '120px', marginBottom:'30px' }}
       >A</Avatar>
       <RoundButton name="Sign out" />
     </div>
