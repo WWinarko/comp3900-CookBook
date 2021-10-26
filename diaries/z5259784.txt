@@ -1,5 +1,3 @@
---- WEEK ONE ---
-
 Thursday 16/09/21 (lab class)
     - Met with the group during the lab time. Introductions and shared skills. 
     - We talked through all the project options, and decided on Topic 5 (E-commerce recommender).
@@ -23,9 +21,6 @@ Sunday 19/09/21 (team meeting)
     - Similarly, Maria suggested looking into selling candles/ aromatiser.
     - We generally struggled with finding something which we could add novel features to, while also being reasonable to implement.
     - Next meeting: brainstorm more ideas which can have novel functions. Discuss before checking with Matthew.
-
-
---- WEEK TWO ---
 
 Tuesday 21/09/21 (team meeting)
     - We still discussed different topics that we thought of
@@ -64,9 +59,6 @@ Sunday 27/09/21 (team meeting)
         - Maria, Wincent and Louis to work on techinical and drawings
         - Regroup to decide on sprints
 
-
---- WEEK THREE ---
-
 Tuesday 28/09/21
     - User story acceptance criteria with Trina
     - Assigned priority (high, medium, low)
@@ -80,12 +72,22 @@ Thursday 30/09/21 (lab class)
     - Went through stories and assigned story points, and planned out the sprints
     - Discussed colour themes
 
-Saturday 02/09/21
+Saturday 02/10/21
     - Linked all user stories to objectives
     - Edited first half of the report
 
-Sunday 03/09/21
+Sunday 03/10/21
     - Added arrows to interface diagrams
     - Linked user stories to interface diagrams
     - Edited second half of the report
     - Submitted the report
+
+Thursday 07/10/21 (lab class)
+    - wrote recommendator questions
+    - discussed server, moved from aws to local on chosen
+
+Thursday 14/10/21 (lab class)
+    - progressive demo A
+
+Sunday 17/10/21
+    -- retrospective A with group, sent to Matthew
