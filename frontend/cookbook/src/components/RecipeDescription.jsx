@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import Divider from '@mui/material/Divider';
@@ -11,7 +12,7 @@ const useStyles = makeStyles({
   root: {
     width: '75%',
   },
-  circle: {
+  profile: {
     borderRadius: '50%',
     height: '80px',
     width: '80px',
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
 
     display: 'inline-block',
     margin: '20px',
+    cursor: 'pointer',
   },
   preptime: {
     width: '80%',
@@ -34,6 +36,7 @@ const useStyles = makeStyles({
 
 function RecipeDescription({ recipe }) {
   const classes = useStyles();
+  const history = useHistory();
   const [loadingState, setLoadingState] = useState(true);
 
   React.useEffect(() => {
@@ -46,6 +49,10 @@ function RecipeDescription({ recipe }) {
   
   const handleFollow = () => {
     console.log('a');
+  }
+
+  const handleProfile = () => {
+    history.push('/user/' + recipe.owner_username);
   }
 
   return (
@@ -92,7 +99,7 @@ function RecipeDescription({ recipe }) {
                 direction="row"
                 alignItems="center"
               >
-                <img src="https://ihatetomatoes.net/demos/_rw/01-real-estate/tn_property01.jpg" className={classes.circle}/>
+                <img src="https://ihatetomatoes.net/demos/_rw/01-real-estate/tn_property01.jpg" className={classes.profile} onClick={handleProfile}/>
                 <Stack
                 >
                   <p style={{ paddingTop:'10%', margin:'0', fontWeight: 'bold' }}>{recipe.owner_username}</p>

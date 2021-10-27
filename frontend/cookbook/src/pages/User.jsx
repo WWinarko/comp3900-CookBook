@@ -1,22 +1,12 @@
 import React from "react";
-import { makeStyles } from '@mui/styles';
 
 import { Stack } from "@mui/material";
 import Navbar from "../components/Navbar";
 import UserInfo from "../components/User/UserInfo";
-
-const useStyles = makeStyles({
-  header: {
-    fontFamily: 'Roboto',
-    fontWeight: 'bold',
-    fontSize: '30px',
-  
-    color: '#FE793D',
-  },
-})
+import MostPopular from "../components/User/MostPopular";
+import UserRecipe from "../components/User/UserRecipe";
 
 function User() {
-  const classes = useStyles();
   return (
     <div>
       <Navbar />
@@ -32,8 +22,8 @@ function User() {
           sx={{ width: '100%' }}
         >
           <UserInfo />
-          <p className={classes.header}>Most Popular</p>
-          
+          <MostPopular />
+          <UserRecipe />
         </Stack>
       </Stack>
     </div>
