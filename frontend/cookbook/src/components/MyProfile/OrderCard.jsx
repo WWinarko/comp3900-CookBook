@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import { Divider, FormControl, MenuItem, Select } from "@mui/material";
 import RoundButton from "../RoundButton";
@@ -23,25 +24,24 @@ const useStyles = makeStyles({
   }
 })
 
-function OrderCard() {
+function OrderCard({ order, handleMove }) {
   const classes = useStyles();
-  const [orderStatus, setOrderStatus] = React.useState('');
 
   const handleChange = (event) => {
-    setOrderStatus(event.target.value);
+    handleMove(order, event.target.value);
   };
 
   return (
     <div className={classes.root}>
       <div className={classes.block}>
         <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order ID</div>
-        <div style={{ color:'#89623D', paddingLeft: '15px' }}>MC30091220</div>
+        <div style={{ color:'#89623D', paddingLeft: '15px' }}>{order.id}</div>
         <div style={{ height:'50px' }}></div>
         <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order Status</div>
         <FormControl sx={{ minWidth: 200 }}>
           <Select
             id="orderStatus"
-            value={orderStatus}
+            value={order.status}
             onChange={handleChange}
             displayEmpty
           >
@@ -70,6 +70,11 @@ function OrderCard() {
       </div>
     </div>
   )
+}
+
+OrderCard.propTypes = {
+  order: PropTypes.object,
+  handleMove: PropTypes.func,
 }
 
 export default OrderCard;
