@@ -90,6 +90,13 @@ function AddRecipe() {
   //   console.log('aa');
   // }, [remove])
 
+  const handleRemoveIngredient = (item) => {
+    setIngredients(ingredients.filter((i) => i !== item));
+  }
+
+  const handleRemoveStep = (item) => {
+    setIngredients(ingredients.filter((i) => i !== item));
+  }
   return (
     <>
       <Navbar />
@@ -121,7 +128,7 @@ function AddRecipe() {
 
           {ingredients.map((ingredient, index) => {
             return (
-              <IngredientCard name={ingredient.ingredient} key={index} />
+              <IngredientCard ingredient={ingredient} handleRemove={handleRemoveIngredient} key={index} />
             )
           })}
 
@@ -132,7 +139,7 @@ function AddRecipe() {
 
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Steps</FormLabel>
           <div style={{ width: '100%' }}>
-            <RecipeStepsContainer recipesData={steps} />
+            <RecipeStepsContainer recipesData={steps} handleRemove={handleRemoveStep} />
             {newStep ? <AddStep steps={steps} setSteps={setSteps} newStep={newStep} setNewStep={() => setNewStep(false)}/> : <AddButton onClick={handleNewStep}> Add step </AddButton>}
           </div>
         </Stack>
