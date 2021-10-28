@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { makeStyles } from '@mui/styles';
+import { makeStyles, styled } from '@mui/styles';
 import OrderCard from "./OrderCard";
-import { Pagination } from "@mui/material";
+import { Pagination, ToggleButton, ToggleButtonGroup, } from "@mui/material";
 
 import { OrderData } from "./TempData";
-import SquareButton from "../SquareButton";
 
 const useStyles = makeStyles({
   root: {
@@ -20,7 +19,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   title: {
-    top: '270px',
+    top: '290px',
     right: '1100px',
     position: "absolute",
 
@@ -50,15 +49,15 @@ const useStyles = makeStyles({
     overflow: 'hidden',
   },
   filter: {
-    paddingRight: '550px',
+    paddingRight: '700px',
 
     display: 'flex',
     gap: '5px',
 
-    marginBottom: '40px',
+    marginBottom: '30px',
   },
   total: {
-    top: '250px',
+    top: '270px',
     right: '200px',
     position: "absolute",
 
@@ -73,6 +72,23 @@ const useStyles = makeStyles({
     fontSize: '20px',
 
     color: '#89623D',
+  }
+})
+
+const StyledToggleButtonGroup = styled(ToggleButtonGroup) ({
+  '& .MuiToggleButtonGroup-grouped': {
+    margin: '15px',
+    border: 0,
+    backgroundColor: '#89623D',
+    justifyContent: 'space-between',
+    fontWeight: 'bold',
+    '&:hover': {
+      backgroundColor: '#785635',
+    },
+    color: 'white',
+  },
+  '&.Mui-selected': {
+    backgroundColor: 'red',
   }
 })
 
@@ -94,7 +110,7 @@ function OrderDashboard() {
     setLst(OrderData.filter((i) => i.status === filter));
   }
 
-  const handleFilter = (name) => {
+  const handleFilter = (event, name) => {
     setFilter(name);
     
     setPage(1);
@@ -107,10 +123,31 @@ function OrderDashboard() {
   return (
     <>
       <div className={classes.filter}>
-        <SquareButton name="Not Started" onClick={() => handleFilter('')} />
-        <SquareButton name="Started" onClick={() => handleFilter('Started')} />
-        <SquareButton name="Dispatched" onClick={() => handleFilter('Dispatched')} />
-        <SquareButton name="Delivered" onClick={() => handleFilter('Delivered')} />
+        <StyledToggleButtonGroup
+          orientation="horizontal"
+          exclusive
+          sx={{ width:'100%' }}
+          value={filter}
+          onChange={handleFilter}
+        >
+          <ToggleButton value="">
+            Not Started
+          </ToggleButton>
+
+          <ToggleButton value="Started">
+            Started
+          </ToggleButton>
+
+          <ToggleButton value="Dispatched">
+            Dispatched
+          </ToggleButton>
+
+          <ToggleButton value="Delivered">
+            Delivered
+          </ToggleButton>
+
+        </StyledToggleButtonGroup>
+        
       </div>
       <div className={classes.title}>
         Orders
