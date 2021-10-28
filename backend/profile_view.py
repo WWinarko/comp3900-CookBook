@@ -1,4 +1,5 @@
 from backend.error import AccessError
+from backend.token_helper import find_user_id
 import database
 import token_helper
 import recipe_helper
@@ -24,35 +25,27 @@ def profile_view(token, user_id):
     first_name = user['first_name']
     last_name = user['last_name']
     email = ""
-    address = ""
-    state = ""
-    postcode = ""
     phone = ""
     follower = user['follower']
     photo = user['photo']
 
-    # If viewing own profile
-    email = user['email']
-    address = user['address']
-    state = user['state']
-    postcode = user['postcode']
-    phone = user['phone']
+    # Check if viewing own profile
+    if token_helper.find_user_id_from_token(token, users) == user['_id']:
+        email = user['email']
+        phone = user['phone']
 
     # User recipes
     user_recipes_string = []
     recipes = database.get_recipes()
     user_recipes = recipes.find({"owner_id":user_id_new})
     for recipe in user_recipes:
-        user_recipes_string.append({recipe['title'], recipe['photo'], recipe['difficulty'], recipe['rating'], })
+        user_recipes_string.append({"_id": recipe['_id']})
 
     return {
         'username': username,
         'first_name': first_name,
         'last_name': last_name,
         'email': email,
-        'address': address,
-        'state': state,
-        'postcode': postcode,
         'phone': phone,
         'follower': follower,
         'photo': photo,
