@@ -1,44 +1,97 @@
 import React, { useState } from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, Card, CardContent } from '@mui/material';
 
 import CustomTextField from './TextField/CustomTextField';
 import SquareButton from './SquareButton';
+import Notification from './Notification';
 
 function DeliveryForm() {
   const [deliveryInfo, setDeliveryInfo] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
-    state: '',
-    postcode: '',
-    phone: '',
-  }) 
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'JohnDoe@example.com',
+    address: '23 Anzac Parade',
+    state: 'NSW',
+    postcode: '2033',
+    phone: '04123456789',
+  })
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: '',
+    type: '',
+  });
+  const [save, setSave] = useState(true);
+  
+  const validateInput = () => {
+    let valid = true;
+    if (!valid) {
+      return false;
+    } else {
+      for (const [key, value] of Object.entries(deliveryInfo)) {
+        if (value === '') {
+          setNotify({
+            isOpen: true,
+            message: `${key} field should not be empty`,
+            type: 'error',
+          });
+         valid = false;
+         break;
+        }
+      }
+    }
+    return valid;
+  };
+  const handleSave = () => {
+    if (validateInput) {
+      setSave(!save);
+    }
+  }
+  const handleEdit = () => {
+    setSave(!save);
+  }
   return (
     <Stack direction="column" sx={{width: '100%'}}>
+      <Notification notify={notify} setNotify={setNotify} /> 
       <Typography component="h2" variant="h4" gutterBottom sx={{color: "#FE793D"}}> Delivery Details</Typography>
-      <Stack
-        direction="row"
-        sx={{"div:first-child": {
-          marginRight: '55px',
-        }}}
-      >
-        <CustomTextField id="firstName" required name="First Name" value={deliveryInfo['firstName']} setValue={setDeliveryInfo}  field="object" width="100%"/>
-        <CustomTextField id="lastName" required name="Last Name" value={deliveryInfo['lastName']} setValue={setDeliveryInfo}  field="object" width="100%"/>
-      </Stack>
-      <CustomTextField id="email" required name="Email" value={deliveryInfo['email']} setValue={setDeliveryInfo}  field="object" width="100%"/>
-      <CustomTextField id="phone" required name="Phone" value={deliveryInfo['phone']} setValue={setDeliveryInfo}  field="object" width="100%"/>
-      <CustomTextField id="adress" required name="Address" value={deliveryInfo['adress']} setValue={setDeliveryInfo}  field="object" width="100%"/>
-      <Stack
-        direction="row"
-        sx={{"div:first-child": {
-          marginRight: '55px',
-        }, marginBottom: '20px'}}
-      >
-        <CustomTextField id="state" required name="State" value={deliveryInfo['state']} setValue={setDeliveryInfo}  field="object" width="100%"/>
-        <CustomTextField id="postcode" required name="Postcode" value={deliveryInfo['postcode']} setValue={setDeliveryInfo}  field="object" width="100%"/>
-      </Stack>
-      <SquareButton name="Save"/>
+      {save ? 
+      <>
+        <Stack
+          direction="row"
+          sx={{"div:first-child": {
+            marginRight: '55px',
+          }}}
+        >
+          <CustomTextField id="firstName" required name="First Name" value={deliveryInfo['firstName']} setValue={setDeliveryInfo}  field="object" width="100%"/>
+          <CustomTextField id="lastName" required name="Last Name" value={deliveryInfo['lastName']} setValue={setDeliveryInfo}  field="object" width="100%"/>
+        </Stack>
+        <CustomTextField id="email" required name="Email" value={deliveryInfo['email']} setValue={setDeliveryInfo}  field="object" width="100%"/>
+        <CustomTextField id="phone" required name="Phone" value={deliveryInfo['phone']} setValue={setDeliveryInfo}  field="object" width="100%"/>
+        <CustomTextField id="adress" required name="Address" value={deliveryInfo['address']} setValue={setDeliveryInfo}  field="object" width="100%"/>
+        <Stack
+          direction="row"
+          sx={{"div:first-child": {
+            marginRight: '55px',
+          }, marginBottom: '20px'}}
+        >
+          <CustomTextField id="state" required name="State" value={deliveryInfo['state']} setValue={setDeliveryInfo}  field="object" width="100%"/>
+          <CustomTextField id="postcode" required name="Postcode" value={deliveryInfo['postcode']} setValue={setDeliveryInfo}  field="object" width="100%"/>
+        </Stack>
+        <SquareButton onClick={handleSave} name="Save"/>
+      </>
+      : 
+      <>
+        <Card sx={{marginBottom: '20px', width: '300px', color: "#767676"}}>
+          <CardContent>
+          <Typography gutterBottom>{deliveryInfo['firstName']} {deliveryInfo['lastName']}</Typography>
+          <Typography gutterBottom>{deliveryInfo['email']}</Typography>
+          <Typography gutterBottom>{deliveryInfo['phone']}</Typography>
+          <Typography gutterBottom>{deliveryInfo['address']}</Typography>
+          <Typography gutterBottom>{deliveryInfo['state']} {deliveryInfo['postcode']}</Typography>
+          </CardContent>
+        </Card>
+        <SquareButton onClick={handleEdit} name="Edit"/>
+      </>}
+      
     </Stack>
   )
 }
