@@ -76,6 +76,7 @@ recipe format:
             {
                 'ingredient':
                 'product_id':
+                'quantity':
             }
         ]
     'steps':
