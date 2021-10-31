@@ -20,11 +20,11 @@ def order_details(token, order_id):
         raise AccessError(description="Does not have permission to view this order")
     
     order = orders.find_one({"_id":ObjectId(order_id)})
-    details = order['details']
+    
 
     # return the order details(json:product_id, quantity)
     return {
-        "details":details,
+        "details":order['details'],
         "order_id":order_id,
         "total":order['total']
     }
