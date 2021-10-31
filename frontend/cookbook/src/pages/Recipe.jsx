@@ -3,11 +3,11 @@ import { CircularProgress, Stack } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
-import RecipeIngredients from '../components/RecipeIngredients';
-import RecipeDescription from '../components/RecipeDescription';
-import RecipeReview from '../components/RecipeReview';
-import RecipeRecommendation from '../components/RecipeRecommendation';
-import BuyRecipeModal from '../components/BuyRecipeModal';
+import RecipeIngredients from '../components/Recipe/RecipeIngredients';
+import RecipeDescription from '../components/Recipe/RecipeDescription';
+import RecipeReview from '../components/Recipe/RecipeReview';
+import RecipeRecommendation from '../components/Recipe/RecipeRecommendation';
+import BuyRecipeModal from '../components/Recipe/BuyRecipeModal';
 
 function Recipe() {
   const location = useLocation();

@@ -8,7 +8,7 @@ import NumberTextField from "../components/TextField/NumberTextField";
 import Navbar from '../components/Navbar';
 import FileTextField from "../components/TextField/FileTextField";
 import IngredientCard from "../components/IngredientCard";
-import RecipeStepsContainer from '../components/RecipeStepsContainer';
+import RecipeStepsContainer from '../components/Recipe/RecipeStepsContainer';
 import AddStep from "../components/AddStep";
 import RoundButton from "../components/RoundButton";
 import AddIngredientModal from "../components/AddIngredientModal";

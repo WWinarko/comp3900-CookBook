@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { RecipeData } from './RecipeData';
+import { RecipeData } from './Recipe/RecipeData';
 import RecommendationCard from './RecommendationCard';
 
 const useStyles = makeStyles({
