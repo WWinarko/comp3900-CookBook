@@ -43,3 +43,25 @@ Next week:
 
 Obstacles:
 - Took long time for choosing color for our website.
+
+Week 4
+
+This week:
+- Created the UI for the frontend without the logic/backend (login, register, logout, navbar, add recipe)
+
+Next week:
+- Connecting frontend with backend
+- Do progressive Demo A
+
+Obstacles:
+- Stuck a while on a bug when doing add recipe page
+
+Week 5
+
+This week:
+- Connected frontend with backend
+- Did progressive Demo A
+
+Next week:
+- Do retrospective meeting A
+- Start sprint 2

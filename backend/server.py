@@ -15,6 +15,11 @@ from product_add import product_add
 from cart_add import cart_add
 from cart_remove import cart_remove
 
+from order_update import order_update
+from order_listall import order_listall
+from order_view import order_view
+from order_add import order_add
+from order_details import order_details
 
 def default_handler(err):
     ''' Default Handle '''
@@ -133,6 +138,63 @@ def remove_from_cart_root():
     item = payload['ingredients']
     return dumps(
         cart_remove(token, item)
+    )
+
+##### ORDER ROUTE #####
+
+@APP.route("/order/view", methods=['GET'])
+def order_view_root():
+    ''' Return order information '''
+    token = request.args.get('token')
+    order_id = request.args.get('order_id')
+
+    return dumps(
+        order_view(token, order_id)
+    )
+
+@APP.route("/order/listall", methods=['GET'])
+def order_listall_root():
+    ''' Return order list '''
+    token = request.args.get('token')
+    status = request.args.get('status')
+    return dumps(
+        order_listall(token, status)
+    )
+
+@APP.route("/order/details", methods=['GET'])
+def order_listall_root():
+    ''' Return order details '''
+    token = request.args.get('token')
+    order_id = request.args.get('order_id')
+    return dumps(
+        order_details(token, order_id)
+    )
+
+@APP.route("/order/update", methods=['POST'])
+def order_update_root():
+    ''' Update order status '''
+    payload = request.get_json()
+    token = payload['token']
+    order_id = payload['order_id']
+    status = payload['status']
+    return dumps(
+        order_update(token, order_id, status)
+    )
+
+@APP.route("/order/add", methods=['POST'])
+def order_add_root():
+    ''' Update order status '''
+    payload = request.get_json()
+    token = payload['token']
+    email = payload['email']
+    phone = payload['phone']
+    address = payload['address']
+    state = payload['state']
+    postcode = payload['postcode']
+    details = payload['details']
+    total = payload['total']
+    return dumps(
+        order_add(token, email, phone, address, state, postcode, details, total)
     )
 
 if __name__ == "__main__":
