@@ -1,5 +1,5 @@
-from backend.error import AccessError
-from backend.token_helper import find_user_id
+from error import AccessError
+from token_helper import find_user_id_from_token
 import database
 import token_helper
 import recipe_helper
@@ -15,7 +15,7 @@ def profile_view(token, user_id):
     token_helper.is_token_valid(token, users)
 
     # Validate user
-    if not auth_helper.check_user_id(user_id, users):
+    if not auth_helper.check_user_id(user_id_new, users):
         raise AccessError(description="User does not exist")
 
     # User info
