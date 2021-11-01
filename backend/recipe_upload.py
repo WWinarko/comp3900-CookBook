@@ -39,7 +39,8 @@ def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, se
         "preptime":preptime,
         "serves":serves,
         "ingredients": ingredients,
-        "steps":steps
+        "steps":steps,
+        "comment":[]
     }
 
     recipes = database.get_recipes()
@@ -76,6 +77,7 @@ recipe format:
             {
                 'ingredient':
                 'product_id':
+                'quantity':
             }
         ]
     'steps':
