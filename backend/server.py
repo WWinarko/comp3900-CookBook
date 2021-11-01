@@ -1,4 +1,6 @@
 from flask import Flask, request
+from backend.cart_retrieve import cart_retrieve
+from backend.cart_reward import cart_reward
 from flask_cors import CORS
 from json import dumps
 
@@ -133,6 +135,28 @@ def remove_from_cart_root():
     item = payload['ingredients']
     return dumps(
         cart_remove(token, item)
+    )
+
+@APP.route("/cart/retrieve", methods=['GET'])
+def retrieve_cart_root():
+    ''' Retrieve products and total from shopping cart'''
+    payload = request.get_json()
+    return dumps(
+        cart_retrieve(payload['token'])
+    )
+
+@APP.route("/cart/reward", methods=['POST'])
+def rewards_cart_root():
+    ''' Place order after checking reward points '''
+    payload = request.get_json()
+    token = payload['token']
+    email = payload['email']
+    phone = payload['phone']
+    address = payload['address']
+    state = payload['state']
+    postcode = payload['postcode']
+    return dumps(
+        cart_reward(token, email, phone, address, state, postcode)
     )
 
 if __name__ == "__main__":
