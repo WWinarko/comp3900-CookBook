@@ -8,7 +8,7 @@ def recipe_view(recipe_id):
     ''' view a recipe '''
     recipes = database.get_recipes()
     # check if the recipe exists
-    if not recipe_helper.check_recipe_exist(recipe_id_new, recipes):
+    if not recipe_helper.check_recipe_exist(ObjectId(recipe_id), recipes):
         raise AccessError(description="recipe does not exist")
 
     recipe = recipes.find_one({"_id":ObjectId(recipe_id)})
