@@ -30,6 +30,8 @@ def order_view(token, order_id):
         'status': order['status'],
         'username': user['username'],
         'order_time': order['time'],
+        'firstname':order['firstname'],
+        'lastname':order['lastname'],
         'address': order['address'],
         'state': order['state'],
         'postcode': order['postcode']

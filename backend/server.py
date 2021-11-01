@@ -1,4 +1,5 @@
 from flask import Flask, request
+from backend.recipe_comment import recipe_comment
 from flask_cors import CORS
 from json import dumps
 
@@ -9,8 +10,11 @@ from auth_logout import auth_logout
 from recipe_view import recipe_view
 from recipe_upload import recipe_upload
 from recipe_listall import recipe_listall
+from recipe_comment import recipe_comment
+from recipe_comment_view import recipe_comment_view
 
 from product_add import product_add
+from product_view import product_view
 
 from cart_add import cart_add
 from cart_remove import cart_remove
@@ -82,7 +86,7 @@ def recipe_view_root():
 
 @APP.route("/recipe/upload", methods=['POST'])
 def recipe_upload_root():
-    ''' Register User '''
+    ''' Upload a recipe '''
     payload = request.get_json()
     token = payload['token']
     title = payload['title']
@@ -98,6 +102,26 @@ def recipe_upload_root():
         recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps)
     )
 
+@APP.route("/recipe/comment", methods=['POST'])
+def recipe_comment_root():
+    ''' Comment on a recipe '''
+    payload = request.get_json()
+    token = payload['token']
+    comment = payload['comment']
+    rating = payload['rating']
+    recipe_id = payload['recipe_id']
+    return dumps(
+        recipe_comment(token,comment, rating, recipe_id)
+    )
+
+@APP.route("/recipe/comment_view", methods=['GET'])
+def recipe_comment_view_root():
+    ''' View the commens on a recipe '''
+    recipe_id = request.args.get('recipe_id')
+    return dumps(
+        recipe_comment_view(recipe_id)
+    )
+
 @APP.route("/recipe/listall", methods=['GET'])
 def recipe_list_all_root():
     ''' Return recipe information '''
@@ -107,7 +131,7 @@ def recipe_list_all_root():
 
 @APP.route("/product/add", methods=['POST'])
 def product_add_root():
-    ''' Register User '''
+    ''' Add a product '''
     payload = request.get_json()
     token = payload['token']
     title = payload['title']
@@ -116,6 +140,14 @@ def product_add_root():
     labels = payload['labels']
     return dumps(
         product_add(token, title, photo, description, labels)
+    )
+
+@APP.route("/product/view", methods=['GET'])
+def product_view_root():
+    ''' Return order information '''
+    product_id = request.args.get('product_id')
+    return dumps(
+        product_view(product_id)
     )
     
 ##### CART ROUTE #####
@@ -140,6 +172,24 @@ def remove_from_cart_root():
         cart_remove(token, item)
     )
 
+@APP.route("/cart/paypal", methods=['POST'])
+def cart_paypal_root():
+    ''' Add an order to the database '''
+    payload = request.get_json()
+    token = payload['token']
+    firstname = payload['firstname']
+    lastname= payload['lastname']
+    email = payload['email']
+    phone = payload['phone']
+    address = payload['address']
+    state = payload['state']
+    postcode = payload['postcode']
+    details = payload['details']
+    total = payload['total']
+    return dumps(
+        order_add(token, firstname, lastname, email, phone, address, state, postcode, details, total)
+    )
+
 ##### ORDER ROUTE #####
 
 @APP.route("/order/view", methods=['GET'])
@@ -162,7 +212,7 @@ def order_listall_root():
     )
 
 @APP.route("/order/details", methods=['GET'])
-def order_listall_root():
+def order_details_root():
     ''' Return order details '''
     token = request.args.get('token')
     order_id = request.args.get('order_id')
@@ -170,7 +220,7 @@ def order_listall_root():
         order_details(token, order_id)
     )
 
-@APP.route("/order/update", methods=['POST'])
+@APP.route("/order/update", methods=['PUT'])
 def order_update_root():
     ''' Update order status '''
     payload = request.get_json()
@@ -179,22 +229,6 @@ def order_update_root():
     status = payload['status']
     return dumps(
         order_update(token, order_id, status)
-    )
-
-@APP.route("/order/add", methods=['POST'])
-def order_add_root():
-    ''' Update order status '''
-    payload = request.get_json()
-    token = payload['token']
-    email = payload['email']
-    phone = payload['phone']
-    address = payload['address']
-    state = payload['state']
-    postcode = payload['postcode']
-    details = payload['details']
-    total = payload['total']
-    return dumps(
-        order_add(token, email, phone, address, state, postcode, details, total)
     )
 
 if __name__ == "__main__":

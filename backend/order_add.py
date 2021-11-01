@@ -5,14 +5,14 @@ import database
 import datetime
 import auth_helper
 
-def order_add(token, email, phone, address, state, postcode, details, total):
+def order_add(token, firstname, lastname, email, phone, address, state, postcode, details, total):
     ''' add order to the database '''
     users = database.get_users()
     orders = database.get_orders()
 
     # Check if the arguments are of correct format
-    argument_checker.all_not_empty([token, email, phone, address, state, postcode])
-    argument_checker.no_white_space([token, email, phone, state, postcode])
+    argument_checker.all_not_empty([token, firstname, lastname, email, phone, address, state, postcode])
+    argument_checker.no_white_space([token, firstname, lastname, email, phone, state, postcode])
 
     # Check if the token is valid
     token_helper.is_token_valid(token, users)
@@ -31,6 +31,8 @@ def order_add(token, email, phone, address, state, postcode, details, total):
     order = {
         "status":"processing",
         "user_id":str(user['_id']),
+        "firstname":firstname,
+        "lastname":lastname,
         "address":address,
         "state":state,
         "postcode":postcode,
