@@ -1,5 +1,4 @@
 from flask import Flask, request
-from backend.recipe_comment import recipe_comment
 from flask_cors import CORS
 from json import dumps
 
@@ -15,6 +14,8 @@ from recipe_comment_view import recipe_comment_view
 
 from product_add import product_add
 from product_view import product_view
+from product_search_keywords import product_search_keyword
+from product_listall import product_listall
 
 from cart_add import cart_add
 from cart_remove import cart_remove
@@ -111,7 +112,7 @@ def recipe_comment_root():
     rating = payload['rating']
     recipe_id = payload['recipe_id']
     return dumps(
-        recipe_comment(token,comment, rating, recipe_id)
+        recipe_comment(token, comment, rating, recipe_id)
     )
 
 @APP.route("/recipe/comment_view", methods=['GET'])
@@ -149,7 +150,22 @@ def product_view_root():
     return dumps(
         product_view(product_id)
     )
-    
+
+@APP.route("/product/search_keyword", methods=['GET'])
+def product_search_keyword_root():
+    ''' List the products that have the keyword '''
+    keyword = request.args.get('keyword')
+    return dumps(
+        product_search_keyword(keyword)
+    )
+
+@APP.route("/product/listall", methods=['GET'])
+def product_listall_root():
+    ''' List all the products '''
+    return dumps(
+        product_listall()
+    )
+
 ##### CART ROUTE #####
 
 @APP.route("/cart/add", methods=['POST'])
@@ -220,7 +236,7 @@ def order_details_root():
         order_details(token, order_id)
     )
 
-@APP.route("/order/update", methods=['PUT'])
+@APP.route("/order/update", methods=['POST'])
 def order_update_root():
     ''' Update order status '''
     payload = request.get_json()
