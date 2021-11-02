@@ -21,8 +21,9 @@ def email_order_details(token):
 
     return total, df_ingredients
 
-
+'''
 # Testing
 token = "b'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDEgMTY6NTY6MTAuNzIzMTkzIiwicmFuZG9tbnVtYmVyIjoiMC4xOTc5MTg4NDY2OTA2NzcyNyJ9.kJxOyLv0w2Nq7WZ1KdgTxY_2jKhJprOBriiY33zykZY'"
 total, ingredients = email_order_details(token)
 email_send(ingredients, total, str(123454878), "maniga2575@hotmail.com", "Maria", "Sydney", "NSW", "2000")
+'''
