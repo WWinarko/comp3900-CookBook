@@ -24,7 +24,7 @@ def cart_reward(token, firstname, lastname, email, phone, address, state, postco
         raise InputError(description="The cart is empty")
 
     # Check if user has enough points
-    points_reward = user["point_rewards"]
+    points_reward = user["reward"]
     total = cart["total"]
     if (points_reward < total):
         raise InputError(description="User does not have enough reward points")
@@ -39,7 +39,7 @@ def cart_reward(token, firstname, lastname, email, phone, address, state, postco
 
     # Creates order
     points_diff = points_reward - total
-    users.update_one({"_id": user_id}, {"$set": {"point_rewards": points_diff}})
+    users.update_one({"_id": user_id}, {"$set": {"reward": points_diff}})
     return order_add.order_add(token, email, phone, address, state, postcode, ingredients, total)
 
 '''
