@@ -1,5 +1,3 @@
-from auth_register import auth_register
-from error import InputError
 from cart_retrieve import cart_retrieve
 from order_add import order_add
 from error import InputError

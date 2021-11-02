@@ -22,9 +22,11 @@ def cart_retrieve(token):
         products = database.get_products()
         ingredients = cart["ingredients"]
         for ingredient in ingredients:
+            quantity = ingredient["quantity"]
             product = products.find_one({"_id": ObjectId(ingredient["_id"])})
-            subtotal = product["price"] * ingredient["quantity"]
+            subtotal = product["price"] * quantity
             total += subtotal
+            product.update({"quantity": quantity})
             product.update({"subtotal": subtotal})
             ingredients_list.append(product)
 
