@@ -3,7 +3,7 @@ import database
 import token_helper
 import cart_helper
 
-def cart_add(token, list_items):
+def cart_add(token, ingredients):
     ''' Add items to shopping cart'''
     # Validates token
     users = database.get_users()
@@ -16,17 +16,17 @@ def cart_add(token, list_items):
     # If shopping cart exists
     if (cart is not None):
         # Check the items, and modify quantity or add ingredient
-        for item in list_items:
-            ingredient = cart_helper.find_ingredient(cart, item)
-            if (ingredient is not None):
-                ingredient["quantity"] += item["quantity"]
+        for ingredient in ingredients:
+            cart_ingredient = cart_helper.find_ingredient(cart, ingredient)
+            if (cart_ingredient is not None):
+                cart_ingredient["quantity"] += ingredient["quantity"]
             else:
-                cart["ingredients"].append(item) 
+                cart["ingredients"].append(ingredient) 
         # Updates the current modifications
         cart_id = cart["_id"]
         carts.update_one({"_id": cart_id}, {"$set": {"ingredients": cart["ingredients"]}})
 
     # Otherwise, creates a new entry and add the ingredients
     else:
-        cart = {"token": token, "ingredients": list_items}
+        cart = {"token": token, "ingredients": ingredients}
         carts.insert_one(cart)
