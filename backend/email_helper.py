@@ -1,12 +1,11 @@
 import pandas as pd
-from cart_retrieve import cart_retrieve
-from email_send import email_send
+import cart_retrieve
 
 def email_order_details(token):
     ''' Return order details (ingredients) in dataframe format and total '''
 
     # Obtain ingredients list and total from shopping cart
-    cart = cart_retrieve(token)
+    cart = cart_retrieve.cart_retrieve(token)
     ingredients = cart["ingredients"]
     total = cart["total"]
 
