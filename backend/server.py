@@ -27,6 +27,7 @@ from order_add import order_add
 from order_details import order_details
 
 from recommendation_questions import recommendation_questions
+from recommendation_history import recommendation_history
 
 def default_handler(err):
     ''' Default Handle '''
@@ -263,6 +264,14 @@ def recommendation_questions_root():
     q6 = request.args.get('q6')
     return dumps(
         recommendation_questions(q1, q2, q3, q4, q5, q6)
+    )
+
+@APP.route("/recommendation/history", methods=['GET'])
+def recommendation_history_root():
+    ''' Recommend reqcipes according the account history '''
+    token = request.args.get('token')
+    return dumps(
+        recommendation_history(token)
     )
 
 if __name__ == "__main__":
