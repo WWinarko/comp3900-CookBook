@@ -26,6 +26,8 @@ from order_view import order_view
 from order_add import order_add
 from order_details import order_details
 
+from recommendation_questions import recommendation_questions
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -99,8 +101,9 @@ def recipe_upload_root():
     serves = payload['serves']
     steps = payload['steps']
     ingredients = payload['ingredients']
+    labels = payload['labels']
     return dumps(
-        recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps)
+        recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps, labels)
     )
 
 @APP.route("/recipe/comment", methods=['POST'])
@@ -245,6 +248,21 @@ def order_update_root():
     status = payload['status']
     return dumps(
         order_update(token, order_id, status)
+    )
+
+##### Recommendation ROUTE #####
+
+@APP.route("/recommendation/questions", methods=['GET'])
+def recommendation_questions_root():
+    ''' Recommend reqcipes according the answers to the survey '''
+    q1 = request.args.get('q1')
+    q2 = request.args.get('q2')
+    q3 = request.args.get('q3')
+    q4 = request.args.get('q4')
+    q5 = request.args.get('q5')
+    q6 = request.args.get('q6')
+    return dumps(
+        recommendation_questions(q1, q2, q3, q4, q5, q6)
     )
 
 if __name__ == "__main__":

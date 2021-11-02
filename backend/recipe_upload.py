@@ -3,7 +3,7 @@ import token_helper
 import database
 from error import InputError
 
-def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps):
+def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps, labels):
     ''' upload a recipe '''
     users = database.get_users()
 
@@ -40,7 +40,8 @@ def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, se
         "serves":serves,
         "ingredients": ingredients,
         "steps":steps,
-        "comment":[]
+        "comment":[], 
+        "labels":labels
     }
 
     recipes = database.get_recipes()
