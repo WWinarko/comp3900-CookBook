@@ -18,7 +18,7 @@ def cart_add(token, ingredients):
     if (cart is not None):
         # Check the items, and modify quantity or add ingredient
         for ingredient in ingredients:
-            cart_ingredient = cart_helper.find_ingredient(cart, ingredient)
+            cart_ingredient = cart_helper.find_ingredient(cart, ingredient['_id'])
             if (cart_ingredient is not None):
                 cart_ingredient["quantity"] += ingredient["quantity"]
             else:

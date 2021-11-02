@@ -40,8 +40,7 @@ def cart_reward(token, firstname, lastname, email, phone, address, state, postco
     # Creates order
     points_diff = points_reward - total
     users.update_one({"_id": user_id}, {"$set": {"point_rewards": points_diff}})
-    order = order_add.order_add(token, email, phone, address, state, postcode, ingredients, total)
-    return order
+    return order_add.order_add(token, email, phone, address, state, postcode, ingredients, total)
 
 '''
 # Testing

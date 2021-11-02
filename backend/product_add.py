@@ -3,7 +3,7 @@ import token_helper
 from error import AccessError
 import argument_checker
 
-def product_add(token, title, photo, description, labels):
+def product_add(token, title, photo, description, price, labels):
     ''' Add a product '''
     # check if the token is valid and find the user
     users = database.get_users()
@@ -21,6 +21,7 @@ def product_add(token, title, photo, description, labels):
         "title": title, 
         "photo": photo,
         "description": description,
+        "price": price,
         "labels": labels
     }
 

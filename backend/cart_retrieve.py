@@ -8,11 +8,13 @@ def cart_retrieve(token):
     ''' Retrieves ingredients and total from the shopping cart '''
     # Validates token
     users = database.get_users()
+    carts = database.get_carts()
+
     token_helper.is_token_valid(token, users)
 
     # Retrieve cart from database
-    carts = database.get_carts()
-    cart = carts.find_one({"token": token})
+    user = users.find_one({"token":token})
+    cart = carts.find_one({"user_id":str(user['_id'])})
 
     ingredients_list = []
     total = 0
@@ -26,9 +28,16 @@ def cart_retrieve(token):
             product = products.find_one({"_id": ObjectId(ingredient["_id"])})
             subtotal = product["price"] * quantity
             total += subtotal
-            product.update({"quantity": quantity})
-            product.update({"subtotal": subtotal})
-            ingredients_list.append(product)
+            product_return = {
+                "title":product['title'],
+                "photo":product['photo'],
+                "description":product['description'],
+                "price":product['price'],
+                "quantity":quantity,
+                "subtotal":subtotal,
+            }
+
+            ingredients_list.append(product_return)
 
     return {
         'ingredients': ingredients_list,

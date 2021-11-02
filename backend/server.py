@@ -144,9 +144,10 @@ def product_add_root():
     title = payload['title']
     photo = payload['photo']
     description = payload['description']
+    price = payload['price']
     labels = payload['labels']
     return dumps(
-        product_add(token, title, photo, description, labels)
+        product_add(token, title, photo, description, price, labels)
     )
 
 @APP.route("/product/view", methods=['GET'])

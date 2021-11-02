@@ -11,5 +11,6 @@ def product_view(product_id):
         "title":product['title'],
         "photo":product['photo'],
         "description":product['description'],
+        "price":product['price'],
         "labels":product['labels']
     }
