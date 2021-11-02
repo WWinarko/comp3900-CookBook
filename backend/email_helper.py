@@ -7,6 +7,7 @@ def email_order_details(token):
     # Obtain ingredients list and total from shopping cart
     cart = cart_retrieve.cart_retrieve(token)
     ingredients = cart["ingredients"]
+    n_ingredients = len(ingredients)
     total = cart["total"]
 
     # Convert list into dataframe
@@ -18,7 +19,7 @@ def email_order_details(token):
     df_ingredients = pd.concat([pd.DataFrame(product), pd.DataFrame(quantity), pd.DataFrame(subtotal)], axis=1)
     df_ingredients.columns = ["Product", "Quantity", "Subtotal"]
 
-    return total, df_ingredients
+    return total, n_ingredients, df_ingredients
 
 '''
 # Testing

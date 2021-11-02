@@ -3,8 +3,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib, ssl
 import email_template
+import email_helper
 
-def email_send(ingredients, subtotal, order_id, email, name, address, state, postcode):
+def email_send(token, order_id, email, name, address, state, postcode):
     ''' Sends email with order details of their purchase to user '''
     
     # Set up details
@@ -14,21 +15,22 @@ def email_send(ingredients, subtotal, order_id, email, name, address, state, pos
     msg["Subject"] = f"CookBook - Your order {order_id} has been confirmed"
     msg["From"] = "cookbook.services@gmail.com"
     msg["To"] = email
-    total = subtotal + 10
 
     # Email message body template
     body = email_template.template
-    html_table = build_table(ingredients, 
-                            'grey_light', 
-                            font_size=16, 
-                            font_family='Open Sans, sans-serif', 
-                            index=False)
+    subtotal, n_items, df_ingredients = email_helper.email_order_details(token)
+    total = subtotal + 10           
+    html_table = build_table(df_ingredients, 
+                             'grey_light', 
+                             font_size=16, 
+                             font_family='Open Sans, sans-serif', 
+                             index=False)
     
     # Update details of email body
     body = body.replace("{table}", str(html_table))
     body = body.replace("{name}", name)
     body = body.replace("{order_id}", order_id)
-    body = body.replace("{items_qty}", str(len(ingredients)))
+    body = body.replace("{items_qty}", str(n_items))
     body = body.replace("{subtotal}", str(subtotal))
     body = body.replace("{total}", str(total))
     body = body.replace("{address}", address)
