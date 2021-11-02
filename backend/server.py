@@ -1,6 +1,4 @@
 from flask import Flask, request
-from backend.cart_retrieve import cart_retrieve
-from backend.cart_reward import cart_reward
 from flask_cors import CORS
 from json import dumps
 
@@ -21,6 +19,8 @@ from product_listall import product_listall
 
 from cart_add import cart_add
 from cart_remove import cart_remove
+from cart_reward import cart_reward
+from cart_retrieve import cart_retrieve
 
 from order_update import order_update
 from order_listall import order_listall

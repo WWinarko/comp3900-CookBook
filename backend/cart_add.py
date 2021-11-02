@@ -11,7 +11,8 @@ def cart_add(token, ingredients):
 
     # Check if user has shopping cart already
     carts = database.get_carts()
-    cart = carts.find_one({"token": token})
+    user = users.find_one({"token":token})
+    cart = carts.find_one({"user_id":str(user['_id'])})
 
     # If shopping cart exists
     if (cart is not None):
@@ -28,5 +29,5 @@ def cart_add(token, ingredients):
 
     # Otherwise, creates a new entry and add the ingredients
     else:
-        cart = {"token": token, "ingredients": ingredients}
+        cart = {"user_id":str(user['_id']), "ingredients":ingredients}
         carts.insert_one(cart)

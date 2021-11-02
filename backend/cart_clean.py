@@ -5,11 +5,14 @@ import token_helper
 def cart_clean(token):
     # Validates token
     users = database.get_users()
+    carts = database.get_carts()
+
     token_helper.is_token_valid(token, users)
 
+    user = users.find_one({"token":token})
+    
     # Remove shopping cart from database
-    carts = database.get_carts()
-    carts.delete_one({"token": token})
+    carts.delete_one({"user_id":str(user['_id'])})
 
 '''
 # Testing

@@ -23,8 +23,5 @@ def recipe_comment(token, comment, rating, recipe_id):
     # append to the comment list
     comments = recipe['comment']
     recipe['comment'] = comments.append(comment_added)
-
-
     
-
-    
+    recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"comment":recipe['comment']}})
