@@ -79,6 +79,7 @@ recipe format:
                 'ingredient':
                 'product_id':
                 'quantity':
+                'compulsory':(True/False)
             }
         ]
     'steps':

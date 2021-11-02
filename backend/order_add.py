@@ -58,11 +58,11 @@ def order_add(token, firstname, lastname, email, phone, address, state, postcode
         'token': token
     }
 
-token = "b'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDEgMTY6NTY6MTAuNzIzMTkzIiwicmFuZG9tbnVtYmVyIjoiMC4xOTc5MTg4NDY2OTA2NzcyNyJ9.kJxOyLv0w2Nq7WZ1KdgTxY_2jKhJprOBriiY33zykZY'"
-cart = cart_retrieve(token)
-items = cart["ingredienst"]
-total = cart["total"]
-order_add(token, "Maria", "Cuyutupa", "maniga2575@hotmail.com", "012345671314", "Sydney", "NSW", "2138", items, total) 
+# token = "b'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDEgMTY6NTY6MTAuNzIzMTkzIiwicmFuZG9tbnVtYmVyIjoiMC4xOTc5MTg4NDY2OTA2NzcyNyJ9.kJxOyLv0w2Nq7WZ1KdgTxY_2jKhJprOBriiY33zykZY'"
+# cart = cart_retrieve(token)
+# items = cart["ingredienst"]
+# total = cart["total"]
+# order_add(token, "Maria", "Cuyutupa", "maniga2575@hotmail.com", "012345671314", "Sydney", "NSW", "2138", items, total) 
 
 
     
