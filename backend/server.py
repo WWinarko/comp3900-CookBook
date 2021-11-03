@@ -116,8 +116,11 @@ def recipe_upload_root():
 @APP.route("/recipe/comment", methods=['POST'])
 def recipe_comment_root():
     ''' Comment on a recipe '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+
     payload = request.get_json()
-    token = payload['token']
     comment = payload['comment']
     rating = payload['rating']
     recipe_id = payload['recipe_id']
@@ -129,6 +132,7 @@ def recipe_comment_root():
 def recipe_comment_view_root():
     ''' View the commens on a recipe '''
     recipe_id = request.args.get('recipe_id')
+    print(recipe_id)
     return dumps(
         recipe_comment_view(recipe_id)
     )
