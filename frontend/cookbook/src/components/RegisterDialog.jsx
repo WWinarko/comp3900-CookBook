@@ -47,7 +47,7 @@ function RegisterDialog({open, setOpen}) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
-    type: '',
+    type: 'error',
   });
   const history = useHistory();
 

@@ -109,13 +109,13 @@ function OrderDashboard() {
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {
-          setAllRecipes(res.recipe_list);
+          console.log(res)
         })
       }
     }).catch((err) => {
       console.log(err);
     }).finally(() => {
-      setLoadingState(false);
+      console.log('a')
     })
   }, [])
 

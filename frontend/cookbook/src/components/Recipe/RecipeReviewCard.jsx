@@ -23,7 +23,7 @@ function RecipeReviewCard({ comment }) {
 }
 
 RecipeReviewCard.propTypes = {
-  comment: PropTypes.object,
+  comment: PropTypes.string,
 }
 
 export default RecipeReviewCard;

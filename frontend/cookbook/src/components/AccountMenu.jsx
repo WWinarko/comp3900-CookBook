@@ -15,7 +15,7 @@ function AccountMenu({anchorEl, open, onClose, onClick}) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
-    type: '',
+    type: 'error',
   });
 
   const handleLogout = () => {

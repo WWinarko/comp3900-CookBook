@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 
 import RecipeReviewContainer from './RecipeReviewContainer';
+import AddComment from './AddComment';
 import { Divider, Pagination } from '@mui/material';
 import RoundButton from '../RoundButton';
-
-import { CommentsData } from './TempDataComments';
 
 const useStyles = makeStyles({
   root: {
@@ -42,7 +41,12 @@ const useStyles = makeStyles({
 
 function RecipeReview() {
   const classes = useStyles();
-  const [comments, setComments] = useState(CommentsData);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState(false);
+
+  React.useEffect(() => {
+    fetch()
+  })
 
   return (
     <div className={classes.root}>
@@ -60,10 +64,12 @@ function RecipeReview() {
       
       <div style={{ width:'50%', margin: '30px' }}>
         <RecipeReviewContainer comments={comments} setComments={setComments} />
+        
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
           <Pagination count={10} />
-          <RoundButton name="Comment" />
-        </div>
+          {!newComment && <RoundButton name="Add comment" onClick={() => setNewComment(true)} />}
+        </div> 
+        {newComment && <AddComment setComments={setComments} setNewComment={setNewComment} />}
       </div>
       {/* <Pagination count={10} page={page} onChange={handlePage} /> */}
       

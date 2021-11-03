@@ -22,6 +22,7 @@ function Recipe() {
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {
+          console.log(res);
           setRecipe(res);
         })
       }
@@ -56,7 +57,6 @@ function Recipe() {
                 sx={{ width: '50%' }}
               >
                 <RecipeIngredients setState={setState} recipe={recipe} />
-                {state}
               </Stack>
               <Stack
                 sx={{ width: '50%' }}

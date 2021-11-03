@@ -11,6 +11,7 @@ import AddRecipe from './pages/AddRecipe';
 import AddProduct from './pages/AddProduct';
 import User from './pages/User';
 import MyProfile from './pages/MyProfile';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path="/profile">
           <MyProfile />
+        </Route>
+        <Route path="/cart" >
+          <Cart />
         </Route>
       </Switch>
     </Router>
