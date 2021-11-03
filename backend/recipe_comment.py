@@ -18,7 +18,13 @@ def recipe_comment(token, comment, rating, recipe_id):
     time = datetime.datetime.strftime(datetime.datetime.now(), "%d/%m/%Y %H:%M"), 
 
     # Username and comment will be displayed and id is for reference
-    comment_added = (user['_id'], user['username'], rating, comment, time)
+    comment_added = {
+        "user_id":user['_id'], 
+        "username":user['username'], 
+        "rating":rating, 
+        "comment":comment, 
+        "time":time
+    }
 
     # append to the comment list
     comments = recipe['comment']

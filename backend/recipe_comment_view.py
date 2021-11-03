@@ -7,5 +7,5 @@ def recipe_comment_view(recipe_id):
     recipe = recipes.find_one({"_id":ObjectId(recipe_id)})
 
     return {
-        "comment":recipe['comment']
+        "comments":recipe['comment']
     }
