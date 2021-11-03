@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Stack, Paper, Button, CircularProgress } from '@mui/material';
+import { Stack, Paper, Button, CircularProgress, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import Navbar from '../components/Navbar';
 import Checkout from '../components/Checkout';
+import CartCard from '../components/CartCard';
 import DeliveryForm from '../components/DeliveryForm';
 import Notification from '../components/Notification';
 
@@ -18,11 +19,13 @@ const ContinueButton = styled(Button)(() => ({
 }));
 
 function Cart() {
+  const token = localStorage.getItem('cookbook-token');
+  const history = useHistory();
   const [checkout, setCheckout] = useState(false);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-  // eslint-disable-next-line no-unused-vars
   const [ingredients, setIngredients] = useState([]);
+  const [update, setUpdate] = useState(false);
   const [deliveryInfo, setDeliveryInfo] = useState({
     firstName: 'John',
     lastName: 'Doe',
@@ -37,17 +40,14 @@ function Cart() {
     message: '',
     type: 'error',
   });
-  const history = useHistory();
-  const goHome = () => {
-    history.push('/');
-  }
+
   useEffect(() => {
-    const token = localStorage.getItem('cookbook-token');
+    console.log(update);
     const auth = {"Authorization": `Bearer ${token}`};
     axios.get('http://127.0.0.1:5000/cart/retrieve', {headers: auth})
     .then((res) => {
       const {ingredients, total} = res.data;
-      console.log(ingredients);
+  
       setIngredients(ingredients);
       setTotal(total);
     })
@@ -61,7 +61,28 @@ function Cart() {
     .finally(() => {
       setLoading(false);
     })
-  }, [checkout])
+  }, [checkout, update])
+  
+  const goHome = () => {
+    history.push('/');
+  }
+  const removeIngredient = (id) => {
+    axios.post('http://127.0.0.1:5000/cart/remove', {
+      token,
+      'ingredients': id,
+    })
+    .then(() => {
+      setLoading(true);
+      setUpdate(!update);
+    })
+    .catch((err) => {
+      setNotify({
+        isOpen: true,
+        message: err.response.data.message || 'Connection Error',
+        type: 'error',
+      });
+    })
+  }
   
   return (
     <>
@@ -74,7 +95,16 @@ function Cart() {
         spacing={5}
         sx={{ backgroundColor:'#F9FAF9', height: '84vh' }}
       >
-        {checkout ? <Paper sx={{width: "30%", padding: '20px', height: '80%'}}><DeliveryForm deliveryInfo={deliveryInfo} setDeliveryInfo={setDeliveryInfo}/></Paper> : <Paper sx={{width: "30%", padding: '20px', height: '80%'}}></Paper>}
+        {checkout ? 
+          <Paper sx={{width: "30%", padding: '20px', height: '80%'}}><DeliveryForm deliveryInfo={deliveryInfo} setDeliveryInfo={setDeliveryInfo}/></Paper> 
+        :
+          loading ? <CircularProgress sx={{position: 'relative', top: '20%'}}/> 
+          : 
+          <Paper sx={{width: "30%", padding: '20px', height: '80%'}}>
+          <Typography component="h2" variant="h4" gutterBottom sx={{color: "#FE793D"}}>My Cart</Typography>
+            {ingredients.map(ingredient => <CartCard removeIngredient={removeIngredient} ingredient={ingredient} key={ingredient['id']} />)}
+          </Paper>
+          }
         <Stack direction="column" sx={{width: "20%"}}>
           {loading ? <CircularProgress sx={{position: 'relative', left: '50%', top: '20%'}}/> :
             <>
