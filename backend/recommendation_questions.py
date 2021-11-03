@@ -15,7 +15,7 @@ def recommendation_questions(q1, q2, q3, q4, q5, q6):
         recipe_labels = set(recipe['labels'])
         if recipe_labels.issubset(match):
             recipe_ids.append(str(recipe['_id']))
-
+    print("hi")
     return {
-        "recipe_list":recipe_list
+        "recipe_list":recipe_ids
     }
