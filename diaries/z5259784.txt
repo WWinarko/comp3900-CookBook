@@ -90,4 +90,8 @@ Thursday 14/10/21 (lab class)
     - progressive demo A
 
 Sunday 17/10/21
-    -- retrospective A with group, sent to Matthew
+    - retrospective A with group, sent to Matthew
+
+Tuesday 26/10/21
+    - meeting with backend
+    - start profile view backend

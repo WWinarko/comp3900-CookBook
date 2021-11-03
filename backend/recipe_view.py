@@ -8,7 +8,7 @@ def recipe_view(recipe_id):
     ''' view a recipe '''
     recipes = database.get_recipes()
     # check if the recipe exists
-    if not recipe_helper.check_recipe_exist(recipe_id_new, recipes):
+    if not recipe_helper.check_recipe_exist(ObjectId(recipe_id), recipes):
         raise AccessError(description="recipe does not exist")
 
     recipe = recipes.find_one({"_id":ObjectId(recipe_id)})
@@ -24,6 +24,7 @@ def recipe_view(recipe_id):
     serves = recipe['serves']
     ingredients = recipe['ingredients']
     comment = recipe['comment']
+    labels = recipe['labels']
     
     ingredient_string = []
     for ingredient in ingredients:
@@ -65,7 +66,8 @@ def recipe_view(recipe_id):
         'owner_photo': owner_photo,
         'ingredient_string': ingredient_string,
         'steps': steps,
-        'comment': comment
+        'comment': comment,
+        'labels': labels
     }
 
 # recipes = database.get_recipes()
