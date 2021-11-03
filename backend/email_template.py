@@ -122,11 +122,11 @@ template = '''
                                             </tr>
                                             <tr>
                                                 <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> Purchased Item ({items_qty}) </td>
-                                                <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> ${subtotal} </td>
+                                                <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> ${total} </td>
                                             </tr>
                                             <tr>
                                                 <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Shipping + Handling </td>
-                                                <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> $10.00 </td>
+                                                <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Free </td>
                                             </tr>
                                         </table>
                                     </td>
@@ -168,8 +168,8 @@ template = '''
                                             <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
                                                 <tr>
                                                     <td align="left" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
-                                                        <p style="font-weight: 800;">Estimated Delivery Date</p>
-                                                        <p>{delivery_date}</p>
+                                                        <p style="font-weight: 800;">Contact Details</p>
+                                                        <p>{phone}</p>
                                                     </td>
                                                 </tr>
                                             </table>
