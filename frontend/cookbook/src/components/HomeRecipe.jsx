@@ -61,7 +61,6 @@ function HomeRecipe() {
         'Content-Type': 'application/json'
       },
     }).then((data) => {
-      console.log(data);
       if (data.status === 200) {
         data.json().then((res) => {
           setAllRecipes(res.recipe_list);

@@ -71,6 +71,7 @@ function HomeRecipeCard({ data }) {
   React.useEffect(() => {
     fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + data, {
       method: 'GET',
+      
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {

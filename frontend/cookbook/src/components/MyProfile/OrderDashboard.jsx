@@ -98,6 +98,27 @@ function OrderDashboard() {
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState('');
 
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/recipe/listall', {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      },
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setAllRecipes(res.recipe_list);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setLoadingState(false);
+    })
+  }, [])
+
   const handlePage = (event, value) => {
     setPage(value);
   }
@@ -138,12 +159,8 @@ function OrderDashboard() {
           value={filter}
           onChange={handleFilter}
         >
-          <ToggleButton value="">
-            Not Started
-          </ToggleButton>
-
-          <ToggleButton value="Started">
-            Started
+          <ToggleButton value="Processing">
+            Processing
           </ToggleButton>
 
           <ToggleButton value="Dispatched">
