@@ -11,7 +11,7 @@ function DeliveryForm({deliveryInfo, setDeliveryInfo}) {
     message: '',
     type: 'error',
   });
-  const [save, setSave] = useState(true);
+  const [save, setSave] = useState(false);
   console.log(deliveryInfo);
   const validateInput = () => {
     let valid = true;
