@@ -132,7 +132,6 @@ def recipe_comment_root():
 def recipe_comment_view_root():
     ''' View the commens on a recipe '''
     recipe_id = request.args.get('recipe_id')
-    print(recipe_id)
     return dumps(
         recipe_comment_view(recipe_id)
     )

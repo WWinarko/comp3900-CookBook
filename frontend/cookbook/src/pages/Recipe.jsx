@@ -22,7 +22,6 @@ function Recipe() {
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {
-          console.log(res);
           setRecipe(res);
         })
       }
@@ -69,7 +68,7 @@ function Recipe() {
               sx={{ width:'100%' }}
               pt={10}
             >
-              <RecipeReview />
+              <RecipeReview id={recipeId}/>
             </Stack>
 
             <Stack

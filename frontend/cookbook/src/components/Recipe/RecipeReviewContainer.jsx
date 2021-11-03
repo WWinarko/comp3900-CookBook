@@ -7,11 +7,9 @@ import RecipeReviewCard from './RecipeReviewCard';
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    height: '50px',
 
     marginBottom: '30px',
     
-    backgroundColor: 'red',
   }
 })
 

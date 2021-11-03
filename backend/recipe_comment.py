@@ -19,7 +19,7 @@ def recipe_comment(token, comment, rating, recipe_id):
 
     # Username and comment will be displayed and id is for reference
     comment_added = {
-        "user_id":user['_id'], 
+        "user_id":str(user['_id']), 
         "username":user['username'], 
         "rating":rating, 
         "comment":comment, 

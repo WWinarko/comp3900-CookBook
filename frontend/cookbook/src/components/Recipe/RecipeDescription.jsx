@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import Divider from '@mui/material/Divider';
-import { Stack, Rating } from '@mui/material';
+import { Stack, Rating, Avatar } from '@mui/material';
 
 import RoundButton from '../RoundButton';
 import RecipeStepsContainer from './RecipeStepsContainer';
@@ -13,12 +13,9 @@ const useStyles = makeStyles({
     width: '75%',
   },
   profile: {
-    borderRadius: '50%',
     height: '80px',
     width: '80px',
     
-    backgroundColor: 'red',
-
     display: 'inline-block',
     margin: '20px',
     cursor: 'pointer',
@@ -99,7 +96,7 @@ function RecipeDescription({ recipe }) {
                 direction="row"
                 alignItems="center"
               >
-                <img src="https://ihatetomatoes.net/demos/_rw/01-real-estate/tn_property01.jpg" className={classes.profile} onClick={handleProfile}/>
+                <Avatar alt={recipe.owner_username} src={recipe.photo} sx={{ width: 70 ,height: 70 }} className={classes.profile} onClick={handleProfile}/>
                 <Stack
                 >
                   <p style={{ paddingTop:'10%', margin:'0', fontWeight: 'bold' }}>{recipe.owner_username}</p>
