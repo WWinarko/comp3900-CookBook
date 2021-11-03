@@ -216,9 +216,11 @@ def cart_paypal_root():
 @APP.route("/cart/retrieve", methods=['GET'])
 def retrieve_cart_root():
     ''' Retrieve products and total from shopping cart'''
-    payload = request.get_json()
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     return dumps(
-        cart_retrieve(payload['token'])
+        cart_retrieve(token)
     )
 
 @APP.route("/cart/reward", methods=['POST'])
