@@ -16,7 +16,7 @@ function PaypalButton({total, onSuccess}) {
       .then(function(details) {
         console.log(details);
       })
-      .finally(onSuccess); 
+      .finally(onSuccess);
 }
 
 const onCancel = (data) => {

@@ -1,27 +1,18 @@
 import React, { useState } from 'react';
 import { Stack, Typography, Card, CardContent } from '@mui/material';
-
+import PropTypes from 'prop-types';
 import CustomTextField from './TextField/CustomTextField';
 import SquareButton from './SquareButton';
 import Notification from './Notification';
 
-function DeliveryForm() {
-  const [deliveryInfo, setDeliveryInfo] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'JohnDoe@example.com',
-    address: '23 Anzac Parade',
-    state: 'NSW',
-    postcode: '2033',
-    phone: '04123456789',
-  })
+function DeliveryForm({deliveryInfo, setDeliveryInfo}) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
-    type: '',
+    type: 'error',
   });
   const [save, setSave] = useState(true);
-  
+  console.log(deliveryInfo);
   const validateInput = () => {
     let valid = true;
     if (!valid) {
@@ -94,6 +85,11 @@ function DeliveryForm() {
       
     </Stack>
   )
+}
+
+DeliveryForm.propTypes = {
+  deliveryInfo: PropTypes.object,
+  setDeliveryInfo: PropTypes.func,
 }
 
 export default DeliveryForm
