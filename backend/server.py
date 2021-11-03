@@ -31,6 +31,8 @@ from order_details import order_details
 from recommendation_questions import recommendation_questions
 from recommendation_history import recommendation_history
 
+from admin_check import admin_check
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -297,6 +299,16 @@ def recommendation_history_root():
     token = request.args.get('token')
     return dumps(
         recommendation_history(token)
+    )
+
+##### Admin ROUTE #####
+
+@APP.route("/admin/check", methods=['GET'])
+def admin_check_root():
+    ''' Check if the user is an admin '''
+    token = request.args.get('token')
+    return dumps(
+        admin_check(token)
     )
 
 if __name__ == "__main__":
