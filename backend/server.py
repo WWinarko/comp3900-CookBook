@@ -230,13 +230,15 @@ def rewards_cart_root():
     ''' Place order after checking reward points '''
     payload = request.get_json()
     token = payload['token']
+    firstname = payload['firstname']
+    lastname = payload['lastname']
     email = payload['email']
     phone = payload['phone']
     address = payload['address']
     state = payload['state']
     postcode = payload['postcode']
     return dumps(
-        cart_reward(token, email, phone, address, state, postcode)
+        cart_reward(token, firstname, lastname, email, phone, address, state, postcode)
     )
 
 ##### ORDER ROUTE #####
