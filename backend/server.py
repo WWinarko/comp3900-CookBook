@@ -244,9 +244,10 @@ def rewards_cart_root():
 @APP.route("/order/view", methods=['GET'])
 def order_view_root():
     ''' Return order information '''
-    token = request.args.get('token')
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     order_id = request.args.get('order_id')
-
     return dumps(
         order_view(token, order_id)
     )
@@ -254,7 +255,9 @@ def order_view_root():
 @APP.route("/order/listall", methods=['GET'])
 def order_listall_root():
     ''' Return order list '''
-    token = request.args.get('token')
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     status = request.args.get('status')
     return dumps(
         order_listall(token, status)
@@ -263,7 +266,9 @@ def order_listall_root():
 @APP.route("/order/details", methods=['GET'])
 def order_details_root():
     ''' Return order details '''
-    token = request.args.get('token')
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     order_id = request.args.get('order_id')
     return dumps(
         order_details(token, order_id)
@@ -298,7 +303,9 @@ def recommendation_questions_root():
 @APP.route("/recommendation/history", methods=['GET'])
 def recommendation_history_root():
     ''' Recommend reqcipes according the account history '''
-    token = request.args.get('token')
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     return dumps(
         recommendation_history(token)
     )
@@ -308,7 +315,9 @@ def recommendation_history_root():
 @APP.route("/admin/check", methods=['GET'])
 def admin_check_root():
     ''' Check if the user is an admin '''
-    token = request.args.get('token')
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     return dumps(
         admin_check(token)
     )
