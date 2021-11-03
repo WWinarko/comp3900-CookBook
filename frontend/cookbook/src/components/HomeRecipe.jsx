@@ -55,7 +55,13 @@ function HomeRecipe() {
   React.useEffect(() => {
     fetch('http://127.0.0.1:5000/recipe/listall', {
       method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      },
     }).then((data) => {
+      console.log(data);
       if (data.status === 200) {
         data.json().then((res) => {
           setAllRecipes(res.recipe_list);

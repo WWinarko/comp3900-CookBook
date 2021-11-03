@@ -19,11 +19,9 @@ function RecipeReviewContainer({ comments }) {
   const classes= useStyles();
   return (
     <div className={classes.root}>
-      {comments.map((index) => {
+      {comments.map((data, index) => {
         return (
-          <div key={index}>
-            <RecipeReviewCard />
-          </div>
+          <RecipeReviewCard comment={data} key={index}/>
         )
       })}
     </div>

@@ -117,7 +117,15 @@ function OrderDashboard() {
   }
 
   React.useEffect(() => {
-    setLst(OrderData.filter((i) => i.status === filter));
+    fetch('http://127.0.0.1:5000/order/view?token=' + localStorage.getItem("cookbook-token") + '&status=' + filter, {
+      method: 'GET',
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          console.log(res);
+        })
+      }
+    })
   }, [filter])
 
   return (
