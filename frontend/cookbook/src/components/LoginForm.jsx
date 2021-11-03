@@ -3,14 +3,13 @@
 import React, {useState} from "react";
 import axios from 'axios';
 import { FormControl, Stack, Typography } from "@mui/material";
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/system';
 import { useHistory } from "react-router-dom"; 
 
 import CustomTextField from "./TextField/CustomTextField";
 import SquareButton from "./SquareButton";
 import RegisterDialog from "./RegisterDialog";
-// import {ReactComponent as GoogleAccount} from '../assets/google-account.svg';
+// import PreferenceDialog from './PreferenceDialog';
 
 const SignIn = styled(Typography)({
   fontWeight: '500',
@@ -19,22 +18,6 @@ const SignIn = styled(Typography)({
   color: '#FE793D',
   paddingTop: '10%',
 });
-
-// const theme = createTheme({
-//   components: {
-//     // Name of the component
-//     MuiDivider: {
-//       styleOverrides: {
-//         // Name of the slot
-//         root: {
-//           ":before, :after": {
-//             top: '0',
-//           },
-//         },
-//       },
-//     },
-//   },
-// });
 
 function LoginForm({setNotify}) {
   const [username, setUsername] = useState('');
@@ -110,11 +93,8 @@ function LoginForm({setNotify}) {
         <SquareButton name="Login" onClick={handleLogin}/>
         <SquareButton name="Register" onClick={showRegister}/>
       </Stack>
-      {/* <ThemeProvider theme={theme}>
-        <Divider variant="middle" sx={{color: '#9D9D9D', width: '78%'}}>or</Divider>
-      </ThemeProvider> */}
-      {/* <GoogleAccount /> */}
       <RegisterDialog open={open} setOpen={setOpen} />
+      {/* <PreferenceDialog open={open} setOpen={setOpen} /> */}
     </Stack>
   )
 }

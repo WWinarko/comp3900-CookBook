@@ -21,7 +21,7 @@ def order_listall(token, status):
         for order in order_list:
             # status check
             if status == 'all' or order['status'] == status:
-                order_listall.append(str[order['_id']])
+                order_listall.append(str(order['_id']))
     else:
         user = users.find_one({"token":token})
         # iterate over the orders

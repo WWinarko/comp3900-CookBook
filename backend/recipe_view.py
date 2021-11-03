@@ -37,7 +37,6 @@ def recipe_view(recipe_id):
     # check if the user exists
     if not auth_helper.check_user_id(ObjectId(owner_id), users):
         raise AccessError(description="user does not exist")
-    
     owner = users.find_one({"_id":ObjectId(owner_id)})
     
     # if the owner is admin no follower numbershows up
@@ -49,7 +48,6 @@ def recipe_view(recipe_id):
         owner_username = owner['username']
         owner_follower = owner['follower']
         owner_photo = owner['photo']
-
     # return the recipe details
     return {
         'title': title,
@@ -66,12 +64,11 @@ def recipe_view(recipe_id):
         'owner_photo': owner_photo,
         'ingredient_string': ingredient_string,
         'steps': steps,
-        'comment': comment,
         'labels': labels
     }
 
 # recipes = database.get_recipes()
-# recipe = recipes.find_one({"title":"testing"})
+# recipe = recipes.find_one({"title":"yummy chicken"})
 # print(recipe_view(recipe['_id']))
 
 '''

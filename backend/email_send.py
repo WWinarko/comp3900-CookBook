@@ -5,7 +5,7 @@ import smtplib, ssl
 import email_template
 import email_helper
 
-def email_send(token, order_id, email, name, address, state, postcode):
+def email_send(token, order_id, email, name, address, state, postcode, phone):
     ''' Sends email with order details of their purchase to user '''
     
     # Set up details
@@ -18,8 +18,7 @@ def email_send(token, order_id, email, name, address, state, postcode):
 
     # Email message body template
     body = email_template.template
-    subtotal, n_items, df_ingredients = email_helper.email_order_details(token)
-    total = subtotal + 10           
+    total, n_items, df_ingredients = email_helper.email_order_details(token)       
     html_table = build_table(df_ingredients, 
                              'grey_light', 
                              font_size=16, 
@@ -31,11 +30,11 @@ def email_send(token, order_id, email, name, address, state, postcode):
     body = body.replace("{name}", name)
     body = body.replace("{order_id}", order_id)
     body = body.replace("{items_qty}", str(n_items))
-    body = body.replace("{subtotal}", str(subtotal))
     body = body.replace("{total}", str(total))
     body = body.replace("{address}", address)
     body = body.replace("{state}", state)
     body = body.replace("{postcode}", postcode)
+    body = body.replace("{phone}", phone)
     body = MIMEText(body, 'html')
     msg.attach(body)
 

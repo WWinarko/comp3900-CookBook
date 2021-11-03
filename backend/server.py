@@ -31,6 +31,8 @@ from order_details import order_details
 from recommendation_questions import recommendation_questions
 from recommendation_history import recommendation_history
 
+from admin_check import admin_check
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -88,7 +90,9 @@ def auth_logout_root():
 def recipe_view_root():
     ''' Return recipe information '''
     recipe_id = request.args.get('recipe_id')
-    return dumps(recipe_view(recipe_id))
+    return dumps(
+        recipe_view(recipe_id)
+    )
 
 @APP.route("/recipe/upload", methods=['POST'])
 def recipe_upload_root():
@@ -216,9 +220,11 @@ def cart_paypal_root():
 @APP.route("/cart/retrieve", methods=['GET'])
 def retrieve_cart_root():
     ''' Retrieve products and total from shopping cart'''
-    payload = request.get_json()
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     return dumps(
-        cart_retrieve(payload['token'])
+        cart_retrieve(token)
     )
 
 @APP.route("/cart/reward", methods=['POST'])
@@ -226,13 +232,15 @@ def rewards_cart_root():
     ''' Place order after checking reward points '''
     payload = request.get_json()
     token = payload['token']
+    firstname = payload['firstname']
+    lastname = payload['lastname']
     email = payload['email']
     phone = payload['phone']
     address = payload['address']
     state = payload['state']
     postcode = payload['postcode']
     return dumps(
-        cart_reward(token, email, phone, address, state, postcode)
+        cart_reward(token, firstname, lastname, email, phone, address, state, postcode)
     )
 
 ##### ORDER ROUTE #####
@@ -240,9 +248,10 @@ def rewards_cart_root():
 @APP.route("/order/view", methods=['GET'])
 def order_view_root():
     ''' Return order information '''
-    token = request.args.get('token')
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     order_id = request.args.get('order_id')
-
     return dumps(
         order_view(token, order_id)
     )
@@ -250,7 +259,9 @@ def order_view_root():
 @APP.route("/order/listall", methods=['GET'])
 def order_listall_root():
     ''' Return order list '''
-    token = request.args.get('token')
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     status = request.args.get('status')
     return dumps(
         order_listall(token, status)
@@ -259,7 +270,9 @@ def order_listall_root():
 @APP.route("/order/details", methods=['GET'])
 def order_details_root():
     ''' Return order details '''
-    token = request.args.get('token')
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     order_id = request.args.get('order_id')
     return dumps(
         order_details(token, order_id)
@@ -281,12 +294,12 @@ def order_update_root():
 @APP.route("/recommendation/questions", methods=['GET'])
 def recommendation_questions_root():
     ''' Recommend reqcipes according the answers to the survey '''
-    q1 = request.args.get('q1')
-    q2 = request.args.get('q2')
-    q3 = request.args.get('q3')
-    q4 = request.args.get('q4')
-    q5 = request.args.get('q5')
-    q6 = request.args.get('q6')
+    q1 = request.args.getlist('q1')
+    q2 = request.args.getlist('q2')
+    q3 = request.args.getlist('q3')
+    q4 = request.args.getlist('q4')
+    q5 = request.args.getlist('q5')
+    q6 = request.args.getlist('q6')
     return dumps(
         recommendation_questions(q1, q2, q3, q4, q5, q6)
     )
@@ -294,9 +307,23 @@ def recommendation_questions_root():
 @APP.route("/recommendation/history", methods=['GET'])
 def recommendation_history_root():
     ''' Recommend reqcipes according the account history '''
-    token = request.args.get('token')
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     return dumps(
         recommendation_history(token)
+    )
+
+##### Admin ROUTE #####
+
+@APP.route("/admin/check", methods=['GET'])
+def admin_check_root():
+    ''' Check if the user is an admin '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    return dumps(
+        admin_check(token)
     )
 
 if __name__ == "__main__":
