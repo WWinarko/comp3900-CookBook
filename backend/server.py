@@ -294,12 +294,12 @@ def order_update_root():
 @APP.route("/recommendation/questions", methods=['GET'])
 def recommendation_questions_root():
     ''' Recommend reqcipes according the answers to the survey '''
-    q1 = request.args.get('q1')
-    q2 = request.args.get('q2')
-    q3 = request.args.get('q3')
-    q4 = request.args.get('q4')
-    q5 = request.args.get('q5')
-    q6 = request.args.get('q6')
+    q1 = request.args.getlist('q1')
+    q2 = request.args.getlist('q2')
+    q3 = request.args.getlist('q3')
+    q4 = request.args.getlist('q4')
+    q5 = request.args.getlist('q5')
+    q6 = request.args.getlist('q6')
     return dumps(
         recommendation_questions(q1, q2, q3, q4, q5, q6)
     )
