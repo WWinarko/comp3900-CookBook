@@ -28,7 +28,9 @@ def cart_retrieve(token):
             product = products.find_one({"_id": ObjectId(ingredient["_id"])})
             subtotal = product["price"] * quantity
             total += subtotal
+            # print(product['_id'],toString())
             product_return = {
+                "id":str(product['_id']),
                 "title":product['title'],
                 "photo":product['photo'],
                 "description":product['description'],

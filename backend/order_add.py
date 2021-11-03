@@ -1,4 +1,3 @@
-from cart_retrieve import cart_retrieve
 from error import InputError
 import argument_checker
 import token_helper
@@ -6,6 +5,7 @@ import database
 import datetime
 import auth_helper
 import email_send
+import cart_clean
 
 def order_add(token, firstname, lastname, email, phone, address, state, postcode, details, total):
     ''' add order to the database '''
@@ -51,6 +51,9 @@ def order_add(token, firstname, lastname, email, phone, address, state, postcode
 
     # send email with order details to user
     email_send.email_send(token, order_id, email, firstname, address, state, postcode)
+
+    # clean shopping cart
+    cart_clean.cart_clean(token)
 
     # return order_id and token
     return {

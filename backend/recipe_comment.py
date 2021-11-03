@@ -18,10 +18,15 @@ def recipe_comment(token, comment, rating, recipe_id):
     time = datetime.datetime.strftime(datetime.datetime.now(), "%d/%m/%Y %H:%M"), 
 
     # Username and comment will be displayed and id is for reference
-    comment_added = (user['_id'], user['username'], rating, comment, time)
+    comment_added = {
+        "user_id":user['_id'], 
+        "username":user['username'], 
+        "rating":rating, 
+        "comment":comment, 
+        "time":time[0]
+    }
 
     # append to the comment list
-    comments = recipe['comment']
-    recipe['comment'] = comments.append(comment_added)
-    
-    recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"comment":recipe['comment']}})
+    comments = list(recipe['comment'])
+    comments.append(comment_added)
+    recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"comment":comments}})
