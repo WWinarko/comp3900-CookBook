@@ -9,7 +9,7 @@ function Login() {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
-    type: '',
+    type: 'error',
   });
 
   return (

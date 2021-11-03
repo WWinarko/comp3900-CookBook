@@ -31,7 +31,7 @@ function AddProduct() {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
-    type: '',
+    type: 'error',
   });
   const [productInfo, setProductInfo] = useState(
     {
