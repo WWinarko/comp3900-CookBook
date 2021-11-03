@@ -90,7 +90,9 @@ def auth_logout_root():
 def recipe_view_root():
     ''' Return recipe information '''
     recipe_id = request.args.get('recipe_id')
-    return dumps(recipe_view(recipe_id))
+    return dumps(
+        recipe_view(recipe_id)
+    )
 
 @APP.route("/recipe/upload", methods=['POST'])
 def recipe_upload_root():
