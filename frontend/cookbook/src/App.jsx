@@ -10,6 +10,7 @@ import Recipe from './pages/Recipe';
 import AddRecipe from './pages/AddRecipe';
 import AddProduct from './pages/AddProduct';
 import Cart from './pages/Cart';
+import Recommendation from './pages/Recommendation';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/recommendation">
+          <Recommendation />
         </Route>
         <Route exact path="/recipe/add">
           <AddRecipe />

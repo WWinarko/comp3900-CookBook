@@ -12,10 +12,12 @@ import AccountMenu from './AccountMenu';
 import {ReactComponent as ReactLogo} from '../assets/CookBook.svg';
 import {ReactComponent as CartIcon} from '../assets/shopping-cart.svg';
 import {ReactComponent as AddRecipeIcon} from '../assets/add-recipe.svg';
+import RecommendRoundedIcon from '@mui/icons-material/RecommendRounded';
 
 const useStyles = makeStyles(({
   root: {
-    height: '109px',
+    // height: '109px',
+    height: '10vh',
     position: 'fixed',
     backgroundColor: '#FE793D',
     width: '100%',
@@ -82,6 +84,10 @@ function Navbar() {
     }
   }
 
+  const handleRecommendation = () => {
+    history.push('/recommendation');
+  }
+
   return (
     <div className={classes.root} >
       <ReactLogo className={classes.logo} onClick={handleHome}/>
@@ -96,6 +102,7 @@ function Navbar() {
           direction="row"
           spacing={3}
           alignItems="center">
+          <RecommendRoundedIcon sx={{ fontSize: 47, alignSelf: 'center', color: '#ffffff'}} className={classes.icon} onClick={handleRecommendation}/>
           <Tooltip title="Add New Recipe" placement="bottom-end">
             <AddRecipeIcon onClick={handleAdd} className={classes.icon}/>
           </Tooltip>
