@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import { Divider, FormControl, MenuItem, Select, Skeleton } from "@mui/material";
 import RoundButton from "../RoundButton";
+import OrderDetailModal from "./OrderDetailModal";
 
 const useStyles = makeStyles({
   root: {
@@ -40,6 +41,7 @@ function OrderCard({ order, handleMove, admin }) {
   });
   const [loadingState, setLoadingState] = useState(true);
   const [status, setStatus] = useState('processing');
+  const [openModal, setOpenModal] = useState(false);
 
   React.useEffect(() => {
     setLoadingState(true);
@@ -92,6 +94,11 @@ function OrderCard({ order, handleMove, admin }) {
     })
   };
 
+  const handleModal = () => {
+    setOpenModal(!openModal);
+    console.log('aa');
+  }
+
   return (
     <div className={classes.root}>
       {loadingState
@@ -137,7 +144,7 @@ function OrderCard({ order, handleMove, admin }) {
                       <MenuItem value='delivered'>delivered</MenuItem>
                     </Select>
                   </FormControl>
-                : <div>{info.status}</div>
+                : <div style={{ color:'#89623D', paddingLeft: '15px', display: 'flex', alignItems: 'center', height: '50px' }}>{info.status}</div>
               }
               
             </div>
@@ -153,8 +160,9 @@ function OrderCard({ order, handleMove, admin }) {
               <div>{info.address}, {info.state} {info.postcode}</div>
             </div>
             <div className={classes.block} style={{  }}>
-              <RoundButton name="View"/>        
+              <RoundButton name="View" onClick={handleModal}/>        
             </div>
+            <OrderDetailModal open={openModal} onClose={handleModal} id={order}/>
           </>
       }
     </div>
