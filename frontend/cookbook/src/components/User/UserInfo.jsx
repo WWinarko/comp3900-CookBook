@@ -54,7 +54,7 @@ function UserInfo({ user }) {
           <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>{user.first_name} {user.last_name}</div>
           <div style={{ color:'#89623D', display: 'flex' }}>
             <p style={{ marginRight: '50px' }}>Followers: {user.follower}</p>
-            <p>Posts: {user.user_recipes_string.length}</p>
+            {/* <p>Posts: {user.user_recipes_string.length}</p> */}
           </div>
           {self
             ? <div style={{ color:'#89623D', display: 'flex' }}>
