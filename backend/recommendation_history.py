@@ -18,17 +18,18 @@ def recommendation_history(token):
 
     for recipe_id in recipe_bought:
         recipe = recipes.find_one({"_id":ObjectId(recipe_id)})
-        for label in recipe['label']:
+        for label in recipe['labels']:
             point_assign[label] = point_assign.get(label, 0) + 1
 
+    recipe_list = list(recipes.find())
     rank_recipe = []
-    for recipe_id in recipes:
-        recipe = recipes.find_one({"_id":ObjectId(recipe_id)})
+
+    for recipe in recipe_list:
         point = 0
-        for label in recipe['label']:
+        for label in recipe['labels']:
             point += point_assign.get(label, 0)
 
-        rank_recipe.append(point, recipe_id)
+        rank_recipe.append((point, recipe_id))
     rank_recipe.sort(key=lambda x:x[0])
 
     final_recipe = []
