@@ -49,7 +49,7 @@ function RecipeDescription({ recipe }) {
   }
 
   const handleProfile = () => {
-    history.push('/user/' + recipe.owner_username);
+    history.push('/user/' + recipe.owner_id);
   }
 
   return (

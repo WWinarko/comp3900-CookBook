@@ -33,6 +33,10 @@ from recommendation_history import recommendation_history
 
 from admin_check import admin_check
 
+from profile_view import profile_view
+
+from id_check import id_check
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -329,6 +333,26 @@ def admin_check_root():
     token = bearer.split()[1]  # YourTokenHere
     return dumps(
         admin_check(token)
+    )
+
+@APP.route("/id/check", methods=['GET'])
+def id_check_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    name = request.args.get('name')
+    return dumps(
+        id_check(token)
+    )
+
+@APP.route("/profile/view", methods=['GET'])
+def profile_view_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    user_id = request.args.get('user_id')
+    return dumps(
+        profile_view(token, user_id)
     )
 
 if __name__ == "__main__":
