@@ -95,3 +95,12 @@ Sunday 17/10/21
 Tuesday 26/10/21
     - meeting with backend
     - start profile view backend
+
+Thursday 26/10/21
+    - profile view backend
+
+Sunday 31/10/21
+    - start implement swagger with server
+
+Tuesday
+    - start working on final report
