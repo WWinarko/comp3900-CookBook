@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
-import { Divider, FormControl, MenuItem, Select } from "@mui/material";
+import { Divider, FormControl, MenuItem, Select, Skeleton } from "@mui/material";
 import RoundButton from "../RoundButton";
 
 const useStyles = makeStyles({
@@ -16,65 +16,155 @@ const useStyles = makeStyles({
     padding: '30px 30px 30px 30px',
 
     display: 'flex',
+    wordWrap: 'break-word',
   },
   block: {
     height: '150px',
-    marginLeft: '75px',
-    marginRight: '75px',
+    marginLeft: '30px',
+    marginRight: '30px',
   }
 })
 
-function OrderCard({ order, handleMove }) {
+function OrderCard({ order, handleMove, admin }) {
   const classes = useStyles();
+  const [info, setInfo] = useState({
+    'order_id': '',
+    'status': '',
+    'username': '',
+    'order_time': '',
+    'firstname':'',
+    'lastname': '',
+    'address': '',
+    'state': '',
+    'postcode': ''
+  });
+  const [loadingState, setLoadingState] = useState(true);
+  const [status, setStatus] = useState('processing');
+
+  React.useEffect(() => {
+    setLoadingState(true);
+  }, [order])
+
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/order/view?order_id=' + order, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      },
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setInfo(res);
+          setStatus(res.status);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setLoadingState(false);
+    })
+  }, [order])
 
   const handleChange = (event) => {
-    handleMove(order, event.target.value);
+    setStatus(event.target.value);
+    const body = {
+      'order_id': info.order_id,
+      'status': event.target.value,
+    }
+    fetch('http://127.0.0.1:5000/order/update', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).then((data) => {
+      if (data.status === 200) {
+        handleMove();
+      }
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setLoadingState(false);
+    })
   };
 
   return (
     <div className={classes.root}>
-      <div className={classes.block}>
-        <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order ID</div>
-        <div style={{ color:'#89623D', paddingLeft: '15px' }}>{order.id}</div>
-        <div style={{ height:'50px' }}></div>
-        <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order Status</div>
-        <FormControl sx={{ minWidth: 200 }}>
-          <Select
-            id="orderStatus"
-            value={order.status}
-            onChange={handleChange}
-            displayEmpty
-          >
-            <MenuItem value="">
-              <em>Not started</em>
-            </MenuItem>
-            <MenuItem value='Started'>Started</MenuItem>
-            <MenuItem value='Dispatched'>Dispatched</MenuItem>
-            <MenuItem value='Delivered'>Delivered</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem/>
-      <div className={classes.block}>
-        <div style={{ color:'#89623D', fontWeight:'bold' }}>User Name</div>
-        <div>test</div>
-        <div style={{ height:'20px' }}></div>
-        <div style={{ color:'#89623D', fontWeight:'bold' }}>Ordered</div>
-        <div>12 Sept 2012 12:20pm</div>
-        <div style={{ height:'20px' }}></div>
-        <div style={{ color:'#89623D', fontWeight:'bold' }}>Delivery address</div>
-        <div>abcabcabc</div>
-      </div>
-      <div className={classes.block}>
-        <RoundButton name="View Order"/>        
-      </div>
+      {loadingState
+        ? <>
+            <div className={classes.block} style={{ width: '350px' }} >
+              <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order ID</div>
+              <div style={{ color:'#89623D', paddingLeft: '15px' }}><Skeleton width="100%" /></div>
+              <div style={{ height:'50px' }}></div>
+              <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order Status</div>
+              <Skeleton height="50px" />
+            </div>
+            <Divider orientation="vertical" variant="middle" flexItem/>
+            <div className={classes.block} style={{ width: '300px' }}>
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>User Name</div>
+              <Skeleton width="100%" />
+              <div style={{ height:'20px' }}></div>
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>Ordered</div>
+              <Skeleton width="100%" />
+              <div style={{ height:'20px' }}></div>
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>Delivery address</div>
+              <Skeleton width="100%" />
+            </div>
+            <div className={classes.block} style={{ width: '10%' }}>
+              <RoundButton name="View"/>        
+            </div>
+          </>
+        : <>
+            <div className={classes.block} style={{ width: '350px' }} >
+              <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order ID</div>
+              <div style={{ color:'#89623D', paddingLeft: '15px' }}>{info.order_id}</div>
+              <div style={{ height:'50px' }}></div>
+              <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order Status</div>
+              {admin 
+                ? <FormControl sx={{ minWidth: 200 }}>
+                    <Select
+                      id="orderStatus"
+                      value={status}
+                      onChange={handleChange}
+                      displayEmpty
+                    >
+                      <MenuItem value='processing'>processing</MenuItem>
+                      <MenuItem value='dispatched'>dispatched</MenuItem>
+                      <MenuItem value='delivered'>delivered</MenuItem>
+                    </Select>
+                  </FormControl>
+                : <div>{info.status}</div>
+              }
+              
+            </div>
+            <Divider orientation="vertical" variant="middle" flexItem/>
+            <div className={classes.block} style={{ width: '300px' }}>
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>User Name</div>
+              <div>{info.username}</div>
+              <div style={{ height:'20px' }}></div>
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>Ordered</div>
+              <div>{info.order_time}</div>
+              <div style={{ height:'20px' }}></div>
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>Delivery address</div>
+              <div>{info.address}, {info.state} {info.postcode}</div>
+            </div>
+            <div className={classes.block} style={{  }}>
+              <RoundButton name="View"/>        
+            </div>
+          </>
+      }
     </div>
   )
 }
 
 OrderCard.propTypes = {
-  order: PropTypes.object,
+  order: PropTypes.string,
   handleMove: PropTypes.func,
+  admin: PropTypes.bool,
 }
 
 export default OrderCard;
