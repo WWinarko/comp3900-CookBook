@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, Box } from '@mui/material';
 
 import PreferenceDialog from '../components/PreferenceDialog';
 import Navbar from '../components/Navbar';
@@ -30,7 +30,9 @@ function Recommendation() {
         sx={{ backgroundColor:'#F9FAF9', height: '90vh' }}
       >
         <Typography component="h2" variant="h4" gutterBottom sx={{color: "#FE793D"}}>Recommendation</Typography>
-        <HomeRecipeContainer recipesData={recipes} />
+        <Box sx={{display: 'flex', flexWrap: 'wrap', width: '60%'}}>
+          <HomeRecipeContainer recipesData={recipes} />
+        </Box>
       </Stack>
     </>
   )

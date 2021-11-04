@@ -9,17 +9,18 @@ const useStyles = makeStyles(({
     height: '100%',
     display: 'flex',
     justifyContent: 'center',
+    flexWrap: 'wrap',
   },
 }));
 
 function HomeRecipeContainer({ recipesData }) {
   const classes = useStyles();
-
+  console.log(recipesData);
   return (
     <div className={classes.root}>
-      {recipesData.map((recipe, index) => {
+      {recipesData.map((recipe) => {
         return (
-          <HomeRecipeCard data={recipe} key={index} />
+          <HomeRecipeCard data={recipe} key={recipe} />
         )
       })}
     </div>
