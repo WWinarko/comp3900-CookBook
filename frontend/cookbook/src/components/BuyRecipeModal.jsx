@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import Drawer from '@mui/material/Drawer';
 import { Typography, Stack } from '@mui/material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+// import axios from 'axios';
 
 import BuyRecipeModalCard from './BuyRecipeModalCard';
 import RoundButton from './RoundButton';
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
 
 function BuyRecipeModal({ state, setState, recipe }) {
   const classes = useStyles();
+  console.log(recipe);
   const [loadingState, setLoadingState] = useState(true);
 
   React.useEffect(() => {
@@ -39,7 +41,11 @@ function BuyRecipeModal({ state, setState, recipe }) {
   }
 
   const addToCart = () => {
-    console.log('a');
+    // const token = localStorage.getItem('cookbook-token')
+    // axios.post('http://127.0.0.1:5000/cart/add', {
+    //   token,
+    // })
+    return;
   }
 
   return (

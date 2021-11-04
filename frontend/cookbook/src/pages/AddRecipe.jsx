@@ -39,6 +39,7 @@ function AddRecipe() {
       cookTime: 1,
       difficulty: 1,
       serves: 1,
+      label: '',
     });
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState([]);
@@ -52,6 +53,7 @@ function AddRecipe() {
   }
 
   const sendToBack = () => {
+    const labels = recipeInfo.label.split(',');
     const recipeBody = {
       token: localStorage.getItem('cookbook-token'),
       title: recipeInfo.recipeName,
@@ -63,6 +65,7 @@ function AddRecipe() {
       serves: recipeInfo.serves,
       ingredients: ingredients,
       steps: steps,
+      labels,
     }
     fetch('http://127.0.0.1:5000/recipe/upload', {
       method: 'POST',
@@ -116,8 +119,8 @@ function AddRecipe() {
             <NumberTextField id="difficulty" name="Difficulty" value={recipeInfo['difficulty']} setValue={setRecipeInfo} field="object" width="70px" min="1" max="5"/>
             <NumberTextField id="serves" name="Serves" value={recipeInfo['serves']} setValue={setRecipeInfo} field="object" width="70px" min="1" />
           </Stack>
+          <CustomTextField id="label" name="Labels" value={recipeInfo['label']} setValue={setRecipeInfo} field="object" width="781px"/>
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Ingredients</FormLabel>
-
 
           {ingredients.map((ingredient, index) => {
             return (
