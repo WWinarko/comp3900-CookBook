@@ -26,9 +26,9 @@ def recipe_view(recipe_id):
     comment = recipe['comment']
     labels = recipe['labels']
     
-    ingredient_string = []
-    for ingredient in ingredients:
-        ingredient_string.append(ingredient['ingredient'])
+    # ingredient_string = []
+    # for ingredient in ingredients:
+    #     ingredient_string.append(ingredient['ingredient'])
     steps = recipe['steps']
 
     users = database.get_users()
@@ -61,8 +61,8 @@ def recipe_view(recipe_id):
         'serves': serves,
         'owner_username': owner_username,
         'owner_follower': owner_follower,
-        'owner_photo': owner_photo,
-        'ingredient_string': ingredient_string,
+        'owner_photo': owner_photo, 
+        'ingredients': ingredients,
         'steps': steps,
         'labels': labels
     }
