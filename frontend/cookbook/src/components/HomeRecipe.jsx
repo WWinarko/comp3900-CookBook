@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
+import axios from 'axios';
 
 import RoundButton from './RoundButton';
 import HomeRecipeContainer from './HomeRecipeContainer';
@@ -8,7 +9,8 @@ import { CircularProgress } from '@mui/material';
 const useStyles = makeStyles(({
   root: {
     width: '100%',
-    alignItems: 'center',
+    flexDirection: 'column',
+    display: 'flex',
   },
   textHolder: {
     width: '31%',
@@ -42,6 +44,20 @@ const useStyles = makeStyles(({
     justifyContent: 'center',
     gap: '20px',
   },
+  recommendationContainer: {
+    width: '60%',
+    alignSelf: 'center',
+    backgroundColor: '#F9FAF9',
+
+    paddingTop: '20px',
+    paddingBottom: '20px',
+
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    gap: '20px',
+  },
 }));
 
 function HomeRecipe() {
@@ -51,6 +67,9 @@ function HomeRecipe() {
   const [recipes, setRecipes] = useState([]);
   const [done, setDone] = useState(false);
   const [loadingState, setLoadingState] = useState(true);
+  const [recommendation, setRecommendation] = useState([]);
+  const [recommendationCount, setRecommendationCount] = useState(0);
+  const [recommendationDone, setRecommendationDone] = useState(false);
 
   React.useEffect(() => {
     fetch('http://127.0.0.1:5000/recipe/listall', {
@@ -73,6 +92,21 @@ function HomeRecipe() {
     })
   }, [])
 
+ React.useEffect(() => {
+    const token = localStorage.getItem('cookbook-token');
+    console.log(token);
+    if (token) {
+      const auth = {"Authorization": `Bearer ${token}`};
+      axios.get('http://127.0.0.1:5000/recommendation/history', {headers: auth})
+      .then((res) => {
+        setRecommendation(res.data['recipe_ids']);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }, []);
+
   React.useEffect(() => {
     setRecipes([allRecipes.slice(0, 4)]);
   }, [allRecipes]);
@@ -85,6 +119,13 @@ function HomeRecipe() {
     
     if (allRecipes.length < (count + 1) * 4) {
       setDone(!done);
+    }
+  }
+  const showMoreRecommendation = () => {
+    setRecommendationCount(recommendationCount + 1);
+    
+    if (recommendation.length < (recommendationCount + 1) * 4) {
+      setRecommendationDone(!done);
     }
   }
 
@@ -106,6 +147,21 @@ function HomeRecipe() {
           {done
             ? <></>
             : <RoundButton name='Show More' onClick={showMore} />
+          }
+        </div>
+      }
+      <div className={classes.textHolder}>
+        <div className={classes.text}>Recommendation</div>
+      </div>
+      {loadingState
+        ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress />
+          </div>
+        : <div className={classes.recommendationContainer}>
+            <HomeRecipeContainer recipesData={recommendation.slice(0, recommendationCount*4+4)}/>
+          {recommendationDone
+            ? <></>
+            : <RoundButton name='Show More' onClick={showMoreRecommendation} />
           }
         </div>
       }

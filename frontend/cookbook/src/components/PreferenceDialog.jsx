@@ -99,7 +99,7 @@ function PreferenceDialog({open, setOpen, setRecipes}) {
     const qList = [];
     for (const [key, value] of Object.entries(qObject)) {
       if (value) {
-        qList.push(key);
+        qList.push(key.toLowerCase());
       }
     }
     console.log(qList);
@@ -119,7 +119,7 @@ function PreferenceDialog({open, setOpen, setRecipes}) {
     axios.get('http://127.0.0.1:5000/recommendation/questions', {
       params: qq,
       paramsSerializer: function (params) {
-        return Qs.stringify(params, {arrayFormat: 'brackets'})
+        return Qs.stringify(params, {  arrayFormat: 'repeat' })
       },
     })
         .then((res) => {       
