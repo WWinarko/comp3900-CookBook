@@ -36,6 +36,8 @@ def order_view(token, order_id):
         'state': order['state'],
         'postcode': order['postcode']
     }
+
+# order_view("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDQgMTc6NTc6NTcuNTk3MTk3IiwicmFuZG9tbnVtYmVyIjoiMC4yNTgzNjkxMzU2NTk5OTUifQ.DPov7O0dphMygmiQKvPLhI-KxAYEpnSG8v4BuL0zYSY", '61837e39d78ac7c586089321')
     
     
 

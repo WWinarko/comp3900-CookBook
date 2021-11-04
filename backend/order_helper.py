@@ -13,7 +13,7 @@ def check_permission(token, order_id, users, orders):
     order = orders.find_one({"_id":order_id})
     
     # The token owner should be either admin or the user that made the order
-    if token_helper.check_admin(token, users) or order['user_id'] == user["_id"]:
+    if token_helper.check_admin(token, users) or order['user_id'] == str(user["_id"]):
         return True
     return False
     

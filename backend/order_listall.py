@@ -27,14 +27,17 @@ def order_listall(token, status):
         # iterate over the orders
         for order in order_list:
             # status and permission check
-            if (order['user_id'] == str(user['_id']) and 
+            if ((order['user_id'] == str(user['_id'])) and 
                 (status == 'all' or order['status'] == status)):
                 order_listall.append(str(order['_id']))
     
+    print(order_listall)
     # return a list of order_id accroding the the condition given
     return {
         "order_list":order_listall
     }
+
+order_listall("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDQgMTc6NTc6NTcuNTk3MTk3IiwicmFuZG9tbnVtYmVyIjoiMC4yNTgzNjkxMzU2NTk5OTUifQ.DPov7O0dphMygmiQKvPLhI-KxAYEpnSG8v4BuL0zYSY", "processing")
 
     
     
