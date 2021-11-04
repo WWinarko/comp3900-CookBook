@@ -67,14 +67,17 @@ function HomeRecipeCard({ data }) {
   const history = useHistory();
   const [recipeData, setRecipeData] = useState({});
   const [loadingState, setLoadingState] = useState(true);
+  const [rating, setRating] = useState(2);
 
   React.useEffect(() => {
     fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + data, {
       method: 'GET',
+      
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {
           setRecipeData(res);
+          setRating(res.rating);
         })
       }
     }).catch((err) => {
@@ -94,18 +97,20 @@ function HomeRecipeCard({ data }) {
         ? <div style={{ height: '207px', display: 'flex', alignItems: 'center' }}>
             <CircularProgress />
           </div>
-        : <div onClick={handleRecipe}>
-            <img src={recipeData.photo} alt='thumbnail' className={classes.thumbnail} />
-            <div className={classes.title}>{recipeData.title}</div>
-            <div className={classes.desc}>
-              <div style={{ marginRight: '5px' }}>Prep {recipeData.preptime} min</div>
-              <div style={{ marginLeft: '5px' }}>Cook {recipeData.cooktime} min</div>
+        : <a href={'/recipe/' + data} style={{ display:'block', textDecoration: 'none', color:'#000000' }}>
+            <div onClick={handleRecipe}>
+              <img src={recipeData.photo} alt='thumbnail' className={classes.thumbnail} />
+              <div className={classes.title}>{recipeData.title}</div>
+              <div className={classes.desc}>
+                <div style={{ marginRight: '5px' }}>Prep {recipeData.preptime} min</div>
+                <div style={{ marginLeft: '5px' }}>Cook {recipeData.cooktime} min</div>
+              </div>
+              <div>
+                <Rating name="read-only" value={rating} readOnly />
+              </div>
+              <div className={classes.author}>{recipeData.owner_username}</div>
             </div>
-            <div>
-              <Rating name="read-only" value={recipeData.rating} readOnly />
-            </div>
-            <div className={classes.author}>{recipeData.owner_username}</div>
-          </div>
+          </a>
       }
     </div>
   )

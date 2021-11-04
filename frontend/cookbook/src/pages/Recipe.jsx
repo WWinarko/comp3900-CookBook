@@ -3,11 +3,11 @@ import { CircularProgress, Stack } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
-import RecipeIngredients from '../components/RecipeIngredients';
-import RecipeDescription from '../components/RecipeDescription';
-import RecipeReview from '../components/RecipeReview';
-import RecipeRecommendation from '../components/RecipeRecommendation';
-import BuyRecipeModal from '../components/BuyRecipeModal';
+import RecipeIngredients from '../components/Recipe/RecipeIngredients';
+import RecipeDescription from '../components/Recipe/RecipeDescription';
+import RecipeReview from '../components/Recipe/RecipeReview';
+import RecipeRecommendation from '../components/Recipe/RecipeRecommendation';
+import BuyRecipeModal from '../components/Recipe/BuyRecipeModal';
 
 function Recipe() {
   const location = useLocation();
@@ -22,6 +22,7 @@ function Recipe() {
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {
+          console.log(res);
           setRecipe(res);
         })
       }
@@ -56,7 +57,6 @@ function Recipe() {
                 sx={{ width: '50%' }}
               >
                 <RecipeIngredients setState={setState} recipe={recipe} />
-                {state}
               </Stack>
               <Stack
                 sx={{ width: '50%' }}
@@ -69,7 +69,7 @@ function Recipe() {
               sx={{ width:'100%' }}
               pt={10}
             >
-              <RecipeReview />
+              <RecipeReview id={recipeId}/>
             </Stack>
 
             <Stack

@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import Divider from '@mui/material/Divider';
-import { Stack, Rating } from '@mui/material';
+import { Stack, Rating, Avatar } from '@mui/material';
 
-import RoundButton from './RoundButton';
+import RoundButton from '../RoundButton';
 import RecipeStepsContainer from './RecipeStepsContainer';
 
 const useStyles = makeStyles({
   root: {
     width: '75%',
   },
-  circle: {
-    borderRadius: '50%',
+  profile: {
     height: '80px',
     width: '80px',
     
-    backgroundColor: 'red',
-
     display: 'inline-block',
     margin: '20px',
+    cursor: 'pointer',
   },
   preptime: {
     width: '80%',
@@ -34,6 +33,7 @@ const useStyles = makeStyles({
 
 function RecipeDescription({ recipe }) {
   const classes = useStyles();
+  const history = useHistory();
   const [loadingState, setLoadingState] = useState(true);
 
   React.useEffect(() => {
@@ -46,6 +46,10 @@ function RecipeDescription({ recipe }) {
   
   const handleFollow = () => {
     console.log('a');
+  }
+
+  const handleProfile = () => {
+    history.push('/user/' + recipe.owner_id);
   }
 
   return (
@@ -92,7 +96,7 @@ function RecipeDescription({ recipe }) {
                 direction="row"
                 alignItems="center"
               >
-                <img src="https://ihatetomatoes.net/demos/_rw/01-real-estate/tn_property01.jpg" className={classes.circle}/>
+                <Avatar alt={recipe.owner_username} src={recipe.photo} sx={{ width: 70 ,height: 70 }} className={classes.profile} onClick={handleProfile}/>
                 <Stack
                 >
                   <p style={{ paddingTop:'10%', margin:'0', fontWeight: 'bold' }}>{recipe.owner_username}</p>

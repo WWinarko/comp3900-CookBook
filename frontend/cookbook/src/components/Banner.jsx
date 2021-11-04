@@ -83,7 +83,7 @@ function Banner ({ bannerdata }) {
 }
 
 Banner.propTypes = {
-  bannerdata: PropTypes.Array
+  bannerdata: PropTypes.array,
 }
 
 export default Banner;

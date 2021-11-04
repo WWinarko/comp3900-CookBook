@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 
 import Divider from '@mui/material/Divider';
 
-import image from '../assets/cheese.png';
+import image from '../../assets/cheese.png';
 
 const useStyles = makeStyles({
   root: {

@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import image from '../assets/cheese.png';
 
 
-function IngredientCard({ name }) {
+function IngredientCard({ ingredient, handleRemove }) {
   return (
     <Box mt={2} sx={{width: '781px'}}>
-      <Typography component="p" sx={{color: '#9D9D9D', fontWeight: '600'}}>{name}</Typography>  
+      <Typography component="p" sx={{color: '#9D9D9D', fontWeight: '600'}}>{ingredient.ingredient}</Typography>  
       <Card sx={{width: '100%', marginTop: '10px', display: 'flex', flexDirection:'row'}}>
         <CardMedia
               component="img"
@@ -26,8 +26,8 @@ function IngredientCard({ name }) {
           </Stack>
         </CardContent>
         <CardActions sx={{display: 'flex', flexDirection:'row', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
-          <Button sx={{color: '#FE793D', textTransform: 'none', fontSize: '18px'}}>Edit</Button>
-          <Button sx={{color: '#FE793D', textTransform: 'none', fontSize: '18px'}}>Remove</Button>
+          {/* <Button sx={{color: '#FE793D', textTransform: 'none', fontSize: '18px'}}>Edit</Button> */}
+          <Button sx={{color: '#FE793D', textTransform: 'none', fontSize: '18px'}} onClick={() => handleRemove(ingredient)} >Remove</Button>
         </CardActions>
       </Card>
     </Box>
@@ -35,7 +35,8 @@ function IngredientCard({ name }) {
 }
 
 IngredientCard.propTypes = {
-  name: PropTypes.string
+  ingredient: PropTypes.object,
+  handleRemove: PropTypes.func,
 }
 
 export default IngredientCard;

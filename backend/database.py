@@ -27,3 +27,10 @@ def get_carts():
     db = client.CookBook
     carts = db.Cart
     return carts
+
+def get_orders():
+    cluster = "mongodb+srv://cookbookla:CookBook@cluster0.ajioi.mongodb.net/CookBook?ssl=true&ssl_cert_reqs=CERT_NONE"
+    client = MongoClient(cluster)
+    db = client.CookBook
+    orders = db.Order
+    return orders

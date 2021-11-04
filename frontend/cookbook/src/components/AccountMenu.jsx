@@ -15,7 +15,7 @@ function AccountMenu({anchorEl, open, onClose, onClick}) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
-    type: '',
+    type: 'error',
   });
 
   const handleLogout = () => {
@@ -46,6 +46,14 @@ function AccountMenu({anchorEl, open, onClose, onClick}) {
   }
   const handleAddProduct = () => {
     history.push('/product/add');
+  }
+
+  const handleProfile = () => {
+    console.log('push /user/selfid');
+  }
+
+  const handleAccount = () => {
+    history.push('/profile');
   }
   return (
     <>
@@ -86,6 +94,12 @@ function AccountMenu({anchorEl, open, onClose, onClick}) {
       >
         <MenuItem onClick={handleAddProduct}>
           Add product
+        </MenuItem>
+        <MenuItem onClick={handleProfile}>
+          Profile
+        </MenuItem>
+        <MenuItem onClick={handleAccount}>
+          Account
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>

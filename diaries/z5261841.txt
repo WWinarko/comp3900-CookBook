@@ -25,3 +25,9 @@ Week 4
 Week 5
 - Integrate frontend and backend
 - Finalize all the components in homepage and recipe page to complete acceptance criteria in sprint 1 user stories
+
+Week 7
+- Created page for admin to see orders, recipe, product and sales.
+- Created order, recipe cards for the page above.
+- Fix add steps in add recipe.
+- Added comments section

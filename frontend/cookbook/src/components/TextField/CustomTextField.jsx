@@ -43,7 +43,7 @@ function CustomTextField(props) {
   };
 
   return (
-    <FormControl sx={{marginTop: '15px'}}>
+    <FormControl sx={{marginTop: '15px', width: '100%'}}>
         <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500' }} required={required}>{name}</FormLabel>
         <OutlinedInput id={id} value={value} onChange={handleChange} required sx={{borderRadius: '3px', width: width, margin: '10px 0', backgroundColor:'#ffffff', color: '#000000'}} type={type ? type : 'string'} multiline={multiline} minRows={5} endAdornment={endAdornment}/>
     </FormControl>

@@ -8,7 +8,7 @@ import NumberTextField from "../components/TextField/NumberTextField";
 import Navbar from '../components/Navbar';
 import FileTextField from "../components/TextField/FileTextField";
 import IngredientCard from "../components/IngredientCard";
-import RecipeStepsContainer from '../components/RecipeStepsContainer';
+import RecipeStepsContainer from '../components/Recipe/RecipeStepsContainer';
 import AddStep from "../components/AddStep";
 import RoundButton from "../components/RoundButton";
 import AddIngredientModal from "../components/AddIngredientModal";
@@ -39,6 +39,7 @@ function AddRecipe() {
       cookTime: 1,
       difficulty: 1,
       serves: 1,
+      label: '',
     });
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState([]);
@@ -52,6 +53,7 @@ function AddRecipe() {
   }
 
   const sendToBack = () => {
+    const labels = recipeInfo.label.split(',');
     const recipeBody = {
       token: localStorage.getItem('cookbook-token'),
       title: recipeInfo.recipeName,
@@ -63,6 +65,7 @@ function AddRecipe() {
       serves: recipeInfo.serves,
       ingredients: ingredients,
       steps: steps,
+      labels,
     }
     fetch('http://127.0.0.1:5000/recipe/upload', {
       method: 'POST',
@@ -90,6 +93,13 @@ function AddRecipe() {
   //   console.log('aa');
   // }, [remove])
 
+  const handleRemoveIngredient = (item) => {
+    setIngredients(ingredients.filter((i) => i !== item));
+  }
+
+  const handleRemoveStep = (item) => {
+    setIngredients(ingredients.filter((i) => i !== item));
+  }
   return (
     <>
       <Navbar />
@@ -116,12 +126,12 @@ function AddRecipe() {
             <NumberTextField id="difficulty" name="Difficulty" value={recipeInfo['difficulty']} setValue={setRecipeInfo} field="object" width="70px" min="1" max="5"/>
             <NumberTextField id="serves" name="Serves" value={recipeInfo['serves']} setValue={setRecipeInfo} field="object" width="70px" min="1" />
           </Stack>
+          <CustomTextField id="label" name="Labels" value={recipeInfo['label']} setValue={setRecipeInfo} field="object" width="781px"/>
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Ingredients</FormLabel>
-
 
           {ingredients.map((ingredient, index) => {
             return (
-              <IngredientCard name={ingredient.ingredient} key={index} />
+              <IngredientCard ingredient={ingredient} handleRemove={handleRemoveIngredient} key={index} />
             )
           })}
 
@@ -132,7 +142,7 @@ function AddRecipe() {
 
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Steps</FormLabel>
           <div style={{ width: '100%' }}>
-            <RecipeStepsContainer recipesData={steps} />
+            <RecipeStepsContainer recipesData={steps} handleRemove={handleRemoveStep} />
             {newStep ? <AddStep steps={steps} setSteps={setSteps} newStep={newStep} setNewStep={() => setNewStep(false)}/> : <AddButton onClick={handleNewStep}> Add step </AddButton>}
           </div>
         </Stack>

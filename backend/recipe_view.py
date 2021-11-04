@@ -7,14 +7,11 @@ from bson.objectid import ObjectId
 def recipe_view(recipe_id):
     ''' view a recipe '''
     recipes = database.get_recipes()
-    recipe_id_new = ObjectId(recipe_id)
     # check if the recipe exists
-    if not recipe_helper.check_recipe_exist(recipe_id_new, recipes):
+    if not recipe_helper.check_recipe_exist(ObjectId(recipe_id), recipes):
         raise AccessError(description="recipe does not exist")
 
-
-
-    recipe = recipes.find_one({"_id":recipe_id_new})
+    recipe = recipes.find_one({"_id":ObjectId(recipe_id)})
 
     title = recipe['title']
     intro = recipe['intro']
@@ -26,9 +23,13 @@ def recipe_view(recipe_id):
     preptime = recipe['preptime']
     serves = recipe['serves']
     ingredients = recipe['ingredients']
-    ingredient_string = []
-    for ingredient in ingredients:
-        ingredient_string.append(ingredient['ingredient'])
+    comment = recipe['comment']
+    labels = recipe['labels']
+    owner_id = recipe['owner_id']
+    
+    # ingredient_string = []
+    # for ingredient in ingredients:
+    #     ingredient_string.append(ingredient['ingredient'])
     steps = recipe['steps']
 
     users = database.get_users()
@@ -37,7 +38,6 @@ def recipe_view(recipe_id):
     # check if the user exists
     if not auth_helper.check_user_id(ObjectId(owner_id), users):
         raise AccessError(description="user does not exist")
-    
     owner = users.find_one({"_id":ObjectId(owner_id)})
     
     # if the owner is admin no follower numbershows up
@@ -49,7 +49,6 @@ def recipe_view(recipe_id):
         owner_username = owner['username']
         owner_follower = owner['follower']
         owner_photo = owner['photo']
-
     # return the recipe details
     return {
         'title': title,
@@ -63,13 +62,15 @@ def recipe_view(recipe_id):
         'serves': serves,
         'owner_username': owner_username,
         'owner_follower': owner_follower,
-        'owner_photo': owner_photo,
-        'ingredient_string': ingredient_string,
-        'steps': steps
+        'owner_photo': owner_photo, 
+        'ingredients': ingredients,
+        'steps': steps,
+        'labels': labels,
+        'owner_id': owner_id
     }
 
 # recipes = database.get_recipes()
-# recipe = recipes.find_one({"title":"testing"})
+# recipe = recipes.find_one({"title":"yummy chicken"})
 # print(recipe_view(recipe['_id']))
 
 '''

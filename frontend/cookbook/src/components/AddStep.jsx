@@ -13,14 +13,21 @@ function AddStep({ steps, setSteps, setNewStep }) {
       setSteps(tempSteps);
     }
     setNewStep();
-
   }
+
+  const handleCancel = () => {
+    setNewStep();
+  }
+
   return (
     <>
     <div>
       <CustomTextField id="newStep" name="New Step" multiline value={step} setValue={setStep} width="781px"/>
     </div>
-    <AddButton onClick={handleSave}>Save</AddButton>
+    <div style={{ display: 'flex', gap: '10px' }}>
+      <AddButton onClick={handleSave}>Save</AddButton>
+      <AddButton onClick={handleCancel}>Cancel</AddButton>
+    </div>
     </>
   )
 }

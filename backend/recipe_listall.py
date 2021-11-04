@@ -8,7 +8,7 @@ def recipe_listall():
     recipe_list = []
     for recipe in sorted_list:
         recipe_list.append(str(recipe['_id']))
-        recipe_list.reverse()
+    recipe_list.reverse()
     return {
         "recipe_list":recipe_list
     }
