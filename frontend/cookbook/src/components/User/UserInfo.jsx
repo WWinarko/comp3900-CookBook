@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import { Avatar, Divider, Rating } from '@mui/material';
 
@@ -27,25 +28,41 @@ const useStyles = makeStyles({
   },
 })
 
-function UserInfo() {
+function UserInfo({ user }) {
   const classes = useStyles();
+  const [self, setSelf] = useState(false);
+
+  React.useEffect(() => {
+    setSelf(false);
+    if (user.email !== '') {
+      setSelf(true);
+    }
+  }, [])
+  
+
   return (
     <div className={classes.root}>
       <div className={classes.container}>
         <div style={{ marginRight: '10%' }}> 
           <Avatar 
-          alt="Profile Picture"
-          src="a"
+          alt={user.first_name}
+          src={user.photo}
           sx={{ width:'125px', height: '125px' }}
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%' }}>
-          <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>User</div>
+          <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>{user.first_name} {user.last_name}</div>
           <div style={{ color:'#89623D', display: 'flex' }}>
-            <p style={{ marginRight: '50px' }}>Followers: 110</p>
-            <p>Posts: 123</p>
+            <p style={{ marginRight: '50px' }}>Followers: {user.follower}</p>
+            <p>Posts: {user.user_recipes_string.length}</p>
           </div>
-          <SquareButton name="Follow" />
+          {self
+            ? <div style={{ color:'#89623D', display: 'flex' }}>
+                <p style={{ marginRight: '50px' }}>Email: {user.email}</p>
+                <p>Phone: {user.phone}</p>
+              </div>
+            : <SquareButton name="Follow" />
+          }
         </div>
       </div>
       <Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor:'#FE793D', }}/>
@@ -62,6 +79,10 @@ function UserInfo() {
       </div>
     </div>
   )
+}
+
+UserInfo.propTypes = {
+  user: PropTypes.object,
 }
 
 export default UserInfo;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 
-import { CircularProgress } from '@mui/material';
 import HomeRecipeContainer from '../HomeRecipeContainer';
 import RoundButton from '../RoundButton';
 
@@ -33,29 +33,11 @@ const useStyles = makeStyles(({
   },
 }));
 
-function UserRecipe() {
+function UserRecipe({ allRecipes }) {
   const classes = useStyles();
   const [count, setCount] = useState(1);
-  const [allRecipes, setAllRecipes] = useState([])
   const [recipes, setRecipes] = useState([]);
   const [done, setDone] = useState(false);
-  const [loadingState, setLoadingState] = useState(true);
-
-  React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/recipe/listall', {
-      method: 'GET',
-    }).then((data) => {
-      if (data.status === 200) {
-        data.json().then((res) => {
-          setAllRecipes(res.recipe_list);
-        })
-      }
-    }).catch((err) => {
-      console.log(err);
-    }).finally(() => {
-      setLoadingState(false);
-    })
-  }, [])
 
   React.useEffect(() => {
     setRecipes([allRecipes.slice(0, 4)]);
@@ -76,24 +58,25 @@ function UserRecipe() {
     <div className={classes.root}>
       <p className={classes.header}>Recipes</p>
 
-      {loadingState
-        ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress />
-          </div>
-        : <div className={classes.container}>
-          {recipes.map((recipe, index) => {
-            return (
-              <HomeRecipeContainer recipesData={recipe} key={index} />
-            )
-          })}
-          {done
-            ? <></>
-            : <RoundButton name='Show More' onClick={showMore} />
-          }
-        </div>
-      }
+
+      <div className={classes.container}>
+        {recipes.map((recipe, index) => {
+          return (
+            <HomeRecipeContainer recipesData={recipe} key={index} />
+          )
+        })}
+        {done
+          ? <></>
+          : <RoundButton name='Show More' onClick={showMore} />
+        }
+      </div>
+      
     </div>
   )
+}
+
+UserRecipe.propTypes = {
+  allRecipes: PropTypes.array,
 }
 
 export default UserRecipe;
