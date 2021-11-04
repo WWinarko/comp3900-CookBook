@@ -1,9 +1,8 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import { makeStyles, styled } from '@mui/styles';
-import OrderCard from "./OrderCard";
-import { Pagination, ToggleButton, ToggleButtonGroup, } from "@mui/material";
-
-import { OrderData } from "./TempData";
+import { CircularProgress, Pagination, ToggleButton, ToggleButtonGroup, } from "@mui/material";
+import DashboardContainer from "./DashboardContainer";
 
 const useStyles = makeStyles({
   root: {
@@ -92,14 +91,19 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup) ({
   }
 })
 
-function OrderDashboard() {
+function OrderDashboard({ admin }) {
   const classes = useStyles();
-  const [lst, setLst] = useState(OrderData.filter((i) => i.status === ''));
+  const [allOrder, setAllOrder] = useState([]);
+  const [order, setOrder] = useState([]);
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState('');
+  const [loadingState, setLoadingState] = useState(true);
+  
 
   React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/recipe/listall', {
+    setAllOrder([]);
+    setOrder([]);
+    fetch('http://127.0.0.1:5000/order/listall?status=' + filter, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
@@ -109,26 +113,49 @@ function OrderDashboard() {
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {
-          console.log(res)
+          setAllOrder(res.order_list);
         })
       }
     }).catch((err) => {
       console.log(err);
     }).finally(() => {
-      console.log('a')
+      setLoadingState(false);
     })
-  }, [])
+  }, [filter])
 
   const handlePage = (event, value) => {
     setPage(value);
   }
 
-  const handleMove = (item, newStatus) => {
-    const index = lst.indexOf(item);
-    if (index !== -1) {
-      lst[index].status = newStatus;
-    }
-    setLst(OrderData.filter((i) => i.status === filter));
+  React.useEffect(() => {
+    const newOrder = allOrder.slice((page - 1) * 3, page * 3);
+    setOrder(newOrder);
+  }, [allOrder])
+
+  React.useEffect(() => {
+    const newOrder = allOrder.slice((page - 1) * 3, page * 3);
+    setOrder(newOrder);
+  }, [page])
+
+  const handleMove = () => {
+    fetch('http://127.0.0.1:5000/order/listall?status=' + filter, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      },
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setAllOrder(res.order_list);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setLoadingState(false);
+    })
   }
 
   const handleFilter = (event, name) => {
@@ -137,61 +164,55 @@ function OrderDashboard() {
     setPage(1);
   }
 
-  React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/order/view?token=' + localStorage.getItem("cookbook-token") + '&status=' + filter, {
-      method: 'GET',
-    }).then((data) => {
-      if (data.status === 200) {
-        data.json().then((res) => {
-          console.log(res);
-        })
-      }
-    })
-  }, [filter])
-
   return (
     <>
-      <div className={classes.filter}>
-        <StyledToggleButtonGroup
-          orientation="horizontal"
-          exclusive
-          sx={{ width:'100%' }}
-          value={filter}
-          onChange={handleFilter}
-        >
-          <ToggleButton value="Processing">
-            Processing
-          </ToggleButton>
+      {loadingState
+        ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress
+            />
+          </div>
+        : <>
+            <div className={classes.filter}>
+              <StyledToggleButtonGroup
+                orientation="horizontal"
+                exclusive
+                sx={{ width:'100%' }}
+                value={filter}
+                onChange={handleFilter}
+              >
+                <ToggleButton value="processing">
+                  Processing
+                </ToggleButton>
 
-          <ToggleButton value="Dispatched">
-            Dispatched
-          </ToggleButton>
+                <ToggleButton value="dispatched">
+                  Dispatched
+                </ToggleButton>
 
-          <ToggleButton value="Delivered">
-            Delivered
-          </ToggleButton>
+                <ToggleButton value="delivered">
+                  Delivered
+                </ToggleButton>
 
-        </StyledToggleButtonGroup>
-        
-      </div>
-      <div className={classes.title}>
-        Orders
-      </div>
-      <div className={classes.total}>
-        Total: {lst.length}
-      </div>
-      <div className={classes.root}>
-        <div className={classes.container}>
-          {lst.slice((page - 1) * 3, (page * 3)).map((order, index) => {
-            return (
-              <OrderCard order={order} handleMove={handleMove} key={index} />
-            )
-          })}
-        </div>
-        <Pagination count={10} page={page} onChange={handlePage} />
-      </div>
+              </StyledToggleButtonGroup>
+              
+            </div>
+            <div className={classes.title}>
+              Orders
+            </div>
+            <div className={classes.total}>
+              Total: {allOrder.length}
+            </div>
+            <div className={classes.root}>
+              <DashboardContainer data={order} handleMove={handleMove} admin={admin}/>
+              <Pagination count={Math.ceil(allOrder.length / 3)} page={page} onChange={handlePage} />
+            </div>
+          </>
+      }
     </>
   )
+}
+
+OrderDashboard.propTypes = {
+  admin: PropTypes.bool,
 }
 
 export default OrderDashboard;

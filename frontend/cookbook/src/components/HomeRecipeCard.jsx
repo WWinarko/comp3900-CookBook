@@ -67,6 +67,7 @@ function HomeRecipeCard({ data }) {
   const history = useHistory();
   const [recipeData, setRecipeData] = useState({});
   const [loadingState, setLoadingState] = useState(true);
+  const [rating, setRating] = useState(2);
 
   React.useEffect(() => {
     fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + data, {
@@ -76,6 +77,7 @@ function HomeRecipeCard({ data }) {
       if (data.status === 200) {
         data.json().then((res) => {
           setRecipeData(res);
+          setRating(res.rating);
         })
       }
     }).catch((err) => {
@@ -87,7 +89,6 @@ function HomeRecipeCard({ data }) {
 
   const handleRecipe = () => {
     history.push('/recipe/' + data);
-    console.log('aaaa');
   }
 
   return (
@@ -105,7 +106,7 @@ function HomeRecipeCard({ data }) {
                 <div style={{ marginLeft: '5px' }}>Cook {recipeData.cooktime} min</div>
               </div>
               <div>
-                <Rating name="read-only" value={recipeData.rating} readOnly />
+                <Rating name="read-only" value={rating} readOnly />
               </div>
               <div className={classes.author}>{recipeData.owner_username}</div>
             </div>

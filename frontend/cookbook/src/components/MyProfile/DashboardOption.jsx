@@ -37,7 +37,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup) ({
 })
 
 
-function DashboardOption({ value, callback }) {
+function DashboardOption({ value, callback, admin }) {
   const classes = useStyles();
 
   return (
@@ -62,17 +62,19 @@ function DashboardOption({ value, callback }) {
             Recipes
             <ArrowForwardIosIcon fontSize='inherit' />
           </ToggleButton>
+          {admin &&
+            <ToggleButton value="PRODUCTS">
+              Products
+              <ArrowForwardIosIcon fontSize='inherit' />
+            </ToggleButton>
+          }
 
-          <ToggleButton value="PRODUCTS">
-            Products
-            <ArrowForwardIosIcon fontSize='inherit' />
-          </ToggleButton>
-
-          <ToggleButton value="SALES">
-            Sales
-            <ArrowForwardIosIcon fontSize='inherit' />
-          </ToggleButton>
-
+          {admin &&
+            <ToggleButton value="SALES">
+              Sales
+              <ArrowForwardIosIcon fontSize='inherit' />
+            </ToggleButton>
+          }
         </StyledToggleButtonGroup>
     </div>
   )
@@ -81,6 +83,7 @@ function DashboardOption({ value, callback }) {
 DashboardOption.propTypes = {
   value: PropTypes.string,
   callback: PropTypes.func,
+  admin: PropTypes.bool,
 }
 
 

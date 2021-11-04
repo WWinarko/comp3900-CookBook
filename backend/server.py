@@ -284,8 +284,10 @@ def order_details_root():
 @APP.route("/order/update", methods=['POST'])
 def order_update_root():
     ''' Update order status '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     payload = request.get_json()
-    token = payload['token']
     order_id = payload['order_id']
     status = payload['status']
     return dumps(
