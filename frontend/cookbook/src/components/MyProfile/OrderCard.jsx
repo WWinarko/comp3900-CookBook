@@ -159,10 +159,15 @@ function OrderCard({ order, handleMove, admin }) {
               <div style={{ color:'#89623D', fontWeight:'bold' }}>Delivery address</div>
               <div>{info.address}, {info.state} {info.postcode}</div>
             </div>
-            <div className={classes.block} style={{  }}>
-              <RoundButton name="View" onClick={handleModal}/>        
-            </div>
-            <OrderDetailModal open={openModal} onClose={handleModal} id={order}/>
+            {admin &&
+              <>
+                <div className={classes.block} style={{  }}>
+                  <RoundButton name="View" onClick={handleModal}/>        
+                </div>
+                <OrderDetailModal open={openModal} onClose={handleModal} id={order}/>
+              </>
+            }
+            
           </>
       }
     </div>
