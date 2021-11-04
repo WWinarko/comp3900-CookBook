@@ -45,6 +45,7 @@ const useStyles = makeStyles({
 });
 
 function RecipeIngredients({ setState, recipe }) {
+  console.log(recipe);
   const classes = useStyles();
   const history = useHistory();
   const token = localStorage.getItem('cookbook-token');
@@ -81,9 +82,9 @@ function RecipeIngredients({ setState, recipe }) {
             </div>
             
             <div className={classes.ingredientsText}>
-              {recipe.ingredient_string.map((ingredient, index) => {
+              {recipe.ingredients.map((ingredient) => {
                 return (
-                  <p key={index}>{ingredient}</p>
+                  <p key={ingredient['product_id']}>{ingredient['ingredient']}</p>
                 )
               })}
             </div>

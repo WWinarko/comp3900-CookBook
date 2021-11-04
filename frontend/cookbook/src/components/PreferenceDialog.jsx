@@ -102,7 +102,7 @@ function PreferenceDialog({open, setOpen, setRecipes}) {
         qList.push(key.toLowerCase());
       }
     }
-    console.log(qList);
+    // console.log(qList);
     return qList;
   };
 
@@ -115,7 +115,7 @@ function PreferenceDialog({open, setOpen, setRecipes}) {
       'q5': getPreference(q5Object),
       'q6': getPreference(q6Object),
     }
-    console.log(qq);
+    // console.log(qq);
     axios.get('http://127.0.0.1:5000/recommendation/questions', {
       params: qq,
       paramsSerializer: function (params) {
@@ -123,7 +123,7 @@ function PreferenceDialog({open, setOpen, setRecipes}) {
       },
     })
         .then((res) => {       
-          console.log(res.data);
+          // console.log(res.data);
           setRecipes(res.data['recipe_list']);
         })
         .catch((err) => {

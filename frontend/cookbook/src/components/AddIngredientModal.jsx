@@ -19,7 +19,7 @@ const style = {
 
 function AddIngredientModal({ open, onClose, ingredients, setIngredients }) {
   const [name, setName] = useState('');
-
+  console.log(ingredients);
   const handleIngredient = () => {
     const body = {
       ingredient: name,

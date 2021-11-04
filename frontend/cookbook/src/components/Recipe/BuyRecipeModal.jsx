@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 import Drawer from '@mui/material/Drawer';
 import { Typography, Stack } from '@mui/material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-// import axios from 'axios';
+import axios from 'axios';
 
 import BuyRecipeModalCard from './BuyRecipeModalCard';
 import RoundButton from '../RoundButton';
@@ -40,12 +40,31 @@ function BuyRecipeModal({ state, setState, recipe }) {
     setState(false);
   }
 
+  const getItems = () => {
+    const items = [];
+    recipe['ingredients'].map((ingredient) => {
+      items.push({
+        "_id": ingredient['product_id'], 
+        "quantity": ingredient['quantity'],
+      })
+    })
+    return items;
+  }
+
   const addToCart = () => {
-    // const token = localStorage.getItem('cookbook-token')
-    // axios.post('http://127.0.0.1:5000/cart/add', {
-    //   token,
-    // })
-    return;
+    
+    const token = localStorage.getItem('cookbook-token')
+    axios.post('http://127.0.0.1:5000/cart/add', {
+      token,
+      "ingredients": getItems()
+    })
+    .then((res) => {
+      console.log(res.data);
+      handleClose();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   return (
@@ -63,9 +82,9 @@ function BuyRecipeModal({ state, setState, recipe }) {
           {loadingState
             ? <></>
             : <>
-                {recipe.ingredient_string.map((ingredient, index) => {
+                {recipe.ingredients.map((ingredient) => {
                   return (
-                    <BuyRecipeModalCard key={index} name={ingredient} />
+                    <BuyRecipeModalCard key={ingredient['product_id']} name={ingredient['ingredient']} />
                   )
                 })}
               </>

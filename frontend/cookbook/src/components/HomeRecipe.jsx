@@ -94,7 +94,7 @@ function HomeRecipe() {
 
  React.useEffect(() => {
     const token = localStorage.getItem('cookbook-token');
-    console.log(token);
+    // console.log(token);
     if (token) {
       const auth = {"Authorization": `Bearer ${token}`};
       axios.get('http://127.0.0.1:5000/recommendation/history', {headers: auth})

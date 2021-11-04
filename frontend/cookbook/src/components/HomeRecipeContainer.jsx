@@ -15,7 +15,6 @@ const useStyles = makeStyles(({
 
 function HomeRecipeContainer({ recipesData }) {
   const classes = useStyles();
-  console.log(recipesData);
   return (
     <div className={classes.root}>
       {recipesData.map((recipe) => {
