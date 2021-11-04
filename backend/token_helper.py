@@ -22,3 +22,14 @@ def check_admin(token, users):
     if user['admin']:
         return True
     return False
+
+def find_user_id_from_token(token, users):
+    ''' returns user id from token '''
+
+    user = users.find_one({"token": token})
+    if token == "":
+        raise AccessError(description='Invalid token')
+    if (user is None):
+        raise AccessError(description='Invalid token')
+
+    return user['_id']

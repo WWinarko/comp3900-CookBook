@@ -36,6 +36,7 @@ week3:
     - List our own APIs for the website(HTTP Route, HTTP method, parameter, return)
     - Roughly list the objects we are goingn to have and their associated attributes
     - Look into setting up mongoDB
+
 Week4:
 - Finish setting up mongodb
 - Finish the recipe view/upload/listall backend
@@ -43,3 +44,18 @@ Week4:
 - Finish the product add backend
 - Set up flask server and the routes
 
+
+Week5:
+- Finalised/Testing backend for sprint1
+- Finalised server for sprint1
+
+Week6:
+Flexible week
+
+Week7:
+- Finished order functions
+- Finished comment on recipes
+
+Week8:
+- Finished recommendation backend
+- Finalised and testing the backend

@@ -25,6 +25,7 @@ def recipe_view(recipe_id):
     ingredients = recipe['ingredients']
     comment = recipe['comment']
     labels = recipe['labels']
+    owner_id = recipe['owner_id']
     
     # ingredient_string = []
     # for ingredient in ingredients:
@@ -64,7 +65,8 @@ def recipe_view(recipe_id):
         'owner_photo': owner_photo, 
         'ingredients': ingredients,
         'steps': steps,
-        'labels': labels
+        'labels': labels,
+        'owner_id': owner_id
     }
 
 # recipes = database.get_recipes()
