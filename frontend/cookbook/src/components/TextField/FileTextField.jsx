@@ -2,20 +2,30 @@
 import React from "react";
 import { FormControl , FormLabel, OutlinedInput } from "@mui/material";
 
+import fileToDataUrl from '../../helpers';
+
 function FileTextField(props) {
   const {id, name, value, setValue, field, width, accept} = props;
 
   const handleChange = (event) => {
-    if (field === "object") {
-      setValue(prevState => {
-        return {
-        ...prevState,
-        [id] : event.target.value,
+    const file = event.target.files[0];
+    fileToDataUrl(file)
+      .then((data) => {
+        if (field === "object") {
+          console.log(data);
+          setValue(prevState => {
+            return {
+            ...prevState,
+            [id] : data,
+            }
+          });
+        } else {
+          setValue(data);
         }
-      });
-    } else {
-      setValue(event.target.value);
-    }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   };
 
   return (
