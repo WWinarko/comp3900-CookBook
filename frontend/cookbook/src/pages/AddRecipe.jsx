@@ -41,6 +41,7 @@ function AddRecipe() {
       serves: 1,
       label: '',
     });
+  // const [attachment, setAttachment] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState([]);
   const [newStep, setNewStep] = useState(false);
@@ -51,7 +52,7 @@ function AddRecipe() {
   const handleNewStep = () => {
     setNewStep(!newStep);
   }
-
+  
   const sendToBack = () => {
     const labels = recipeInfo.label.split(',');
     const recipeBody = {
@@ -114,7 +115,7 @@ function AddRecipe() {
           alignItems="flex-start"
         >
           <CustomTextField id="recipeName" name="Recipe Name" value={recipeInfo['recipeName']} setValue={setRecipeInfo} field="object" width="781px"/>
-          <FileTextField id="photo" name="Photo" value={recipeInfo['photo']} setValue={setRecipeInfo} field="object" width="781px" accept="image/*"/>
+          <FileTextField id="photo" name="Photo" setValue={setRecipeInfo} field="object" width="781px" accept="image/*"/>
           <CustomTextField id="description" name="Description" multiline value={recipeInfo['description']} setValue={setRecipeInfo} field="object" width="781px"/>
           <Stack
             direction="row"
