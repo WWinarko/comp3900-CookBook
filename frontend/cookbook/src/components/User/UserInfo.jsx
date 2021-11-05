@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import { Avatar, Divider, Rating } from '@mui/material';
@@ -29,17 +29,7 @@ const useStyles = makeStyles({
 })
 
 function UserInfo({ user }) {
-  const classes = useStyles();
-  const [self, setSelf] = useState(false);
-
-  React.useEffect(() => {
-    if (user.email === "") {
-      setSelf(false);
-    } else {
-      setSelf(true);
-    }
-  }, [])
-  
+  const classes = useStyles(); 
 
   return (
     <div className={classes.root}>
@@ -56,11 +46,11 @@ function UserInfo({ user }) {
           <div style={{ color:'#89623D', display: 'flex' }}>
             <p style={{ marginRight: '50px' }}>Followers: {user.follower}</p>
           </div>
+              <div>
                 <p style={{ marginRight: '50px' }}>Email: {user.email}</p>
                 <p>Phone: {user.phone}</p>
               </div>
-            : <SquareButton name="Follow" />
-          }
+              <SquareButton name="Follow" />
         </div>
       </div>
       <Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor:'#FE793D', }}/>
