@@ -2,7 +2,6 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
 import CloseSharpIcon from '@mui/icons-material/CloseSharp';
-import image from '../assets/cheese.png';
 
 
 function CartCard({ ingredient, removeIngredient }) {
@@ -11,7 +10,7 @@ function CartCard({ ingredient, removeIngredient }) {
       <CardMedia
             component="img"
             sx={{ width: 151 }}
-            image={image || ingredient['photo']}
+            image={ingredient['photo']}
             alt="Ingredient Image"
       />
       <CardContent>

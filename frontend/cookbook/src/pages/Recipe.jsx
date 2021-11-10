@@ -22,7 +22,6 @@ function Recipe() {
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {
-          console.log(res);
           setRecipe(res);
         })
       }
