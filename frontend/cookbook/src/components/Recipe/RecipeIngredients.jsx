@@ -45,7 +45,6 @@ const useStyles = makeStyles({
 });
 
 function RecipeIngredients({ setState, recipe }) {
-  console.log(recipe);
   const classes = useStyles();
   const history = useHistory();
   const token = localStorage.getItem('cookbook-token');

@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
 import Drawer from '@mui/material/Drawer';
 import { Typography, Stack } from '@mui/material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
@@ -9,37 +9,28 @@ import axios from 'axios';
 import BuyRecipeModalCard from './BuyRecipeModalCard';
 import RoundButton from '../RoundButton';
 
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-    height: '100%',
-    padding: '5px',
-
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-
-    backgroundColor: '#C4C4C4',
-  },
-})
 
 function BuyRecipeModal({ state, setState, recipe }) {
-  const classes = useStyles();
   console.log(recipe);
   const [loadingState, setLoadingState] = useState(true);
-
+  const [ingredientList, setIngredientList] = useState([]);
+  
   React.useEffect(() => {
     if (recipe === undefined) {
       setLoadingState(true);
     } else {
       setLoadingState(false);
+      setIngredientList(getItems);
     }
-  }, [recipe])
+  }, [recipe, state])
 
+
+  
   const handleClose = () => {
     setState(false);
+    
   }
-
+  
   const getItems = () => {
     const items = [];
     recipe['ingredients'].map((ingredient) => {
@@ -67,31 +58,51 @@ function BuyRecipeModal({ state, setState, recipe }) {
     })
   }
 
+  const removeItem = (id) => {
+    const newList = ingredientList.filter(item => item['_id'] !== id);
+    setIngredientList(newList);
+  }
+
+  const changeQuantity = (id,event) => {
+    const newList = [...ingredientList];
+    newList.map(item => {
+      if (item['_id'] === id) {
+        item['quantity'] = parseInt(event.target.value);
+      }
+    });
+    setIngredientList(newList);
+  }
+
   return (
-    <Drawer anchor="right" open={state} onClose={handleClose} sx={{width: '520px'}}>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{padding: '20px', backgroundColor: '#FE793D', color: '#ffffff'}}
-        >
-          <Typography component="h1" variant="h5" sx={{fontWeight: 600}}>Ingredients</Typography>
-          <CancelOutlinedIcon fontSize="large"/>
-        </Stack>
-        <Stack className={classes.root}>
-          {loadingState
-            ? <></>
-            : <>
-                {recipe.ingredients.map((ingredient) => {
-                  return (
-                    <BuyRecipeModalCard key={ingredient['product_id']} name={ingredient['ingredient']} />
-                  )
-                })}
-              </>
-          }  
-          <RoundButton name="Add to Cart" onClick={addToCart} />
-        </Stack>
-      </Drawer>
+    <Drawer anchor="right" open={state} onClose={handleClose} PaperProps={{ sx: {width: '25%', backgroundColor: '#C4C4C4'} }}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        p={3}
+        sx={{backgroundColor: '#FE793D', color: '#ffffff'}}
+      >
+        <Typography component="h1" variant="h5" sx={{fontWeight: 600}}>Ingredients</Typography>
+        <CancelOutlinedIcon fontSize="large" onClick={handleClose} sx={{cursor: 'pointer'}}/>
+      </Stack>
+      <Stack
+        direction="column"
+        alignItems="center"
+        p={2}
+      >
+        {loadingState
+          ? <></>
+          : <>
+              {ingredientList.map((ingredient) => {
+                return (
+                  <BuyRecipeModalCard key={ingredient['_id']} id={ingredient['_id']} quantity={ingredient['quantity']} removeItem={removeItem} changeQuantity={changeQuantity}/>
+                )
+              })}
+            </>
+        }  
+        <RoundButton name="Add to Cart" onClick={addToCart} />
+      </Stack>
+    </Drawer>
 )
 }
 
