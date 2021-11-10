@@ -18,9 +18,9 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   title: {
-    top: '290px',
-    right: '1100px',
-    position: "absolute",
+    top: '55px',
+    left: '20px',
+    position: "relative",
 
     height: '35px',
     width: '170px',
@@ -35,30 +35,17 @@ const useStyles = makeStyles({
 
     color: '#89623D',
   },
-  container: {
-    width: '100%',
-    height: '95%',
-
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-
-    margin: '30px',
-
-    overflow: 'hidden',
-  },
   filter: {
-    paddingRight: '700px',
+    paddingRight: '900px',
 
     display: 'flex',
     gap: '5px',
 
-    marginBottom: '30px',
   },
   total: {
-    top: '270px',
-    right: '200px',
-    position: "absolute",
+    top: '0px',
+    left: '850px',
+    position: "relative",
 
     height: '35px',
     width: '170px',
@@ -171,7 +158,7 @@ function OrderDashboard({ admin }) {
             <CircularProgress
             />
           </div>
-        : <>
+        : <div>
             <div className={classes.filter}>
               <StyledToggleButtonGroup
                 orientation="horizontal"
@@ -205,7 +192,7 @@ function OrderDashboard({ admin }) {
               <DashboardContainer data={order} handleMove={handleMove} admin={admin}/>
               <Pagination count={Math.ceil(allOrder.length / 3)} page={page} onChange={handlePage} />
             </div>
-          </>
+          </div>
       }
     </>
   )

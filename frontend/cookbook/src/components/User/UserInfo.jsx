@@ -46,11 +46,14 @@ function UserInfo({ user }) {
           <div style={{ color:'#89623D', display: 'flex' }}>
             <p style={{ marginRight: '50px' }}>Followers: {user.follower}</p>
           </div>
-              <div>
+            {user.email === ""
+              ? <SquareButton name="Follow" />
+              : <div>
                 <p style={{ marginRight: '50px' }}>Email: {user.email}</p>
                 <p>Phone: {user.phone}</p>
               </div>
-              <SquareButton name="Follow" />
+            }
+             
         </div>
       </div>
       <Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor:'#FE793D', }}/>

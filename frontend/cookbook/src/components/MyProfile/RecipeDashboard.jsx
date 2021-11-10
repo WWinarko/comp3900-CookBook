@@ -18,9 +18,9 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   title: {
-    top: '185px',
-    right: '1100px',
-    position: "absolute",
+    top: '20px',
+    left: '20px',
+    position: "relative",
 
     height: '35px',
     width: '170px',
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
 function RecipeDashboard() {
   const classes = useStyles();
   return (
-    <>
+    <div>
       <div className={classes.title}>
         Recipes
       </div>
@@ -64,7 +64,7 @@ function RecipeDashboard() {
         {/* <Pagination count={10} page={page} onChange={handleChange} /> */}
         <Pagination count={10} />
       </div>
-    </>
+    </div>
   )
 }
 

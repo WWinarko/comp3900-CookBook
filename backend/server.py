@@ -340,7 +340,6 @@ def id_check_root():
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
-    name = request.args.get('name')
     return dumps(
         id_check(token)
     )

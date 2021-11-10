@@ -49,7 +49,20 @@ function AccountMenu({anchorEl, open, onClose, onClick}) {
   }
 
   const handleProfile = () => {
-    console.log('push /user/selfid');
+    fetch('http://127.0.0.1:5000/id/check', {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      }
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          history.push('/user/' + res.id);
+        })
+      }
+    })
   }
 
   const handleAccount = () => {
