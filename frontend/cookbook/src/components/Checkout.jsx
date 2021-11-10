@@ -113,7 +113,7 @@ function Checkout({checkout, setCheckout, total, ingredients, deliveryInfo}) {
           <Typography paragraph variant="h5" gutterBottom align="left" sx={{color: "#FE793D", fontWeight: "lighter", fontSize: "1.25rem"}}>Sub-total</Typography>
         </Grid>
         <Grid item xs={6}>
-          <Typography paragraph variant="h5" gutterBottom align="right" sx={{color: "#FE793D", fontWeight: "lighter", fontSize: "1.25rem"}}>$ {total}.00</Typography>
+          <Typography paragraph variant="h5" gutterBottom align="right" sx={{color: "#FE793D", fontWeight: "lighter", fontSize: "1.25rem"}}>$ {parseInt(total).toFixed(2)}</Typography>
         </Grid>
       </Grid>
       <Grid container spacing={2}>
@@ -130,7 +130,7 @@ function Checkout({checkout, setCheckout, total, ingredients, deliveryInfo}) {
           <Typography paragraph variant="h5" gutterBottom align="left"  sx={{color: "#FE793D",  fontWeight: "bold", fontSize: "1.75rem"}}>Total</Typography>
         </Grid>
         <Grid item xs={6}>
-          <Typography paragraph variant="h5" gutterBottom align="right" sx={{color: "#FE793D",  fontWeight: "bold", fontSize: "1.75rem"}}>$ {total}.00 </Typography>
+          <Typography paragraph variant="h5" gutterBottom align="right" sx={{color: "#FE793D",  fontWeight: "bold", fontSize: "1.75rem"}}>$ {parseInt(total).toFixed(2)} </Typography>
         </Grid>
       </Grid>
       {!checkout ? <CheckoutButton sx={{width: '100%'}} onClick={() => setCheckout(true)}>Proceed to Checkout</CheckoutButton>
