@@ -21,7 +21,6 @@ Week 4
 - Discuss how to implement the frontend with Wincent
 - Implement homepage and recipe page components in accordance to sprint 1 user stories
 
-
 Week 5
 - Integrate frontend and backend
 - Finalize all the components in homepage and recipe page to complete acceptance criteria in sprint 1 user stories
@@ -31,3 +30,6 @@ Week 7
 - Created order, recipe cards for the page above.
 - Fix add steps in add recipe.
 - Added comments section
+
+Week 8
+- Connect frontend and backend for admin page, user and comments
