@@ -17,18 +17,29 @@ const useStyles = makeStyles(({
   },
 }));
 
-function SearchBar({ width, placeholder, border }) {
+function SearchBar({ width, placeholder, border, searchFunc, setSelected }) {
   const [ search, setSearch ] = useState('');
   const classes = useStyles();
 
   const handleSearch = () => {
-    console.log(search);
+    if (setSelected !== undefined) {
+      setSelected({
+        isSelected: false,
+        product_id: '',
+      })
+    }
+    searchFunc(search)
   }
 
   const handleEnter = (e) => {
     if(e.key === 'Enter') {
-      console.log(search);
-      console.log(width);
+      if (setSelected !== undefined) {
+        setSelected({
+          isSelected: false,
+          product_id: '',
+        })
+      }
+      searchFunc(search);
     }
   }
   return (
@@ -45,6 +56,8 @@ SearchBar.propTypes = {
   width: PropTypes.string,
   placeholder: PropTypes.string,
   border: PropTypes.string,
+  searchFunc: PropTypes.func,
+  setSelected: PropTypes.func,
 }
 
 export default SearchBar;

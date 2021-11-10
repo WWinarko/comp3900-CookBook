@@ -7,12 +7,12 @@ import CustomTextField from "../components/TextField/CustomTextField";
 import NumberTextField from "../components/TextField/NumberTextField";
 import Navbar from '../components/Navbar';
 import FileTextField from "../components/TextField/FileTextField";
-import IngredientCard from "../components/IngredientCard";
 import RecipeStepsContainer from '../components/Recipe/RecipeStepsContainer';
 import AddStep from "../components/AddStep";
 import RoundButton from "../components/RoundButton";
 import AddIngredientModal from "../components/AddIngredientModal";
 import LabelSelect from "../components/LabelSelect";
+import BuyRecipeModalCard from "../components/Recipe/BuyRecipeModalCard";
 
 export const AddButton = styled(Button)(() => ({
   backgroundColor: '#89623D',
@@ -94,8 +94,17 @@ function AddRecipe() {
   //   console.log('aa');
   // }, [remove])
 
-  const handleRemoveIngredient = (item) => {
-    setIngredients(ingredients.filter((i) => i !== item));
+  const handleRemoveIngredient = (id) => {
+    setIngredients(ingredients.filter((ingredient) => ingredient['product_id'] !== id));
+  }
+  const changeQuantity = (id,event) => {
+    const newList = [...ingredients];
+    newList.map(item => {
+      if (item['product_id'] === id) {
+        item['quantity'] = parseInt(event.target.value);
+      }
+    });
+    setIngredients(newList);
   }
 
   const handleRemoveStep = (item) => {
@@ -130,11 +139,14 @@ function AddRecipe() {
           <LabelSelect labels={recipeInfo['labels']} setLabels={setRecipeInfo}/>
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Ingredients</FormLabel>
 
-          {ingredients.map((ingredient, index) => {
+          {ingredients.map((ingredient => {
             return (
-              <IngredientCard ingredient={ingredient} handleRemove={handleRemoveIngredient} key={index} />
+              <>
+                <Typography component="p" sx={{color: '#9D9D9D', fontWeight: '600'}}>{ingredient.ingredient}</Typography> 
+                <BuyRecipeModalCard key={ingredient['product_id']} id={ingredient['product_id']} quantity={ingredient['quantity']} removeItem={handleRemoveIngredient} changeQuantity={changeQuantity}/>
+              </>
             )
-          })}
+          }))}
 
 
           <AddButton onClick={handleNewIngredient}> Add ingredient </AddButton>

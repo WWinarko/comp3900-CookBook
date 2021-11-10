@@ -18,9 +18,9 @@ const BrownButton = styled(Button)(() => ({
   fontWeight: '500',
 }));
 
-function SquareButton({ name, onClick }) {
+function SquareButton({ name, onClick, disabled }) {
   return (
-    <BrownButton variant= "outlined" onClick={onClick}>
+    <BrownButton variant= "outlined" onClick={onClick} disabled={disabled}>
       {name}
     </BrownButton>
   );
