@@ -65,3 +65,12 @@ This week:
 Next week:
 - Do retrospective meeting A
 - Start sprint 2
+
+Week 6
+
+This week:
+- Started sprint 2
+- Did retrospective meeting A
+
+Next week:
+- Continue doing the sprint 2
