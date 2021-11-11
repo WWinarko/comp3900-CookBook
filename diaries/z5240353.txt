@@ -83,3 +83,14 @@ This week:
 Next week:
 - Connecting cart page to the backend
 - Create a recommendation page and add recommendation recipe section on recipe page and connect it to the backend
+
+Week 8
+
+This week:
+- Created recommendation page and add recommendation recipe section on recipe page
+- Connected frontend with backend
+- Did progressive Demo B
+
+Next week:
+- Do retrospective meeting B
+- Start sprint 3
