@@ -8,7 +8,9 @@ const useStyles = makeStyles({
   root: {
     backgroundColor: '#F9FAF9',
     height: '850px',
-    width: '90%',
+    width: '60vw',
+    
+    
 
     border: '3px solid #89623D',
     borderRadius: '10px',
@@ -36,7 +38,7 @@ const useStyles = makeStyles({
     color: '#89623D',
   },
   filter: {
-    paddingRight: '900px',
+    // paddingRight: '900px',
 
     display: 'flex',
     gap: '5px',
@@ -44,7 +46,7 @@ const useStyles = makeStyles({
   },
   total: {
     top: '0px',
-    left: '850px',
+    left: '50vw',
     position: "relative",
 
     height: '35px',
@@ -58,6 +60,9 @@ const useStyles = makeStyles({
     fontSize: '20px',
 
     color: '#89623D',
+  },
+  big: {
+    position: 'static'
   }
 })
 
@@ -83,9 +88,8 @@ function OrderDashboard({ admin }) {
   const [allOrder, setAllOrder] = useState([]);
   const [order, setOrder] = useState([]);
   const [page, setPage] = useState(1);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState('processing');
   const [loadingState, setLoadingState] = useState(true);
-  
 
   React.useEffect(() => {
     setAllOrder([]);
@@ -146,19 +150,20 @@ function OrderDashboard({ admin }) {
   }
 
   const handleFilter = (event, name) => {
-    setFilter(name);
-    
-    setPage(1);
+    if (name !== null) {
+      setFilter(name);
+      setPage(1);
+    }
   }
 
   return (
     <>
       {loadingState
-        ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
+        ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center', width: '90vh' }}>
             <CircularProgress
             />
           </div>
-        : <div>
+        : <div className={classes.big}>
             <div className={classes.filter}>
               <StyledToggleButtonGroup
                 orientation="horizontal"

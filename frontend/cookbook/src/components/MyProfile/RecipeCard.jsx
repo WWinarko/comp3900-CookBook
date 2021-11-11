@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import RoundButton from "../RoundButton";
-import { Stack } from "@mui/material";
+import { Skeleton, Stack } from "@mui/material";
 
 const useStyles = makeStyles({
   root: {
@@ -18,44 +19,106 @@ const useStyles = makeStyles({
   },
   block: {
     height: '150px',
-    marginLeft: '50px',
-    marginRight: '50px',
+    marginLeft: '2vw',
+    marginRight: '2vw',
+
+    wordWrap: 'break-word',
   }
 })
 
-function RecipeCard() {
+function RecipeCard({ id }) {
   const classes = useStyles();
+  const [loadingState, setLoadingState] = useState(true);
+  const [recipe, setRecipe] = useState({});
+
+  React.useEffect(() => {
+    setLoadingState(true);
+  }, [id])
+
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + id, {
+      method: 'GET',
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setRecipe(res);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setLoadingState(false);
+    })
+  }, [id])
 
   return (
     <div className={classes.root}>
-      <div className={classes.block} style={{ marginRight:'15px' }}>
-        <img src='a' alt='thumbnail' style={{ minWidth:'150px', minHeight:'150px', border:'1px solid', borderRadius:'7px' }} />
-      </div>
-      <div className={classes.block}>
-        <div style={{ color:'#FE793D', fontWeight:'bold' }}>Product ID</div>
-        <div style={{ color:'#89623D', paddingLeft: '15px' }}>MC30091220</div>
-        <div style={{ height:'50px' }}></div>
-        <div style={{ color:'#FE793D', fontWeight:'bold' }}>Product Name</div>
-        <div style={{ color:'#89623D', paddingLeft: '15px' }}>test</div>
-      </div>
-      <div className={classes.block}>
-        <div style={{ color:'#89623D', fontWeight:'bold' }}>Price</div>
-        <div>$10.00</div>
-        <div style={{ height:'20px' }}></div>
-        <div style={{ color:'#89623D', fontWeight:'bold' }}>Description</div>
-        <div>testadfasdfasdfasdfa dsf adsf asdf asedt rrewterteads tdasdf ads rasre</div>
-        <div style={{ height:'20px' }}></div>
-      </div>
-      <div className={classes.block}>
-        <Stack
-          spacing={1}
-        >
-          <RoundButton name="Edit"/>
-          <RoundButton name="Delete"/>
-        </Stack>
-      </div>
+      {loadingState
+        ? <>
+            <div className={classes.block} style={{ marginRight:'15px' }}>
+            <Skeleton width="150px" height="150px" />
+            </div>
+            <div className={classes.block} style={{ width:'35vh'}} >
+              <div style={{ color:'#FE793D', fontWeight:'bold' }}>Product ID</div>
+              <Skeleton width="100%" />
+              <div style={{ height:'50px' }}></div>
+              <div style={{ color:'#FE793D', fontWeight:'bold' }}>Product Name</div>
+              <Skeleton width="100%" />
+            </div>
+            <div className={classes.block} style={{ width:'30vh'}} >
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>Owner</div>
+              <Skeleton width="100%" />
+              <div style={{ height:'20px' }}></div>
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>Description</div>
+              <Skeleton width="100%" />
+              <div style={{ height:'20px' }}></div>
+            </div>
+            <div className={classes.block}>
+              <Stack
+                spacing={1}
+              >
+                <RoundButton name="Edit"/>
+                <RoundButton name="Delete"/>
+              </Stack>
+            </div>
+          </>
+        : <>
+            <div className={classes.block}>
+              <img src={recipe.photo} alt='thumbnail' style={{ minWidth:'7vw', minHeight:'7vw', width:'7vw',  jeight:'7vw', border:'1px solid', borderRadius:'7px' }} />
+            </div>
+            <div className={classes.block} style={{ width:'14vw'}} >
+              <div style={{ color:'#FE793D', fontWeight:'bold' }}>Product ID</div>
+              <div style={{ color:'#89623D', paddingLeft: '15px' }}>{id}</div>
+              <div style={{ height:'50px' }}></div>
+              <div style={{ color:'#FE793D', fontWeight:'bold' }}>Product Name</div>
+              <div style={{ color:'#89623D', paddingLeft: '15px' }}>{recipe.title}</div>
+            </div>
+            <div className={classes.block} style={{ width:'22vw'}} >
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>Owner</div>
+              <div>{recipe.owner_username}</div>
+              <div style={{ height:'20px' }}></div>
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>Sold</div>
+              <div>{recipe.sold}</div>
+              <div style={{ height:'20px' }}></div>
+              <div style={{ color:'#89623D', fontWeight:'bold' }}>Rating</div>
+              <div>{recipe.rating} / 5</div>
+            </div>
+            <div className={classes.block} style={{ width:'4vw' }}>
+              <Stack
+                spacing={1}
+              >
+                <RoundButton name="Edit"/>
+                <RoundButton name="Delete"/>
+              </Stack>
+            </div>
+          </>
+      }
     </div>
   )
+}
+
+RecipeCard.propTypes = {
+  id: PropTypes.number,
 }
 
 export default RecipeCard;

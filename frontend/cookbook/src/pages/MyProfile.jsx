@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import MyProfilePicture from "../components/MyProfile/MyProfilePicture";
 import DashboardOption from "../components/MyProfile/DashboardOption";
 import OrderDashboard from "../components/MyProfile/OrderDashboard";
-import RecipeDashboard from "../components/MyProfile/RecipeDashboard";
+import RecipeDashboardAdmin from "../components/MyProfile/RecipeDashboardAdmin";
 
 function MyProfile() {
   const [option, setOption] = useState('ORDERS');
@@ -36,18 +36,17 @@ function MyProfile() {
     <div>
       <Navbar />
       <Stack
-        p={10}
         spacing={5}
         sx={{ backgroundColor:'#F9FAF9' }}
       >
         <Stack
           direction="row"
-          justifyContent="space-between"
-          sx={{ width: '100%' }}
+          justifyContent="center"
+          sx={{ width: '100%', margin: '50px auto ' }}
+          spacing={5}
         >
           <Stack
             alignItems="center"
-            sx={{ width:'25%' }}
             pt={15}
             spacing={5}
           >
@@ -56,12 +55,12 @@ function MyProfile() {
           </Stack>
           <Stack
             alignItems="center"
-            sx={{ width:'75%' }}
             pt={15}
+            sx={{ width: '60vw' }}
           >
-            {option === 'ORDERS' && <OrderDashboard admin={admin}/>}
-            {option === 'RECIPES' && <RecipeDashboard />}
-            {option === 'PRODUCTS' && <RecipeDashboard />}
+            {option === 'ORDERS' && <OrderDashboard admin={admin} />}
+            {option === 'RECIPES' && admin && <RecipeDashboardAdmin />}
+            {option === 'PRODUCTS' && <RecipeDashboardAdmin />}
           </Stack>
         </Stack>
       </Stack>

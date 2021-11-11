@@ -21,8 +21,8 @@ const useStyles = makeStyles({
   },
   block: {
     height: '150px',
-    marginLeft: '30px',
-    marginRight: '30px',
+    marginLeft: '2vw',
+    marginRight: '2vw',
   }
 })
 
@@ -96,14 +96,13 @@ function OrderCard({ order, handleMove, admin }) {
 
   const handleModal = () => {
     setOpenModal(!openModal);
-    console.log('aa');
   }
 
   return (
     <div className={classes.root}>
       {loadingState
         ? <>
-            <div className={classes.block} style={{ width: '350px' }} >
+            <div className={classes.block} style={{ width: '14vw' }} >
               <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order ID</div>
               <div style={{ color:'#89623D', paddingLeft: '15px' }}><Skeleton width="100%" /></div>
               <div style={{ height:'50px' }}></div>
@@ -111,7 +110,7 @@ function OrderCard({ order, handleMove, admin }) {
               <Skeleton height="50px" />
             </div>
             <Divider orientation="vertical" variant="middle" flexItem/>
-            <div className={classes.block} style={{ width: '300px' }}>
+            <div className={classes.block} style={{ width: '22vw' }}>
               <div style={{ color:'#89623D', fontWeight:'bold' }}>User Name</div>
               <Skeleton width="100%" />
               <div style={{ height:'20px' }}></div>
@@ -121,12 +120,12 @@ function OrderCard({ order, handleMove, admin }) {
               <div style={{ color:'#89623D', fontWeight:'bold' }}>Delivery address</div>
               <Skeleton width="100%" />
             </div>
-            <div className={classes.block} style={{ width: '10%' }}>
+            <div className={classes.block} style={{ width: '4vw' }}>
               <RoundButton name="View"/>        
             </div>
           </>
         : <>
-            <div className={classes.block} style={{ width: '350px' }} >
+            <div className={classes.block} style={{ width: '14vw' }} >
               <div style={{ color:'#FE793D', fontWeight:'bold' }}>Order ID</div>
               <div style={{ color:'#89623D', paddingLeft: '15px' }}>{info.order_id}</div>
               <div style={{ height:'50px' }}></div>
@@ -149,7 +148,7 @@ function OrderCard({ order, handleMove, admin }) {
               
             </div>
             <Divider orientation="vertical" variant="middle" flexItem/>
-            <div className={classes.block} style={{ width: '300px' }}>
+            <div className={classes.block} style={{ width: '24vw' }}>
               <div style={{ color:'#89623D', fontWeight:'bold' }}>User Name</div>
               <div>{info.username}</div>
               <div style={{ height:'20px' }}></div>
@@ -161,7 +160,7 @@ function OrderCard({ order, handleMove, admin }) {
             </div>
             {admin &&
               <>
-                <div className={classes.block} style={{  }}>
+                <div className={classes.block} style={{ width: '4vw' }}>
                   <RoundButton name="View" onClick={handleModal}/>        
                 </div>
                 <OrderDetailModal open={openModal} onClose={handleModal} id={order}/>
