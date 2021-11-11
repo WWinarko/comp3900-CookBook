@@ -74,3 +74,12 @@ This week:
 
 Next week:
 - Continue doing the sprint 2
+
+Week 7
+
+This week:
+- Created cart page, connect with Paypal developer API and reward
+
+Next week:
+- Connecting cart page to the backend
+- Create a recommendation page and add recommendation recipe section on recipe page and connect it to the backend
