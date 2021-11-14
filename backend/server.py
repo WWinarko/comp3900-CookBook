@@ -40,6 +40,7 @@ from profile_view import profile_view
 from id_check import id_check
 
 from user_follow import user_follow
+from user_listfollow import user_listfollow
 
 def default_handler(err):
     ''' Default Handle '''
@@ -388,6 +389,13 @@ def user_follow_root():
     user_id = request.args.get('user_id')
     return dumps(
         user_follow(token, user_id)
+    )
+
+@APP.route("/user/listfollow", methods=['GET'])
+def user_listfollow_root():
+    user_id = request.args.get('user_id')
+    return dumps(
+        user_listfollow(user_id)
     )
 
 if __name__ == "__main__":
