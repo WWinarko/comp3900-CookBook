@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import { Avatar, Divider, Rating } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -34,12 +35,17 @@ const useStyles = makeStyles({
 
 function RecipeReviewCard({ comment }) {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleUser = () => {
+    history.push('/user/' + comment.user_id);
+  }
   return (
     <div className={classes.root}>
-      <div className={classes.block} style={{ marginLeft: '70px' }}>
-        <Avatar sx={{ width: 60, height: 60 }} />
-      </div>
-      <div className={classes.block} style={{ width:'10vh', wordWrap:'break-word '}}>
+      <a href={'/user/' + comment.user_id} className={classes.block} style={{ textDecoration: 'none', color:'#000000', marginLeft:'75px' }}>
+          <Avatar sx={{ width: 60, height: 60 }} />
+      </a>
+      <div className={classes.block} style={{ width:'10vh', wordWrap:'break-word '}} onClick={handleUser}>
         {comment.username}
       </div>
       <Divider orientation="vertical" variant="middle" flexItem/>

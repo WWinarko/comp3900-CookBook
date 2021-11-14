@@ -29,7 +29,9 @@ function MyProfile() {
   }, [])
 
   const handleOption = (event, newOption) => {
-    setOption(newOption);
+    if (newOption !== null) {
+      setOption(newOption);
+    }
   }
 
   return (

@@ -51,21 +51,25 @@ function RecipeCard({ id }) {
     })
   }, [id])
 
+  const handleEdit = () => {
+    console.log('a');
+  }
+
   return (
     <div className={classes.root}>
       {loadingState
         ? <>
-            <div className={classes.block} style={{ marginRight:'15px' }}>
-            <Skeleton width="150px" height="150px" />
+            <div className={classes.block}>
+              <Skeleton height="7vw" width="7vw" />
             </div>
-            <div className={classes.block} style={{ width:'35vh'}} >
+            <div className={classes.block} style={{ width:'14vw'}} >
               <div style={{ color:'#FE793D', fontWeight:'bold' }}>Product ID</div>
               <Skeleton width="100%" />
               <div style={{ height:'50px' }}></div>
               <div style={{ color:'#FE793D', fontWeight:'bold' }}>Product Name</div>
               <Skeleton width="100%" />
             </div>
-            <div className={classes.block} style={{ width:'30vh'}} >
+            <div className={classes.block} style={{ width:'22vw'}} >
               <div style={{ color:'#89623D', fontWeight:'bold' }}>Owner</div>
               <Skeleton width="100%" />
               <div style={{ height:'20px' }}></div>
@@ -107,7 +111,7 @@ function RecipeCard({ id }) {
               <Stack
                 spacing={1}
               >
-                <RoundButton name="Edit"/>
+                <RoundButton name="Edit" onClick={handleEdit}/>
                 <RoundButton name="Delete"/>
               </Stack>
             </div>
