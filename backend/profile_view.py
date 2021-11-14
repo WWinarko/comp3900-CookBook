@@ -9,17 +9,13 @@ from bson.objectid import ObjectId
 def profile_view(token, user_id):
     ''' View a profile '''
     users = database.get_users()
-    user_id_new = ObjectId(user_id)
-
-    # Validate token
-    token_helper.is_token_valid(token, users)
 
     # Validate user
-    if not auth_helper.check_user_id(user_id_new, users):
+    if not auth_helper.check_user_id(ObjectId(user_id), users):
         raise AccessError(description="User does not exist")
 
     # User info
-    user = users.find_one({"_id":user_id_new})
+    user = users.find_one({"_id":ObjectId(user_id)})
     
     username = user['username']
     first_name = user['first_name']
@@ -29,16 +25,35 @@ def profile_view(token, user_id):
     follower = user['follower']
     photo = user['photo']
 
+
+    viewing_user = users.find_one({"token": token})
     # Check if viewing own profile
-    if token_helper.find_user_id_from_token(token, users) == user['_id']:
-        email = user['email']
-        phone = user['phone']
+    if viewing_user:
+        if viewing_user['_id'] == user['_id']:
+            email = user['email']
+            phone = user['phone']
 
     # User recipes
     user_recipes_string = []
     recipes = database.get_recipes()
-    user_recipes = recipes.find({"owner_id":str(user_id_new)})
+    user_recipes = recipes.find({"owner_id":user_id})
+    whole_rating = 0
+    whole_counter = 0
+    final_rating = 5
     for recipe in user_recipes:
+        rating = 0
+        counter = 0
+        for comment in recipe['comment']:
+            rating += int(comment['rating'])
+            counter += 1
+        if counter != 0:
+            rating = rating/counter
+            whole_counter += 1
+            whole_rating += rating
+        if whole_counter == 0:
+            final_rating == 0
+        else:
+            final_rating = whole_rating/whole_counter
         user_recipes_string.append(str(recipe['_id']))
         
     return {
@@ -49,5 +64,6 @@ def profile_view(token, user_id):
         'phone': phone,
         'follower': follower,
         'photo': photo,
-        'user_recipes_string': user_recipes_string
+        'user_recipes_string': user_recipes_string,
+        'average rating':round(final_rating, 1)
     }
