@@ -39,6 +39,8 @@ from profile_view import profile_view
 
 from id_check import id_check
 
+from user_follow import user_follow
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -353,6 +355,8 @@ def admin_check_root():
         admin_check(token)
     )
 
+##### id ROUTE #####
+
 @APP.route("/id/check", methods=['GET'])
 def id_check_root():
     headers = request.headers
@@ -362,6 +366,8 @@ def id_check_root():
         id_check(token)
     )
 
+##### profile ROUTE #####
+
 @APP.route("/profile/view", methods=['GET'])
 def profile_view_root():
     headers = request.headers
@@ -370,6 +376,18 @@ def profile_view_root():
     user_id = request.args.get('user_id')
     return dumps(
         profile_view(token, user_id)
+    )
+
+##### user Route #####
+
+@APP.route("/user/follow", methods=['GET'])
+def user_follow_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    user_id = request.args.get('user_id')
+    return dumps(
+        user_follow(token, user_id)
     )
 
 if __name__ == "__main__":
