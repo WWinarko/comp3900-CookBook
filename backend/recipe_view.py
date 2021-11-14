@@ -27,7 +27,7 @@ def recipe_view(recipe_id):
     rating = 0
     counter = 0
     for comment in recipe['comment']:
-        rating += comment['rating']
+        rating += int(comment['rating'])
         counter += 1
     if counter == 0:
         rating = 0

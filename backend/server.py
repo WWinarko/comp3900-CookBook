@@ -11,6 +11,7 @@ from recipe_upload import recipe_upload
 from recipe_listall import recipe_listall
 from recipe_comment import recipe_comment
 from recipe_comment_view import recipe_comment_view
+from recipe_search_keyword import recipe_search_keyword
 
 from product_add import product_add
 from product_view import product_view
@@ -144,6 +145,14 @@ def recipe_comment_view_root():
 def recipe_list_all_root():
     ''' Return recipe information '''
     return dumps(recipe_listall())
+
+@APP.route("/recipe/search_keyword", methods=['GET'])
+def recipe_search_keyword_root():
+    ''' List the recipes that have the keyword '''
+    keyword = request.args.get('keyword')
+    return dumps(
+        recipe_search_keyword(keyword)
+    )
 
 ##### PRODUCT ROUTE #####
 

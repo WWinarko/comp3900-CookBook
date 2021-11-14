@@ -21,7 +21,7 @@ def recipe_comment(token, comment, rating, recipe_id):
     comment_added = {
         "user_id":str(user['_id']), 
         "username":user['username'], 
-        "rating":rating, 
+        "rating":int(rating), 
         "comment":comment, 
         "time":time[0]
     }
