@@ -7,7 +7,7 @@ def recipe_search_label(label):
 
     for recipe in recipe_list:
         for recipe_label in recipe['labels']:
-            if recipe_label == label:
+            if recipe_label.lower() == label.lower():
                 recipe_ids.append(str(recipe['_id']))
 
     return {

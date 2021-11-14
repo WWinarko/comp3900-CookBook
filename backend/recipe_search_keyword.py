@@ -7,7 +7,7 @@ def recipe_search_keyword(keyword):
     recipe_ids = []
 
     for recipe in recipe_list:
-        if re.search(keyword, recipe['title']):
+        if re.search(keyword.lower(), recipe['title'].lower()):
             recipe_ids.append(str(recipe['_id']))
 
     return {
