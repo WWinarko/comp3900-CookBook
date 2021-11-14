@@ -18,15 +18,21 @@ def recipe_view(recipe_id):
     photo = recipe['photo']
     sold = recipe['sold']
     difficulty = recipe['difficulty']
-    rating = recipe['rating']
     cooktime = recipe['cooktime']
     preptime = recipe['preptime']
     serves = recipe['serves']
     ingredients = recipe['ingredients']
-    comment = recipe['comment']
     labels = recipe['labels']
     owner_id = recipe['owner_id']
-    
+    rating = 0
+    counter = 0
+    for comment in recipe['comment']:
+        rating += comment['rating']
+        counter += 1
+    if counter == 0:
+        rating = 0
+    else:
+        rating = rating/counter
     # ingredient_string = []
     # for ingredient in ingredients:
     #     ingredient_string.append(ingredient['ingredient'])

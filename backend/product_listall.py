@@ -12,4 +12,3 @@ def product_listall():
     return {
         "product_list":product_ids
     }
-    
