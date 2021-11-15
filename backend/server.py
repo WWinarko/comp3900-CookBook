@@ -11,6 +11,10 @@ from recipe_upload import recipe_upload
 from recipe_listall import recipe_listall
 from recipe_comment import recipe_comment
 from recipe_comment_view import recipe_comment_view
+from recipe_search_keyword import recipe_search_keyword
+from recipe_search_label import recipe_search_label
+from recipe_edit import recipe_edit
+from recipe_delete import recipe_delete
 
 from product_add import product_add
 from product_view import product_view
@@ -21,6 +25,7 @@ from cart_add import cart_add
 from cart_remove import cart_remove
 from cart_reward import cart_reward
 from cart_retrieve import cart_retrieve
+from cart_clean import cart_clean
 
 from order_update import order_update
 from order_listall import order_listall
@@ -34,8 +39,12 @@ from recommendation_history import recommendation_history
 from admin_check import admin_check
 
 from profile_view import profile_view
+from profile_most_popular import profile_most_popular
 
 from id_check import id_check
+
+from user_follow import user_follow
+from user_listfollow import user_listfollow
 
 def default_handler(err):
     ''' Default Handle '''
@@ -144,6 +153,56 @@ def recipe_comment_view_root():
 def recipe_list_all_root():
     ''' Return recipe information '''
     return dumps(recipe_listall())
+
+@APP.route("/recipe/search_keyword", methods=['GET'])
+def recipe_search_keyword_root():
+    ''' List the recipes that have the keyword '''
+    keyword = request.args.get('keyword')
+    return dumps(
+        recipe_search_keyword(keyword)
+    )
+
+@APP.route("/recipe/search_label", methods=['GET'])
+def recipe_search_label_root():
+    ''' List the recipes that have the label '''
+    label = request.args.get('label')
+    return dumps(
+        recipe_search_label(label)
+    )
+
+@APP.route("/recipe/edit", methods=['POST'])
+def recipe_edit_root():
+    ''' Edit a recipe '''
+    payload = request.get_json()
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    recipe_id = payload['recipe_id']    
+    title = payload['title']
+    intro = payload['intro']
+    photo = payload['photo']
+    difficulty = payload['difficulty']
+    cooktime= payload['cooktime']
+    preptime = payload['preptime']
+    serves = payload['serves']
+    steps = payload['steps']
+    ingredients = payload['ingredients']
+    labels = payload['labels']
+    return dumps(
+        recipe_edit(token, recipe_id, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps, labels)
+    )
+
+@APP.route("/recipe/delete", methods=['POST'])
+def recipe_delete_root():
+    ''' Delete a recipe '''
+    payload = request.get_json()
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    recipe_id = payload['recipe_id']    
+    return dumps(
+        recipe_delete(token, recipe_id)
+    )
 
 ##### PRODUCT ROUTE #####
 
@@ -335,6 +394,8 @@ def admin_check_root():
         admin_check(token)
     )
 
+##### id ROUTE #####
+
 @APP.route("/id/check", methods=['GET'])
 def id_check_root():
     headers = request.headers
@@ -344,6 +405,8 @@ def id_check_root():
         id_check(token)
     )
 
+##### profile ROUTE #####
+
 @APP.route("/profile/view", methods=['GET'])
 def profile_view_root():
     headers = request.headers
@@ -352,6 +415,32 @@ def profile_view_root():
     user_id = request.args.get('user_id')
     return dumps(
         profile_view(token, user_id)
+    )
+
+@APP.route("/profile/most_popular", methods=['GET'])
+def profile_most_popular_root():
+    user_id = request.args.get('user_id')
+    return dumps(
+        profile_most_popular(user_id)
+    )
+
+##### user Route #####
+
+@APP.route("/user/follow", methods=['GET'])
+def user_follow_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    user_id = request.args.get('user_id')
+    return dumps(
+        user_follow(token, user_id)
+    )
+
+@APP.route("/user/listfollow", methods=['GET'])
+def user_listfollow_root():
+    user_id = request.args.get('user_id')
+    return dumps(
+        user_listfollow(user_id)
     )
 
 if __name__ == "__main__":

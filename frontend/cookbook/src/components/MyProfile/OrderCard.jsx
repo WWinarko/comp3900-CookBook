@@ -137,6 +137,7 @@ function OrderCard({ order, handleMove, admin }) {
                       value={status}
                       onChange={handleChange}
                       displayEmpty
+                      sx={{ width: '13vw' }}
                     >
                       <MenuItem value='processing'>processing</MenuItem>
                       <MenuItem value='dispatched'>dispatched</MenuItem>
