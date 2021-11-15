@@ -20,6 +20,7 @@ const ContinueButton = styled(Button)(() => ({
 
 function Cart() {
   const token = localStorage.getItem('cookbook-token');
+  const headers = {"Authorization": `Bearer ${token}`};
   const history = useHistory();
   const [checkout, setCheckout] = useState(false);
   const [total, setTotal] = useState(0);
@@ -43,8 +44,8 @@ function Cart() {
 
   useEffect(() => {
     // console.log(update);
-    const auth = {"Authorization": `Bearer ${token}`};
-    axios.get('http://127.0.0.1:5000/cart/retrieve', {headers: auth})
+    
+    axios.get('http://127.0.0.1:5000/cart/retrieve', {headers: headers})
     .then((res) => {
       console.log(res.data);
       const {section_list, total} = res.data;
@@ -66,10 +67,13 @@ function Cart() {
   const goHome = () => {
     history.push('/');
   }
-  const removeIngredient = (id) => {
-    axios.post('http://127.0.0.1:5000/cart/remove', {
-      token,
-      'ingredients': id,
+  const removeIngredient = (id, recipe_id) => {
+    const data = {
+      'ingredient': id,
+      'recipe_id': recipe_id,
+    }
+    axios.post('http://127.0.0.1:5000/cart/remove', data, {
+      headers: headers
     })
     .then(() => {
       setLoading(true);
@@ -83,16 +87,35 @@ function Cart() {
       });
     })
   }
-  const changeQuantity = (id,event) => {
-    const newList = [...sections];
-    newList.map(item => {
-      if (item['id'] === id) {
+  const changeQuantity = (id,recipe_id,event) => {
+    const recipe = sections.reduce(section => section['recipe_id'] === recipe_id);
+    recipe['recipe_ingredients'].map(item => {
+      if (item['_id'] === id) {
+        // console.log(id, item);
         item['quantity'] = parseInt(event.target.value);
       }
     });
-    setSections(newList);
+    // console.log(recipe['recipe_ingredients']);
+    const data = {
+      'ingredients': recipe['recipe_ingredients'],
+      'recipe_id': recipe_id,
+    }
+    axios.post('http://127.0.0.1:5000/cart/update', data, {
+      headers: headers
+    })
+    .then(() => {
+      setLoading(true);
+      setUpdate(!update);
+    })
+    .catch((err) => {
+      setNotify({
+        isOpen: true,
+        message: err.response.data.message || 'Connection Error',
+        type: 'error',
+      });
+    })
   }
-  
+
   return (
     <>
       <Navbar />
