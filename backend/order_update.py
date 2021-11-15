@@ -5,6 +5,7 @@ from bson.objectid import ObjectId
 
 def order_update(token, order_id, status):
     ''' update the order status '''
+    # Retrieve data from the database
     users = database.get_users()
     orders = database.get_orders()
     

@@ -4,6 +4,7 @@ import datetime
 
 def order_listall(token, status):
     ''' view the list of the orders according to the status given '''
+    # Retrieve data from the database
     users = database.get_users()
     orders = database.get_orders()
 
@@ -31,12 +32,12 @@ def order_listall(token, status):
                 (status == 'all' or order['status'] == status)):
                 order_listall.append(str(order['_id']))
     
-    # print(order_listall)
     # return a list of order_id accroding the the condition given
     return {
         "order_list":order_listall
     }
 
+################## testing ##################
 # order_listall("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDQgMTc6NTc6NTcuNTk3MTk3IiwicmFuZG9tbnVtYmVyIjoiMC4yNTgzNjkxMzU2NTk5OTUifQ.DPov7O0dphMygmiQKvPLhI-KxAYEpnSG8v4BuL0zYSY", "processing")
 
     
