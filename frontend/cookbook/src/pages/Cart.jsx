@@ -7,9 +7,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import Navbar from '../components/Navbar';
 import Checkout from '../components/Checkout';
-import CartCard from '../components/CartCard';
 import DeliveryForm from '../components/DeliveryForm';
 import Notification from '../components/Notification';
+import RecipeSection from '../components/RecipeSection';
 
 const ContinueButton = styled(Button)(() => ({
   color: "#89623D",
@@ -20,11 +20,12 @@ const ContinueButton = styled(Button)(() => ({
 
 function Cart() {
   const token = localStorage.getItem('cookbook-token');
+  const headers = {"Authorization": `Bearer ${token}`};
   const history = useHistory();
   const [checkout, setCheckout] = useState(false);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [ingredients, setIngredients] = useState([]);
+  const [sections, setSections] = useState([]);
   const [update, setUpdate] = useState(false);
   const [deliveryInfo, setDeliveryInfo] = useState({
     firstName: 'John',
@@ -42,13 +43,13 @@ function Cart() {
   });
 
   useEffect(() => {
-    console.log(update);
-    const auth = {"Authorization": `Bearer ${token}`};
-    axios.get('http://127.0.0.1:5000/cart/retrieve', {headers: auth})
+    // console.log(update);
+    
+    axios.get('http://127.0.0.1:5000/cart/retrieve', {headers: headers})
     .then((res) => {
-      const {ingredients, total} = res.data;
       console.log(res.data);
-      setIngredients(ingredients);
+      const {section_list, total} = res.data;
+      setSections(section_list);
       setTotal(total);
     })
     .catch((err) => {
@@ -66,10 +67,13 @@ function Cart() {
   const goHome = () => {
     history.push('/');
   }
-  const removeIngredient = (id) => {
-    axios.post('http://127.0.0.1:5000/cart/remove', {
-      token,
-      'ingredients': id,
+  const removeIngredient = (id, recipe_id) => {
+    const data = {
+      'ingredient': id,
+      'recipe_id': recipe_id,
+    }
+    axios.post('http://127.0.0.1:5000/cart/remove', data, {
+      headers: headers
     })
     .then(() => {
       setLoading(true);
@@ -83,16 +87,35 @@ function Cart() {
       });
     })
   }
-  const changeQuantity = (id,event) => {
-    const newList = [...ingredients];
-    newList.map(item => {
-      if (item['id'] === id) {
+  const changeQuantity = (id,recipe_id,event) => {
+    const recipe = sections.reduce(section => section['recipe_id'] === recipe_id);
+    recipe['recipe_ingredients'].map(item => {
+      if (item['_id'] === id) {
+        // console.log(id, item);
         item['quantity'] = parseInt(event.target.value);
       }
     });
-    setIngredients(newList);
+    // console.log(recipe['recipe_ingredients']);
+    const data = {
+      'ingredients': recipe['recipe_ingredients'],
+      'recipe_id': recipe_id,
+    }
+    axios.post('http://127.0.0.1:5000/cart/update', data, {
+      headers: headers
+    })
+    .then(() => {
+      setLoading(true);
+      setUpdate(!update);
+    })
+    .catch((err) => {
+      setNotify({
+        isOpen: true,
+        message: err.response.data.message || 'Connection Error',
+        type: 'error',
+      });
+    })
   }
-  
+
   return (
     <>
       <Navbar />
@@ -100,25 +123,29 @@ function Cart() {
       <Stack
         direction="row"
         justifyContent="center"
-        pt={25}
+        pt={20}
         spacing={5}
-        sx={{ backgroundColor:'#F9FAF9', height: '84vh' }}
+        sx={{ backgroundColor:'#F9FAF9', minHeight: '84vh' }}
       >
         {checkout ? 
           <Paper sx={{width: "30%", padding: '20px', height: '80%'}}><DeliveryForm deliveryInfo={deliveryInfo} setDeliveryInfo={setDeliveryInfo}/></Paper> 
         :
           loading ? <CircularProgress sx={{position: 'relative', top: '20%'}}/> 
-          : 
-          <Paper sx={{width: "30%", padding: '20px', height: '80%'}}>
-          <Typography component="h2" variant="h4" gutterBottom sx={{color: "#FE793D"}}>My Cart</Typography>
-            {ingredients.map(ingredient => <CartCard removeIngredient={removeIngredient} ingredient={ingredient} key={ingredient['id']} changeQuantity={changeQuantity} />)}
-          </Paper>
+          :
+          <Stack
+            direction="column"
+            sx={{width: "50%"}}
+          >
+            <Typography component="h1" variant="h4" gutterBottom sx={{color: "#FE793D"}}>My Cart</Typography>
+            {sections.map(section => <RecipeSection removeIngredient={removeIngredient} ingredients={section['recipe_ingredients']} key={section['recipe_id']} recipeId={section['recipe_id']} changeQuantity={changeQuantity} />)}
+          </Stack>
+          
           }
         <Stack direction="column" sx={{width: "20%"}}>
           {loading ? <CircularProgress sx={{position: 'relative', left: '50%', top: '20%'}}/> :
             <>
               <ContinueButton endIcon={<ArrowForwardIosIcon />} sx={{alignSelf: 'flex-end', paddingTop: 0, marginBottom: '20px'}} onClick={goHome}>Continue Shopping</ContinueButton>
-              <Checkout checkout={checkout} setCheckout={setCheckout} total={total} ingredients={ingredients} deliveryInfo={deliveryInfo}/>
+              <Checkout checkout={checkout} setCheckout={setCheckout} total={total} sections={sections} deliveryInfo={deliveryInfo}/>
             </>
           }
         </Stack>

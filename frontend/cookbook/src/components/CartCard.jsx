@@ -4,7 +4,8 @@ import { Card, CardContent, CardMedia, Stack, Typography, OutlinedInput } from '
 import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 
 
-function CartCard({ ingredient, removeIngredient, changeQuantity }) {
+function CartCard({ ingredient, recipeId, removeIngredient, changeQuantity }) {
+  console.log(ingredient);
   return (  
     <Card sx={{width: '100%', marginTop: '20px', display: 'flex', flexDirection:'row', position: 'relative'}}>
       <CardMedia
@@ -19,8 +20,8 @@ function CartCard({ ingredient, removeIngredient, changeQuantity }) {
           spacing={3}
           sx={{width: '250px'}}
         >
-          <Typography variant="h5" sx={{color: '#977554'}}>{ingredient['title']}</Typography>
-          <Typography variant="h6" sx={{color: '#977554'}}>$ {ingredient['subtotal']}</Typography>
+          <Typography variant="h6" sx={{color: '#977554'}}>{ingredient['title']}</Typography>
+          <Typography variant="h6" sx={{color: '#977554'}}>$ {parseFloat(ingredient['subtotal']).toFixed(2)}</Typography>
         </Stack>
       </CardContent>
       {/* <Typography variant="h6" sx={{color: '#977554', alignSelf: 'center'}}>Quantity: {ingredient['quantity']}</Typography> */}
@@ -30,9 +31,9 @@ function CartCard({ ingredient, removeIngredient, changeQuantity }) {
         justifyContent="center"
       >
         <Typography variant="h6" sx={{color: '#977554', alignSelf: 'center'}}>Quantity</Typography>
-        <OutlinedInput value={ingredient['quantity']} type="number" onChange={(event) => changeQuantity(ingredient['id'], event)} sx={{borderRadius: '3px', width: "50%", backgroundColor:'#ffffff', color: '#000000'}} />
+        <OutlinedInput value={ingredient['quantity']} type="number" onChange={(event) => changeQuantity(ingredient['_id'], recipeId, event)} sx={{borderRadius: '3px', width: "50%", backgroundColor:'#ffffff', color: '#000000'}} />
       </Stack>
-      <CloseSharpIcon onClick={() => removeIngredient(ingredient['id'])} sx={{position: 'absolute', right: 0, padding: '10px', cursor: 'pointer'}}/>
+      <CloseSharpIcon onClick={() => removeIngredient(ingredient['_id'], recipeId)} sx={{position: 'absolute', right: 0, padding: '10px', cursor: 'pointer'}}/>
     </Card>
   )
 }
