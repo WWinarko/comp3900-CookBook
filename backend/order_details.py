@@ -6,6 +6,7 @@ from error import AccessError
 
 def order_details(token, order_id):
     ''' view the detail associated with the order'''
+    # Retrieve data from the database
     users = database.get_users()
     orders = database.get_orders()
 

@@ -7,7 +7,6 @@ import email_helper
 
 def email_send(details, order_id, email, name, address, state, postcode, phone):
     ''' Sends email with order details of their purchase to user '''
-    
     # Set up details
     port = 465
     smtp_server = "smtp.gmail.com"

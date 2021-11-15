@@ -10,6 +10,7 @@ from bson.objectid import ObjectId
 
 def order_add(token, firstname, lastname, email, phone, address, state, postcode, details, total):
     ''' add order to the database '''
+    # Retrieve data from the database
     users = database.get_users()
     orders = database.get_orders()
     recipes = database.get_recipes()
@@ -46,13 +47,19 @@ def order_add(token, firstname, lastname, email, phone, address, state, postcode
         "time":datetime.datetime.strftime(datetime.datetime.now(), "%d/%m/%Y %H:%M"), 
         "total":total
     }
+
     recipe_bought = user['recipe_bought']
+    # Iterate through each recipe
     for recipe in details:
+        # Append to the bought recipe
         recipe_bought.append(recipe['recipe_id'])
+        # Give the recipe owner reward
         recipe_own = recipes.find_one({"_id":ObjectId(recipe['recipe_id'])})
         user_owner = users.find_one({"_id":ObjectId(recipe_own['owner_id'])})
         newReward = user_owner['reward'] + recipe['recipe_subtotal'] * 0.05
+        # Update the reward
         users.update_one({"_id": user_owner['_id']}, {"$set": {"reward":newReward}})
+    # Update the bought recipe
     users.update_one({"_id": user['_id']}, {"$set": {"recipe_bought":recipe_bought}})
 
     # insert the order to the database
@@ -71,15 +78,10 @@ def order_add(token, firstname, lastname, email, phone, address, state, postcode
         'token': token
     }
 
+################## testing ##################
 # order_add('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMTQgMTg6MjU6MTMuOTg0NjQwIiwicmFuZG9tbnVtYmVyIjoiMC4wOTQ5MDE4NzY5NDIzODk5NCJ9.KOPaEQdX8yVPy5Zr2CLQtOaFnzUFBepJVa9dLRLjS3w',
 # "trina", "chang", "ks12345@gmail.com", "09123", "sdfsfsfsdf", "sdfsdf", "dfsdf", [{'recipe_id': '61833fa71f805c540f9562f4', 'recipe_ingredients': [{'id': '61822388cc5920235e3244e7', 'title': 'chicken breast', 'photo': 'dfdsfsdfsfsfsd', 'description': 'yummy chicken breast', 'price': 1.5, 'quantity': 1, 'subtotal': 1.5}, {'id': '618223f6cc5920235e3244ed', 'title': 'chicken leg', 'photo': 'njlkerwe', 'description': 'yummy chicken leg', 'price': 1, 'quantity': 3, 'subtotal': 3}], 'recipe_subtotal': 4.5}],
 # 4.5)
-
-# token = "b'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDEgMTY6NTY6MTAuNzIzMTkzIiwicmFuZG9tbnVtYmVyIjoiMC4xOTc5MTg4NDY2OTA2NzcyNyJ9.kJxOyLv0w2Nq7WZ1KdgTxY_2jKhJprOBriiY33zykZY'"
-# cart = cart_retrieve(token)
-# items = cart["ingredienst"]
-# total = cart["total"]
-# order_add(token, "Maria", "Cuyutupa", "maniga2575@hotmail.com", "012345671314", "Sydney", "NSW", "2138", items, total) 
 
 
     
