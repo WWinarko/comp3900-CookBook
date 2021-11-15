@@ -72,6 +72,7 @@ def auth_register_root():
     payload = request.get_json()
     first_name = payload['first_name']
     last_name = payload['last_name']
+    photo = payload['photo']
     email = payload['email']
     address = payload['address']
     state = payload['state']
@@ -81,7 +82,7 @@ def auth_register_root():
     password = payload['password']
     confirmpassword = payload['confirmpassword']
     return dumps(
-        auth_register(first_name, last_name, email, address, state, postcode, phone, username, password, confirmpassword)
+        auth_register(first_name, last_name, photo, email, address, state, postcode, phone, username, password, confirmpassword)
     )
 
 @APP.route("/auth/login", methods=['POST'])
