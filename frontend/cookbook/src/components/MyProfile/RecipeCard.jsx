@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import RoundButton from "../RoundButton";
 import { Skeleton, Stack } from "@mui/material";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -30,6 +31,7 @@ function RecipeCard({ id }) {
   const classes = useStyles();
   const [loadingState, setLoadingState] = useState(true);
   const [recipe, setRecipe] = useState({});
+  const history = useHistory();
 
   React.useEffect(() => {
     setLoadingState(true);
@@ -52,7 +54,18 @@ function RecipeCard({ id }) {
   }, [id])
 
   const handleEdit = () => {
-    console.log('a');
+    history.push('/recipe/add', {
+      name: recipe.title,
+      photo: recipe.photo,
+      description: recipe.intro,
+      prep: recipe.preptime,
+      serves: recipe.serves,
+      cook: recipe.cooktime,
+      steps: recipe.steps,
+      ingredients: recipe.ingredients,
+      difficulty: recipe.difficulty,
+      labels: recipe.labels,
+    });
   }
 
   return (
@@ -122,7 +135,7 @@ function RecipeCard({ id }) {
 }
 
 RecipeCard.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
 }
 
 export default RecipeCard;

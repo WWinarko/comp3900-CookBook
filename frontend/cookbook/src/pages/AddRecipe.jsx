@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Stack, Typography, InputAdornment, FormLabel, Button, } from "@mui/material";
 import { styled } from '@mui/material/styles';
 
@@ -7,7 +7,7 @@ import CustomTextField from "../components/TextField/CustomTextField";
 import NumberTextField from "../components/TextField/NumberTextField";
 import Navbar from '../components/Navbar';
 import FileTextField from "../components/TextField/FileTextField";
-import RecipeStepsContainer from '../components/Recipe/RecipeStepsContainer';
+import AddRecipeStepsContainer from '../components/AddRecipeStepsContainer';
 import AddStep from "../components/AddStep";
 import RoundButton from "../components/RoundButton";
 import AddIngredientModal from "../components/AddIngredientModal";
@@ -31,6 +31,8 @@ export const AddButton = styled(Button)(() => ({
 
 function AddRecipe() {
   const history = useHistory();
+  const location = useLocation();
+  
   const [recipeInfo, setRecipeInfo] = useState(
     {
       recipeName: '',
@@ -55,6 +57,7 @@ function AddRecipe() {
   }
   
   const sendToBack = () => {
+    console.log(test);
     const recipeBody = {
       token: localStorage.getItem('cookbook-token'),
       title: recipeInfo.recipeName,
@@ -86,13 +89,22 @@ function AddRecipe() {
 
   }
 
-  // const [remove, setRemove] = useState("");
-
-  // const handleRemove = () => setRemove(1);
-
-  // React.useEffect(() => {
-  //   console.log('aa');
-  // }, [remove])
+  React.useEffect(() => {
+    if (location.state) {
+      setSteps(location.state.steps);
+      setIngredients(location.state.ingredients);
+      setRecipeInfo({
+        recipeName: location.state.name,
+        photo: location.state.photo,
+        description: location.state.description,
+        prepTime: location.state.prep,
+        cookTime: location.state.cook,
+        difficulty: location.state.difficulty,
+        serves: location.state.serves,
+        labels: location.state.labels,
+      })
+    }
+  }, [])
 
   const handleRemoveIngredient = (id) => {
     setIngredients(ingredients.filter((ingredient) => ingredient['product_id'] !== id));
@@ -108,8 +120,9 @@ function AddRecipe() {
   }
 
   const handleRemoveStep = (item) => {
-    setIngredients(ingredients.filter((i) => i !== item));
+    setSteps(steps.filter((i) => i !== item));
   }
+
   return (
     <>
       <Navbar />
@@ -155,7 +168,7 @@ function AddRecipe() {
 
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Steps</FormLabel>
           <div style={{ width: '100%' }}>
-            <RecipeStepsContainer recipesData={steps} handleRemove={handleRemoveStep} />
+            <AddRecipeStepsContainer recipesData={steps} handleRemove={handleRemoveStep} />
             {newStep ? <AddStep steps={steps} setSteps={setSteps} newStep={newStep} setNewStep={() => setNewStep(false)}/> : <AddButton onClick={handleNewStep}> Add step </AddButton>}
           </div>
         </Stack>

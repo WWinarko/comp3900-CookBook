@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 
 
-import RecipeStepsCard from './RecipeStepsCard';
+import AddRecipeStepsCard from './AddRecipeStepsCard';
 import { Stack } from '@mui/material';
 // import SquareButton from './SquareButton';
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles(({
   }
 }));
 
-function RecipeStepsContainer({ recipesData }) {
+function AddRecipeStepsContainer({ recipesData, handleRemove }) {
   const classes = useStyles();
 
   return (
@@ -34,7 +34,7 @@ function RecipeStepsContainer({ recipesData }) {
         return (
           <div key={index}>
             <p className={classes.title}>Step {index + 1}</p>
-            <RecipeStepsCard data={step}/>
+            <AddRecipeStepsCard data={step} handleRemove={handleRemove}/>
             <Stack direction="row" spacing={2} mt={2}>
               {/* <SquareButton name="Edit" />
               <SquareButton name="Remove" /> */}
@@ -46,9 +46,9 @@ function RecipeStepsContainer({ recipesData }) {
   )
 }
 
-RecipeStepsContainer.propTypes = {
+AddRecipeStepsContainer.propTypes = {
   recipesData: PropTypes.array,
-  // setRemove: PropTypes.func
+  handleRemove: PropTypes.func
 }
 
-export default RecipeStepsContainer;
+export default AddRecipeStepsContainer;
