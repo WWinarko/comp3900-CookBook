@@ -2,7 +2,7 @@ import database
 import token_helper
 from error import AccessError
 
-def sales_total(token, orders=None):
+def sales_total(token):
     ''' Return total sales '''
     # Verify user
     users = database.get_users()
@@ -13,13 +13,16 @@ def sales_total(token, orders=None):
     if not user['admin']:
         raise AccessError(description="The user does not have permission")
 
-    # If orders is not specified, it assigns the one from database
-    if orders is None:
-        orders = database.get_orders()
+    # Check if database is empty
+    orders = database.get_orders()
 
     total = 0
     for order in orders.find():
         total += order["total"]
+
+    # Check if orders have been placed
+    if total == 0:
+        raise AccessError(description="No orders have been placed yet")
 
     return "{:.2f}".format(total)
 
