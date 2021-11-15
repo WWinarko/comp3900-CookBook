@@ -72,7 +72,7 @@ def order_add(token, firstname, lastname, email, phone, address, state, postcode
     }
 
 # order_add('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMTQgMTg6MjU6MTMuOTg0NjQwIiwicmFuZG9tbnVtYmVyIjoiMC4wOTQ5MDE4NzY5NDIzODk5NCJ9.KOPaEQdX8yVPy5Zr2CLQtOaFnzUFBepJVa9dLRLjS3w',
-# "trina", "chang", "ks20342@gmail.com", "09123", "sdfsfsfsdf", "sdfsdf", "dfsdf", [{'recipe_id': '61833fa71f805c540f9562f4', 'recipe_ingredients': [{'id': '61822388cc5920235e3244e7', 'title': 'chicken breast', 'photo': 'dfdsfsdfsfsfsd', 'description': 'yummy chicken breast', 'price': 1.5, 'quantity': 1, 'subtotal': 1.5}, {'id': '618223f6cc5920235e3244ed', 'title': 'chicken leg', 'photo': 'njlkerwe', 'description': 'yummy chicken leg', 'price': 1, 'quantity': 3, 'subtotal': 3}], 'recipe_subtotal': 4.5}],
+# "trina", "chang", "ks12345@gmail.com", "09123", "sdfsfsfsdf", "sdfsdf", "dfsdf", [{'recipe_id': '61833fa71f805c540f9562f4', 'recipe_ingredients': [{'id': '61822388cc5920235e3244e7', 'title': 'chicken breast', 'photo': 'dfdsfsdfsfsfsd', 'description': 'yummy chicken breast', 'price': 1.5, 'quantity': 1, 'subtotal': 1.5}, {'id': '618223f6cc5920235e3244ed', 'title': 'chicken leg', 'photo': 'njlkerwe', 'description': 'yummy chicken leg', 'price': 1, 'quantity': 3, 'subtotal': 3}], 'recipe_subtotal': 4.5}],
 # 4.5)
 
 # token = "b'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDEgMTY6NTY6MTAuNzIzMTkzIiwicmFuZG9tbnVtYmVyIjoiMC4xOTc5MTg4NDY2OTA2NzcyNyJ9.kJxOyLv0w2Nq7WZ1KdgTxY_2jKhJprOBriiY33zykZY'"
