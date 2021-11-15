@@ -27,7 +27,6 @@ function AccountMenu({anchorEl, open, onClose, onClick, setOpenLoading}) {
         Authorization: `Bearer ${token}`
       }})
       .then((res) => {
-        console.log(res.data['admin']);
         setIsAdmin(res.data['admin']);
       })
       .catch((err) => {

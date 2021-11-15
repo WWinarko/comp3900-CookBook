@@ -66,7 +66,6 @@ function Navbar() {
           user_id,
         }})
         .then((res) => {
-          console.log(res);
           setPhoto(res.data['photo']);
         })
         .catch((err) => {
