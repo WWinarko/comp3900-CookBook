@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 
 def get_users():
+    ''' Get the user data from the database '''
     cluster = "mongodb+srv://cookbookla:CookBook@cluster0.ajioi.mongodb.net/CookBook?ssl=true&ssl_cert_reqs=CERT_NONE"
     client = MongoClient(cluster)
     db = client.CookBook
@@ -8,6 +9,7 @@ def get_users():
     return users
 
 def get_recipes():
+    ''' Get the recipe data from the database '''
     cluster = "mongodb+srv://cookbookla:CookBook@cluster0.ajioi.mongodb.net/CookBook?ssl=true&ssl_cert_reqs=CERT_NONE"
     client = MongoClient(cluster)
     db = client.CookBook
@@ -15,6 +17,7 @@ def get_recipes():
     return recipes
 
 def get_products():
+    ''' Get the product data from the database '''
     cluster = "mongodb+srv://cookbookla:CookBook@cluster0.ajioi.mongodb.net/CookBook?ssl=true&ssl_cert_reqs=CERT_NONE"
     client = MongoClient(cluster)
     db = client.CookBook
@@ -22,6 +25,7 @@ def get_products():
     return products
     
 def get_carts():
+    ''' Get the cart data from the database '''
     cluster = "mongodb+srv://cookbookla:CookBook@cluster0.ajioi.mongodb.net/CookBook?ssl=true&ssl_cert_reqs=CERT_NONE"
     client = MongoClient(cluster)
     db = client.CookBook
@@ -29,6 +33,7 @@ def get_carts():
     return carts
 
 def get_orders():
+    ''' Get the order data from the database '''
     cluster = "mongodb+srv://cookbookla:CookBook@cluster0.ajioi.mongodb.net/CookBook?ssl=true&ssl_cert_reqs=CERT_NONE"
     client = MongoClient(cluster)
     db = client.CookBook

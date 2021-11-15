@@ -6,6 +6,7 @@ from error import InputError
 
 def auth_login(username, password):
     ''' Log in a user '''
+    # retrieve data from the database
     users = database.get_users()
 
     # check if both field have arguments
@@ -30,5 +31,6 @@ def auth_login(username, password):
         'token': token
     }
 
+################## testing ##################
 # auth_login("TrinaChang", "abcdefgh")
 # auth_login("JennaChan", "iamsougly")

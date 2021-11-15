@@ -68,7 +68,6 @@ def auth_register(first_name, last_name, photo, email, address, state, postcode,
         'token': token
     }
 
-
-
+################## testing ##################
 # auth_register("Trina", "Chang", "kabcde@cookbook.com", "", "", "", "09123", "TrinaChang", "abcdefgh", "abcdefgh")
 # auth_register("Jenna", "Chan", "jennaclown@gmail.com", "", "", "", "09123456", "JennaChan", "iamsougly", "iamsougly")
