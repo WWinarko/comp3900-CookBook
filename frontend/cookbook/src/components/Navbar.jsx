@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
@@ -44,8 +44,6 @@ const useStyles = makeStyles(({
 
 function Navbar() {
   const classes = useStyles();
-  const history = useHistory();
-  const location = useLocation();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -58,42 +56,15 @@ function Navbar() {
   }
   
   const token = localStorage.getItem('cookbook-token');
-  const handleLogin = () => {
-    history.push('/login');
-  }
-
-  const handleHome = () => {
-    if (location['pathname'] !== '/') {
-      history.push('/');
-    }
-  }
-
-  const handleCart = () => {
-    if (token !== null) {
-      history.push('/cart');
-    } else {
-      history.push('/login');
-    }
-  }
-
-  const handleAdd = () => {
-    if (token !== null) {
-      history.push('/recipe/add');
-    } else {
-      history.push('/login');
-    }
-  }
-
-  const handleRecommendation = () => {
-    history.push('/recommendation');
-  }
 
   const handleSearch = (search, label=false) => {
     history.push(`/search?searchTerm=${search}&label=${label}`);
   }
   return (
     <div className={classes.root} >
-      <ReactLogo className={classes.logo} onClick={handleHome}/>
+      <NavLink to="/">
+        <ReactLogo className={classes.logo} />
+      </NavLink>
       <SearchBar width="667px" placeholder="Search recipes" searchFunc={handleSearch}/>
       <Stack
         direction="row"
@@ -105,13 +76,22 @@ function Navbar() {
           direction="row"
           spacing={3}
           alignItems="center">
-          <RecommendRoundedIcon sx={{ fontSize: 47, alignSelf: 'center', color: '#ffffff'}} className={classes.icon} onClick={handleRecommendation}/>
+          <NavLink to='/recommendation'>
+            <RecommendRoundedIcon sx={{ fontSize: 47, alignSelf: 'center', color: '#ffffff'}} className={classes.icon} />
+          </NavLink>
           <Tooltip title="Add New Recipe" placement="bottom-end">
-            <AddRecipeIcon onClick={handleAdd} className={classes.icon}/>
+            <NavLink to={(token !== null)? "/recipe/add" : "/login"}>
+              <AddRecipeIcon className={classes.icon}/>
+            </NavLink>
           </Tooltip>
-          <CartIcon onClick={handleCart} className={classes.icon} />
+          <NavLink to={(token !== null)? "/cart" : "/login"}>
+            <CartIcon className={classes.icon} />
+          </NavLink>
         </Stack>
-        {token === null ? <RoundButton name="Login" onClick={handleLogin} /> 
+        {token === null ?
+          <NavLink to="/login">
+            <RoundButton name="Login" />
+          </NavLink> 
         : 
         <>
           <Avatar sx={{cursor: 'pointer'}} onClick={handleMenu}>C</Avatar>
