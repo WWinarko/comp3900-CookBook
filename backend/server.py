@@ -36,6 +36,7 @@ from order_details import order_details
 
 from recommendation_questions import recommendation_questions
 from recommendation_history import recommendation_history
+from recommendation_swap import recommendation_swap
 
 from admin_check import admin_check
 
@@ -421,6 +422,14 @@ def recommendation_history_root():
     token = bearer.split()[1]  # YourTokenHere
     return dumps(
         recommendation_history(token)
+    )
+
+@APP.route("/recommendation/swap", methods=['GET'])
+def recommendation_swap_root():
+    ''' Recommend reqcipes for swapping '''
+    product_id = request.args.getlist('product_id')
+    return dumps(
+        recommendation_swap(product_id)
     )
 
 ##### Admin ROUTE #####
