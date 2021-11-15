@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import MyProfilePicture from "../components/MyProfile/MyProfilePicture";
 import DashboardOption from "../components/MyProfile/DashboardOption";
 import OrderDashboard from "../components/MyProfile/OrderDashboard";
-import RecipeDashboardAdmin from "../components/MyProfile/RecipeDashboardAdmin";
+// import RecipeDashboardAdmin from "../components/MyProfile/RecipeDashboardAdmin";
 
 function MyProfile() {
   const [option, setOption] = useState('ORDERS');
@@ -59,8 +59,8 @@ function MyProfile() {
             sx={{ width: '60vw' }}
           >
             {option === 'ORDERS' && <OrderDashboard admin={admin} />}
-            {option === 'RECIPES' && admin && <RecipeDashboardAdmin />}
-            {option === 'PRODUCTS' && <RecipeDashboardAdmin />}
+            {/* {option === 'RECIPES' && admin && <RecipeDashboardAdmin />} */}
+            {/* {option === 'PRODUCTS' && <RecipeDashboardAdmin />} */}
           </Stack>
         </Stack>
       </Stack>

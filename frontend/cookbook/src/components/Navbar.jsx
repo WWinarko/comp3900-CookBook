@@ -88,10 +88,13 @@ function Navbar() {
     history.push('/recommendation');
   }
 
+  const handleSearch = (search, label=false) => {
+    history.push(`/search?searchTerm=${search}&label=${label}`);
+  }
   return (
     <div className={classes.root} >
       <ReactLogo className={classes.logo} onClick={handleHome}/>
-      <SearchBar width="667px" placeholder="Search recipes" />
+      <SearchBar width="667px" placeholder="Search recipes" searchFunc={handleSearch}/>
       <Stack
         direction="row"
         divider={<Divider orientation="vertical" flexItem sx={{border: "1.5px solid #FFFFFF", borderRadius: '5px'}}/>}

@@ -13,6 +13,7 @@ import User from './pages/User';
 import MyProfile from './pages/MyProfile';
 import Cart from './pages/Cart';
 import Recommendation from './pages/Recommendation';
+import RecipeSearch from './pages/RecipeSearch';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/recommendation">
           <Recommendation />
+        </Route>
+        <Route path="/search">
+          <RecipeSearch />
         </Route>
         <Route exact path="/recipe/add">
           <AddRecipe />

@@ -83,6 +83,15 @@ function Cart() {
       });
     })
   }
+  const changeQuantity = (id,event) => {
+    const newList = [...ingredients];
+    newList.map(item => {
+      if (item['id'] === id) {
+        item['quantity'] = parseInt(event.target.value);
+      }
+    });
+    setIngredients(newList);
+  }
   
   return (
     <>
@@ -102,7 +111,7 @@ function Cart() {
           : 
           <Paper sx={{width: "30%", padding: '20px', height: '80%'}}>
           <Typography component="h2" variant="h4" gutterBottom sx={{color: "#FE793D"}}>My Cart</Typography>
-            {ingredients.map(ingredient => <CartCard removeIngredient={removeIngredient} ingredient={ingredient} key={ingredient['id']} />)}
+            {ingredients.map(ingredient => <CartCard removeIngredient={removeIngredient} ingredient={ingredient} key={ingredient['id']} changeQuantity={changeQuantity} />)}
           </Paper>
           }
         <Stack direction="column" sx={{width: "20%"}}>
