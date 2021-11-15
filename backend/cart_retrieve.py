@@ -40,7 +40,7 @@ def cart_retrieve(token):
                     "subtotal":subtotal,
                 }
                 recipe_list.append(product_return)
-            section_list.append({"recipe_ingredients":recipe_list,"recipe_subtotal":recipe_total})
+            section_list.append({"recipe_id":recipe['recipe_id'], "recipe_ingredients":recipe_list,"recipe_subtotal":recipe_total})
     else:
         raise AccessError(description="No cart for this user")
 
@@ -49,7 +49,7 @@ def cart_retrieve(token):
         'total': total
     }
 
-# cart_retrieve('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMTQgMTg6MjU6MTMuOTg0NjQwIiwicmFuZG9tbnVtYmVyIjoiMC4wOTQ5MDE4NzY5NDIzODk5NCJ9.KOPaEQdX8yVPy5Zr2CLQtOaFnzUFBepJVa9dLRLjS3w')
+# print(cart_retrieve('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMTQgMTg6MjU6MTMuOTg0NjQwIiwicmFuZG9tbnVtYmVyIjoiMC4wOTQ5MDE4NzY5NDIzODk5NCJ9.KOPaEQdX8yVPy5Zr2CLQtOaFnzUFBepJVa9dLRLjS3w'))
 
 '''
 # Testing
