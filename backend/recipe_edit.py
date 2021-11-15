@@ -27,3 +27,7 @@ def recipe_edit(token, recipe_id, title, intro, photo, difficulty, cooktime, pre
     recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"ingredients":ingredients}})
     recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"steps":steps}})
     recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"labels":labels}})
+
+    return {
+        "recipe_id":recipe_id
+    }

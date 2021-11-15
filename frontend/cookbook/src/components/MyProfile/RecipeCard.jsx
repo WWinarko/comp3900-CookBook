@@ -55,6 +55,7 @@ function RecipeCard({ id }) {
 
   const handleEdit = () => {
     history.push('/recipe/add', {
+      id: id,
       name: recipe.title,
       photo: recipe.photo,
       description: recipe.intro,

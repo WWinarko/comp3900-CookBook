@@ -13,6 +13,7 @@ import RoundButton from "../components/RoundButton";
 import AddIngredientModal from "../components/AddIngredientModal";
 import LabelSelect from "../components/LabelSelect";
 import BuyRecipeModalCard from "../components/Recipe/BuyRecipeModalCard";
+import Notification from "../components/Notification";
 
 export const AddButton = styled(Button)(() => ({
   backgroundColor: '#89623D',
@@ -49,6 +50,12 @@ function AddRecipe() {
   const [steps, setSteps] = useState([]);
   const [newStep, setNewStep] = useState(false);
   const [newIngredient, setNewIngredient] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: '',
+    type: 'error',
+  });
 
   const handleNewIngredient = () => setNewIngredient(!newIngredient);
 
@@ -57,7 +64,6 @@ function AddRecipe() {
   }
   
   const sendToBack = () => {
-    console.log(test);
     const recipeBody = {
       token: localStorage.getItem('cookbook-token'),
       title: recipeInfo.recipeName,
@@ -71,21 +77,60 @@ function AddRecipe() {
       steps: steps,
       labels: recipeInfo.labels,
     }
-    fetch('http://127.0.0.1:5000/recipe/upload', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(recipeBody)
-    }).then((data) => {
-      if (data.status === 200) {
-        data.json().then((res) => {
-          history.push('/recipe/' + res.recipe_id);
-        })
-      }
-    }).catch((err) => {
-      console.log(err);
-    })
+
+    if (edit === true) {
+      recipeBody.recipe_id =  location.state.id;
+      fetch('http://127.0.0.1:5000/recipe/edit', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(recipeBody)
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            history.push('/recipe/' + res.recipe_id);
+          })
+        } else {
+          data.json().then((res) => {
+            setNotify({
+              isOpen: true,
+              message: res.message,
+              type: 'error',
+            });
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
+    } else {
+      fetch('http://127.0.0.1:5000/recipe/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(recipeBody)
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            history.push('/recipe/' + res.recipe_id);
+          })
+        } else {
+          data.json().then((res) => {
+            setNotify({
+              isOpen: true,
+              message: res.message,
+              type: 'error',
+            });
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
+    
 
   }
 
@@ -103,6 +148,7 @@ function AddRecipe() {
         serves: location.state.serves,
         labels: location.state.labels,
       })
+      setEdit(true);
     }
   }, [])
 
@@ -131,6 +177,7 @@ function AddRecipe() {
         alignItems="center"
         pt={20}
         sx={{backgroundColor: '#F9FAF9', height: '100%'}}>
+        <Notification notify={notify} setNotify={setNotify} /> 
         <Typography component="h1" variant="h3" sx={{color: "#FE793D", marginBottom: '36px'}}>Add Recipe</Typography>
         <Stack
           direction="column"
