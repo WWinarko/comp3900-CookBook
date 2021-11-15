@@ -1,7 +1,6 @@
 from error import AccessError
 import token_helper
 import database
-import cart_helper
 from error import AccessError
 def cart_remove(token, recipe_id, item):
     ''' Remove item (only one) from shopping cart '''
