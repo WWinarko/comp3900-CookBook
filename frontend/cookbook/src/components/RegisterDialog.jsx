@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useHistory } from 'react-router-dom';
 
 import CustomTextField from './TextField/CustomTextField';
+import FileTextField from './TextField/FileTextField';
 import SquareButton from './SquareButton';
 import Notification from './Notification';
 
@@ -31,6 +32,7 @@ function RegisterDialog({open, setOpen}) {
   const [personalInfo, setPersonalInfo] = useState({
     firstName: '',
     lastName: '',
+    photo: '',
     email: '',
     address: '',
     state: '',
@@ -89,6 +91,7 @@ function RegisterDialog({open, setOpen}) {
       axios.post('http://127.0.0.1:5000/auth/register', {
         first_name: personalInfo['firstName'],
         last_name:  personalInfo['lastName'],
+        photo: personalInfo['photo'],
         email: personalInfo['email'],
         address: personalInfo['address'],
         state:  personalInfo['state'],
@@ -99,8 +102,9 @@ function RegisterDialog({open, setOpen}) {
         confirmpassword: accountInfo['confirmPassword']
         })
         .then((res) => {       
-          const {token} = res.data;
+          const {token, user_id} = res.data;
           localStorage.setItem('cookbook-token', token);
+          localStorage.setItem('cookbook-profile', user_id);
           history.push('/'); 
         })
         .catch((err) => {
@@ -134,6 +138,7 @@ function RegisterDialog({open, setOpen}) {
               <CustomTextField id="firstName" required name="First Name" value={personalInfo['firstName']} setValue={setPersonalInfo}  field="object" width="205px"/>
               <CustomTextField id="lastName" required name="Last Name" value={personalInfo['lastName']} setValue={setPersonalInfo}  field="object" width="205px"/>
             </Stack>
+            <FileTextField id="photo" name="Photo" setValue={setPersonalInfo} field="object" width="466px" accept="image/*"/>
             <CustomTextField id="email" required name="Email" value={personalInfo['email']} setValue={setPersonalInfo}  field="object" width="466px"/>
             <CustomTextField id="phone" required name="Phone" value={personalInfo['phone']} setValue={setPersonalInfo}  field="object" width="466px"/>
             <CustomTextField id="adress" name="Address" value={personalInfo['adress']} setValue={setPersonalInfo}  field="object" width="466px"/>

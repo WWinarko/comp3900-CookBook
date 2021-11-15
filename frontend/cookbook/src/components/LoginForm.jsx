@@ -57,8 +57,9 @@ function LoginForm({setNotify}) {
         password: password.trim()
       })
       .then((res) => {
-        const {token} = res.data;
+        const {token, user_id} = res.data;
         localStorage.setItem('cookbook-token', token);
+        localStorage.setItem('cookbook-profile', user_id);
         history.push('/');
       })
       .catch((err) => {

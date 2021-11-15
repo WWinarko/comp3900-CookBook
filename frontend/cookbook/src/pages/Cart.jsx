@@ -47,7 +47,7 @@ function Cart() {
     axios.get('http://127.0.0.1:5000/cart/retrieve', {headers: auth})
     .then((res) => {
       const {ingredients, total} = res.data;
-  
+      console.log(res.data);
       setIngredients(ingredients);
       setTotal(total);
     })

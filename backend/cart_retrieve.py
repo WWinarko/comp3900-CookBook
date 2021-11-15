@@ -2,7 +2,6 @@ from error import AccessError
 from bson.objectid import ObjectId
 import token_helper
 import database
-from cart_add import cart_add
 
 def cart_retrieve(token):
     ''' Retrieves ingredients and total from the shopping cart '''
@@ -16,35 +15,41 @@ def cart_retrieve(token):
     user = users.find_one({"token":token})
     cart = carts.find_one({"user_id":str(user['_id'])})
 
-    ingredients_list = []
+    section_list = []
     total = 0
     # If cart exists, it will return the list of ingredients. Otherwise, 
     # it will return an empty list.
     if (cart is not None):
         products = database.get_products()
-        ingredients = cart["ingredients"]
-        for ingredient in ingredients:
-            quantity = ingredient["quantity"]
-            product = products.find_one({"_id": ObjectId(ingredient["_id"])})
-            subtotal = product["price"] * quantity
-            total += subtotal
-            # print(product['_id'],toString())
-            product_return = {
-                "id":str(product['_id']),
-                "title":product['title'],
-                "photo":product['photo'],
-                "description":product['description'],
-                "price":product['price'],
-                "quantity":quantity,
-                "subtotal":subtotal,
-            }
-
-            ingredients_list.append(product_return)
+        recipes = cart["recipe_list"]
+        for recipe in recipes:
+            recipe_total = 0
+            recipe_list = []
+            for ingredient in recipe['ingredients']:
+                product = products.find_one({"_id": ObjectId(ingredient["_id"])})
+                subtotal = product["price"] * ingredient["quantity"]
+                total += subtotal
+                recipe_total += subtotal
+                product_return = {
+                    "id":str(product['_id']),
+                    "title":product['title'],
+                    "photo":product['photo'],
+                    "description":product['description'],
+                    "price":product['price'],
+                    "quantity":ingredient["quantity"],
+                    "subtotal":subtotal,
+                }
+                recipe_list.append(product_return)
+            section_list.append({"recipe_id":recipe['recipe_id'], "recipe_ingredients":recipe_list,"recipe_subtotal":recipe_total})
+    else:
+        raise AccessError(description="No cart for this user")
 
     return {
-        'ingredients': ingredients_list,
+        'section_list': section_list,
         'total': total
     }
+
+# print(cart_retrieve('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMTQgMTg6MjU6MTMuOTg0NjQwIiwicmFuZG9tbnVtYmVyIjoiMC4wOTQ5MDE4NzY5NDIzODk5NCJ9.KOPaEQdX8yVPy5Zr2CLQtOaFnzUFBepJVa9dLRLjS3w'))
 
 '''
 # Testing

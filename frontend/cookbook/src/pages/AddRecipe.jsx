@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Stack, Typography, InputAdornment, FormLabel, Button, } from "@mui/material";
 import { styled } from '@mui/material/styles';
 
@@ -7,12 +7,13 @@ import CustomTextField from "../components/TextField/CustomTextField";
 import NumberTextField from "../components/TextField/NumberTextField";
 import Navbar from '../components/Navbar';
 import FileTextField from "../components/TextField/FileTextField";
-import RecipeStepsContainer from '../components/Recipe/RecipeStepsContainer';
+import AddRecipeStepsContainer from '../components/AddRecipeStepsContainer';
 import AddStep from "../components/AddStep";
 import RoundButton from "../components/RoundButton";
 import AddIngredientModal from "../components/AddIngredientModal";
 import LabelSelect from "../components/LabelSelect";
 import BuyRecipeModalCard from "../components/Recipe/BuyRecipeModalCard";
+import Notification from "../components/Notification";
 
 export const AddButton = styled(Button)(() => ({
   backgroundColor: '#89623D',
@@ -31,6 +32,8 @@ export const AddButton = styled(Button)(() => ({
 
 function AddRecipe() {
   const history = useHistory();
+  const location = useLocation();
+  
   const [recipeInfo, setRecipeInfo] = useState(
     {
       recipeName: '',
@@ -47,6 +50,12 @@ function AddRecipe() {
   const [steps, setSteps] = useState([]);
   const [newStep, setNewStep] = useState(false);
   const [newIngredient, setNewIngredient] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: '',
+    type: 'error',
+  });
 
   const handleNewIngredient = () => setNewIngredient(!newIngredient);
 
@@ -68,31 +77,80 @@ function AddRecipe() {
       steps: steps,
       labels: recipeInfo.labels,
     }
-    fetch('http://127.0.0.1:5000/recipe/upload', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(recipeBody)
-    }).then((data) => {
-      if (data.status === 200) {
-        data.json().then((res) => {
-          history.push('/recipe/' + res.recipe_id);
-        })
-      }
-    }).catch((err) => {
-      console.log(err);
-    })
+
+    if (edit === true) {
+      recipeBody.recipe_id =  location.state.id;
+      fetch('http://127.0.0.1:5000/recipe/edit', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(recipeBody)
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            history.push('/recipe/' + res.recipe_id);
+          })
+        } else {
+          data.json().then((res) => {
+            setNotify({
+              isOpen: true,
+              message: res.message,
+              type: 'error',
+            });
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
+    } else {
+      fetch('http://127.0.0.1:5000/recipe/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(recipeBody)
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            history.push('/recipe/' + res.recipe_id);
+          })
+        } else {
+          data.json().then((res) => {
+            setNotify({
+              isOpen: true,
+              message: res.message,
+              type: 'error',
+            });
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
+    
 
   }
 
-  // const [remove, setRemove] = useState("");
-
-  // const handleRemove = () => setRemove(1);
-
-  // React.useEffect(() => {
-  //   console.log('aa');
-  // }, [remove])
+  React.useEffect(() => {
+    if (location.state) {
+      setSteps(location.state.steps);
+      setIngredients(location.state.ingredients);
+      setRecipeInfo({
+        recipeName: location.state.name,
+        photo: location.state.photo,
+        description: location.state.description,
+        prepTime: location.state.prep,
+        cookTime: location.state.cook,
+        difficulty: location.state.difficulty,
+        serves: location.state.serves,
+        labels: location.state.labels,
+      })
+      setEdit(true);
+    }
+  }, [])
 
   const handleRemoveIngredient = (id) => {
     setIngredients(ingredients.filter((ingredient) => ingredient['product_id'] !== id));
@@ -108,8 +166,9 @@ function AddRecipe() {
   }
 
   const handleRemoveStep = (item) => {
-    setIngredients(ingredients.filter((i) => i !== item));
+    setSteps(steps.filter((i) => i !== item));
   }
+
   return (
     <>
       <Navbar />
@@ -118,6 +177,7 @@ function AddRecipe() {
         alignItems="center"
         pt={20}
         sx={{backgroundColor: '#F9FAF9', height: '100%'}}>
+        <Notification notify={notify} setNotify={setNotify} /> 
         <Typography component="h1" variant="h3" sx={{color: "#FE793D", marginBottom: '36px'}}>Add Recipe</Typography>
         <Stack
           direction="column"
@@ -155,12 +215,15 @@ function AddRecipe() {
 
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Steps</FormLabel>
           <div style={{ width: '100%' }}>
-            <RecipeStepsContainer recipesData={steps} handleRemove={handleRemoveStep} />
+            <AddRecipeStepsContainer recipesData={steps} handleRemove={handleRemoveStep} />
             {newStep ? <AddStep steps={steps} setSteps={setSteps} newStep={newStep} setNewStep={() => setNewStep(false)}/> : <AddButton onClick={handleNewStep}> Add step </AddButton>}
           </div>
         </Stack>
         <div style={{ marginBottom: '20px'}}>
-          <RoundButton name="Add Recipe" onClick={sendToBack}/>
+          {edit
+            ? <RoundButton name="Edit Recipe" onClick={sendToBack}/>
+            : <RoundButton name="Add Recipe" onClick={sendToBack}/>
+          }
         </div>
       </Stack>
     </>
