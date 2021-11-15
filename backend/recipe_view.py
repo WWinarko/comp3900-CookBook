@@ -7,6 +7,7 @@ from bson.objectid import ObjectId
 def recipe_view(recipe_id):
     ''' view a recipe '''
     recipes = database.get_recipes()
+    products = database.get_products()
     # check if the recipe exists
     if not recipe_helper.check_recipe_exist(ObjectId(recipe_id), recipes):
         raise AccessError(description="recipe does not exist")
@@ -22,6 +23,9 @@ def recipe_view(recipe_id):
     preptime = recipe['preptime']
     serves = recipe['serves']
     ingredients = recipe['ingredients']
+    for ingredient in ingredients:
+        product = products.find_one({"_id":ObjectId(ingredient['product_id'])})
+        ingredient['product_name'] = product['title']
     labels = recipe['labels']
     owner_id = recipe['owner_id']
     rating = 0

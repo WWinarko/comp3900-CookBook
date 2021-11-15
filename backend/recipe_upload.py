@@ -7,7 +7,7 @@ from bson.objectid import ObjectId
 def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps, labels):
     ''' upload a recipe '''
     users = database.get_users()
-    products = database.get_products()
+
     # check if the token is valid
     token_helper.is_token_valid(token, users)
 
@@ -25,9 +25,6 @@ def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, se
         if argument_checker.is_empty_string(ingredient['ingredient']):
             raise InputError(description="contains empty ingredient textfield")
 
-    for ingredient in ingredients:
-        product = products.find_one({"_id":ObjectId(ingredient['product_id'])})
-        ingredient['product_name'] = product['title']
     user = users.find_one({"token":token})
     owner_id = str(user['_id'])
     recipe = {
