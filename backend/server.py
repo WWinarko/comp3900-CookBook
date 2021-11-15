@@ -37,6 +37,7 @@ from order_details import order_details
 from recommendation_questions import recommendation_questions
 from recommendation_history import recommendation_history
 from recommendation_swap import recommendation_swap
+from recommendation_user_following import recommendation_user_following
 
 from admin_check import admin_check
 
@@ -430,6 +431,16 @@ def recommendation_swap_root():
     product_id = request.args.getlist('product_id')
     return dumps(
         recommendation_swap(product_id)
+    )
+
+@APP.route("/recommendation/user_following", methods=['GET'])
+def recommendation_user_following_root():
+    ''' Recommend reqcipes of the following user '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    return dumps(
+        recommendation_user_following(token)
     )
 
 ##### Admin ROUTE #####
