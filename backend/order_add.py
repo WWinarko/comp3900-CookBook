@@ -58,7 +58,7 @@ def order_add(token, firstname, lastname, email, phone, address, state, postcode
     order_id = str(result.inserted_id)
 
     # send email with order details to user
-    email_send.email_send(token, order_id, email, firstname, address, state, postcode, phone)
+    email_send.email_send(details, order_id, email, firstname, address, state, postcode, phone)
 
     # clean shopping cart
     cart_clean.cart_clean(token)
