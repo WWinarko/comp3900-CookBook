@@ -10,7 +10,6 @@ function BuyRecipeModalCard({ id, quantity, removeItem, changeQuantity}) {
   const [ingredientInfo, setIngredientInfo] = useState({});
   
   useEffect(() => {
-    console.log(id, quantity);
     axios.get('http://127.0.0.1:5000/product/view', {
       params: {product_id: id}
     })

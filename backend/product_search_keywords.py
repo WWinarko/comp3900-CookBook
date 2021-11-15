@@ -8,7 +8,7 @@ def product_search_keyword(keyword):
     
 
     for product in product_list:
-        if re.search(keyword.lower(), product['title'].loewr()):
+        if re.search(keyword.lower(), product['title'].lower()):
             product_ids.append(str(product['_id']))
 
     return {
