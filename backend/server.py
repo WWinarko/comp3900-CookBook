@@ -46,6 +46,7 @@ from id_check import id_check
 
 from user_follow import user_follow
 from user_listfollow import user_listfollow
+from user_unfollow import user_unfollow
 
 def default_handler(err):
     ''' Default Handle '''
@@ -481,6 +482,17 @@ def user_listfollow_root():
     user_id = request.args.get('user_id')
     return dumps(
         user_listfollow(user_id)
+    )
+
+@APP.route("/user/unfollow", methods=['POST'])
+def user_unfollow_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    payload = request.get_json()
+    user_id = payload['payload']
+    return dumps(
+        user_unfollow(token, user_id)
     )
 
 if __name__ == "__main__":
