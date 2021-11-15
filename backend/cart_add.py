@@ -52,7 +52,8 @@ def cart_add(token, recipe_id, ingredients):
         }
         carts.insert_one(cart)
 
-# cart_add('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMTQgMTg6MjU6MTMuOTg0NjQwIiwicmFuZG9tbnVtYmVyIjoiMC4wOTQ5MDE4NzY5NDIzODk5NCJ9.KOPaEQdX8yVPy5Zr2CLQtOaFnzUFBepJVa9dLRLjS3w', "123", [{"_id":"61894270e1ae0f08edeb81d7", "quantity":3},{"_id":"123", "quantity":100}]
+# cart_add('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMTQgMTg6MjU6MTMuOTg0NjQwIiwicmFuZG9tbnVtYmVyIjoiMC4wOTQ5MDE4NzY5NDIzODk5NCJ9.KOPaEQdX8yVPy5Zr2CLQtOaFnzUFBepJVa9dLRLjS3w', 
+# "61833fa71f805c540f9562f4", [{"_id":"61822388cc5920235e3244e7", "quantity":1},{"_id":"618223f6cc5920235e3244ed", "quantity":3}]
 # )
 
 '''

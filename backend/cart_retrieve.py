@@ -44,11 +44,6 @@ def cart_retrieve(token):
     else:
         raise AccessError(description="No cart for this user")
 
-    print({
-        'section_list': section_list,
-        'total': total
-    })
-
     return {
         'section_list': section_list,
         'total': total
