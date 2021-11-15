@@ -40,7 +40,10 @@ def sales_timeframe(token, initial_date, end_date):
     for order in orders:
         total += order["total"]
     
-    return "{:.2f}".format(total)
+    total = "{:.2f}".format(total)
+    return {
+        "sales_total": total
+    }
 
 '''
 # Testing

@@ -24,7 +24,10 @@ def sales_total(token):
     if total == 0:
         raise AccessError(description="No orders have been placed yet")
 
-    return "{:.2f}".format(total)
+    total = "{:.2f}".format(total)
+    return {
+        "sales_total": total
+    }
 
 '''
 # Testing

@@ -29,7 +29,10 @@ def sales_product(token, product_id):
             if product["_id"] == product_id:
                 total += product["subtotal"]
 
-    return "{:.2f}".format(total)
+    total = "{:.2f}".format(total)
+    return {
+        "sales_total": total
+    }
 
 '''
 # Testing
