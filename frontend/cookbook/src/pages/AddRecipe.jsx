@@ -220,7 +220,10 @@ function AddRecipe() {
           </div>
         </Stack>
         <div style={{ marginBottom: '20px'}}>
-          <RoundButton name="Add Recipe" onClick={sendToBack}/>
+          {edit
+            ? <RoundButton name="Edit Recipe" onClick={sendToBack}/>
+            : <RoundButton name="Add Recipe" onClick={sendToBack}/>
+          }
         </div>
       </Stack>
     </>
