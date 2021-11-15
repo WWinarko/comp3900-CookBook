@@ -6,6 +6,7 @@ from error import AccessError
 
 def order_details(token, order_id):
     ''' view the detail associated with the order'''
+    # Retrieve data from the database
     users = database.get_users()
     orders = database.get_orders()
 
@@ -20,7 +21,6 @@ def order_details(token, order_id):
         raise AccessError(description="Does not have permission to view this order")
     
     order = orders.find_one({"_id":ObjectId(order_id)})
-    
 
     # return the order details(json:product_id, quantity)
     return {

@@ -4,9 +4,10 @@ import argument_checker
 import auth_helper
 import database
 import cart_retrieve
-import order_add
+from order_add import order_add
 
 def cart_reward(token, firstname, lastname, email, phone, address, state, postcode):
+    ''' Checkout with reward '''
     # Obtain user's information
     users = database.get_users()
     user = users.find_one({"token": token})
@@ -41,12 +42,13 @@ def cart_reward(token, firstname, lastname, email, phone, address, state, postco
     # Creates order
     points_diff = points_reward - total
     users.update_one({"_id": user_id}, {"$set": {"reward": points_diff}})
+
+    # Add order to the database and return the result
     return order_add(token, firstname, lastname, email, phone, address, state, postcode, recipe_list, total)
 
-'''
-# Testing
-token = "b'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDEgMTY6NTY6MTAuNzIzMTkzIiwicmFuZG9tbnVtYmVyIjoiMC4xOTc5MTg4NDY2OTA2NzcyNyJ9.kJxOyLv0w2Nq7WZ1KdgTxY_2jKhJprOBriiY33zykZY'"
-order = cart_reward(token, "mariaexample@gmail.com", "01234567891", "Sydney", "NSW", "2138")
-print(order)
-'''
+################## testing ##################
+# token = "b'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDEgMTY6NTY6MTAuNzIzMTkzIiwicmFuZG9tbnVtYmVyIjoiMC4xOTc5MTg4NDY2OTA2NzcyNyJ9.kJxOyLv0w2Nq7WZ1KdgTxY_2jKhJprOBriiY33zykZY'"
+# order = cart_reward(token, "mariaexample@gmail.com", "01234567891", "Sydney", "NSW", "2138")
+# print(order)
+
 

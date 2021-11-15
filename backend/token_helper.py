@@ -3,7 +3,6 @@ from error import AccessError
 def is_token_valid(token, users):
     ''' return True if in use, 
         else raise an AccessError if the token is not owned by anyone '''
-    
     result = users.find_one({"token":token})
     if token == "":
         raise AccessError(description='Invalid token')
@@ -25,11 +24,9 @@ def check_admin(token, users):
 
 def find_user_id_from_token(token, users):
     ''' returns user id from token '''
-
     user = users.find_one({"token": token})
     if token == "":
         raise AccessError(description='Invalid token')
     if (user is None):
         raise AccessError(description='Invalid token')
-
     return user['_id']

@@ -2,8 +2,8 @@ from error import InputError
 
 def is_empty_string(string):
     '''
-      Returns True if string is any combination of empty
-      E.g. Contains only spaces, tabs, new lines or no character
+        Returns True if string is any combination of empty
+        E.g. Contains only spaces, tabs, new lines or no character
     '''
 
     string = string.strip()
@@ -15,8 +15,8 @@ def is_empty_string(string):
 
 def all_not_empty(args):
     '''
-      Given a list of string, passes if they're all not empty
-      Else raises InputError if any are empty
+        Given a list of string, passes if they're all not empty
+        Else raises InputError if any are empty
     '''
     for string in args:
         if is_empty_string(string):

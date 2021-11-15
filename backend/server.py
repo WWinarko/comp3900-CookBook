@@ -36,6 +36,7 @@ from order_details import order_details
 
 from recommendation_questions import recommendation_questions
 from recommendation_history import recommendation_history
+from recommendation_swap import recommendation_swap
 
 from admin_check import admin_check
 
@@ -46,6 +47,8 @@ from id_check import id_check
 
 from user_follow import user_follow
 from user_listfollow import user_listfollow
+from user_unfollow import user_unfollow
+from user_edit import user_edit
 
 def default_handler(err):
     ''' Default Handle '''
@@ -73,6 +76,7 @@ def auth_register_root():
     payload = request.get_json()
     first_name = payload['first_name']
     last_name = payload['last_name']
+    photo = payload['photo']
     email = payload['email']
     address = payload['address']
     state = payload['state']
@@ -82,7 +86,7 @@ def auth_register_root():
     password = payload['password']
     confirmpassword = payload['confirmpassword']
     return dumps(
-        auth_register(first_name, last_name, email, address, state, postcode, phone, username, password, confirmpassword)
+        auth_register(first_name, last_name, photo, email, address, state, postcode, phone, username, password, confirmpassword)
     )
 
 @APP.route("/auth/login", methods=['POST'])
@@ -420,6 +424,14 @@ def recommendation_history_root():
         recommendation_history(token)
     )
 
+@APP.route("/recommendation/swap", methods=['GET'])
+def recommendation_swap_root():
+    ''' Recommend reqcipes for swapping '''
+    product_id = request.args.getlist('product_id')
+    return dumps(
+        recommendation_swap(product_id)
+    )
+
 ##### Admin ROUTE #####
 
 @APP.route("/admin/check", methods=['GET'])
@@ -436,6 +448,7 @@ def admin_check_root():
 
 @APP.route("/id/check", methods=['GET'])
 def id_check_root():
+    ''' Check the id for the given token '''
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
@@ -447,6 +460,7 @@ def id_check_root():
 
 @APP.route("/profile/view", methods=['GET'])
 def profile_view_root():
+    ''' View the profile of an user '''
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
@@ -457,29 +471,63 @@ def profile_view_root():
 
 @APP.route("/profile/most_popular", methods=['GET'])
 def profile_most_popular_root():
+    ''' Show the most popular recipe of an user '''
     user_id = request.args.get('user_id')
     return dumps(
         profile_most_popular(user_id)
     )
 
-##### user Route #####
+##### User Route #####
 
 @APP.route("/user/follow", methods=['POST'])
 def user_follow_root():
+    ''' Follow a user '''
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
     payload = request.get_json()
-    user_id = payload['payload']
+    user_id = payload['user_id']
     return dumps(
         user_follow(token, user_id)
     )
 
 @APP.route("/user/listfollow", methods=['GET'])
 def user_listfollow_root():
+    ''' List all the user the user is following '''
     user_id = request.args.get('user_id')
     return dumps(
         user_listfollow(user_id)
+    )
+
+@APP.route("/user/unfollow", methods=['POST'])
+def user_unfollow_root():
+    ''' Unfollow a user '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    payload = request.get_json()
+    user_id = payload['user_id']
+    return dumps(
+        user_unfollow(token, user_id)
+    )
+
+@APP.route("/user/edit", methods=['POST'])
+def user_edit_root():
+    ''' Edit information of an user '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    payload = request.get_json()
+    first_name = payload['first_name']
+    last_name = payload['last_name']
+    photo = payload['photo']
+    email = payload['email']
+    address = payload['address']
+    state = payload['state']
+    postcode = payload['postcode']
+    phone = payload['phone']
+    return dumps(
+        user_edit(token, first_name, last_name, photo, email, address, state, postcode, phone)
     )
 
 if __name__ == "__main__":

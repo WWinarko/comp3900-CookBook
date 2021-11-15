@@ -8,6 +8,7 @@ from bson.objectid import ObjectId
 
 def profile_view(token, user_id):
     ''' View a profile '''
+    # Retrieve the data from the database
     users = database.get_users()
 
     # Validate user
@@ -40,9 +41,11 @@ def profile_view(token, user_id):
     whole_rating = 0
     whole_counter = 0
     final_rating = 5
+    # Iterate through the recipes
     for recipe in user_recipes:
         rating = 0
         counter = 0
+        # Calculate the rating for the recipes
         for comment in recipe['comment']:
             rating += int(comment['rating'])
             counter += 1
@@ -50,12 +53,15 @@ def profile_view(token, user_id):
             rating = rating/counter
             whole_counter += 1
             whole_rating += rating
-        if whole_counter == 0:
-            final_rating == 0
-        else:
-            final_rating = whole_rating/whole_counter
         user_recipes_string.append(str(recipe['_id']))
-        
+
+    # If no recipe has rating
+    if whole_counter == 0:
+        final_rating = 5
+    else:
+        final_rating = whole_rating/whole_counter
+
+    # Return the info associated with the user 
     return {
         'username': username,
         'first_name': first_name,
@@ -65,5 +71,5 @@ def profile_view(token, user_id):
         'follower': follower,
         'photo': photo,
         'user_recipes_string': user_recipes_string,
-        'average rating':round(final_rating, 1)
+        'average_rating':round(final_rating, 1)
     }

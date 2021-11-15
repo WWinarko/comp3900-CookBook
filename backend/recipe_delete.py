@@ -5,6 +5,7 @@ from bson.objectid import ObjectId
 
 def recipe_delete(token, recipe_id):
     ''' delete a recipe '''
+    # Retrieve data from the database
     users = database.get_users()
     recipes = database.get_recipes()
 

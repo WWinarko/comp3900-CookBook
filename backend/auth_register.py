@@ -5,7 +5,7 @@ import encryption_helper
 import re
 from error import InputError
 
-def auth_register(first_name, last_name, email, address, state, postcode, phone, username, password, confirmpassword):
+def auth_register(first_name, last_name, photo, email, address, state, postcode, phone, username, password, confirmpassword):
     ''' Register a user '''
     users = database.get_users()
 
@@ -55,7 +55,7 @@ def auth_register(first_name, last_name, email, address, state, postcode, phone,
     # create user data
     user = {"username":username, "password":password_hash, "first_name":first_name, 
     "last_name":last_name, "email":email, "address":address, "state":state, "postcode":postcode, 
-    "phone":phone, "follower":0, "reward":0, "admin":admin, "token":token, "photo":"", "recipe_bought":[], "following":[]}
+    "phone":phone, "follower":0, "reward":0, "admin":admin, "token":token, "photo":photo, "recipe_bought":[], "following":[]}
 
     users.insert_one(user)
 
@@ -68,7 +68,6 @@ def auth_register(first_name, last_name, email, address, state, postcode, phone,
         'token': token
     }
 
-
-
+################## testing ##################
 # auth_register("Trina", "Chang", "kabcde@cookbook.com", "", "", "", "09123", "TrinaChang", "abcdefgh", "abcdefgh")
 # auth_register("Jenna", "Chan", "jennaclown@gmail.com", "", "", "", "09123456", "JennaChan", "iamsougly", "iamsougly")
