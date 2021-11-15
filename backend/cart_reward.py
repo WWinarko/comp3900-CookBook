@@ -17,10 +17,10 @@ def cart_reward(token, firstname, lastname, email, phone, address, state, postco
 
     # Obtain cart information
     cart = cart_retrieve.cart_retrieve(token)
-    ingredients = cart["ingredients"]
+    recipe_list = cart["section_list"]
 
     # Check if the cart is not empty
-    if len(ingredients) <= 0:
+    if len(recipe_list) <= 0:
         raise InputError(description="The cart is empty")
 
     # Check if user has enough points
@@ -41,7 +41,7 @@ def cart_reward(token, firstname, lastname, email, phone, address, state, postco
     # Creates order
     points_diff = points_reward - total
     users.update_one({"_id": user_id}, {"$set": {"reward": points_diff}})
-    return order_add.order_add(token, firstname, lastname, email, phone, address, state, postcode, ingredients, total)
+    return order_add(token, firstname, lastname, email, phone, address, state, postcode, recipe_list, total)
 
 '''
 # Testing
