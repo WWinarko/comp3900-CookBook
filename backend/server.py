@@ -1,4 +1,5 @@
 from flask import Flask, request
+from backend.sales_total import sales_total
 from flask_cors import CORS
 from json import dumps
 
@@ -32,6 +33,10 @@ from order_details import order_details
 
 from recommendation_questions import recommendation_questions
 from recommendation_history import recommendation_history
+
+from sales_total import sales_total
+from sales_product import sales_product
+from sales_timeframe import sales_timeframe
 
 from admin_check import admin_check
 
@@ -370,6 +375,34 @@ def profile_view_root():
     user_id = request.args.get('user_id')
     return dumps(
         profile_view(token, user_id)
+    )
+
+##### Sales ROUTE #####
+
+@APP.route("/sales/total", methods=['POST'])
+def sales_total_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    return dumps(
+        sales_total(token)
+    )
+
+@APP.route("/sales/timeframe", methods=['POST'])
+def sales_timeframe_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    pass
+
+@APP.route("/sales/product", methods=['POST'])
+def sales_product_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    product_id = request.args.get('product_id')
+    return dumps(
+        sales_product(token, product_id)
     )
 
 if __name__ == "__main__":
