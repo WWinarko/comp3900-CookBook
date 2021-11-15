@@ -448,6 +448,7 @@ def admin_check_root():
 
 @APP.route("/id/check", methods=['GET'])
 def id_check_root():
+    ''' Check the id for the given token '''
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
@@ -459,6 +460,7 @@ def id_check_root():
 
 @APP.route("/profile/view", methods=['GET'])
 def profile_view_root():
+    ''' View the profile of an user '''
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
@@ -469,15 +471,17 @@ def profile_view_root():
 
 @APP.route("/profile/most_popular", methods=['GET'])
 def profile_most_popular_root():
+    ''' Show the most popular recipe of an user '''
     user_id = request.args.get('user_id')
     return dumps(
         profile_most_popular(user_id)
     )
 
-##### user Route #####
+##### User Route #####
 
 @APP.route("/user/follow", methods=['POST'])
 def user_follow_root():
+    ''' Follow a user '''
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
@@ -489,6 +493,7 @@ def user_follow_root():
 
 @APP.route("/user/listfollow", methods=['GET'])
 def user_listfollow_root():
+    ''' List all the user the user is following '''
     user_id = request.args.get('user_id')
     return dumps(
         user_listfollow(user_id)
@@ -496,6 +501,7 @@ def user_listfollow_root():
 
 @APP.route("/user/unfollow", methods=['POST'])
 def user_unfollow_root():
+    ''' Unfollow a user '''
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
@@ -507,6 +513,7 @@ def user_unfollow_root():
 
 @APP.route("/user/edit", methods=['POST'])
 def user_edit_root():
+    ''' Edit information of an user '''
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
