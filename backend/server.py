@@ -47,6 +47,7 @@ from id_check import id_check
 from user_follow import user_follow
 from user_listfollow import user_listfollow
 from user_unfollow import user_unfollow
+from user_edit import user_edit
 
 def default_handler(err):
     ''' Default Handle '''
@@ -472,7 +473,7 @@ def user_follow_root():
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
     payload = request.get_json()
-    user_id = payload['payload']
+    user_id = payload['user_id']
     return dumps(
         user_follow(token, user_id)
     )
@@ -490,9 +491,27 @@ def user_unfollow_root():
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
     payload = request.get_json()
-    user_id = payload['payload']
+    user_id = payload['user_id']
     return dumps(
         user_unfollow(token, user_id)
+    )
+
+@APP.route("/user/edit", methods=['POST'])
+def user_edit_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    payload = request.get_json()
+    first_name = payload['first_name']
+    last_name = payload['last_name']
+    photo = payload['photo']
+    email = payload['email']
+    address = payload['address']
+    state = payload['state']
+    postcode = payload['postcode']
+    phone = payload['phone']
+    return dumps(
+        user_edit(token, first_name, last_name, photo, email, address, state, postcode, phone)
     )
 
 if __name__ == "__main__":
