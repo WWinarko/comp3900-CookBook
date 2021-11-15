@@ -393,7 +393,12 @@ def sales_timeframe_root():
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
-    pass
+    payload = request.get_json()
+    initial_date = payload['initial_date']
+    end_date = payload['end_date']
+    return dumps(
+        sales_timeframe(token, initial_date, end_date)
+    )
 
 @APP.route("/sales/product", methods=['POST'])
 def sales_product_root():
