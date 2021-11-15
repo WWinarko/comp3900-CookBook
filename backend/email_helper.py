@@ -1,5 +1,4 @@
 import pandas as pd
-import cart_retrieve
 
 def email_order_details(details):
     ''' Return order details (ingredients) in dataframe format and total '''
