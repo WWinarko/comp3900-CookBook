@@ -52,29 +52,8 @@ def cart_add(token, recipe_id, ingredients):
         }
         carts.insert_one(cart)
 
-
-cart_add('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMTQgMTg6MjU6MTMuOTg0NjQwIiwicmFuZG9tbnVtYmVyIjoiMC4wOTQ5MDE4NzY5NDIzODk5NCJ9.KOPaEQdX8yVPy5Zr2CLQtOaFnzUFBepJVa9dLRLjS3w', "123", [{"_id":"61894270e1ae0f08edeb81d7", "quantity":3},{"_id":"123", "quantity":100}]
-)
-
-
-
-
-
-    #     # Check the items, and modify quantity or add ingredient
-    #     for ingredient in ingredients:
-    #         cart_ingredient = cart_helper.find_ingredient(cart, ingredient['_id'])
-    #         if (cart_ingredient is not None):
-    #             cart_ingredient["quantity"] += ingredient["quantity"]
-    #         else:
-    #             cart["ingredients"].append(ingredient) 
-    #     # Updates the current modifications
-    #     cart_id = cart["_id"]
-    #     carts.update_one({"_id": cart_id}, {"$set": {"ingredients": cart["ingredients"]}})
-
-    # # Otherwise, creates a new entry and add the ingredients
-    # else:
-    #     cart = {"user_id":str(user['_id']), "ingredients":ingredients}
-    #     carts.insert_one(cart)
+# cart_add('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMTQgMTg6MjU6MTMuOTg0NjQwIiwicmFuZG9tbnVtYmVyIjoiMC4wOTQ5MDE4NzY5NDIzODk5NCJ9.KOPaEQdX8yVPy5Zr2CLQtOaFnzUFBepJVa9dLRLjS3w', "123", [{"_id":"61894270e1ae0f08edeb81d7", "quantity":3},{"_id":"123", "quantity":100}]
+# )
 
 '''
 cart
