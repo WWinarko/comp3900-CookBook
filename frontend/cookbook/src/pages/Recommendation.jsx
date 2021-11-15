@@ -4,6 +4,7 @@ import { Stack, Typography, Box } from '@mui/material';
 import PreferenceDialog from '../components/PreferenceDialog';
 import Navbar from '../components/Navbar';
 import Notification from '../components/Notification';
+import RoundButton from '../components/RoundButton';
 import HomeRecipeContainer from '../components/HomeRecipeContainer';
 
 
@@ -16,6 +17,9 @@ function Recommendation() {
     type: 'error',
   });
 
+  const refreshPage = () => {
+    window.location.reload(false);
+  }
   return (
     <>
       <Navbar />
@@ -23,16 +27,20 @@ function Recommendation() {
       <PreferenceDialog open={open} setOpen={setOpen} setRecipes={setRecipes}/>
       <Stack
         direction="column"
-        justifyContent="center"
         alignItems="center"
-        pt={15}
+        pt={25}
         spacing={5}
         sx={{ backgroundColor:'#F9FAF9', height: '90vh' }}
       >
         <Typography component="h2" variant="h4" gutterBottom sx={{color: "#FE793D"}}>Recommendation</Typography>
-        <Box sx={{display: 'flex', flexWrap: 'wrap', width: '60%'}}>
-          <HomeRecipeContainer recipesData={recipes} />
-        </Box>
+        {recipes.length > 0 ? 
+          <Box sx={{display: 'flex', flexWrap: 'wrap', width: '60%'}}>
+            <HomeRecipeContainer recipesData={recipes} />
+          </Box>
+        :
+          <Typography component="p" variant="h6" gutterBottom sx={{color: "#FE793D"}}>No recipe match with your preferences</Typography>
+        }
+        <RoundButton name='Recommend me' onClick={refreshPage} />
       </Stack>
     </>
   )

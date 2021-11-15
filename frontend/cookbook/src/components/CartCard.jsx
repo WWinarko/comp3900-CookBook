@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Stack, Typography, OutlinedInput } from '@mui/material';
 import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 
 
-function CartCard({ ingredient, removeIngredient }) {
+function CartCard({ ingredient, removeIngredient, changeQuantity }) {
   return (  
     <Card sx={{width: '100%', marginTop: '20px', display: 'flex', flexDirection:'row', position: 'relative'}}>
       <CardMedia
@@ -23,7 +23,15 @@ function CartCard({ ingredient, removeIngredient }) {
           <Typography variant="h6" sx={{color: '#977554'}}>$ {ingredient['subtotal']}</Typography>
         </Stack>
       </CardContent>
-      <Typography variant="h6" sx={{color: '#977554', alignSelf: 'center'}}>Quantity: {ingredient['quantity']}</Typography>
+      {/* <Typography variant="h6" sx={{color: '#977554', alignSelf: 'center'}}>Quantity: {ingredient['quantity']}</Typography> */}
+      <Stack
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Typography variant="h6" sx={{color: '#977554', alignSelf: 'center'}}>Quantity</Typography>
+        <OutlinedInput value={ingredient['quantity']} type="number" onChange={(event) => changeQuantity(ingredient['id'], event)} sx={{borderRadius: '3px', width: "50%", backgroundColor:'#ffffff', color: '#000000'}} />
+      </Stack>
       <CloseSharpIcon onClick={() => removeIngredient(ingredient['id'])} sx={{position: 'absolute', right: 0, padding: '10px', cursor: 'pointer'}}/>
     </Card>
   )
