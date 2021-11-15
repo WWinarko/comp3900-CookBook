@@ -7,9 +7,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import Navbar from '../components/Navbar';
 import Checkout from '../components/Checkout';
-import CartCard from '../components/CartCard';
 import DeliveryForm from '../components/DeliveryForm';
 import Notification from '../components/Notification';
+import RecipeSection from '../components/RecipeSection';
 
 const ContinueButton = styled(Button)(() => ({
   color: "#89623D",
@@ -24,7 +24,7 @@ function Cart() {
   const [checkout, setCheckout] = useState(false);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [ingredients, setIngredients] = useState([]);
+  const [sections, setSections] = useState([]);
   const [update, setUpdate] = useState(false);
   const [deliveryInfo, setDeliveryInfo] = useState({
     firstName: 'John',
@@ -42,13 +42,13 @@ function Cart() {
   });
 
   useEffect(() => {
-    console.log(update);
+    // console.log(update);
     const auth = {"Authorization": `Bearer ${token}`};
     axios.get('http://127.0.0.1:5000/cart/retrieve', {headers: auth})
     .then((res) => {
-      const {ingredients, total} = res.data;
       console.log(res.data);
-      setIngredients(ingredients);
+      const {section_list, total} = res.data;
+      setSections(section_list);
       setTotal(total);
     })
     .catch((err) => {
@@ -84,13 +84,13 @@ function Cart() {
     })
   }
   const changeQuantity = (id,event) => {
-    const newList = [...ingredients];
+    const newList = [...sections];
     newList.map(item => {
       if (item['id'] === id) {
         item['quantity'] = parseInt(event.target.value);
       }
     });
-    setIngredients(newList);
+    setSections(newList);
   }
   
   return (
@@ -100,25 +100,29 @@ function Cart() {
       <Stack
         direction="row"
         justifyContent="center"
-        pt={25}
+        pt={20}
         spacing={5}
-        sx={{ backgroundColor:'#F9FAF9', height: '84vh' }}
+        sx={{ backgroundColor:'#F9FAF9', minHeight: '84vh' }}
       >
         {checkout ? 
           <Paper sx={{width: "30%", padding: '20px', height: '80%'}}><DeliveryForm deliveryInfo={deliveryInfo} setDeliveryInfo={setDeliveryInfo}/></Paper> 
         :
           loading ? <CircularProgress sx={{position: 'relative', top: '20%'}}/> 
-          : 
-          <Paper sx={{width: "30%", padding: '20px', height: '80%'}}>
-          <Typography component="h2" variant="h4" gutterBottom sx={{color: "#FE793D"}}>My Cart</Typography>
-            {ingredients.map(ingredient => <CartCard removeIngredient={removeIngredient} ingredient={ingredient} key={ingredient['id']} changeQuantity={changeQuantity} />)}
-          </Paper>
+          :
+          <Stack
+            direction="column"
+            sx={{width: "50%"}}
+          >
+            <Typography component="h1" variant="h4" gutterBottom sx={{color: "#FE793D"}}>My Cart</Typography>
+            {sections.map(section => <RecipeSection removeIngredient={removeIngredient} ingredients={section['recipe_ingredients']} key={section['recipe_id']} recipeId={section['recipe_id']} changeQuantity={changeQuantity} />)}
+          </Stack>
+          
           }
         <Stack direction="column" sx={{width: "20%"}}>
           {loading ? <CircularProgress sx={{position: 'relative', left: '50%', top: '20%'}}/> :
             <>
               <ContinueButton endIcon={<ArrowForwardIosIcon />} sx={{alignSelf: 'flex-end', paddingTop: 0, marginBottom: '20px'}} onClick={goHome}>Continue Shopping</ContinueButton>
-              <Checkout checkout={checkout} setCheckout={setCheckout} total={total} ingredients={ingredients} deliveryInfo={deliveryInfo}/>
+              <Checkout checkout={checkout} setCheckout={setCheckout} total={total} sections={sections} deliveryInfo={deliveryInfo}/>
             </>
           }
         </Stack>

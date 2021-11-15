@@ -19,7 +19,7 @@ function CartCard({ ingredient, removeIngredient, changeQuantity }) {
           spacing={3}
           sx={{width: '250px'}}
         >
-          <Typography variant="h5" sx={{color: '#977554'}}>{ingredient['title']}</Typography>
+          <Typography variant="h6" sx={{color: '#977554'}}>{ingredient['title']}</Typography>
           <Typography variant="h6" sx={{color: '#977554'}}>$ {ingredient['subtotal']}</Typography>
         </Stack>
       </CardContent>
