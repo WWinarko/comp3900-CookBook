@@ -17,7 +17,6 @@ function BuyRecipeModal({ state, setState, recipe }) {
   const [ingredientList, setIngredientList] = useState([]);
   const [openLoading, setOpenLoading] = useState(false);
   let { recipeId } = useParams();
-  console.log(recipeId);
   React.useEffect(() => {
     if (recipe === undefined) {
       setLoadingState(true);
@@ -42,6 +41,7 @@ function BuyRecipeModal({ state, setState, recipe }) {
         "quantity": ingredient['quantity'],
       })
     })
+    console.log(items);
     return items;
   }
 
@@ -52,7 +52,7 @@ function BuyRecipeModal({ state, setState, recipe }) {
       Authorization: `Bearer ${token}`,
     };
     const data = {
-      "ingredients": getItems(),
+      "ingredients": ingredientList,
       "recipe_id": recipeId,
     }
     axios.post('http://127.0.0.1:5000/cart/add', data, {
