@@ -5,6 +5,7 @@ import datetime
 
 def recipe_comment(token, comment, rating, recipe_id):
     ''' comment on a recipe '''
+    # Retrieve data from the database
     users = database.get_users()
     recipes = database.get_recipes()
 

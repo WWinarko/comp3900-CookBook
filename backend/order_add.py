@@ -56,8 +56,11 @@ def order_add(token, firstname, lastname, email, phone, address, state, postcode
         # Give the recipe owner reward
         recipe_own = recipes.find_one({"_id":ObjectId(recipe['recipe_id'])})
         user_owner = users.find_one({"_id":ObjectId(recipe_own['owner_id'])})
-        newReward = user_owner['reward'] + recipe['recipe_subtotal'] * 0.05
+        # Update the sold field
+        newSold = recipe_own['sold'] + 1
+        recipes.update_one({"_id": recipe_own['_id']}, {"$set": {"sold":newSold}})
         # Update the reward
+        newReward = user_owner['reward'] + recipe['recipe_subtotal'] * 0.05
         users.update_one({"_id": user_owner['_id']}, {"$set": {"reward":newReward}})
     # Update the bought recipe
     users.update_one({"_id": user['_id']}, {"$set": {"recipe_bought":recipe_bought}})

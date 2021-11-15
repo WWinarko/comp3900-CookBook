@@ -4,6 +4,7 @@ from bson.objectid import ObjectId
 from error import AccessError
 def recipe_edit(token, recipe_id, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps, labels):
     ''' edit a recipe '''
+    # Retrieve data from the database
     users = database.get_users()
     recipes = database.get_recipes()
 
@@ -17,6 +18,7 @@ def recipe_edit(token, recipe_id, title, intro, photo, difficulty, cooktime, pre
     if not (token_helper.check_admin(token, users) or recipe['owner_id'] == str(user['_id'])):
         raise AccessError(description="user does not have permission")
 
+    # update the data in the database
     recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"title":title}})
     recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"intro":intro}})
     recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"photo":photo}})
@@ -28,6 +30,7 @@ def recipe_edit(token, recipe_id, title, intro, photo, difficulty, cooktime, pre
     recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"steps":steps}})
     recipes.update_one({"_id":ObjectId(recipe_id)}, {"$set": {"labels":labels}})
 
+    # return the id of the recipe
     return {
         "recipe_id":recipe_id
     }

@@ -37,7 +37,7 @@ def cart_retrieve(token):
 
                 # Append the product to the list
                 product_return = {
-                    "id":str(product['_id']),
+                    "_id":str(product['_id']),
                     "title":product['title'],
                     "photo":product['photo'],
                     "description":product['description'],

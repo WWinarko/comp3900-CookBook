@@ -6,6 +6,7 @@ from bson.objectid import ObjectId
 
 def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps, labels):
     ''' upload a recipe '''
+    # Retrieve data from the database
     users = database.get_users()
 
     # check if the token is valid
@@ -21,6 +22,7 @@ def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, se
     # no empty step
     argument_checker.all_not_empty(steps)
 
+    # Iterate through the ingredient list and check if it's valid
     for ingredient in ingredients:
         if argument_checker.is_empty_string(ingredient['ingredient']):
             raise InputError(description="contains empty ingredient textfield")
