@@ -32,7 +32,8 @@ def sales_timeframe(token, initial_date, end_date):
             }})
     
     # Check if there is orders
-    if len(list(orders)):
+    n_items = orders.count()
+    if (n_items == 0):
         raise AccessError(description="No sales have been registered for this time frame")
 
     total = 0
@@ -40,3 +41,9 @@ def sales_timeframe(token, initial_date, end_date):
         total += order["total"]
     
     return "{:.2f}".format(total)
+
+'''
+# Testing
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDkgMjE6NDA6MDUuMjEzMjQyIiwicmFuZG9tbnVtYmVyIjoiMC43OTEyODU1NTU1OTc4NjQ2In0.Fixc1v0ehApZBMXzWpOpkexLLzCRR2R3wb_1yA1YqHg"
+print(sales_timeframe(token, "16/11/2021", "16/11/2021"))
+'''

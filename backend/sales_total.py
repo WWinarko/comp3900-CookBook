@@ -7,7 +7,7 @@ def sales_total(token):
     # Verify user
     users = database.get_users()
     token_helper.is_token_valid(token, users)
-    user = users.find_one({"token":token})
+    user = users.find_one({"token": token})
     
     # Check if the user is an admin
     if not user['admin']:
@@ -27,6 +27,7 @@ def sales_total(token):
     return "{:.2f}".format(total)
 
 '''
+# Testing
 token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDkgMjE6NDA6MDUuMjEzMjQyIiwicmFuZG9tbnVtYmVyIjoiMC43OTEyODU1NTU1OTc4NjQ2In0.Fixc1v0ehApZBMXzWpOpkexLLzCRR2R3wb_1yA1YqHg"
 print(sales_total(token))
 '''

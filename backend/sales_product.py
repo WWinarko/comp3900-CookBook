@@ -7,7 +7,7 @@ def sales_product(token, product_id):
     # Verify user
     users = database.get_users()
     token_helper.is_token_valid(token, users)
-    user = users.find_one({"token":token})
+    user = users.find_one({"token": token})
     
     # Check if the user is an admin
     if not user['admin']:
@@ -18,7 +18,8 @@ def sales_product(token, product_id):
     orders = orders.find({"details": {'$elemMatch': {'_id': product_id}}})
 
     # Check if product has been sold before
-    if len(list(orders)):
+    n_items = orders.count()
+    if (n_items == 0):
         raise AccessError(description="No sales have been registered for this product")
 
     total = 0
@@ -27,6 +28,12 @@ def sales_product(token, product_id):
         for product in products:
             if product["_id"] == product_id:
                 total += product["subtotal"]
-                break
 
     return "{:.2f}".format(total)
+
+'''
+# Testing
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRldGltZSI6IjIwMjEtMTEtMDkgMjE6NDA6MDUuMjEzMjQyIiwicmFuZG9tbnVtYmVyIjoiMC43OTEyODU1NTU1OTc4NjQ2In0.Fixc1v0ehApZBMXzWpOpkexLLzCRR2R3wb_1yA1YqHg"
+product_id = "61822388cc5920235e3244e7"
+print(sales_product(token, product_id))
+'''
