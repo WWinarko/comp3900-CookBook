@@ -46,12 +46,14 @@ def order_add(token, firstname, lastname, email, phone, address, state, postcode
         "time":datetime.datetime.strftime(datetime.datetime.now(), "%d/%m/%Y %H:%M"), 
         "total":total
     }
-
+    recipe_bought = user['recipe_bought']
     for recipe in details:
+        recipe_bought.append(recipe['recipe_id'])
         recipe_own = recipes.find_one({"_id":ObjectId(recipe['recipe_id'])})
-        user = users.find_one({"_id":ObjectId(recipe_own['owner_id'])})
-        newReward = user['reward'] + recipe['recipe_subtotal'] * 0.05
-        users.update_one({"_id": user['_id']}, {"$set": {"reward":newReward}})
+        user_owner = users.find_one({"_id":ObjectId(recipe_own['owner_id'])})
+        newReward = user_owner['reward'] + recipe['recipe_subtotal'] * 0.05
+        users.update_one({"_id": user_owner['_id']}, {"$set": {"reward":newReward}})
+    users.update_one({"_id": user['_id']}, {"$set": {"recipe_bought":recipe_bought}})
 
     # insert the order to the database
     result = orders.insert_one(order)
