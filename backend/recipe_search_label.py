@@ -1,4 +1,5 @@
 import database
+
 def recipe_search_label(label):
     ''' list all the recipes with the given label '''
     # Retrieve data from the database
