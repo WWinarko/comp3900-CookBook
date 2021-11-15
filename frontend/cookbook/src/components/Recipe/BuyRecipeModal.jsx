@@ -1,20 +1,23 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import Drawer from '@mui/material/Drawer';
-import { Typography, Stack } from '@mui/material';
+import { Typography, Stack, Box } from '@mui/material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import axios from 'axios';
 
 import BuyRecipeModalCard from './BuyRecipeModalCard';
 import RoundButton from '../RoundButton';
+import LoadingDialog from '../LoadingDialog';
 
 
 function BuyRecipeModal({ state, setState, recipe }) {
-  console.log(recipe);
   const [loadingState, setLoadingState] = useState(true);
   const [ingredientList, setIngredientList] = useState([]);
-  
+  const [openLoading, setOpenLoading] = useState(false);
+  let { recipeId } = useParams();
+  console.log(recipeId);
   React.useEffect(() => {
     if (recipe === undefined) {
       setLoadingState(true);
@@ -43,14 +46,20 @@ function BuyRecipeModal({ state, setState, recipe }) {
   }
 
   const addToCart = () => {
-    
-    const token = localStorage.getItem('cookbook-token')
-    axios.post('http://127.0.0.1:5000/cart/add', {
-      token,
-      "ingredients": getItems()
+    setOpenLoading(true);
+    const token = localStorage.getItem('cookbook-token');
+    const headers =  {
+      Authorization: `Bearer ${token}`,
+    };
+    const data = {
+      "ingredients": getItems(),
+      "recipe_id": recipeId,
+    }
+    axios.post('http://127.0.0.1:5000/cart/add', data, {
+      headers: headers,
     })
-    .then((res) => {
-      console.log(res.data);
+    .then(() => {
+      setOpenLoading(true);
       handleClose();
     })
     .catch((err) => {
@@ -74,7 +83,8 @@ function BuyRecipeModal({ state, setState, recipe }) {
   }
 
   return (
-    <Drawer anchor="right" open={state} onClose={handleClose} PaperProps={{ sx: {width: '25%', backgroundColor: '#C4C4C4'} }}>
+    <Drawer anchor="right" open={state} onClose={handleClose} PaperProps={{ sx: {width: '50vw', backgroundColor: '#C4C4C4'} }}>
+      <LoadingDialog open={openLoading} />
       <Stack
         direction="row"
         alignItems="center"
@@ -99,8 +109,10 @@ function BuyRecipeModal({ state, setState, recipe }) {
                 )
               })}
             </>
-        }  
-        <RoundButton name="Add to Cart" onClick={addToCart} />
+        }
+        <Box mt={5}>
+          <RoundButton name="Add to Cart" onClick={addToCart} />
+        </Box>
       </Stack>
     </Drawer>
 )
