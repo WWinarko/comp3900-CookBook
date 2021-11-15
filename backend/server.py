@@ -26,6 +26,7 @@ from cart_remove import cart_remove
 from cart_reward import cart_reward
 from cart_retrieve import cart_retrieve
 from cart_clean import cart_clean
+from cart_update import cart_update
 
 from order_update import order_update
 from order_listall import order_listall
@@ -111,7 +112,9 @@ def recipe_view_root():
 def recipe_upload_root():
     ''' Upload a recipe '''
     payload = request.get_json()
-    token = payload['token']
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     title = payload['title']
     intro = payload['intro']
     photo = payload['photo']
@@ -132,7 +135,6 @@ def recipe_comment_root():
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
-
     payload = request.get_json()
     comment = payload['comment']
     rating = payload['rating']
@@ -210,7 +212,9 @@ def recipe_delete_root():
 def product_add_root():
     ''' Add a product '''
     payload = request.get_json()
-    token = payload['token']
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     title = payload['title']
     photo = payload['photo']
     description = payload['description']
@@ -246,30 +250,39 @@ def product_listall_root():
 ##### CART ROUTE #####
 
 @APP.route("/cart/add", methods=['POST'])
-def add_to_cart_root():
+def cart_add_root():
     ''' Add product to shopping cart '''
     payload = request.get_json()
-    token = payload['token']
-    list_items = payload['ingredients']
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    ingredients = payload['ingredients']
+    recipe_id = payload['recipe_id']
     return dumps(
-        cart_add(token, list_items)
+        cart_add(token, recipe_id, ingredients)
     )
 
 @APP.route("/cart/remove", methods=['POST'])
-def remove_from_cart_root():
+def cart_remove_root():
     ''' Remove product from shopping cart '''
     payload = request.get_json()
-    token = payload['token']
-    item = payload['ingredients']
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    # should be a single string with one ingredient id
+    ingredient = payload['ingredient']
+    recipe_id = payload['recipe_id']
     return dumps(
-        cart_remove(token, item)
+        cart_remove(token, recipe_id, ingredient)
     )
 
 @APP.route("/cart/paypal", methods=['POST'])
 def cart_paypal_root():
     ''' Add an order to the database '''
     payload = request.get_json()
-    token = payload['token']
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     firstname = payload['firstname']
     lastname= payload['lastname']
     email = payload['email']
@@ -284,7 +297,7 @@ def cart_paypal_root():
     )
 
 @APP.route("/cart/retrieve", methods=['GET'])
-def retrieve_cart_root():
+def cart_retrieve_root():
     ''' Retrieve products and total from shopping cart'''
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
@@ -294,10 +307,12 @@ def retrieve_cart_root():
     )
 
 @APP.route("/cart/reward", methods=['POST'])
-def rewards_cart_root():
+def cart_reward_root():
     ''' Place order after checking reward points '''
     payload = request.get_json()
-    token = payload['token']
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
     firstname = payload['firstname']
     lastname = payload['lastname']
     email = payload['email']
@@ -317,6 +332,19 @@ def cart_clean_root():
     token = bearer.split()[1]  # YourTokenHere
     return dumps(
         cart_clean(token)
+    )
+
+@APP.route("/cart/update", methods=['POST'])
+def cart_update_root():
+    ''' Update shopping cart '''
+    payload = request.get_json()
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    ingredients = payload['ingredients']
+    recipe_id = payload['recipe_id']
+    return dumps(
+        cart_update(token, recipe_id, ingredients)
     )
 
 ##### ORDER ROUTE #####
