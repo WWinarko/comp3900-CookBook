@@ -309,6 +309,16 @@ def rewards_cart_root():
         cart_reward(token, firstname, lastname, email, phone, address, state, postcode)
     )
 
+@APP.route("/cart/clean", methods=['POST'])
+def cart_clean_root():
+    ''' Clean the shopping cart '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    return dumps(
+        cart_clean(token)
+    )
+
 ##### ORDER ROUTE #####
 
 @APP.route("/order/view", methods=['GET'])
