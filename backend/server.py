@@ -464,12 +464,13 @@ def profile_most_popular_root():
 
 ##### user Route #####
 
-@APP.route("/user/follow", methods=['GET'])
+@APP.route("/user/follow", methods=['POST'])
 def user_follow_root():
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
-    user_id = request.args.get('user_id')
+    payload = request.get_json()
+    user_id = payload['payload']
     return dumps(
         user_follow(token, user_id)
     )
