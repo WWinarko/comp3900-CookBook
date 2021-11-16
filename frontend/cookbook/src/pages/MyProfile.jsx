@@ -37,7 +37,7 @@ function MyProfile() {
   }
 
   return (
-    <div>
+    <div style={{ backgroundColor:'#F9FAF9', minHeight: '100vh' }}>
       <Navbar />
       <Stack
         spacing={5}
@@ -66,6 +66,7 @@ function MyProfile() {
             {option === 'RECIPES' && admin && <RecipeDashboardAdmin />}
             {option === 'RECIPES' && !admin && <RecipeDashboardUser />}
             {option === 'PRODUCTS' && <ProductDashboard />}
+            {option === 'SETTINGS' && <ProductDashboard />}
           </Stack>
         </Stack>
       </Stack>

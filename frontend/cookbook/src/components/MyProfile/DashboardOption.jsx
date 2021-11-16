@@ -75,6 +75,11 @@ function DashboardOption({ value, callback, admin }) {
               <ArrowForwardIosIcon fontSize='inherit' />
             </ToggleButton>
           }
+
+          <ToggleButton value="SETTINGS">
+            Settings
+            <ArrowForwardIosIcon fontSize='inherit' />
+          </ToggleButton>
         </StyledToggleButtonGroup>
     </div>
   )
