@@ -13,6 +13,8 @@ function User() {
   const id = (location.pathname.split('/')).pop();
   const [user, setUser] = useState({});
   const [recipes, setRecipes] = useState([]);
+  const [selfId, setSelfId] = useState();
+  const [following, setFollowing] = useState([]);
 
   React.useEffect(() => {
     if (id === undefined) {
@@ -34,13 +36,53 @@ function User() {
       }
     }).catch((err) => {
       console.log(err);
-    }).finally(() => {
-      setLoadingState(false);
     })
   }, [])
 
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/id/check', {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      }
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setSelfId(res.id);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, [user])
+
+  React.useEffect(() => {
+    if (selfId !== undefined) {
+      fetch('http://127.0.0.1:5000/user/listfollow?user_id=' + selfId, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        }
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            setFollowing(res.following);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoadingState(false);
+      })
+    }
+  }, [selfId])
+
   return (
-    <div>
+    <div style={{ backgroundColor:'#F9FAF9', minHeight: '100vh' }}>
       <Navbar />
       {loadingState
         ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
@@ -48,7 +90,6 @@ function User() {
           </div>
         : <Stack
             p={10}
-            sx={{ backgroundColor:'#F9FAF9' }}
           >
             <Stack
               direction="column"
@@ -57,7 +98,7 @@ function User() {
               spacing = {5}
               sx={{ width: '100%' }}
             >
-              <UserInfo user={user} />
+              <UserInfo user={user} following={following}/>
               <MostPopular user={user} />
               <UserRecipe allRecipes={recipes} />
             </Stack>

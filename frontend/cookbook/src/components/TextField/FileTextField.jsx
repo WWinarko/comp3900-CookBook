@@ -12,7 +12,6 @@ function FileTextField(props) {
     fileToDataUrl(file)
       .then((data) => {
         if (field === "object") {
-          console.log(data);
           setValue(prevState => {
             return {
             ...prevState,

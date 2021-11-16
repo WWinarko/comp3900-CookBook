@@ -10,7 +10,7 @@ import HomeRecipe from '../components/HomeRecipe';
 
 function Home () {
   return (
-    <div style={{ backgroundColor: '#F9FAF9' }}>
+    <div style={{ backgroundColor:'#F9FAF9', minHeight: '100vh' }}>
       <Navbar />
       <Stack
         pt={20}

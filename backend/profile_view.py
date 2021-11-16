@@ -25,6 +25,7 @@ def profile_view(token, user_id):
     phone = ""
     follower = user['follower']
     photo = user['photo']
+    admin = user['admin']
 
 
     viewing_user = users.find_one({"token": token})
@@ -57,12 +58,13 @@ def profile_view(token, user_id):
 
     # If no recipe has rating
     if whole_counter == 0:
-        final_rating = 5
+        final_rating = 0
     else:
         final_rating = whole_rating/whole_counter
 
     # Return the info associated with the user 
     return {
+        'user_id': user_id,
         'username': username,
         'first_name': first_name,
         'last_name': last_name,
@@ -71,5 +73,6 @@ def profile_view(token, user_id):
         'follower': follower,
         'photo': photo,
         'user_recipes_string': user_recipes_string,
-        'average_rating':round(final_rating, 1)
+        'average_rating':round(final_rating, 1),
+        'admin': admin,
     }

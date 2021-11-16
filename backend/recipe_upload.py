@@ -2,7 +2,6 @@ import argument_checker
 import token_helper
 import database
 from error import InputError
-from bson.objectid import ObjectId
 
 def recipe_upload(token, title, intro, photo, difficulty, cooktime, preptime, serves, ingredients, steps, labels):
     ''' upload a recipe '''

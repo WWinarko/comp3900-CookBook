@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
+import OrderDetailProduct from './OrderDetailProduct';
 
 const useStyles = makeStyles({
   root: {
-    width: '400px',
-    height: '100px',
-    borderRadius: '5px',
+    width: '100%',
+    height: '100%',
 
-    margin: '10px 10px 10px 10px',
+    padding: '10px',
 
     display: 'flex',
     flexDirection: 'row',
@@ -18,7 +19,8 @@ const useStyles = makeStyles({
 
     backgroundColor: 'white',
 
-    border: '1px solid grey'
+    borderTop: '1px solid grey',
+    borderBottom: '1px solid grey',
   },
   thumbnail: {
     width: '85px',
@@ -27,16 +29,24 @@ const useStyles = makeStyles({
     margin: '5px',
 
     border: '1px solid black'
+  },
+  title: {
+    padding: '0px',
+    cursor: 'pointer',
+    '&:hover': {
+      color: 'blue',
+    },
   }
 })
 
-function OrderDetailCard({ id, quantity }) {
+function OrderDetailCard({ id, products, subtotal }) {
   const classes = useStyles();
+  const history = useHistory();
   const [detail, setDetail] = useState({});
   const [loadingState, setLoadingState] = useState(true);
 
   React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/product/view?product_id=' + id, {
+    fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + id, {
       method: 'GET',
     }).then((data) => {
       if (data.status === 200) {
@@ -51,16 +61,25 @@ function OrderDetailCard({ id, quantity }) {
     })
   }, [])
 
+  const handleRedirect = () => {
+    history.push('/recipe/' + id);
+  }
+
   return (
     <div className={classes.root}>
       {loadingState
         ? <> </>
         : <>
-            <img src={detail.photo} alt='thumbnail' className={classes.thumbnail}/>
             <div>
-              <div>{detail.title}</div>
-              <div>${detail.price}</div>
-              <div>Quantity: {quantity}</div>
+              <div className={classes.title} onClick={handleRedirect}>{detail.title}</div>
+              <div>
+                {products.map((data, index) => {
+                  return (
+                    <OrderDetailProduct key={index} detail={data} />
+                  )
+                })}
+              </div>
+              <div>Subtotal: ${subtotal}</div>
             </div>
           </>
       }
@@ -71,7 +90,8 @@ function OrderDetailCard({ id, quantity }) {
 
 OrderDetailCard.propTypes = {
   id: PropTypes.string,
-  quantity: PropTypes.number,
+  products: PropTypes.array,
+  subtotal: PropTypes.number,
 }
 
 export default OrderDetailCard;

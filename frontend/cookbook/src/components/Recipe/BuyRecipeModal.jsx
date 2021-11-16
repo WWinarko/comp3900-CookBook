@@ -41,7 +41,6 @@ function BuyRecipeModal({ state, setState, recipe }) {
         "quantity": ingredient['quantity'],
       })
     })
-    console.log(items);
     return items;
   }
 

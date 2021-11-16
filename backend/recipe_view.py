@@ -54,7 +54,7 @@ def recipe_view(recipe_id):
     # if the owner is admin no follower numbershows up
     if owner['admin']:
         owner_username = "admin"
-        owner_follower = 0
+        owner_follower = -1
         owner_photo = ""
     else:
         owner_username = owner['username']

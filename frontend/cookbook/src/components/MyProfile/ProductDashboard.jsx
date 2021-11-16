@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 
-import RecipeCard from './RecipeCard';
 import { CircularProgress, Pagination } from '@mui/material';
+import ProductCard from './ProductCard';
 
 const useStyles = makeStyles({
   root: {
@@ -48,50 +48,29 @@ const useStyles = makeStyles({
   },
 })
 
-function RecipeDashboardAdmin() {
+function ProductDashboard() {
   const classes = useStyles();
-  const [allRecipes, setAllRecipes] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const [recipes, setRecipes] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
-  const [refresh, setRefresh] = useState(false);
 
   React.useEffect(() => {
-    const newRecipes = allRecipes.slice((page - 1) * 3, page * 3);
-    setRecipes(newRecipes);
-  }, [allRecipes])
+    const newProducts = allProducts.slice((page - 1) * 3, page * 3);
+    setProducts(newProducts);
+  }, [allProducts])
 
   React.useEffect(() => {
-    const newRecipes = allRecipes.slice((page - 1) * 3, page * 3);
-    setRecipes(newRecipes);
+    const newProducts = allProducts.slice((page - 1) * 3, page * 3);
+    setProducts(newProducts);
   }, [page])
 
   const handlePage = (event, value) => {
     setPage(value);
   }
 
-  const handleDelete = (id) => {
-    setLoadingState(true);
-    const body = {
-      recipe_id: id,
-    }
-    fetch('http://127.0.0.1:5000/recipe/delete', {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
-        Accept: 'applicaton/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    }).catch((err) => {
-      console.log(err);
-    }).finally(() => {
-      setRefresh(!refresh);
-    })
-  }
-
   React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/recipe/listall', {
+    fetch('http://127.0.0.1:5000/product/listall', {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
@@ -101,7 +80,7 @@ function RecipeDashboardAdmin() {
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {
-          setAllRecipes(res.recipe_list);
+          setAllProducts(res.product_list);
         })
       }
     }).catch((err) => {
@@ -109,34 +88,27 @@ function RecipeDashboardAdmin() {
     }).finally(() => {
       setLoadingState(false);
     })
-  }, [refresh])
+  }, [])
 
   return (
     <div>
       {loadingState
-        ? <>
-          <div className={classes.title}>
-            Recipes
+        ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress/>
           </div>
-          <div className={classes.root}>
-            <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
-              <CircularProgress/>
-            </div>
-          </div>
-          </>
         : <> 
           <div className={classes.title}>
-            Recipes
+            Products
           </div>
           <div className={classes.root}>
             <div className={classes.container} >
-              {recipes.map((data, index) => {
+              {products.map((data, index) => {
                 return (
-                    <RecipeCard key={index} id={data} handleDelete={handleDelete} />
+                    <ProductCard key={index} id={data} />
                 )
               })}
             </div>
-            <Pagination count={Math.ceil(allRecipes.length / 3)} page={page} onChange={handlePage} />
+            <Pagination count={Math.ceil(allProducts.length / 3)} page={page} onChange={handlePage} />
           </div>
           </>
       }
@@ -144,5 +116,4 @@ function RecipeDashboardAdmin() {
   )
 }
 
-export default RecipeDashboardAdmin;
-
+export default ProductDashboard;

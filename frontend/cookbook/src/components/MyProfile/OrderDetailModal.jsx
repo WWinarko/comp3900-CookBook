@@ -8,7 +8,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '31vw',
   bgcolor: 'background.paper',
   boxShadow: 10,
   p: 4,
@@ -54,7 +54,7 @@ function OrderDetailModal({ open, onClose, id }) {
               <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '20px', fontWeight: '500', marginBottom: '10px' }}>Details</FormLabel>
               {productIds.map((data, index) => {
                 return (
-                  <OrderDetailCard key={index} id={data._id} quantity={data.quantity}/>
+                  <OrderDetailCard key={index} id={data.recipe_id} products={data.recipe_ingredients} subtotal={data.recipe_subtotal}/>
                 )
               })}
               <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '20px', fontWeight: '500', marginBottom: '10px' }}>Total Price</FormLabel>

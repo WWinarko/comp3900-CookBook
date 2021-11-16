@@ -37,6 +37,11 @@ from order_details import order_details
 from recommendation_questions import recommendation_questions
 from recommendation_history import recommendation_history
 from recommendation_swap import recommendation_swap
+from recommendation_user_following import recommendation_user_following
+
+from sales_total import sales_total
+from sales_product import sales_product
+from sales_timeframe import sales_timeframe
 
 from admin_check import admin_check
 
@@ -49,7 +54,8 @@ from user_follow import user_follow
 from user_listfollow import user_listfollow
 from user_unfollow import user_unfollow
 from user_edit import user_edit
-
+from user_photo import user_photo
+# product_add, recipe_upload
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -119,6 +125,7 @@ def recipe_upload_root():
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
+    # token = payload['token']
     title = payload['title']
     intro = payload['intro']
     photo = payload['photo']
@@ -219,6 +226,7 @@ def product_add_root():
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
+    # token = payload['token']
     title = payload['title']
     photo = payload['photo']
     description = payload['description']
@@ -432,6 +440,16 @@ def recommendation_swap_root():
         recommendation_swap(product_id)
     )
 
+@APP.route("/recommendation/user_following", methods=['GET'])
+def recommendation_user_following_root():
+    ''' Recommend reqcipes of the following user '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    return dumps(
+        recommendation_user_following(token)
+    )
+
 ##### Admin ROUTE #####
 
 @APP.route("/admin/check", methods=['GET'])
@@ -528,6 +546,48 @@ def user_edit_root():
     phone = payload['phone']
     return dumps(
         user_edit(token, first_name, last_name, photo, email, address, state, postcode, phone)
+    )
+
+@APP.route("/user/photo", methods=['GET'])
+def user_photo_root():
+    ''' Return the photo of an user '''
+    user_id = request.args.get('user_id')
+    return dumps(
+        user_photo(user_id)
+    )
+
+##### Sales Route #####
+
+@APP.route("/sales/total", methods=['POST'])
+def sales_total_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    return dumps(
+        sales_total(token)
+    )
+
+@APP.route("/sales/timeframe", methods=['POST'])
+def sales_timeframe_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    payload = request.get_json()
+    initial_date= payload['initial_date']
+    end_date = payload['end_date']
+    return dumps(
+        sales_timeframe(token, initial_date, end_date)
+    )
+
+@APP.route("/sales/product", methods=['POST'])
+def sales_product_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    payload = request.get_json()
+    product_id = payload['product_id']
+    return dumps(
+        sales_product(token, product_id)
     )
 
 if __name__ == "__main__":

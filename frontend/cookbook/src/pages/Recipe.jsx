@@ -15,6 +15,8 @@ function Recipe() {
   const [recipe, setRecipe] = useState();
   const [state, setState] = useState(false);
   const [loadingState, setLoadingState] = useState(true);
+  const [id, setId] = useState();
+  const [following, setFollowing] = useState([]);
 
   React.useEffect(() => {
     fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + recipeId, {
@@ -27,13 +29,53 @@ function Recipe() {
       }
     }).catch((err) => {
       console.log(err);
-    }).finally(() => {
-      setLoadingState(false);
     })
   }, [])
 
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/id/check', {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      }
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setId(res.id);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, [recipe])
+
+  React.useEffect(() => {
+    if (id !== undefined) {
+      fetch('http://127.0.0.1:5000/user/listfollow?user_id=' + id, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        }
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            setFollowing(res.following);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoadingState(false);
+      })
+    }
+  }, [id])
+
   return (
-    <div>
+    <div style={{ backgroundColor:'#F9FAF9', minHeight: '100vh' }}>
       <Navbar />
       {loadingState
         ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
@@ -60,7 +102,7 @@ function Recipe() {
               <Stack
                 sx={{ width: '50%' }}
               >
-                <RecipeDescription recipe={recipe}/>
+                <RecipeDescription recipe={recipe} selfId={id} following={following}/>
               </Stack>
             </Stack>
             

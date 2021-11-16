@@ -55,6 +55,7 @@ function RecipeDashboardUser() {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [id, setId] = useState();
+  const [refresh, setRefresh] = useState(false);
 
   React.useEffect(() => {
     const newRecipes = allRecipes.slice((page - 1) * 3, page * 3);
@@ -87,33 +88,62 @@ function RecipeDashboardUser() {
     })
   }, [])
 
-  React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/profile/view?user_id=' + id, {
-      method: 'GET',
+  const handleDelete = (id) => {
+    setLoadingState(true);
+    const body = {
+      recipe_id: id,
+    }
+    fetch('http://127.0.0.1:5000/recipe/delete', {
+      method: 'POST',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
         Accept: 'applicaton/json',
         'Content-Type': 'application/json'
       },
-    }).then((data) => {
-      if (data.status === 200) {
-        data.json().then((res) => {
-          setAllRecipes(res.user_recipes_string);
-        })
-      }
+      body: JSON.stringify(body)
     }).catch((err) => {
       console.log(err);
     }).finally(() => {
-      setLoadingState(false);
+      setRefresh(!refresh);
     })
-  }, [id])
+  }
+
+  React.useEffect(() => {
+    if (typeof id === "string") {
+      fetch('http://127.0.0.1:5000/profile/view?user_id=' + id, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            setAllRecipes(res.user_recipes_string);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoadingState(false);
+      })
+    }
+  }, [refresh, id])
 
   return (
     <div>
       {loadingState
-        ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress/>
+        ? <>
+          <div className={classes.title}>
+            Recipes
           </div>
+          <div className={classes.root}>
+            <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
+              <CircularProgress/>
+            </div>
+          </div>
+          </>
         : <> 
           <div className={classes.title}>
             Recipes
@@ -122,7 +152,7 @@ function RecipeDashboardUser() {
             <div className={classes.container} >
               {recipes.map((data, index) => {
                 return (
-                    <RecipeCard key={index} id={data} />
+                    <RecipeCard key={index} id={data} handleDelete={handleDelete}/>
                 )
               })}
             </div>
