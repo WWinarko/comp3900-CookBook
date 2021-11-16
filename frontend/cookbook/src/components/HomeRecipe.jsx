@@ -72,7 +72,7 @@ function HomeRecipe() {
   const [recommendationDone, setRecommendationDone] = useState(false);
 
   React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/recipe/listall', {
+    fetch('http://127.0.0.1:5000/recommendation/user_following', {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
@@ -82,7 +82,7 @@ function HomeRecipe() {
     }).then((data) => {
       if (data.status === 200) {
         data.json().then((res) => {
-          setAllRecipes(res.recipe_list);
+          setAllRecipes(res.recipe_ids);
         })
       }
     }).catch((err) => {
@@ -132,7 +132,7 @@ function HomeRecipe() {
   return (
     <div className={classes.root}>
       <div className={classes.textHolder}>
-        <div className={classes.text}>Popular This Week</div>
+        <div className={classes.text}>Following</div>
       </div>
       {loadingState
         ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
