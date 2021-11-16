@@ -50,7 +50,7 @@ def recommendation_history(token):
     for recipe in recipe_list:
         # Add point for each label on the recipe according to how many time the label appears
         point = 0
-        if len(recipe['label']) <= 0:
+        if len(recipe['labels']) <= 0:
             continue
         for label in recipe['labels']:
             point += point_assign.get(label, 0)

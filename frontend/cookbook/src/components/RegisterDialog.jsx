@@ -59,7 +59,7 @@ function RegisterDialog({open, setOpen}) {
   const validateInput = () => {
     let valid = true;
     for (const [key, value] of Object.entries(personalInfo)) {
-      if (value === '' && ! ["address","state","postcode"].includes(key) ) {
+      if (value === '' && ! ["address","state","postcode","photo"].includes(key) ) {
         setNotify({
           isOpen: true,
           message: `${key} field should not be empty`,
