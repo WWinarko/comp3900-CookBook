@@ -63,6 +63,7 @@ def profile_view(token, user_id):
 
     # Return the info associated with the user 
     return {
+        'user_id': user_id,
         'username': username,
         'first_name': first_name,
         'last_name': last_name,

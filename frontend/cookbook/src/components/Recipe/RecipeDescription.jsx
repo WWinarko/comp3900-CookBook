@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import Divider from '@mui/material/Divider';
-import { Stack, Rating, Avatar } from '@mui/material';
+import { Stack, Rating, Avatar, Button } from '@mui/material';
 
 import RoundButton from '../RoundButton';
 import RecipeStepsContainer from './RecipeStepsContainer';
@@ -29,23 +29,76 @@ const useStyles = makeStyles({
 
     color: '#9D9D9D',
   },
+  unfollow: {
+    background: '#F9FAF9',
+    color: '#FE793D',
+    border: '1px solid #E97048',
+    borderRadius: '20px',
+    backgroundColor: 'red',
+    '&:hover': {
+      backgroundColor: '#FFFFFF',
+    },
+    textTransform: 'none',
+    fontsize: '18px',
+    fontWeight: 'bold',
+  }
 })
 
-function RecipeDescription({ recipe }) {
+function RecipeDescription({ recipe, selfId, following }) {
   const classes = useStyles();
   const history = useHistory();
   const [loadingState, setLoadingState] = useState(true);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   React.useEffect(() => {
     if (recipe === undefined) {
       setLoadingState(true);
     } else {
       setLoadingState(false);
+      if (following.includes(recipe.owner_id)) {
+        setIsFollowing(true);
+      }
     }
   }, [recipe])
   
   const handleFollow = () => {
-    console.log('a');
+    const payload = {
+      user_id: recipe.owner_id
+    }
+
+    fetch('http://127.0.0.1:5000/user/follow', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setIsFollowing(true);
+      })
+  }
+
+  const handleUnfollow = () => {
+    const payload = {
+      user_id: recipe.owner_id
+    }
+
+    fetch('http://127.0.0.1:5000/user/unfollow', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setIsFollowing(false);
+      })
   }
 
   const handleProfile = () => {
@@ -103,7 +156,17 @@ function RecipeDescription({ recipe }) {
                   <p style={{ paddingTop:'10%', margin:'0' }}>Followers:{recipe.owner_follower}</p>
                 </Stack>
               </Stack>
-              <div><RoundButton name={"Follow"} onclick={handleFollow} /></div>
+              <div>
+                {selfId === recipe.owner_id
+                  ? <></>
+                  : <>
+                      {isFollowing
+                        ? <Button sx={{ border: '1px solid #9EC2E6', borderRadius: '20px', color: '#2271B1', textTransform: 'none', fontsize: '18px', fontWeight: 'bold' }} variant= "outlined" onClick={handleUnfollow}> Unfollow </Button>
+                        : <RoundButton name={"Follow"} onClick={handleFollow}/>
+                      }
+                    </>
+                }
+              </div>
             </Stack>
       
             <Stack
@@ -133,7 +196,9 @@ function RecipeDescription({ recipe }) {
 }
 
 RecipeDescription.propTypes = {
-  recipe: PropTypes.object
+  recipe: PropTypes.object,
+  selfId: PropTypes.string,
+  following: PropTypes.array,
 }
 
 export default RecipeDescription;

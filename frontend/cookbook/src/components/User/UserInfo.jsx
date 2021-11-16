@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
-import { Avatar, Divider, Rating } from '@mui/material';
+import { Avatar, Button, Divider, Rating } from '@mui/material';
 
 import SquareButton from '../SquareButton';
 
@@ -28,8 +28,56 @@ const useStyles = makeStyles({
   },
 })
 
-function UserInfo({ user }) {
+function UserInfo({ user, following }) {
   const classes = useStyles(); 
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [lst, setLst] = useState(following);
+
+  const handleUnfollow = () => {
+    const payload = {
+      user_id: user.user_id
+    }
+
+    fetch('http://127.0.0.1:5000/user/unfollow', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLst([]);
+        setIsFollowing(false);
+      })
+  }
+
+  const handleFollow = () => {
+    const payload = {
+      user_id: user.user_id
+    }
+
+    fetch('http://127.0.0.1:5000/user/follow', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setIsFollowing(true);
+      })
+  }
+
+  React.useEffect(() => {
+    
+    setLst(following);
+  }, [following])
 
   return (
     <div className={classes.root}>
@@ -47,7 +95,28 @@ function UserInfo({ user }) {
             <p style={{ marginRight: '50px' }}>Followers: {user.follower}</p>
           </div>
             {user.email === ""
-              ? <SquareButton name="Follow" />
+              ? <>
+                {isFollowing | lst.includes(user.user_id)
+                  ? <Button sx={{ 
+                      width: '151px',
+                      height: '45px', 
+                      backgroundColor: '#755100',
+                      color: "#ffffff",
+                      borderRadius: '3px',
+                      border: 'none',
+                      textTransform: 'none',
+                      fontSize: '18px',
+                      fontWeight: '500',
+                      '&:hover': {
+                        backgroundColor: '#89623D',
+                      },
+                    }} onClick={handleUnfollow}>
+                      Unfollow
+                    </Button>
+                  : <SquareButton name="Follow" onClick={handleFollow} />
+                }
+                </>
+                
               : <div>
                 <p style={{ marginRight: '50px' }}>Email: {user.email}</p>
                 <p>Phone: {user.phone}</p>
@@ -61,7 +130,7 @@ function UserInfo({ user }) {
         <div>
           <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>Average Rating</div>
           <Rating 
-            value={5} 
+            value={user.average_rating} 
             readOnly 
             sx={{ margin: '10px', fontSize:'2.5rem' }}
             size={"large"}
@@ -74,6 +143,7 @@ function UserInfo({ user }) {
 
 UserInfo.propTypes = {
   user: PropTypes.object,
+  following: PropTypes.array,
 }
 
 export default UserInfo;
