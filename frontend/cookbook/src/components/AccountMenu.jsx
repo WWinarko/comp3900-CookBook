@@ -66,6 +66,7 @@ function AccountMenu({anchorEl, open, onClose, onClick, setOpenLoading}) {
       })
       .finally(() => {
         setOpenLoading(false);
+        window.location.reload();
       })
   }
   const handleAddProduct = () => {

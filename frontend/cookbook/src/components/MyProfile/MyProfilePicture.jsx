@@ -38,6 +38,7 @@ function MyProfilePicture() {
         const {is_success} = res.data;
         if(is_success) {
           localStorage.removeItem('cookbook-token');
+          localStorage.removeItem('cookbook-profile');
           history.push('/');
         } else {
           setNotify({
