@@ -548,7 +548,7 @@ def user_edit_root():
 
 @APP.route("/user/photo", methods=['GET'])
 def user_photo_root():
-    ''' List all the user the user is following '''
+    ''' Return the photo of an user '''
     user_id = request.args.get('user_id')
     return dumps(
         user_photo(user_id)
