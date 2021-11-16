@@ -58,7 +58,7 @@ def profile_view(token, user_id):
 
     # If no recipe has rating
     if whole_counter == 0:
-        final_rating = 5
+        final_rating = 0
     else:
         final_rating = whole_rating/whole_counter
 

@@ -16,10 +16,15 @@ def recommendation_history(token):
 
     recipe_bought = user['recipe_bought']
     point_assign = dict()
-
+    if recipe_bought == None:
+        return {
+        "recipe_ids":[]
+    }
     # Count how many time each label appear 
     for recipe_id in recipe_bought:
         recipe = recipes.find_one({"_id":ObjectId(recipe_id)})
+        if len(recipe['label']) <= 0:
+            continue
         for label in recipe['labels']:
             point_assign[label] = point_assign.get(label, 0) + 1
 
@@ -45,6 +50,8 @@ def recommendation_history(token):
     for recipe in recipe_list:
         # Add point for each label on the recipe according to how many time the label appears
         point = 0
+        if len(recipe['label']) <= 0:
+            continue
         for label in recipe['labels']:
             point += point_assign.get(label, 0)
         # Calculate the recipe rating
