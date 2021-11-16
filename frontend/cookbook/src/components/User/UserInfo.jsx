@@ -99,11 +99,11 @@ function UserInfo({ user, following }) {
               <Avatar 
               alt={user.first_name}
               src={user.photo}
-              sx={{ width:'125px', height: '125px' }}
+              sx={{ width:'6vw', height: '6vw' }}
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%' }}>
-              <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>{user.first_name} {user.last_name}</div>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%', wordWrap:'break-word' }}>
+              <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px',  }}>{user.first_name} {user.last_name}</div>
               <div style={{ color:'#89623D', display: 'flex' }}>
                 <p style={{ marginRight: '50px' }}>Followers: {user.follower}</p>
               </div>

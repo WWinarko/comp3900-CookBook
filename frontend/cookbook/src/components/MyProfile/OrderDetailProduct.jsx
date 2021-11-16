@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
   root: {
     borderRadius: '5px',
-    width: '20vw',
+    width: '30vw',
     margin: '10px auto 10px auto',
 
     display: 'flex',
