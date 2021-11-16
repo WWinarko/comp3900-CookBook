@@ -149,7 +149,7 @@ function HomeRecipe() {
       {localStorage.getItem('cookbook-token') === null
         ? <>
           <div className={classes.textHolder}>
-            <div className={classes.text}>Popular This Week</div>
+            <div className={classes.text}>All Recipes</div>
           </div>
           {loadingState
             ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
