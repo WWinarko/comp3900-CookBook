@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import { Stack, Typography, Button, InputAdornment} from "@mui/material";
 import { styled } from '@mui/material/styles';
@@ -53,18 +52,18 @@ function AddProduct() {
       labels: productInfo.labels,
       price: parseFloat(productInfo.price),
     }
-    axios.post('http://127.0.0.1:5000/product/add', {
+    fetch('http://127.0.0.1:5000/product/add', {
+      method: 'POST',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
         Accept: 'applicaton/json',
         'Content-Type': 'application/json'
       },
-      productBody
+      body: JSON.stringify(productBody)
     }).then((res) => {
       console.log(res.data);
       history.push('/');
-    })
-    .catch((err) => {
+    }).catch((err) => {
       setNotify({
         isOpen: true,
         message: err.response.data.message,

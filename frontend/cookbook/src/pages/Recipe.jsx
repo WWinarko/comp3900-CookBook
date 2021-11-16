@@ -75,7 +75,7 @@ function Recipe() {
   }, [id])
 
   return (
-    <div>
+    <div style={{ backgroundColor:'#F9FAF9', minHeight: '100vh' }}>
       <Navbar />
       {loadingState
         ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>

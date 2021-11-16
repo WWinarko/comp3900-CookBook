@@ -82,7 +82,7 @@ function User() {
   }, [selfId])
 
   return (
-    <div>
+    <div style={{ backgroundColor:'#F9FAF9', minHeight: '100vh' }}>
       <Navbar />
       {loadingState
         ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
@@ -90,7 +90,6 @@ function User() {
           </div>
         : <Stack
             p={10}
-            sx={{ backgroundColor:'#F9FAF9' }}
           >
             <Stack
               direction="column"
