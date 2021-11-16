@@ -12,12 +12,12 @@ def recommendation_user_following(token):
 
     # Get the current user
     user = users.find_one({"token":token})
-
+    recipe_all = recipes.find()
     # Find all the recipes from currently following users
     recipe_list = []
     user_ids = user['following']
     for following in user_ids:
-        for recipe in recipes:
+        for recipe in recipe_all:
             if recipe['owner_id'] == following:
                 rating = 0
                 counter = 0
