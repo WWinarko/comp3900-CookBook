@@ -50,6 +50,7 @@ from user_follow import user_follow
 from user_listfollow import user_listfollow
 from user_unfollow import user_unfollow
 from user_edit import user_edit
+from user_photo import user_photo
 
 def default_handler(err):
     ''' Default Handle '''
@@ -539,6 +540,14 @@ def user_edit_root():
     phone = payload['phone']
     return dumps(
         user_edit(token, first_name, last_name, photo, email, address, state, postcode, phone)
+    )
+
+@APP.route("/user/photo", methods=['GET'])
+def user_photo_root():
+    ''' List all the user the user is following '''
+    user_id = request.args.get('user_id')
+    return dumps(
+        user_photo(user_id)
     )
 
 if __name__ == "__main__":

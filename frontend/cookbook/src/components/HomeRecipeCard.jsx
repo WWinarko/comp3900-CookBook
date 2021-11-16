@@ -26,6 +26,7 @@ const useStyles = makeStyles(({
       backgroundColor: '#FFFFFF',
       border: '1px solid orange'
     },
+    overflow: 'hidden',
   },
   thumbnail: {
     minWidth: '106px',
