@@ -121,7 +121,7 @@ function Navbar() {
           </Tooltip>
         </Stack>
         {token === null ?
-          <NavLink to="/login">
+          <NavLink to="/login" style={{ display:'block', textDecoration: 'none', color:'#000000' }}>
             <div style={{ margin:'1vw' }}>
             <RoundButton name="Login" />
             </div>

@@ -80,27 +80,32 @@ function MostPopular() {
   }, [])
 
   React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + recipeId, {
-      method: 'GET',
-    }).then((data) => {
-      if (data.status === 200) {
-        data.json().then((res) => {
-          setRecipe(res);
-        })
-      }
-    }).catch((err) => {
-      console.log(err);
-    }).finally(() => {
-      setLoadingState(false);
-    })
+    if (typeof recipeId === "string") {
+      console.log(typeof recipeId);
+      fetch('http://127.0.0.1:5000/recipe/view?recipe_id=' + recipeId, {
+        method: 'GET',
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            setRecipe(res);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoadingState(false);
+      })
+    }
   }, [recipeId])
 
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-      <p className={classes.header}>Most Popular</p>
+      
       {loadingState
         ? <> </>
-        : <div className={classes.root}>
+        : <>
+          <p className={classes.header}>Most Popular</p>
+          <div className={classes.root}>
             <div className={classes.container}>
               <div className={classes.subcontainer}>
                 <img src={recipe.photo} alt='thumbnail' className={classes.picture} />
@@ -122,6 +127,7 @@ function MostPopular() {
               </div>
             </div>
           </div>
+          </>
       }
     </div>
   )

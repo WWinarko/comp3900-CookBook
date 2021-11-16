@@ -96,7 +96,6 @@ function RecipeCard({ id }) {
                 spacing={1}
               >
                 <RoundButton name="Edit"/>
-                <RoundButton name="Delete"/>
               </Stack>
             </div>
           </>

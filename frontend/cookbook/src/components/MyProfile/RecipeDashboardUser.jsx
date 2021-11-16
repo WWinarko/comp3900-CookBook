@@ -88,24 +88,26 @@ function RecipeDashboardUser() {
   }, [])
 
   React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/profile/view?user_id=' + id, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
-        Accept: 'applicaton/json',
-        'Content-Type': 'application/json'
-      },
-    }).then((data) => {
-      if (data.status === 200) {
-        data.json().then((res) => {
-          setAllRecipes(res.user_recipes_string);
-        })
-      }
-    }).catch((err) => {
-      console.log(err);
-    }).finally(() => {
-      setLoadingState(false);
-    })
+    if (typeof id === "string") {
+      fetch('http://127.0.0.1:5000/profile/view?user_id=' + id, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            setAllRecipes(res.user_recipes_string);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoadingState(false);
+      })
+    }
   }, [id])
 
   return (

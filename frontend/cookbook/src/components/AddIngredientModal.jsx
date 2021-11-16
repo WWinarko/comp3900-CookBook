@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Modal, Box, FormLabel, Checkbox, FormControlLabel } from "@mui/material";
+import { Modal, Box, FormLabel } from "@mui/material";
 import CustomTextField from "./TextField/CustomTextField";
 import SearchBar from "./SearchBar";
 import SquareButton from "./SquareButton";
@@ -29,14 +29,12 @@ function AddIngredientModal({ open, onClose, ingredients, setIngredients }) {
     isSelected: false,
     product_id: '',
   });
-  const [isCompulsory, setIsCompulsory] = React.useState(true);
 
   const handleIngredient = () => {
     const body = {
       ingredient: name,
       product_id: selected['product_id'],
       quantity: parseInt(quantity),
-      compulsory: isCompulsory,
     }
     setIngredients([...ingredients, body]);
     setName('');
@@ -70,9 +68,11 @@ function AddIngredientModal({ open, onClose, ingredients, setIngredients }) {
           </Box>
         }
         <NumberTextField id="quantity" name="Quantity" value={quantity} setValue={setQuantity} width="70px" min="1" />
-        <FormControlLabel label="Compulsory"control={<Checkbox checked={isCompulsory} onChange={(event) => setIsCompulsory(event.target.checked)} />}
-      />
-        <SquareButton name="Confirm" onClick={handleIngredient} disabled={selected['product_id'] === ''}/>
+        {selected['product_id'] === ''
+          ? <SquareButton name="Confirm" disabled={selected['product_id'] === ''}/>
+          : <SquareButton name="Confirm" onClick={handleIngredient} />
+        }
+        
       </Box>
     </Modal>
   )
