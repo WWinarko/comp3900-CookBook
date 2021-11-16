@@ -70,6 +70,10 @@ function HomeRecipe() {
   const [recommendation, setRecommendation] = useState([]);
   const [recommendationCount, setRecommendationCount] = useState(0);
   const [recommendationDone, setRecommendationDone] = useState(false);
+  const [allFollowing, setAllFollowing] = useState([])
+  const [following, setFollowing] = useState([]);
+  const [followingCount, setFollowingCount] = useState(0);
+  const [followingDone, setFollowingDone] = useState(false);
 
   React.useEffect(() => {
     if (localStorage.getItem('cookbook-token') !== null) {
@@ -83,21 +87,7 @@ function HomeRecipe() {
       }).then((data) => {
         if (data.status === 200) {
           data.json().then((res) => {
-            setAllRecipes(res.recipe_ids);
-          })
-        }
-      }).catch((err) => {
-        console.log(err);
-      }).finally(() => {
-        setLoadingState(false);
-      })
-    } else {
-      fetch('http://127.0.0.1:5000/recipe/listall', {
-        method: 'GET',
-      }).then((data) => {
-        if (data.status === 200) {
-          data.json().then((res) => {
-            setAllRecipes(res.recipe_list);
+            setAllFollowing(res.recipe_ids);
           })
         }
       }).catch((err) => {
@@ -107,6 +97,22 @@ function HomeRecipe() {
       })
     }
   }, [])
+
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/recipe/listall', {
+      method: 'GET',
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setAllRecipes(res.recipe_list);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setLoadingState(false);
+    })
+  }, []);
 
  React.useEffect(() => {
     const token = localStorage.getItem('cookbook-token');
@@ -136,6 +142,22 @@ function HomeRecipe() {
       setDone(!done);
     }
   }
+
+  React.useEffect(() => {
+    setFollowing([allFollowing.slice(0, 4)]);
+  }, [allFollowing]);
+
+  const showMoreFollowing = () => {
+    const newFollowing = [...following, allFollowing.slice(followingCount * 4, (followingCount + 1) * 4)];
+
+    setFollowingCount(followingCount + 1);
+    setFollowing(newFollowing);
+    
+    if (allFollowing.length < (followingCount + 1) * 4) {
+      setFollowingDone(!done);
+    }
+  }
+
   const showMoreRecommendation = () => {
     setRecommendationCount(recommendationCount + 1);
     
@@ -156,19 +178,34 @@ function HomeRecipe() {
                 <CircularProgress />
               </div>
             : <div className={classes.container}>
-              {recipes.map((recipe, index) => {
-                return (
-                  <HomeRecipeContainer recipesData={recipe} key={index} />
-                )
-              })}
-              {done
-                ? <></>
-                : <RoundButton name='Show More' onClick={showMore} />
-              }
-            </div>
+                {recipes.map((recipe, index) => {
+                  return (
+                    <HomeRecipeContainer recipesData={recipe} key={index} />
+                  )
+                })}
+                {done
+                  ? <></>
+                  : <RoundButton name='Show More' onClick={showMore} />
+                }
+              </div>
           }
           </>
         : <>
+          <div className={classes.textHolder}>
+            <div className={classes.text}>All Recipes</div>
+          </div>
+          <div className={classes.container}>
+            {recipes.map((recipe, index) => {
+              return (
+                <HomeRecipeContainer recipesData={recipe} key={index} />
+              )
+            })}
+            {done
+              ? <></>
+              : <RoundButton name='Show More' onClick={showMore} />
+            }
+          </div>
+          
           <div className={classes.textHolder}>
             <div className={classes.text}>Following</div>
           </div>
@@ -177,14 +214,14 @@ function HomeRecipe() {
                 <CircularProgress />
               </div>
             : <div className={classes.container}>
-              {recipes.map((recipe, index) => {
+              {following.map((recipe, index) => {
                 return (
                   <HomeRecipeContainer recipesData={recipe} key={index} />
                 )
               })}
-              {done
+              {followingDone
                 ? <></>
-                : <RoundButton name='Show More' onClick={showMore} />
+                : <RoundButton name='Show More' onClick={showMoreFollowing} />
               }
             </div>
           }
