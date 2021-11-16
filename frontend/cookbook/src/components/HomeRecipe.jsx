@@ -72,29 +72,44 @@ function HomeRecipe() {
   const [recommendationDone, setRecommendationDone] = useState(false);
 
   React.useEffect(() => {
-    fetch('http://127.0.0.1:5000/recommendation/user_following', {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
-        Accept: 'applicaton/json',
-        'Content-Type': 'application/json'
-      },
-    }).then((data) => {
-      if (data.status === 200) {
-        data.json().then((res) => {
-          setAllRecipes(res.recipe_ids);
-        })
-      }
-    }).catch((err) => {
-      console.log(err);
-    }).finally(() => {
-      setLoadingState(false);
-    })
+    if (localStorage.getItem('cookbook-token') !== null) {
+      fetch('http://127.0.0.1:5000/recommendation/user_following', {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            setAllRecipes(res.recipe_ids);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoadingState(false);
+      })
+    } else {
+      fetch('http://127.0.0.1:5000/recipe/listall', {
+        method: 'GET',
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            setAllRecipes(res.recipe_list);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoadingState(false);
+      })
+    }
   }, [])
 
  React.useEffect(() => {
     const token = localStorage.getItem('cookbook-token');
-    // console.log(token);
     if (token) {
       const auth = {"Authorization": `Bearer ${token}`};
       axios.get('http://127.0.0.1:5000/recommendation/history', {headers: auth})
@@ -131,39 +146,64 @@ function HomeRecipe() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.textHolder}>
-        <div className={classes.text}>Following</div>
-      </div>
-      {loadingState
-        ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress />
+      {localStorage.getItem('cookbook-token') === null
+        ? <>
+          <div className={classes.textHolder}>
+            <div className={classes.text}>Popular This Week</div>
           </div>
-        : <div className={classes.container}>
-          {recipes.map((recipe, index) => {
-            return (
-              <HomeRecipeContainer recipesData={recipe} key={index} />
-            )
-          })}
-          {done
-            ? <></>
-            : <RoundButton name='Show More' onClick={showMore} />
+          {loadingState
+            ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress />
+              </div>
+            : <div className={classes.container}>
+              {recipes.map((recipe, index) => {
+                return (
+                  <HomeRecipeContainer recipesData={recipe} key={index} />
+                )
+              })}
+              {done
+                ? <></>
+                : <RoundButton name='Show More' onClick={showMore} />
+              }
+            </div>
           }
-        </div>
-      }
-      <div className={classes.textHolder}>
-        <div className={classes.text}>Recommendation</div>
-      </div>
-      {loadingState
-        ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress />
+          </>
+        : <>
+          <div className={classes.textHolder}>
+            <div className={classes.text}>Following</div>
           </div>
-        : <div className={classes.recommendationContainer}>
-            <HomeRecipeContainer recipesData={recommendation.slice(0, recommendationCount*4+4)}/>
-          {recommendationDone
-            ? <></>
-            : <RoundButton name='Show More' onClick={showMoreRecommendation} />
+          {loadingState
+            ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress />
+              </div>
+            : <div className={classes.container}>
+              {recipes.map((recipe, index) => {
+                return (
+                  <HomeRecipeContainer recipesData={recipe} key={index} />
+                )
+              })}
+              {done
+                ? <></>
+                : <RoundButton name='Show More' onClick={showMore} />
+              }
+            </div>
           }
-        </div>
+          <div className={classes.textHolder}>
+            <div className={classes.text}>Recommendation</div>
+          </div>
+          {loadingState
+            ? <div style={{ height: '30vh', backgroundColor: '#F9FAF9', display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress />
+              </div>
+            : <div className={classes.recommendationContainer}>
+                <HomeRecipeContainer recipesData={recommendation.slice(0, recommendationCount*4+4)}/>
+              {recommendationDone
+                ? <></>
+                : <RoundButton name='Show More' onClick={showMoreRecommendation} />
+              }
+            </div>
+          }
+          </>
       }
     </div>
   )
