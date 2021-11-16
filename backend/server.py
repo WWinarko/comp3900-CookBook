@@ -39,6 +39,10 @@ from recommendation_history import recommendation_history
 from recommendation_swap import recommendation_swap
 from recommendation_user_following import recommendation_user_following
 
+from sales_total import sales_total
+from sales_product import sales_product
+from sales_timeframe import sales_timeframe
+
 from admin_check import admin_check
 
 from profile_view import profile_view
@@ -548,6 +552,40 @@ def user_photo_root():
     user_id = request.args.get('user_id')
     return dumps(
         user_photo(user_id)
+    )
+
+##### Sales Route #####
+
+@APP.route("/sales/total", methods=['POST'])
+def sales_total_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    return dumps(
+        sales_total(token)
+    )
+
+@APP.route("/sales/timeframe", methods=['POST'])
+def sales_timeframe_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    payload = request.get_json()
+    initial_date= payload['initial_date']
+    end_date = payload['end_date']
+    return dumps(
+        sales_timeframe(token, initial_date, end_date)
+    )
+
+@APP.route("/sales/product", methods=['POST'])
+def sales_product_root():
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    payload = request.get_json()
+    product_id = payload['product_id']
+    return dumps(
+        sales_product(token, product_id)
     )
 
 if __name__ == "__main__":
