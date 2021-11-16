@@ -163,8 +163,6 @@ function OrderCard({ order, handleMove, admin }) {
               <RoundButton name="View" onClick={handleModal}/>        
             </div>
             <OrderDetailModal open={openModal} onClose={handleModal} id={order}/>
-            }
-            
           </>
       }
     </div>
