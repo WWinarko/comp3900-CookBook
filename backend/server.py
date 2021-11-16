@@ -1,5 +1,4 @@
 from flask import Flask, request
-from backend.sales_total import sales_total
 from flask_cors import CORS
 from json import dumps
 
@@ -405,7 +404,8 @@ def sales_product_root():
     headers = request.headers
     bearer = headers.get('Authorization')    # Bearer YourTokenHere
     token = bearer.split()[1]  # YourTokenHere
-    product_id = request.args.get('product_id')
+    payload = request.get_json()
+    product_id = payload["product_id"]
     return dumps(
         sales_product(token, product_id)
     )
