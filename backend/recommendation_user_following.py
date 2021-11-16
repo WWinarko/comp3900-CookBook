@@ -40,7 +40,7 @@ def recommendation_user_following(token):
     for recipe in recipe_list:
         (recipe_retrieve, rating) = recipe
         if not str(recipe_retrieve['_id']) in user['recipe_bought']:
-            final_recipe.append(recipe_retrieve['_id'])
+            final_recipe.append(str(recipe_retrieve['_id']))
 
     # Return the recipe id list
     return {
