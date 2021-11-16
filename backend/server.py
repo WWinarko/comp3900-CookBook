@@ -223,10 +223,10 @@ def recipe_delete_root():
 def product_add_root():
     ''' Add a product '''
     payload = request.get_json()
-    # headers = request.headers
-    # bearer = headers.get('Authorization')    # Bearer YourTokenHere
-    # token = bearer.split()[1]  # YourTokenHere
-    token = payload['token']
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    # token = payload['token']
     title = payload['title']
     photo = payload['photo']
     description = payload['description']

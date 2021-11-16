@@ -146,4 +146,3 @@ function RecipeDashboardAdmin() {
 
 export default RecipeDashboardAdmin;
 
-server.py ../frontend/cookbook/src/components/MyProfile/RecipeCard.jsx ../frontend/cookbook/src/components/MyProfile/RecipeDashboardAdmin.jsx ../frontend/cookbook/src/components/MyProfile/RecipeDashboardUser.jsx ../frontend/cookbook/src/components/Recipe/RecipeRecommendation.jsx ../frontend/cookbook/src/components/TextField/FileTextField.jsx ../frontend/cookbook/src/components/User/MostPopular.jsx ../frontend/cookbook/src/pages/AddProduct.jsx

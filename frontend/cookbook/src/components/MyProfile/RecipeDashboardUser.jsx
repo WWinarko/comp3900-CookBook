@@ -139,7 +139,9 @@ function RecipeDashboardUser() {
             Recipes
           </div>
           <div className={classes.root}>
-            <CircularProgress />
+            <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
+              <CircularProgress/>
+            </div>
           </div>
           </>
         : <> 
