@@ -55,7 +55,7 @@ from user_listfollow import user_listfollow
 from user_unfollow import user_unfollow
 from user_edit import user_edit
 from user_photo import user_photo
-
+# product_add, recipe_upload
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -122,9 +122,10 @@ def recipe_view_root():
 def recipe_upload_root():
     ''' Upload a recipe '''
     payload = request.get_json()
-    headers = request.headers
-    bearer = headers.get('Authorization')    # Bearer YourTokenHere
-    token = bearer.split()[1]  # YourTokenHere
+    # headers = request.headers
+    # bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    # token = bearer.split()[1]  # YourTokenHere
+    token = payload['token']
     title = payload['title']
     intro = payload['intro']
     photo = payload['photo']
@@ -222,9 +223,10 @@ def recipe_delete_root():
 def product_add_root():
     ''' Add a product '''
     payload = request.get_json()
-    headers = request.headers
-    bearer = headers.get('Authorization')    # Bearer YourTokenHere
-    token = bearer.split()[1]  # YourTokenHere
+    # headers = request.headers
+    # bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    # token = bearer.split()[1]  # YourTokenHere
+    token = payload['token']
     title = payload['title']
     photo = payload['photo']
     description = payload['description']
