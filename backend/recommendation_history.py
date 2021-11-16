@@ -23,7 +23,7 @@ def recommendation_history(token):
     # Count how many time each label appear 
     for recipe_id in recipe_bought:
         recipe = recipes.find_one({"_id":ObjectId(recipe_id)})
-        if len(recipe['label']) <= 0:
+        if len(recipe['labels']) <= 0:
             continue
         for label in recipe['labels']:
             point_assign[label] = point_assign.get(label, 0) + 1
