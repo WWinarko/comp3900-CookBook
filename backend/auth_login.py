@@ -21,6 +21,9 @@ def auth_login(username, password):
     if user['password'] != encryption_helper.hash_password(password):
         raise InputError(description="Incorrect Password")
 
+    if user['token'] != "":
+        raise InputError(description="the account is already logged in on another device")
+
     user_id = str(user['_id'])
     token = encryption_helper.generate_token()
     users.update_one({"_id": user['_id']}, {"$set": {"token": token}})
