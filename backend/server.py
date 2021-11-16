@@ -122,10 +122,10 @@ def recipe_view_root():
 def recipe_upload_root():
     ''' Upload a recipe '''
     payload = request.get_json()
-    # headers = request.headers
-    # bearer = headers.get('Authorization')    # Bearer YourTokenHere
-    # token = bearer.split()[1]  # YourTokenHere
-    token = payload['token']
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    # token = payload['token']
     title = payload['title']
     intro = payload['intro']
     photo = payload['photo']

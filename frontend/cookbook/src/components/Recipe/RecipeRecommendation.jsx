@@ -56,7 +56,6 @@ function RecipeRecommendation() {
     const auth = {"Authorization": `Bearer ${token}`};
     axios.get('http://127.0.0.1:5000/recommendation/history', {headers: auth})
     .then((res) => {
-      console.log(res.data['recipe_ids']);
       setRecipes(res.data['recipe_ids']);
     })
     .catch((err) => {

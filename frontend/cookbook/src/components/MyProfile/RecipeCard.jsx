@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   }
 })
 
-function RecipeCard({ id }) {
+function RecipeCard({ id, handleDelete }) {
   const classes = useStyles();
   const [loadingState, setLoadingState] = useState(true);
   const [recipe, setRecipe] = useState({});
@@ -46,8 +46,6 @@ function RecipeCard({ id }) {
           setRecipe(res);
         })
       }
-    }).catch((err) => {
-      console.log(err);
     }).finally(() => {
       setLoadingState(false);
     })
@@ -96,6 +94,7 @@ function RecipeCard({ id }) {
                 spacing={1}
               >
                 <RoundButton name="Edit"/>
+                <RoundButton name="Delete"/>
               </Stack>
             </div>
           </>
@@ -125,6 +124,7 @@ function RecipeCard({ id }) {
                 spacing={1}
               >
                 <RoundButton name="Edit" onClick={handleEdit}/>
+                <RoundButton name="Delete" onClick={() => handleDelete(id)}/>
               </Stack>
             </div>
           </>
@@ -135,6 +135,7 @@ function RecipeCard({ id }) {
 
 RecipeCard.propTypes = {
   id: PropTypes.string,
+  handleDelete: PropTypes.func,
 }
 
 export default RecipeCard;

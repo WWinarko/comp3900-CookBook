@@ -54,6 +54,7 @@ function RecipeDashboardAdmin() {
   const [page, setPage] = useState(1);
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
+  const [refresh, setRefresh] = useState(false);
 
   React.useEffect(() => {
     const newRecipes = allRecipes.slice((page - 1) * 3, page * 3);
@@ -67,6 +68,26 @@ function RecipeDashboardAdmin() {
 
   const handlePage = (event, value) => {
     setPage(value);
+  }
+
+  const handleDelete = (id) => {
+    setLoadingState(true);
+    const body = {
+      recipe_id: id,
+    }
+    fetch('http://127.0.0.1:5000/recipe/delete', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setRefresh(!refresh);
+    })
   }
 
   React.useEffect(() => {
@@ -88,14 +109,21 @@ function RecipeDashboardAdmin() {
     }).finally(() => {
       setLoadingState(false);
     })
-  }, [])
+  }, [refresh])
 
   return (
     <div>
       {loadingState
-        ? <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress/>
+        ? <>
+          <div className={classes.title}>
+            Recipes
           </div>
+          <div className={classes.root}>
+            <div style={{ height: '100vh', backgroundColor: '#F9FAF9', paddingTop: '150px', display: 'flex', justifyContent: 'center' }}>
+              <CircularProgress/>
+            </div>
+          </div>
+          </>
         : <> 
           <div className={classes.title}>
             Recipes
@@ -104,7 +132,7 @@ function RecipeDashboardAdmin() {
             <div className={classes.container} >
               {recipes.map((data, index) => {
                 return (
-                    <RecipeCard key={index} id={data} />
+                    <RecipeCard key={index} id={data} handleDelete={handleDelete} />
                 )
               })}
             </div>
@@ -117,3 +145,5 @@ function RecipeDashboardAdmin() {
 }
 
 export default RecipeDashboardAdmin;
+
+server.py ../frontend/cookbook/src/components/MyProfile/RecipeCard.jsx ../frontend/cookbook/src/components/MyProfile/RecipeDashboardAdmin.jsx ../frontend/cookbook/src/components/MyProfile/RecipeDashboardUser.jsx ../frontend/cookbook/src/components/Recipe/RecipeRecommendation.jsx ../frontend/cookbook/src/components/TextField/FileTextField.jsx ../frontend/cookbook/src/components/User/MostPopular.jsx ../frontend/cookbook/src/pages/AddProduct.jsx

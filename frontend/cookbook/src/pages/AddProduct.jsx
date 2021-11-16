@@ -53,8 +53,14 @@ function AddProduct() {
       labels: productInfo.labels,
       price: parseFloat(productInfo.price),
     }
-    axios.post('http://127.0.0.1:5000/product/add', productBody)
-    .then((res) => {
+    axios.post('http://127.0.0.1:5000/product/add', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      },
+      productBody
+    }).then((res) => {
       console.log(res.data);
       history.push('/');
     })
