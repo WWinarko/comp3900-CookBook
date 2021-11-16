@@ -32,6 +32,16 @@ function UserInfo({ user, following }) {
   const classes = useStyles(); 
   const [isFollowing, setIsFollowing] = useState(false);
   const [lst, setLst] = useState(following);
+  const [admin, setAdmin] = useState(false);
+  const [loadingState, setLoadingState] = useState(true);
+
+  React.useEffect(() => {
+    console.log(user.admin);
+    if (user.admin === 'true') {
+      setAdmin(true);
+    }
+    setLoadingState(false);
+  }, [])
 
   const handleUnfollow = () => {
     const payload = {
@@ -81,62 +91,75 @@ function UserInfo({ user, following }) {
 
   return (
     <div className={classes.root}>
-      <div className={classes.container}>
-        <div style={{ marginRight: '10%' }}> 
-          <Avatar 
-          alt={user.first_name}
-          src={user.photo}
-          sx={{ width:'125px', height: '125px' }}
-          />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%' }}>
-          <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>{user.first_name} {user.last_name}</div>
-          <div style={{ color:'#89623D', display: 'flex' }}>
-            <p style={{ marginRight: '50px' }}>Followers: {user.follower}</p>
-          </div>
-            {user.email === ""
-              ? <>
-                {isFollowing | lst.includes(user.user_id)
-                  ? <Button sx={{ 
-                      width: '151px',
-                      height: '45px', 
-                      backgroundColor: '#755100',
-                      color: "#ffffff",
-                      borderRadius: '3px',
-                      border: 'none',
-                      textTransform: 'none',
-                      fontSize: '18px',
-                      fontWeight: '500',
-                      '&:hover': {
-                        backgroundColor: '#89623D',
-                      },
-                    }} onClick={handleUnfollow}>
-                      Unfollow
-                    </Button>
-                  : <SquareButton name="Follow" onClick={handleFollow} />
-                }
-                </>
-                
-              : <div>
-                <p style={{ marginRight: '50px' }}>Email: {user.email}</p>
-                <p>Phone: {user.phone}</p>
+      {loadingState
+        ? <> </>
+        : <>
+          <div className={classes.container}>
+            <div style={{ marginRight: '10%' }}> 
+              <Avatar 
+              alt={user.first_name}
+              src={user.photo}
+              sx={{ width:'125px', height: '125px' }}
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%' }}>
+              <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>{user.first_name} {user.last_name}</div>
+              <div style={{ color:'#89623D', display: 'flex' }}>
+                <p style={{ marginRight: '50px' }}>Followers: {user.follower}</p>
               </div>
-            }
-             
-        </div>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor:'#FE793D', }}/>
-      <div className={classes.container}>
-        <div>
-          <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>Average Rating</div>
-          <Rating 
-            value={user.average_rating} 
-            readOnly 
-            sx={{ margin: '10px', fontSize:'2.5rem' }}
-            size={"large"}
-          />
-        </div>
-      </div>
+                {admin
+                  ? <div style={{ color:'#FE793D' }}>Admin</div>
+                  : <>
+                    {user.email === ""
+                      ? <>
+                        {isFollowing | lst.includes(user.user_id)
+                          ? <Button sx={{ 
+                              width: '151px',
+                              height: '45px', 
+                              backgroundColor: '#755100',
+                              color: "#ffffff",
+                              borderRadius: '3px',
+                              border: 'none',
+                              textTransform: 'none',
+                              fontSize: '18px',
+                              fontWeight: '500',
+                              '&:hover': {
+                                backgroundColor: '#89623D',
+                              },
+                            }} onClick={handleUnfollow}>
+                              Unfollow
+                            </Button>
+                          : <SquareButton name="Follow" onClick={handleFollow} />
+                        }
+                        </>
+                        
+                      : <div>
+                        <p style={{ marginRight: '50px' }}>Email: {user.email}</p>
+                        <p>Phone: {user.phone}</p>
+                      </div>
+                    }
+                    </>
+                }
+                    
+                
+            </div>
+          </div>
+          <Divider orientation="vertical" variant="middle" flexItem sx={{ borderColor:'#FE793D', }}/>
+          <div className={classes.container}>
+            <div>
+              <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>Average Rating</div>
+              <Rating 
+                value={user.average_rating} 
+                readOnly 
+                sx={{ margin: '10px', fontSize:'2.5rem' }}
+                size={"large"}
+              />
+            </div>
+          </div>
+          </>
+      }
+    
+      
     </div>
   )
 }

@@ -25,6 +25,7 @@ def profile_view(token, user_id):
     phone = ""
     follower = user['follower']
     photo = user['photo']
+    admin = user['admin']
 
 
     viewing_user = users.find_one({"token": token})
@@ -72,5 +73,6 @@ def profile_view(token, user_id):
         'follower': follower,
         'photo': photo,
         'user_recipes_string': user_recipes_string,
-        'average_rating':round(final_rating, 1)
+        'average_rating':round(final_rating, 1),
+        'admin': admin,
     }

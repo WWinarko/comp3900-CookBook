@@ -49,18 +49,37 @@ function RecipeDescription({ recipe, selfId, following }) {
   const history = useHistory();
   const [loadingState, setLoadingState] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [photo, setPhoto] = useState();
 
   React.useEffect(() => {
     if (recipe === undefined) {
       setLoadingState(true);
     } else {
-      setLoadingState(false);
       if (following.includes(recipe.owner_id)) {
         setIsFollowing(true);
       }
+
+      fetch('http://127.0.0.1:5000/user/photo?user_id=' + recipe.owner_id, {
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+            Accept: 'applicaton/json',
+            'Content-Type': 'application/json'
+          },
+        }).then((data) => {
+          if (data.status === 200) {
+            data.json().then((res) => {
+              setPhoto(res.photo);
+            })
+          }
+        }).catch((err) => {
+          console.log(err);
+        }).finally(() => {
+          setLoadingState(false);
+        })
     }
   }, [recipe])
-  
+
   const handleFollow = () => {
     const payload = {
       user_id: recipe.owner_id
@@ -149,15 +168,18 @@ function RecipeDescription({ recipe, selfId, following }) {
                 direction="row"
                 alignItems="center"
               >
-                <Avatar alt={recipe.owner_username} src={recipe.photo} sx={{ width: 70 ,height: 70 }} className={classes.profile} onClick={handleProfile}/>
+                <Avatar alt={recipe.owner_username} src={photo} sx={{ width: 70 ,height: 70 }} className={classes.profile} onClick={handleProfile}/>
                 <Stack
                 >
                   <p style={{ paddingTop:'10%', margin:'0', fontWeight: 'bold' }}>{recipe.owner_username}</p>
-                  <p style={{ paddingTop:'10%', margin:'0' }}>Followers:{recipe.owner_follower}</p>
+                  {recipe.owner_follower === -1
+                    ? <></>
+                    : <p style={{ paddingTop:'10%', margin:'0' }}>Followers:{recipe.owner_follower}</p>
+                  }
                 </Stack>
               </Stack>
               <div>
-                {selfId === recipe.owner_id
+                {selfId === recipe.owner_id | recipe.owner_follower === -1
                   ? <></>
                   : <>
                       {isFollowing

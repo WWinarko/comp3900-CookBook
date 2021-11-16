@@ -6,7 +6,6 @@ import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 import RecommendRoundedIcon from '@mui/icons-material/RecommendRounded';
-import axios from 'axios';
 
 import SearchBar from './SearchBar';
 import RoundButton from './RoundButton';
@@ -54,25 +53,25 @@ function Navbar() {
   const [photo, setPhoto] = useState('');
 
   const token = localStorage.getItem('cookbook-token');
-  const user_id = localStorage.getItem('cookbook-profile');
 
   useEffect(() => {
-    if (token !== null && user_id !== null) {
-      axios.get('http://127.0.0.1:5000/profile/view', 
-        { headers: {
-          Authorization: `Bearer ${token}`
-        },
-          params: {
-          user_id,
-        }})
-        .then((res) => {
-          setPhoto(res.data['photo']);
+    fetch('http://127.0.0.1:5000/user/photo?user_id=' + localStorage.getItem('cookbook-profile'), {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      },
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setPhoto(res.photo);
         })
-        .catch((err) => {
-          console.log(err);
-        })
-    }
-  }, [token, user_id]);
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, [])
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -123,13 +122,15 @@ function Navbar() {
         </Stack>
         {token === null ?
           <NavLink to="/login">
+            <div style={{ margin:'1vw' }}>
             <RoundButton name="Login" />
+            </div>
           </NavLink>
         : 
         <>
-          {photo !== '' ? <Avatar sx={{cursor: 'pointer'}} src={photo} onClick={handleMenu} />
+          {photo !== '' ? <Avatar sx={{cursor: 'pointer', width: 50, height: 50 }} src={photo} onClick={handleMenu} />
           :
-            <Avatar sx={{cursor: 'pointer'}} onClick={handleMenu}>C</Avatar>
+            <Avatar sx={{cursor: 'pointer', width: 50, height: 50}} onClick={handleMenu} />
           }
           <AccountMenu 
             anchorEl={anchorEl}
