@@ -31,7 +31,7 @@ def recommendation_questions(q1, q2, q3, q4, q5, q6):
     if len(recipe_ids) > 0:
         (point, id) = recipe_ids[0]
         max = point
-        (point, id) = recipe_ids[len(recipe_ids - 1)]
+        (point, id) = recipe_ids[len(recipe_ids) - 1]
         min = point
     else:
         return {
