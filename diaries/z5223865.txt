@@ -30,5 +30,36 @@ week they accomplished about 70% of the total work.
 recommended system.
 
 Week 5
-- Worked on the backend 
-  TODO: COMPLETE ME
+- We delievered our first demo, we were working on the backend. I did 
+some cart related funtions.
+- Frontend managed to finish their part and connect to backend. It was
+a bit rushed but we managed to complete the sprint.
+
+Week 6
+- We took a break this week. Catching up with other subjects.
+
+Week 7
+- Started to work on the second sprint. I did some more functions related
+to cart.
+- Front end also start working on some more pages for the second sprint.
+The progress was more consistent this time as we said we will try to not 
+rush this sprint.
+
+Week 8
+- Worked on the email send and some cart functions. Email setup ended
+up being a bit challenging because I was trying to use nice templates but 
+since I have very little knowledge of html.
+- Frontend finished up to connect with backend.
+- The report was started after the presentation.
+
+Week 9
+- This week I worked on the sales display/functions from the admin side
+for the backend. 
+- Progress in the frontend was to create the last buttons for the last 
+sprint.
+
+Week 10
+- This week I worked on helping to debug and also give some finishing 
+touches to our code (formatting). Also I helped to add data into the database.
+- Frontend connected the code from the backend.
+- Finished up with the report.
