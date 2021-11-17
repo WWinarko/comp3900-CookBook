@@ -26,7 +26,7 @@ const useStyles = makeStyles(({
   },
 }));
 
-function SearchBar({ width, placeholder, border, searchFunc, setSelected }) {
+function SearchBar({ width, placeholder, border, searchFunc, setSelected, labelOption }) {
   const [ search, setSearch ] = useState('');
   const [anchorEl, setAnchorEl] = useState('searchRoot');
   const [open, setOpen] = useState(false);
@@ -68,7 +68,7 @@ function SearchBar({ width, placeholder, border, searchFunc, setSelected }) {
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
       <div id="searchRoot"className={classes.root} style={{ width: width, border: border }}>
-        <Popper open={open && !label} anchorEl={anchorEl} placement="bottom-start" transition className={classes.popper}>
+        <Popper open={labelOption && open && !label} anchorEl={anchorEl} placement="bottom-start" transition className={classes.popper}>
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
               <Paper className={classes.paper}>
@@ -94,6 +94,7 @@ SearchBar.propTypes = {
   border: PropTypes.string,
   searchFunc: PropTypes.func,
   setSelected: PropTypes.func,
+  labelOption: PropTypes.bool,
 }
 
 export default SearchBar;

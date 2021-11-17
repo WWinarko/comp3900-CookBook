@@ -28,6 +28,49 @@ function MyProfilePicture() {
     message: '',
     type: 'error',
   });
+  const [id, setId] = useState();
+  const [photo, setPhoto] = useState();
+  const [loadingState, setLoadingState] = useState(true);
+
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/id/check', {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      }
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setId(res.id);
+        })
+      }
+    })
+  }, [])
+
+  React.useEffect(() => {
+    if (id !== undefined) {
+      fetch('http://127.0.0.1:5000/user/photo?user_id=' + id, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+      }).then((data) => {
+        if (data.status === 200) {
+          data.json().then((res) => {
+            setPhoto(res.photo);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setLoadingState(false);
+      })
+    }
+  }, [id])
 
   const handleLogout = () => {
     const token = localStorage.getItem('cookbook-token');
@@ -56,15 +99,22 @@ function MyProfilePicture() {
         });
       })
   }
-  
+
   return (
     <div className={classes.root}>
       <Notification notify={notify} setNotify={setNotify} /> 
-      <Avatar
-        alt="Profile Picture"
-        src="a"
-        sx={{ width:'120px', height: '120px', marginBottom:'30px' }}
-      >A</Avatar>
+      {loadingState
+        ?<Avatar
+            alt="Profile Picture"
+            src="a"
+            sx={{ width:'120px', height: '120px', marginBottom:'30px' }}
+          />
+        : <Avatar
+            alt="Profile Picture"
+            src={photo}
+            sx={{ width:'120px', height: '120px', marginBottom:'30px' }}
+          />
+      }
       <RoundButton name="Sign out" onClick={handleLogout} />
     </div>
   )

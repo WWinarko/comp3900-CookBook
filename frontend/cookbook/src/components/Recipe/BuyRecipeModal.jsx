@@ -44,6 +44,16 @@ function BuyRecipeModal({ state, setState, recipe }) {
     return items;
   }
 
+  const swapIngredient = (id, newId) => {
+    const newList = [...ingredientList];
+    newList.map(item => {
+      if (item['_id'] === id) {
+        item['_id'] = newId;
+      }
+    });
+    setIngredientList(newList);
+  }
+
   const addToCart = () => {
     setOpenLoading(true);
     const token = localStorage.getItem('cookbook-token');
@@ -104,7 +114,7 @@ function BuyRecipeModal({ state, setState, recipe }) {
           : <>
               {ingredientList.map((ingredient) => {
                 return (
-                  <BuyRecipeModalCard key={ingredient['_id']} id={ingredient['_id']} quantity={ingredient['quantity']} removeItem={removeItem} changeQuantity={changeQuantity}/>
+                  <BuyRecipeModalCard key={ingredient['_id']} id={ingredient['_id']} quantity={ingredient['quantity']} removeItem={removeItem} changeQuantity={changeQuantity} swapIngredient={swapIngredient}/>
                 )
               })}
             </>

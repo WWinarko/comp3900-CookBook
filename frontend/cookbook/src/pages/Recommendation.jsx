@@ -30,7 +30,7 @@ function Recommendation() {
         alignItems="center"
         pt={25}
         spacing={5}
-        sx={{ backgroundColor:'#F9FAF9', height: '90vh' }}
+        sx={{ backgroundColor:'#F9FAF9', minHeight: '90vh', paddingBottom: '20px' }}
       >
         <Typography component="h2" variant="h4" gutterBottom sx={{color: "#FE793D"}}>Recommendation</Typography>
         {recipes.length > 0 ? 

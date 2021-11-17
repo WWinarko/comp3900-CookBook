@@ -213,8 +213,6 @@ function AddRecipe() {
 
           <AddButton onClick={handleNewIngredient}> Add ingredient </AddButton>
           <AddIngredientModal open={newIngredient} onClose={handleNewIngredient} ingredients={ingredients} setIngredients={setIngredients}/>
-
-
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginTop: '15px' }}>Steps</FormLabel>
           <div style={{ width: '100%' }}>
             <AddRecipeStepsContainer recipesData={steps} handleRemove={handleRemoveStep} />

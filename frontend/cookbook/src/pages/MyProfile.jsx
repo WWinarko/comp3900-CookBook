@@ -8,6 +8,8 @@ import OrderDashboard from "../components/MyProfile/OrderDashboard";
 import RecipeDashboardAdmin from "../components/MyProfile/RecipeDashboardAdmin";
 import RecipeDashboardUser from "../components/MyProfile/RecipeDashboardUser";
 import ProductDashboard from "../components/MyProfile/ProductDashboard";
+import SettingsDashboard from "../components/MyProfile/SettingsDashboard";
+import SalesDashboard from "../components/MyProfile/SalesDashboard";
 
 function MyProfile() {
   const [option, setOption] = useState('ORDERS');
@@ -66,7 +68,8 @@ function MyProfile() {
             {option === 'RECIPES' && admin && <RecipeDashboardAdmin />}
             {option === 'RECIPES' && !admin && <RecipeDashboardUser />}
             {option === 'PRODUCTS' && <ProductDashboard />}
-            {option === 'SETTINGS' && <ProductDashboard />}
+            {option === 'SALES' && <SalesDashboard />}
+            {option === 'SETTINGS' && <SettingsDashboard />}
           </Stack>
         </Stack>
       </Stack>
