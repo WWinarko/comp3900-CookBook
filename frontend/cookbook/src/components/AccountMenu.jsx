@@ -65,6 +65,8 @@ function AccountMenu({anchorEl, open, onClose, onClick, setOpenLoading}) {
         });
       })
       .finally(() => {
+        localStorage.removeItem('cookbook-token');
+        localStorage.removeItem('cookbook-profile');
         setOpenLoading(false);
         window.location.reload();
       })
