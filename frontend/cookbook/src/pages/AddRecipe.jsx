@@ -132,8 +132,6 @@ function AddRecipe() {
         console.log(err);
       })
     }
-    
-
   }
 
   React.useEffect(() => {
@@ -178,7 +176,7 @@ function AddRecipe() {
         direction="column"
         alignItems="center"
         pt={20}
-        sx={{backgroundColor: '#F9FAF9', minHeight: '100vh'}}>
+        sx={{backgroundColor: '#F9FAF9', height: '100%'}}>
         <Notification notify={notify} setNotify={setNotify} /> 
         <Typography component="h1" variant="h3" sx={{color: "#FE793D", marginBottom: '36px'}}>Add Recipe</Typography>
         <Stack

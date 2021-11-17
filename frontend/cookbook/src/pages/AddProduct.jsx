@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Stack, Typography, Button, InputAdornment} from "@mui/material";
 import { styled } from '@mui/material/styles';
 
@@ -29,6 +29,8 @@ export const AddButton = styled(Button)(() => ({
 
 function AddProduct() {
   const history = useHistory();
+  const location = useLocation();
+  
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
@@ -42,6 +44,7 @@ function AddProduct() {
       labels: [],
       price: 0,
     });
+  const [edit, setEdit] = useState(false);
 
   const sendToBack = () => {
     const productBody = {
@@ -52,25 +55,60 @@ function AddProduct() {
       labels: productInfo.labels,
       price: parseFloat(productInfo.price),
     }
-    fetch('http://127.0.0.1:5000/product/add', {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
-        Accept: 'applicaton/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(productBody)
-    }).then((res) => {
-      console.log(res.data);
-      history.push('/');
-    }).catch((err) => {
-      setNotify({
-        isOpen: true,
-        message: err.response.data.message,
-        type: 'error',
-      });
-    })
+
+    if (edit !== true) {
+      fetch('http://127.0.0.1:5000/product/add', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productBody)
+      }).then(() => {
+        history.push('/');
+      }).catch((err) => {
+        setNotify({
+          isOpen: true,
+          message: err.response.data.message,
+          type: 'error',
+        });
+      })
+    } else {
+      productBody.recipe_id =  location.state.id;
+      fetch('http://127.0.0.1:5000/product/edit', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+          Accept: 'applicaton/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productBody)
+      }).then(() => {
+        history.push('/profile');
+      }).catch((err) => {
+        setNotify({
+          isOpen: true,
+          message: err.response.data.message,
+          type: 'error',
+        });
+      })
+    }
   }
+
+  React.useEffect(() => {
+    if (location.state) {
+      setProductInfo({
+        id: location.state.id,
+        productName: location.state.name,
+        photo: location.state.photo,
+        description: location.state.description,
+        labels: location.state.labels,
+        price: location.state.price,
+      })
+      setEdit(true);
+    }
+  }, [])
 
   return (
     <>
