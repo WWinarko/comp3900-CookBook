@@ -1,4 +1,5 @@
 import database
+import recommendation_helper
 
 def recommendation_questions(q1, q2, q3, q4, q5, q6):
     ''' recoommend recipes based on the answers of the questions '''
@@ -11,11 +12,38 @@ def recommendation_questions(q1, q2, q3, q4, q5, q6):
     recipes = database.get_recipes()
     recipe_list = list(recipes.find())
 
+    whole_counter, whole_rating = recommendation_helper.average_all_recipes(recipe_list)
+    
     recipe_ids = []
     for recipe in recipe_list:
         recipe_labels = set(recipe['labels'])
-        if match.issubset(recipe_labels):
-            recipe_ids.append(str(recipe['_id']))
+        diff = match - recipe_labels
+        label_point = len(match) - len(diff)
+        label_point = recommendation_helper.assign_point(recipe, label_point, whole_counter, whole_rating)
+        recipe_ids.append((label_point, str(recipe['_id'])))
+
+    # Sort the recipe according to the point
+    recipe_ids.sort(key=lambda x:x[0])
+    recipe_ids.reverse()
+    final_reicpe = []
+    max = 0
+    min = 0
+    if recipe_ids > 0:
+        (point, id) = recipe_ids[0]
+        max = point
+        (point, id) = recipe_ids[len(recipe_ids - 1)]
+        min = point
+    else:
+        return {
+            "recipe_list":final_reicpe
+        }
+    standard = (max + min) / 2
+    # Don't recommend the recipe that is already bought
+    for recipe in recipe_ids:
+        (point, id) = recipe
+        if point >= standard:
+            final_reicpe.append(id)
+
     return {
-        "recipe_list":recipe_ids
+        "recipe_list":final_reicpe
     }
