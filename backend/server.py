@@ -474,9 +474,9 @@ def recommendation_user_following_root():
 def recommendation_user_following_root():
     ''' Recommend reqcipes of a recipe '''
     payload = request.get_json()
-    product_id = payload['product_id']
+    recipe_id = payload['recipe_id']
     return dumps(
-        recommendation_recipe(product_id)
+        recommendation_recipe(recipe_id)
     )
 
 ##### Admin ROUTE #####
