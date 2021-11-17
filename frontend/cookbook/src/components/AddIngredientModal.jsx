@@ -60,7 +60,7 @@ function AddIngredientModal({ open, onClose, ingredients, setIngredients }) {
         <CustomTextField id="ingredientName" name="Name" value={name} setValue={setName} width="400px"/>
         <div style={{ marginTop: '15px', marginBottom: '15px' }}>
           <FormLabel component="legend" sx={{ color: '#89623D', fontSize: '18px', fontWeight: '500', marginBottom: '10px' }}>Ingredient</FormLabel>
-          <SearchBar width="375px" placeholder="Search Ingredient" border="1px solid black" searchFunc={searchIngredient} setSelected={setSelected}/>
+          <SearchBar width="375px" placeholder="Search Ingredient" border="1px solid black" searchFunc={searchIngredient} setSelected={setSelected} labelOption={false}/>
         </div>
         {selected['isSelected'] ? <IngredientModalCard id={selected['product_id']}  /> :
           <Box p={1} sx={{maxHeight: '50vh', overflowY: 'scroll'}}>

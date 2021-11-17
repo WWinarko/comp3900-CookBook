@@ -93,7 +93,7 @@ function Navbar() {
       <NavLink to="/">
         <ReactLogo className={classes.logo} />
       </NavLink>
-      <SearchBar width="667px" placeholder="Search recipes" searchFunc={handleSearch}/>
+      <SearchBar width="667px" placeholder="Search recipes" searchFunc={handleSearch} labelOption={true}/>
       <Stack
         direction="row"
         divider={<Divider orientation="vertical" flexItem sx={{border: "1.5px solid #FFFFFF", borderRadius: '5px'}}/>}
