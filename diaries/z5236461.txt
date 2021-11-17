@@ -57,5 +57,27 @@ Week7:
 - Finished comment on recipes
 
 Week8:
-- Finished recommendation backend
-- Finalised and testing the backend
+- Finished recommendation backend for sprint2
+- Finalised and testing the backend for sprint2
+
+Week9:
+1.auth_register(add following field to the user)
+2.recipe_search_keyword
+3.recipe_search_label
+4.user_follow
+5.user_listfollow
+6.recipe_edit
+7.recipe_delete
+8.add route for cart_clean
+9.profile_most_popular(it returns None when the user hasn't uploaded any recipe
+10.profile_view(add average rating to it)
+
+- Assume can't clikc admin to view user in the recipe(can only profile view when the upload person is not an admin)
+- The follower for admin should be deleted in the recipe!!!!!!
+- Assume everyone can see what everyone else is follow, no need to login
+- No quantity in recipe add to cart page, remember to add
+
+Week10:
+- Rewrite the whole cart
+- Add recommendation functions
+- Add edit functions

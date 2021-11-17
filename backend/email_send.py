@@ -17,7 +17,8 @@ def email_send(details, order_id, email, name, address, state, postcode, phone):
 
     # Email message body template
     body = email_template.template
-    total, n_items, df_ingredients = email_helper.email_order_details(details)       
+    total, n_items, df_ingredients = email_helper.email_order_details(details)  
+    total = "{:.2f}".format(total)     
     html_table = build_table(df_ingredients, 
                              'grey_light', 
                              font_size=16, 
@@ -29,7 +30,7 @@ def email_send(details, order_id, email, name, address, state, postcode, phone):
     body = body.replace("{name}", name)
     body = body.replace("{order_id}", order_id)
     body = body.replace("{items_qty}", str(n_items))
-    body = body.replace("{total}", str(total))
+    body = body.replace("{total}", total)
     body = body.replace("{address}", address)
     body = body.replace("{state}", state)
     body = body.replace("{postcode}", postcode)
