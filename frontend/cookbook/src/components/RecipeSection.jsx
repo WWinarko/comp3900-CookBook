@@ -32,7 +32,7 @@ function RecipeSection({recipeId, ingredients, removeIngredient, changeQuantity}
         <Stack
           direction="row"
           alignItems="center"
-          sx={{height: '140px', marginBottom: '16px'}}
+          sx={{height: 'auto', marginBottom: '16px'}}
         >
           <img src={recipeInfo['photo']} alt='thumbnail' style={{ width:'120px', height:'120px', borderRadius:'3px', marginBottom:'20px' }} />
           <Link to={`/recipe/${recipeId}`}>
