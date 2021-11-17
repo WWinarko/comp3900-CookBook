@@ -44,7 +44,7 @@ function RecipeSearch() {
         alignItems="center"
         pt={25}
         spacing={5}
-        sx={{ backgroundColor:'#F9FAF9', height: '90vh' }}
+        sx={{ backgroundColor:'#F9FAF9', minHeight: '90vh' }}
       >
         <Typography component="h2" variant="h4" gutterBottom sx={{color: "#FE793D"}}>Search Result for &quot;{search}&quot;</Typography>
       {loading ? <CircularProgress sx={{position: 'relative'}}/> :
