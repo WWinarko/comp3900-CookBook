@@ -58,7 +58,7 @@ function RecipeRecommendation({ id }) {
       params: {recipe_id: id}
     })
     .then((res) => {
-      setRecipes(res.data['recipe_ids']);
+      setRecipes(res.data['recipe_list']);
     })
     .catch((err) => {
       console.log(err);
@@ -86,14 +86,8 @@ function RecipeRecommendation({ id }) {
 
   return (
     <div className={classes.root}>
-      {/* <p className={classes.header}>Similar Recipes</p>
-      <div className={classes.container}>
-        <ArrowBackIosIcon className={classes.arrowLeft} />
-        <RecommendationContainer />
-        <ArrowForwardIosIcon className={classes.arrowRight} />
-      </div> */}
       <p className={classes.header}>Recommendations</p>
-      {loadingState || recipes === undefined
+      {loadingState
         ? <></>
         : <div className={classes.container}>
             <ArrowBackIosIcon className={classes.arrowLeft}  onClick={handleBack}/>

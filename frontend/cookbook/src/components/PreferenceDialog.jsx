@@ -115,7 +115,6 @@ function PreferenceDialog({open, setOpen, setRecipes}) {
       'q5': getPreference(q5Object),
       'q6': getPreference(q6Object),
     }
-    // console.log(qq);
     axios.get('http://127.0.0.1:5000/recommendation/questions', {
       params: qq,
       paramsSerializer: function (params) {
@@ -123,8 +122,9 @@ function PreferenceDialog({open, setOpen, setRecipes}) {
       },
     })
         .then((res) => {       
-          // console.log(res.data);
-          setRecipes(res.data['recipe_list']);
+          const arr = [];
+          res.data['recipe_list'].map(x => arr.push(x[0]));
+          setRecipes(arr);
         })
         .catch((err) => {
           console.log(err);
