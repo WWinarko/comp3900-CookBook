@@ -117,7 +117,7 @@ function Recipe() {
               sx={{ width:'100%' }}
               pt={10}
             >
-                <RecipeRecommendation />
+                <RecipeRecommendation id={recipeId}/>
             </Stack>
           </Stack>
           <BuyRecipeModal state={state} setState={setState} recipe={recipe}/>
