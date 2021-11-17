@@ -33,3 +33,12 @@ Week 7
 
 Week 8
 - Connect frontend and backend for admin page, user and comments
+
+Week 9
+- Fixed responsiveness of some pages and components
+
+Week 10
+- Implement follow functions, most popular
+- Fixed several pages and components (Navbar, photos, order details, account)
+- Fixed responsiveness
+- Fix bugs and completed all components

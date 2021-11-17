@@ -10,6 +10,7 @@ def recommendation_swap(product_id):
     
     # Get the label of the product
     labels = product['labels']
+    labels = list(map(lambda x: x.lower(),labels))
     labels = set(labels)
     product_list = products.find()
     return_list = []
@@ -17,6 +18,7 @@ def recommendation_swap(product_id):
     # Iterate through the product list
     for single_product in product_list:
         single_labels = single_product['labels']
+        single_labels = list(map(lambda x: x.lower(),single_labels))
         single_labels = set(single_labels)
         # Compare the label of the given product with the ones in the database
         if labels == single_labels and single_product['_id'] != product['_id']:
