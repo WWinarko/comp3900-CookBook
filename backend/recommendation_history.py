@@ -27,6 +27,7 @@ def recommendation_history(token):
         if len(recipe['labels']) <= 0:
             continue
         for label in recipe['labels']:
+            label = label.lower()
             point_assign[label] = point_assign.get(label, 0) + 1
 
     recipe_list = list(recipes.find())
@@ -41,6 +42,7 @@ def recommendation_history(token):
         if len(recipe['labels']) <= 0:
             continue
         for label in recipe['labels']:
+            label = label.lower()
             point += point_assign.get(label, 0)
             point = recommendation_helper.assign_point(recipe, point, whole_counter, whole_rating)
         rank_recipe.append((point, str(recipe['_id'])))
