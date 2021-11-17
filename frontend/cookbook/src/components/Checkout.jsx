@@ -8,7 +8,7 @@ import axios from 'axios';
 import PaypalButton from './PaypalButton';
 import Notification from './Notification';
 import LoadingDialog from './LoadingDialog';
-import {ReactComponent as PaypalLogo} from '../assets/paypal-logo.svg';
+// import PaypalLogo from '../assets/paypal-logo.svg';
 
 function Checkout({checkout, setCheckout, total, sections, deliveryInfo}) {
   const [payment, setPayment] = useState('reward');
@@ -143,7 +143,7 @@ function Checkout({checkout, setCheckout, total, sections, deliveryInfo}) {
       <>
         <Typography paragraph variant="h5" gutterBottom sx={{color: "#767676", alignSelf: 'flex-start'}}>Payment Methods</Typography>
         <RadioGroup value={payment} onChange={handlePaymentRadio}>
-          <FormControlLabel value="paypal" control={<Radio />} label={<PaypalLogo />} sx={{width: "150px"}}/>
+          <FormControlLabel value="paypal" control={<Radio />} label="Paypal" sx={{color: "#767676", width: "150px"}}/>
           <FormControlLabel value="reward" control={<Radio />} label="Reward Cash" sx={{color: "#767676", width: "150px"}}/>
         </RadioGroup>
         {payment === 'paypal' ? <PaypalButton total={total} onSuccess={handlepaymentSuccess}/> : <CheckoutButton sx={{width: '100%'}} onClick={handleRewardPayment}>Pay Now</CheckoutButton>}

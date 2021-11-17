@@ -56,7 +56,7 @@ function DeliveryForm({deliveryInfo, setDeliveryInfo}) {
         </Stack>
         <CustomTextField id="email" required name="Email" value={deliveryInfo['email']} setValue={setDeliveryInfo}  field="object" width="100%"/>
         <CustomTextField id="phone" required name="Phone" value={deliveryInfo['phone']} setValue={setDeliveryInfo}  field="object" width="100%"/>
-        <CustomTextField id="adress" required name="Address" value={deliveryInfo['address']} setValue={setDeliveryInfo}  field="object" width="100%"/>
+        <CustomTextField id="address" required name="Address" value={deliveryInfo['address']} setValue={setDeliveryInfo}  field="object" width="100%"/>
         <Stack
           direction="row"
           sx={{"div:first-child": {

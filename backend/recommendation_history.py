@@ -1,6 +1,7 @@
 import token_helper
 import database
 from bson.objectid import ObjectId
+import recommendation_helper
 
 def recommendation_history(token):
     ''' recommend based on user's account history '''
@@ -31,20 +32,7 @@ def recommendation_history(token):
     recipe_list = list(recipes.find())
     rank_recipe = []
 
-    # Calculate the average rating
-    whole_counter = 0
-    whole_rating = 0
-    for recipe in recipe_list:
-        rating = 0
-        counter = 0
-        for comment in recipe['comment']:
-            rating += int(comment['rating'])
-            counter += 1
-        if counter != 0:
-            whole_rating += rating
-            whole_counter += 1
-    if whole_counter != 0:
-        whole_rating = whole_counter / whole_rating
+    whole_counter, whole_rating = recommendation_helper.average_all_recipes(recipe_list)
 
     # Iteratte through the recipes
     for recipe in recipe_list:
@@ -54,19 +42,7 @@ def recommendation_history(token):
             continue
         for label in recipe['labels']:
             point += point_assign.get(label, 0)
-        # Calculate the recipe rating
-        rating = 0
-        counter = 0
-        for comment in recipe['comment']:
-            rating += int(comment['rating'])
-            counter += 1
-        if whole_counter != 0:
-            # Consider the rating when assigning point
-            if counter != 0:
-                rating = rating / counter
-            else:
-                rating = whole_rating
-            point  = point * rating * 0.4
+            point = recommendation_helper.assign_point(recipe, point, whole_counter, whole_rating)
         rank_recipe.append((point, str(recipe['_id'])))
     
     # Sort the recipe according to the point

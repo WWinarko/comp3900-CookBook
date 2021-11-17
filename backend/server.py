@@ -20,6 +20,7 @@ from product_add import product_add
 from product_view import product_view
 from product_search_keywords import product_search_keyword
 from product_listall import product_listall
+from product_edit import product_edit
 
 from cart_add import cart_add
 from cart_remove import cart_remove
@@ -55,7 +56,7 @@ from user_listfollow import user_listfollow
 from user_unfollow import user_unfollow
 from user_edit import user_edit
 from user_photo import user_photo
-# product_add, recipe_upload
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -257,6 +258,23 @@ def product_listall_root():
     ''' List all the products '''
     return dumps(
         product_listall()
+    )
+
+@APP.route("/product/edit", methods=['POST'])
+def product_edit_root():
+    ''' Edit the products '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    payload = request.get_json()
+    product_id = payload['product_id']
+    title = payload['title']
+    photo = payload['photo']
+    description = payload['description']
+    price = payload['price']
+    labels = payload['labels']
+    return dumps(
+        product_edit(token, product_id, title, photo, description, price, labels)
     )
 
 ##### CART ROUTE #####

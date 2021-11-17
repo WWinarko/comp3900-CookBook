@@ -5,7 +5,6 @@ import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 
 
 function CartCard({ ingredient, recipeId, removeIngredient, changeQuantity }) {
-  console.log(ingredient);
   return (  
     <Card sx={{width: '100%', marginTop: '20px', display: 'flex', flexDirection:'row', position: 'relative'}}>
       <CardMedia

@@ -178,7 +178,7 @@ function AddRecipe() {
         direction="column"
         alignItems="center"
         pt={20}
-        sx={{backgroundColor: '#F9FAF9', height: '100%'}}>
+        sx={{backgroundColor: '#F9FAF9', minHeight: '100vh'}}>
         <Notification notify={notify} setNotify={setNotify} /> 
         <Typography component="h1" variant="h3" sx={{color: "#FE793D", marginBottom: '36px'}}>Add Recipe</Typography>
         <Stack
