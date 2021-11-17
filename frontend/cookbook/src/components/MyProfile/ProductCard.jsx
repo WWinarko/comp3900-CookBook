@@ -35,7 +35,7 @@ function ProductCard({ id }) {
   const [labels, setLabels] = useState([]);
 
   const handleEdit = () => {
-    history.push('/recipe/add', {
+    history.push('/product/add', {
       id: id,
       productName: product.title,
       photo: product.photo,
