@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import RoundButton from "../RoundButton";
 import { Skeleton, Stack } from "@mui/material";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -28,9 +29,21 @@ const useStyles = makeStyles({
 
 function ProductCard({ id }) {
   const classes = useStyles();
+  const history = useHistory();
   const [loadingState, setLoadingState] = useState(true);
   const [product, setProduct] = useState({});
   const [labels, setLabels] = useState([]);
+
+  const handleEdit = () => {
+    history.push('/recipe/add', {
+      id: id,
+      productName: product.title,
+      photo: product.photo,
+      description: product.description,
+      labels: product.labels,
+      price: product.price,
+    });
+  }
 
   React.useEffect(() => {
     setLoadingState(true);
@@ -80,7 +93,6 @@ function ProductCard({ id }) {
                 spacing={1}
               >
                 <RoundButton name="Edit"/>
-                <RoundButton name="Delete"/>
               </Stack>
             </div>
           </>
@@ -95,7 +107,7 @@ function ProductCard({ id }) {
               <div style={{ color:'#FE793D', fontWeight:'bold' }}>Price</div>
               <div style={{ color:'#89623D', paddingLeft: '15px' }}>${product.price}</div>
             </div>
-            <div className={classes.block} style={{ width:'22vw'}} >
+            <div className={classes.block} style={{ width:'20vw'}} >
               <div style={{ color:'#89623D', fontWeight:'bold' }}>Description</div>
               <div>{product.description}</div>
               <div style={{ height:'20px' }}></div>
@@ -107,6 +119,13 @@ function ProductCard({ id }) {
                   )
                 })}
               </div>
+            </div>
+            <div className={classes.block} style={{ width:'4vw' }}>
+              <Stack
+                spacing={1}
+              >
+                <RoundButton name="Edit" onClick={handleEdit}/>
+              </Stack>
             </div>
           </>
       }
