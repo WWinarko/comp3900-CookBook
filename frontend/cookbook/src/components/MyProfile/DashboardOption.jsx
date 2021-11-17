@@ -9,7 +9,7 @@ import ViewHeadlineIcon from '@mui/icons-material/ViewHeadline';
 const useStyles = makeStyles({
   root: {
     backgroundColor: '#FFFFFF',
-    width: '250px',
+    width: '100%',
 
     display: 'flex',
     flexDirection: 'column',
