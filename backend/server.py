@@ -435,7 +435,8 @@ def recommendation_history_root():
 @APP.route("/recommendation/swap", methods=['GET'])
 def recommendation_swap_root():
     ''' Recommend reqcipes for swapping '''
-    product_id = request.args.getlist('product_id')
+    product_id = request.args.get('product_id')
+    print(type(product_id), product_id)
     return dumps(
         recommendation_swap(product_id)
     )
