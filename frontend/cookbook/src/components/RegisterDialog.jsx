@@ -123,9 +123,10 @@ function RegisterDialog({open, setOpen}) {
       <Dialog 
         open={open} 
         onClose={handleClose}
+        sx={{height: '80vh', justifySelf: 'center', position: 'absolute', top: '10%'}}
       > 
         <DialogTitle sx={{color: '#FE793D', fontSize: '2rem'}}>Register</DialogTitle>
-        <DialogContent sx={{display: 'flex', flexDirection: 'column', alignItems: "center", justifyContent: "center"}}>
+        <DialogContent sx={{display: 'flex', flexDirection: 'row', alignItems: "center", justifyContent: "center", flexWrap: 'wrap', width: '466px'}}>
         {!next ? 
           <>
             <Stack

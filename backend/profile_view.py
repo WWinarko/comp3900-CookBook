@@ -23,7 +23,9 @@ def profile_view(token, user_id):
     follower = user['follower']
     photo = user['photo']
     admin = user['admin']
-
+    address = user['address']
+    state = user['state']
+    postcode = user['postcode']
 
     viewing_user = users.find_one({"token": token})
     # Check if viewing own profile
@@ -72,4 +74,7 @@ def profile_view(token, user_id):
         'user_recipes_string': user_recipes_string,
         'average_rating':round(final_rating, 1),
         'admin': admin,
+        'address': address,
+        'postcode': postcode,
+        'state': state,
     }

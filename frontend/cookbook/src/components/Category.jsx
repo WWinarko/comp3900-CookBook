@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+// import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import CategoryContainer from './CategoryContainer';
 
@@ -59,9 +59,9 @@ function Category() {
         <div className={classes.text}>Category</div>
       </div>
       <div className={classes.container}>
-        <ArrowBackIosIcon className={classes.arrowLeft} />
+        {/* <ArrowBackIosIcon className={classes.arrowLeft} /> */}
         <CategoryContainer />
-        <ArrowForwardIosIcon className={classes.arrowRight} />
+        {/* <ArrowForwardIosIcon className={classes.arrowRight} /> */}
       </div>
     </div>
   )

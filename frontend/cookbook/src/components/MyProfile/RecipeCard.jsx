@@ -100,7 +100,7 @@ function RecipeCard({ id, handleDelete }) {
           </>
         : <>
             <div className={classes.block}>
-              <img src={recipe.photo} alt='thumbnail' style={{ minWidth:'7vw', minHeight:'7vw', width:'7vw',  jeight:'7vw', border:'1px solid', borderRadius:'7px' }} />
+              <img src={recipe.photo} alt='thumbnail' style={{ minWidth:'7vw', minHeight:'7vw', width:'7vw',  height:'7vw', border:'1px solid', borderRadius:'7px' }} />
             </div>
             <div className={classes.block} style={{ width:'14vw'}} >
               <div style={{ color:'#FE793D', fontWeight:'bold' }}>Product ID</div>

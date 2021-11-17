@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import { Avatar, Divider, Rating } from '@mui/material';
@@ -36,6 +36,29 @@ const useStyles = makeStyles({
 function RecipeReviewCard({ comment }) {
   const classes = useStyles();
   const history = useHistory();
+  const [photo, setPhoto] = useState();
+  const [loadingState, setLoadingState] = useState(true);
+
+  React.useEffect(() => {
+    fetch('http://127.0.0.1:5000/user/photo?user_id=' + comment.user_id, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem("cookbook-token"),
+        Accept: 'applicaton/json',
+        'Content-Type': 'application/json'
+      },
+    }).then((data) => {
+      if (data.status === 200) {
+        data.json().then((res) => {
+          setPhoto(res.photo);
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      setLoadingState(false);
+    })
+  }, [])
 
   const handleUser = () => {
     history.push('/user/' + comment.user_id);
@@ -43,7 +66,10 @@ function RecipeReviewCard({ comment }) {
   return (
     <div className={classes.root}>
       <a href={'/user/' + comment.user_id} className={classes.block} style={{ textDecoration: 'none', color:'#000000', marginLeft:'75px' }}>
-          <Avatar sx={{ width: 60, height: 60 }} />
+          {loadingState
+            ? <Avatar sx={{ width: 60, height: 60 }} />
+            : <Avatar src={photo} sx={{ width: 60, height: 60 }} />
+          }
       </a>
       <div className={classes.block} style={{ width:'10vh', wordWrap:'break-word '}} onClick={handleUser}>
         {comment.username}
