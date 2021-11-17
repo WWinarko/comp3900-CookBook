@@ -20,14 +20,18 @@ def user_edit(token, first_name, last_name, photo, email, address, state, postco
     if postcode != "":
         argument_checker.no_white_space([postcode])
 
-    # check if the email is in valid and has not been used
-    auth_helper.validate_email(email, users)
-
-    # check if the username has not been taken
-    if auth_helper.check_phone_in_use(phone, users):
-        raise InputError(description="Phone is already taken")
-
     user = users.find_one({"token":token})
+
+    if user['email'] != email:
+        # check if the email is in valid and has not been used
+        auth_helper.validate_email(email, users)
+
+    if user['phone'] != phone:
+        # check if the username has not been taken
+        if auth_helper.check_phone_in_use(phone, users):
+            raise InputError(description="Phone is already taken")
+
+
 
     # Update the user information
     users.update_one({"token":token}, {"$set": {"first_name":first_name}})
