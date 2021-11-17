@@ -44,10 +44,8 @@ function Cart() {
 
   useEffect(() => {
     // console.log(update);
-    
     axios.get('http://127.0.0.1:5000/cart/retrieve', {headers: headers})
     .then((res) => {
-      console.log(res.data);
       const {section_list, total} = res.data;
       setSections(section_list);
       setTotal(total);
@@ -63,6 +61,33 @@ function Cart() {
       setLoading(false);
     })
   }, [checkout, update])
+
+  useEffect(() => {
+    const user_id = localStorage.getItem('cookbook-profile');
+    console.log(user_id);
+    axios.get('http://127.0.0.1:5000/profile/view', {
+      headers: headers,
+      params: {
+        user_id: user_id,
+      }
+    })
+    .then((res) => {
+      console.log(res.data)
+      const profile = res.data;
+      setDeliveryInfo({
+        firstName: profile['first_name'],
+        lastName: profile['last_name'],
+        email: profile['email'],
+        address: profile['address'],
+        state: profile['state'],
+        postcode: profile['postcode'],
+        phone: profile['phone'],
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [token]);
   
   const goHome = () => {
     history.push('/');
