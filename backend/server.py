@@ -39,6 +39,7 @@ from recommendation_questions import recommendation_questions
 from recommendation_history import recommendation_history
 from recommendation_swap import recommendation_swap
 from recommendation_user_following import recommendation_user_following
+from recommendation_recipe import recommendation_recipe
 
 from sales_total import sales_total
 from sales_product import sales_product
@@ -467,6 +468,14 @@ def recommendation_user_following_root():
     token = bearer.split()[1]  # YourTokenHere
     return dumps(
         recommendation_user_following(token)
+    )
+
+@APP.route("/recommendation/recipe", methods=['GET'])
+def recommendation_recipe_root():
+    ''' Recommend reqcipes of a recipe '''
+    recipe_id = request.args.get('recipe_id')
+    return dumps(
+        recommendation_recipe(recipe_id)
     )
 
 ##### Admin ROUTE #####

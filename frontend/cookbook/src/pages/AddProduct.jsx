@@ -100,7 +100,7 @@ function AddProduct() {
     if (location.state) {
       setProductInfo({
         id: location.state.id,
-        productName: location.state.name,
+        productName: location.state.productName,
         photo: location.state.photo,
         description: location.state.description,
         labels: location.state.labels,
@@ -126,6 +126,7 @@ function AddProduct() {
         >
           <CustomTextField id="productName" name="Product Name" value={productInfo['productName']} setValue={setProductInfo} field="object" width="781px"/>
           <FileTextField id="photo" name="Photo" setValue={setProductInfo} field="object" width="781px" accept="image/*"/>
+          <img src={productInfo['photo']} style={{ maxWidth: '450px', maxHeight:'450px' }}/>
           <CustomTextField id="description" name="Description" multiline value={productInfo['description']} setValue={setProductInfo} field="object" width="781px"/>
           <LabelSelect labels={productInfo['labels']} setLabels={setProductInfo}/>
           <NumberTextField id="price" name="Price"  value={productInfo['price']} setValue={setProductInfo} field="object" width="100px" min="0" startAdornment={<InputAdornment position="start">$</InputAdornment>}/>
