@@ -94,3 +94,20 @@ This week:
 Next week:
 - Do retrospective meeting B
 - Start sprint 3
+
+Week 9
+
+This week:
+- Did retrospective meeting B
+- Added upload photo field
+- Implemented search recipes based on keyword and label
+- Modified Cart and add to cart dialog
+
+Next week:
+- Implementing Swap ingredient
+- Fixing sizing issue on UI
+
+Week 10
+This week:
+- Implemented swap ingredient
+- Fixed size issues on different laptop and monitor size
