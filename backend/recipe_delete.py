@@ -19,4 +19,9 @@ def recipe_delete(token, recipe_id):
     if not (token_helper.check_admin(token, users) or recipe['owner_id'] == str(user['_id'])):
         raise AccessError(description="user does not have permission")
 
+    user_list = list(users.find())
+    for single_user in user_list:
+        single_user['recipe_bought'].remove(recipe_id)
+        users.update_one({"_id":user['_id']}, {"$set": {'recipe_bought':single_user['recipe_bought']}})
+
     recipes.delete_one({"_id":ObjectId(recipe_id)})
