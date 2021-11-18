@@ -2,6 +2,7 @@ import database
 import token_helper
 from error import AccessError
 import argument_checker
+from bson.objectid import ObjectId
 
 def product_edit(token, product_id, title, photo, description, price, labels):
     ''' Add a product '''
@@ -19,6 +20,7 @@ def product_edit(token, product_id, title, photo, description, price, labels):
 
     # Check if all fields are not empty
     argument_checker.all_not_empty([title, photo, description])
+    product_id = ObjectId(product_id)
 
     products.update_one({"_id":product_id}, {"$set": {"title":title}})
     products.update_one({"_id":product_id}, {"$set": {"photo":photo}})
@@ -27,5 +29,5 @@ def product_edit(token, product_id, title, photo, description, price, labels):
     products.update_one({"_id":product_id}, {"$set": {"labels":labels}})
 
     return {
-        'product_id': product_id
+        'product_id': str(product_id)
     }
