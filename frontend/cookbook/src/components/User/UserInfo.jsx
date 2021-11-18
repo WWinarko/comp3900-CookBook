@@ -34,13 +34,11 @@ function UserInfo({ user, following, avgrating }) {
   const [lst, setLst] = useState(following);
   const [admin, setAdmin] = useState(false);
   const [loadingState, setLoadingState] = useState(true);
-  const [follower, setFollower] = useState(0);
 
   React.useEffect(() => {
     if (user.admin === 'true') {
       setAdmin(true);
     }
-    setFollower(user.follower);
     setLoadingState(false);
   }, [])
 
@@ -62,7 +60,6 @@ function UserInfo({ user, following, avgrating }) {
       }).finally(() => {
         setLst([]);
         setIsFollowing(false);
-        setFollower(follower - 1)
       })
   }
 
@@ -83,7 +80,6 @@ function UserInfo({ user, following, avgrating }) {
         console.log(err);
       }).finally(() => {
         setIsFollowing(true);
-        setFollower(follower + 1);
       })
   }
 
@@ -108,7 +104,7 @@ function UserInfo({ user, following, avgrating }) {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%', wordWrap:'break-word' }}>
               <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px',  }}>{user.first_name} {user.last_name}</div>
               <div style={{ color:'#89623D', display: 'flex' }}>
-                <p style={{ marginRight: '50px' }}>Followers: {follower}</p>
+                <p style={{ marginRight: '50px' }}>Followers: {user.follower}</p>
               </div>
                 {admin
                   ? <div style={{ color:'#FE793D' }}>Admin</div>
