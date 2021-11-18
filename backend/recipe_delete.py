@@ -21,7 +21,8 @@ def recipe_delete(token, recipe_id):
 
     user_list = list(users.find())
     for single_user in user_list:
-        single_user['recipe_bought'].remove(recipe_id)
-        users.update_one({"_id":user['_id']}, {"$set": {'recipe_bought':single_user['recipe_bought']}})
+        if recipe_id in single_user['recipe_bought']:
+            single_user['recipe_bought'].remove(recipe_id)
+            users.update_one({"_id":user['_id']}, {"$set": {'recipe_bought':single_user['recipe_bought']}})
 
     recipes.delete_one({"_id":ObjectId(recipe_id)})
