@@ -94,3 +94,4 @@ Notes: make sure you're on root directory
 
 ` $ npm start `
 
+5. Open http://localhost:3000 with your favourite brower and enjoy our service
