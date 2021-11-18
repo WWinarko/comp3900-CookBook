@@ -20,7 +20,7 @@ def recommendation_questions(q1, q2, q3, q4, q5, q6):
     for recipe in recipe_list:
         recipe_labels = set(list(map(lambda x: x.lower(), recipe['labels'])))
         diff = match - recipe_labels
-        label_point = len(match) - len(diff)
+        label_point = abs(len(match) - len(diff))
         label_point = recommendation_helper.assign_point(recipe, label_point, whole_counter, whole_rating)
         recipe_ids.append((label_point, str(recipe['_id'])))
 
