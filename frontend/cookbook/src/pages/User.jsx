@@ -15,6 +15,7 @@ function User() {
   const [recipes, setRecipes] = useState([]);
   const [selfId, setSelfId] = useState();
   const [following, setFollowing] = useState([]);
+  const [rating, setRating] = useState(0);
 
   React.useEffect(() => {
     if (id === undefined) {
@@ -32,6 +33,7 @@ function User() {
         data.json().then((res) => {
           setUser(res);
           setRecipes(res.user_recipes_string);
+          setRating(res.average_rating);
         })
       }
     }).catch((err) => {
@@ -98,7 +100,7 @@ function User() {
               spacing = {5}
               sx={{ width: '100%' }}
             >
-              <UserInfo user={user} following={following}/>
+              <UserInfo user={user} following={following} avgrating={rating}/>
               <MostPopular user={user} />
               <UserRecipe allRecipes={recipes} />
             </Stack>

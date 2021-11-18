@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 })
 
-function UserInfo({ user, following }) {
+function UserInfo({ user, following, avgrating }) {
   const classes = useStyles(); 
   const [isFollowing, setIsFollowing] = useState(false);
   const [lst, setLst] = useState(following);
@@ -36,7 +36,6 @@ function UserInfo({ user, following }) {
   const [loadingState, setLoadingState] = useState(true);
 
   React.useEffect(() => {
-    console.log(user.admin);
     if (user.admin === 'true') {
       setAdmin(true);
     }
@@ -149,7 +148,7 @@ function UserInfo({ user, following }) {
             <div>
               <div style={{ color:'#FE793D', fontWeight:'bold', fontSize: '24px' }}>Average Rating</div>
               <Rating 
-                value={user.average_rating} 
+                value={avgrating} 
                 readOnly 
                 sx={{ margin: '10px', fontSize:'2.5rem' }}
                 size={"large"}
@@ -167,6 +166,7 @@ function UserInfo({ user, following }) {
 UserInfo.propTypes = {
   user: PropTypes.object,
   following: PropTypes.array,
+  avgrating: PropTypes.number,
 }
 
 export default UserInfo;

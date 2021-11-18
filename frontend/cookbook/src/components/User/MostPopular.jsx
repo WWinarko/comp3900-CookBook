@@ -59,6 +59,7 @@ function MostPopular() {
   const [recipeId, setRecipeId] = useState();
   const [recipe, setRecipe] = useState({});
   const [loadingState, setLoadingState] = useState(true);
+  const [rating, setRating] = useState(0);
 
   React.useEffect(() => {
     fetch('http://127.0.0.1:5000/profile/most_popular?user_id=' + id, {
@@ -87,6 +88,7 @@ function MostPopular() {
         if (data.status === 200) {
           data.json().then((res) => {
             setRecipe(res);
+            setRating(res.rating);
           })
         }
       }).catch((err) => {
@@ -117,7 +119,8 @@ function MostPopular() {
                   <p>Difficulty: {recipe.difficulty} / 5.0</p>
                   <p>
                     <Rating 
-                      value={recipe.rating} 
+                      name="read-only"
+                      value={rating} 
                       readOnly 
                       size={"large"}
                     />

@@ -42,7 +42,6 @@ function AccountMenu({anchorEl, open, onClose, onClick, setOpenLoading}) {
         Authorization: `Bearer ${token}`
       }})
       .then((res) => {
-        console.log(res.data);
         setBalance(res.data['balance']);
       })
       .catch((err) => {
