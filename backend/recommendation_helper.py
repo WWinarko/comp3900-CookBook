@@ -12,7 +12,7 @@ def average_all_recipes(recipe_list):
             whole_rating += rating
             whole_counter += 1
     if whole_counter != 0:
-        whole_rating = whole_counter / whole_rating
+        whole_rating = whole_rating / whole_counter
     return whole_counter, whole_rating
 
 def assign_point(recipe, point,whole_counter, whole_rating):
