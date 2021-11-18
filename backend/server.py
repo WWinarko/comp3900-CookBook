@@ -473,10 +473,9 @@ def recommendation_user_following_root():
     )
 
 @APP.route("/recommendation/recipe", methods=['GET'])
-def recommendation_user_following_root():
+def recommendation_recipe_root():
     ''' Recommend reqcipes of a recipe '''
-    payload = request.get_json()
-    recipe_id = payload['recipe_id']
+    recipe_id = request.args.get('recipe_id')
     return dumps(
         recommendation_recipe(recipe_id)
     )

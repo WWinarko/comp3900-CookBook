@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
 
@@ -45,21 +46,26 @@ const useStyles = makeStyles({
   },
 })
 
-function RecipeRecommendation() {
+function RecipeRecommendation({ id }) {
   const classes = useStyles();
   const [recipes, setRecipes] = useState([]);
   const [index, setIndex] = useState(0);
+  const [loadingState, setLoadingState] = useState(true);
   // const recipeData = RecipeData.properties.slice(0,3);
 
   useEffect(() => {
-    const token = localStorage.getItem('cookbook-token');
-    const auth = {"Authorization": `Bearer ${token}`};
-    axios.get('http://127.0.0.1:5000/recommendation/history', {headers: auth})
+    axios.get('http://127.0.0.1:5000/recommendation/recipe', {
+      params: {recipe_id: id}
+    })
     .then((res) => {
-      setRecipes(res.data['recipe_ids']);
+      setRecipes(res.data['recipe_list']);
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      setLoadingState(false);
+      console.log(recipes);
     })
   }, []);
 
@@ -80,20 +86,20 @@ function RecipeRecommendation() {
 
   return (
     <div className={classes.root}>
-      {/* <p className={classes.header}>Similar Recipes</p>
-      <div className={classes.container}>
-        <ArrowBackIosIcon className={classes.arrowLeft} />
-        <RecommendationContainer />
-        <ArrowForwardIosIcon className={classes.arrowRight} />
-      </div> */}
       <p className={classes.header}>Recommendations</p>
-      <div className={classes.container}>
-        <ArrowBackIosIcon className={classes.arrowLeft}  onClick={handleBack}/>
-        <RecommendationContainer data={recipes.slice(index*3, index*3 + 3)}/>
-        <ArrowForwardIosIcon className={classes.arrowRight} onClick={handleForward}/>
-      </div>
+      {loadingState
+        ? <></>
+        : <div className={classes.container}>
+            <ArrowBackIosIcon className={classes.arrowLeft}  onClick={handleBack}/>
+            <RecommendationContainer data={recipes.slice(index*3, index*3 + 3)}/>
+            <ArrowForwardIosIcon className={classes.arrowRight} onClick={handleForward}/>
+          </div>
+      }
     </div>
   )
 }
 
+RecipeRecommendation.propTypes = {
+  id: PropTypes.string,
+}
 export default RecipeRecommendation;
