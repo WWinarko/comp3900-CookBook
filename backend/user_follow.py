@@ -25,5 +25,3 @@ def user_follow(token, user_id):
     users.update_one({"_id":user_followed['_id']}, {"$set":{"follower":number}})
     following.append(user_id)
     users.update_one({"_id":user['_id']}, {"$set":{"following":following}})
-
-user_follow("1", "61936a86f1d13a25efa35a57")
