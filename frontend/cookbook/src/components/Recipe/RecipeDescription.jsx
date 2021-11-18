@@ -50,6 +50,7 @@ function RecipeDescription({ recipe, selfId, following }) {
   const [loadingState, setLoadingState] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
   const [photo, setPhoto] = useState();
+  const [follower, setFollower] = useState(0);
 
   React.useEffect(() => {
     if (recipe === undefined) {
@@ -70,6 +71,7 @@ function RecipeDescription({ recipe, selfId, following }) {
           if (data.status === 200) {
             data.json().then((res) => {
               setPhoto(res.photo);
+              setFollower(recipe.owner_follower);
             })
           }
         }).catch((err) => {
@@ -97,6 +99,7 @@ function RecipeDescription({ recipe, selfId, following }) {
         console.log(err);
       }).finally(() => {
         setIsFollowing(true);
+        setFollower(follower + 1);
       })
   }
 
@@ -117,6 +120,7 @@ function RecipeDescription({ recipe, selfId, following }) {
         console.log(err);
       }).finally(() => {
         setIsFollowing(false);
+        setFollower(follower - 1);
       })
   }
 
@@ -174,7 +178,7 @@ function RecipeDescription({ recipe, selfId, following }) {
                   <p style={{ paddingTop:'10%', margin:'0', fontWeight: 'bold' }}>{recipe.owner_username}</p>
                   {recipe.owner_follower === -1
                     ? <></>
-                    : <p style={{ paddingTop:'10%', margin:'0' }}>Followers:{recipe.owner_follower}</p>
+                    : <p style={{ paddingTop:'10%', margin:'0' }}>Followers:{follower}</p>
                   }
                 </Stack>
               </Stack>
