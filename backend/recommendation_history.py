@@ -16,6 +16,7 @@ def recommendation_history(token):
     user = users.find_one({"token":token})
 
     recipe_bought = user['recipe_bought']
+    recipe_bought = list(set(recipe_bought))
     point_assign = dict()
     if recipe_bought == None:
         return {
