@@ -68,11 +68,11 @@ function HomeRecipe() {
   const [done, setDone] = useState(false);
   const [loadingState, setLoadingState] = useState(true);
   const [recommendation, setRecommendation] = useState([]);
-  const [recommendationCount, setRecommendationCount] = useState(0);
+  const [recommendationCount, setRecommendationCount] = useState(1);
   const [recommendationDone, setRecommendationDone] = useState(false);
   const [allFollowing, setAllFollowing] = useState([])
   const [following, setFollowing] = useState([]);
-  const [followingCount, setFollowingCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(1);
   const [followingDone, setFollowingDone] = useState(false);
 
   React.useEffect(() => {
