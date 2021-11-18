@@ -19,5 +19,7 @@ def user_unfollow(token, user_id):
     
     # Unfollow the user
     following = user['following']
+    number = user['follwer'] - 1
+    users.update_one({"_id":user['_id']}, {"$set":{"follower":number}})
     following.remove(user_id)
     users.update_one({"_id":user['_id']}, {"$set":{"following":following}})

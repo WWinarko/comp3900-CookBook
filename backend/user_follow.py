@@ -20,6 +20,8 @@ def user_follow(token, user_id):
 
     # Update the user follow list
     following = user['following']
+    number = user['follwer'] + 1
+    users.update_one({"_id":user['_id']}, {"$set":{"follower":number}})
     following.append(user_id)
     users.update_one({"_id":user['_id']}, {"$set":{"following":following}})
 
