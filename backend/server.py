@@ -58,6 +58,8 @@ from user_unfollow import user_unfollow
 from user_edit import user_edit
 from user_photo import user_photo
 
+from reward_balance import reward_balance
+
 def default_handler(err):
     ''' Default Handle '''
     response = err.get_response()
@@ -616,6 +618,16 @@ def sales_product_root():
     product_id = payload['product_id']
     return dumps(
         sales_product(token, product_id)
+    )
+
+@APP.route("/reward/balance", methods=['GET'])
+def reward_balance_root():
+    ''' reward balance of an user '''
+    headers = request.headers
+    bearer = headers.get('Authorization')    # Bearer YourTokenHere
+    token = bearer.split()[1]  # YourTokenHere
+    return dumps(
+        reward_balance(token)
     )
 
 if __name__ == "__main__":

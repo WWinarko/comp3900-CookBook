@@ -15,7 +15,7 @@ def recommendation_questions(q1, q2, q3, q4, q5, q6):
     recipe_list = list(recipes.find())
 
     whole_counter, whole_rating = recommendation_helper.average_all_recipes(recipe_list)
-    print(whole_counter, whole_rating)
+
     recipe_ids = []
     for recipe in recipe_list:
         recipe_labels = set(list(map(lambda x: x.lower(), recipe['labels'])))
