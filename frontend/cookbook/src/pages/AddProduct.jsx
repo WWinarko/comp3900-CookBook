@@ -75,7 +75,8 @@ function AddProduct() {
         });
       })
     } else {
-      productBody.recipe_id =  location.state.id;
+      productBody.product_id =  location.state.id;
+      console.log(productBody);
       fetch('http://127.0.0.1:5000/product/edit', {
         method: 'POST',
         headers: {
@@ -87,11 +88,7 @@ function AddProduct() {
       }).then(() => {
         history.push('/profile');
       }).catch((err) => {
-        setNotify({
-          isOpen: true,
-          message: err.response.data.message,
-          type: 'error',
-        });
+        console.log(err);
       })
     }
   }
