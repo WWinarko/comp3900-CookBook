@@ -38,7 +38,7 @@ def recommendation_questions(q1, q2, q3, q4, q5, q6):
         return {
             "recipe_list":final_reicpe
         }
-    standard = (max + min) * 0.2
+    standard = (max + min) * 0.5
     # Don't recommend the recipe that is already bought
     for recipe in recipe_ids:
         (point, id) = recipe
