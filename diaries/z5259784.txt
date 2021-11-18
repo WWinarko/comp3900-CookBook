@@ -116,3 +116,8 @@ Friday 12/11/21
 
 Tuesday 16/1/21
     - final report and demo prep
+
+Thursday 18/11/21
+    - finish final report
+    - finish sprint 3
+    - demo in tutorial
