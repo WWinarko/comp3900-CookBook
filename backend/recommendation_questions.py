@@ -13,7 +13,6 @@ def recommendation_questions(q1, q2, q3, q4, q5, q6):
     match = set(new_list)
     recipes = database.get_recipes()
     recipe_list = list(recipes.find())
-
     whole_counter, whole_rating = recommendation_helper.average_all_recipes(recipe_list)
 
     recipe_ids = []
