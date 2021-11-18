@@ -20,7 +20,7 @@ def user_unfollow(token, user_id):
     # Unfollow the user
     following = user['following']
     user_followed = users.find_one({"_id":ObjectId(user_id)})
-    number = user_followed['follower'] + 1
+    number = user_followed['follower'] - 1
     if number <= 0:
         number = 0
     users.update_one({"_id":user_followed['_id']}, {"$set":{"follower":number}})
