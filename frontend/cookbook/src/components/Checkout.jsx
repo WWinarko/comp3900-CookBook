@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Paper, Typography, Grid, Button, Divider, RadioGroup, Radio, FormControlLabel } from '@mui/material';
+import { Paper, Typography, Grid, Button, Divider, RadioGroup, Radio, FormControlLabel, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 
@@ -13,11 +13,26 @@ import LoadingDialog from './LoadingDialog';
 function Checkout({checkout, setCheckout, total, sections, deliveryInfo}) {
   const [payment, setPayment] = useState('reward');
   const [openLoading, setOpenLoading] = useState(false);
+  const [balance, setBalance] = useState(0);
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
     type: 'error',
   });
+
+  useEffect (() => {
+    axios.get('http://127.0.0.1:5000/reward/balance', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }})
+      .then((res) => {
+        console.log(res.data);
+        setBalance(res.data['balance']);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   const token = localStorage.getItem('cookbook-token');
   const headers = {
     Authorization: `Bearer ${token}`
@@ -144,7 +159,10 @@ function Checkout({checkout, setCheckout, total, sections, deliveryInfo}) {
         <Typography paragraph variant="h5" gutterBottom sx={{color: "#767676", alignSelf: 'flex-start'}}>Payment Methods</Typography>
         <RadioGroup value={payment} onChange={handlePaymentRadio}>
           <FormControlLabel value="paypal" control={<Radio />} label="Paypal" sx={{color: "#767676", width: "150px"}}/>
-          <FormControlLabel value="reward" control={<Radio />} label="Reward Cash" sx={{color: "#767676", width: "150px"}}/>
+          <Box sx={{display: 'flex', flexDirection: 'row'}}>
+            <FormControlLabel value="reward" control={<Radio />} label="Reward Cash" sx={{color: "#767676", width: "150px"}}/>
+            <Typography variant="p" sx={{color: "#FE793D",  fontWeight: "bold", alignSelf: 'center'}}>Balance: $ {balance} </Typography>
+          </Box>
         </RadioGroup>
         {payment === 'paypal' ? <PaypalButton total={total} onSuccess={handlepaymentSuccess}/> : <CheckoutButton sx={{width: '100%'}} onClick={handleRewardPayment}>Pay Now</CheckoutButton>}
       </> 

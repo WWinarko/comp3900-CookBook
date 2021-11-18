@@ -14,6 +14,7 @@ import Notification from './Notification';
 function AccountMenu({anchorEl, open, onClose, onClick, setOpenLoading}) {
   const history = useHistory();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [balance, setBalance] = useState(0);
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
@@ -36,6 +37,17 @@ function AccountMenu({anchorEl, open, onClose, onClick, setOpenLoading}) {
           type: 'error',
         });
       })
+    axios.get('http://127.0.0.1:5000/reward/balance', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }})
+      .then((res) => {
+        console.log(res.data);
+        setBalance(res.data['balance']);
+      })
+      .catch((err) => {
+        console.log(err);
+      });    
   }, [])
 
   const handleLogout = () => {
@@ -137,7 +149,7 @@ function AccountMenu({anchorEl, open, onClose, onClick, setOpenLoading}) {
           <MenuItem onClick={handleAddProduct}>
             Add product
           </MenuItem>
-        : null}
+        : <MenuItem>Reward Balance: ${balance}</MenuItem>}
         <MenuItem onClick={handleProfile}>
           Profile
         </MenuItem>
