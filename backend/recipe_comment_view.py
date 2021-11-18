@@ -6,10 +6,11 @@ def recipe_comment_view(recipe_id):
     # Retrieve data from the database
     recipes = database.get_recipes()
     recipe = recipes.find_one({"_id":ObjectId(recipe_id)})
-
+    recipe_list = recipe['comment']
+    recipe_list.reverse()
     # Return the comments of the recipe
     return {
-        "comments":recipe['comment']
+        "comments":recipe_list
     }
 
 ################## testing ##################
