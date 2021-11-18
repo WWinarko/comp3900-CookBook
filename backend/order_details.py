@@ -26,7 +26,7 @@ def order_details(token, order_id):
     return {
         "details":order['details'],
         "order_id":order_id,
-        "total":order['total']
+        "total":"{:.2f}".format(order['total'])
     }
 
     
