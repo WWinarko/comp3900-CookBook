@@ -99,5 +99,7 @@ Notes: make sure you're on root directory
 ### Credential
 
 Paypal Sandbox Account
+
 Email: sb-9wz098283803@personal.example.com
+
 Password: pt'!4dL:
