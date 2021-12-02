@@ -95,3 +95,9 @@ Notes: make sure you're on root directory
 ` $ npm start `
 
 5. Open http://localhost:3000 with your favourite brower and enjoy our service
+
+### Credential
+
+Paypal Sandbox Account
+Email: sb-9wz098283803@personal.example.com
+Password: pt'!4dL:
